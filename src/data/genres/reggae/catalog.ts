@@ -83,21 +83,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "roots bass melody and organ bubble voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "roots bass melody and organ bubble guitar accompaniment",
           "shortName": "Offbeat guitar skank",
           "description": "Strike clipped chords on beats two and four; keep the voicing light, the decay short, and beat one open for bass and drums.",
@@ -115,21 +100,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.22
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "roots bass melody and organ bubble guitar cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "guitar"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "roots bass melody and organ bubble organ accompaniment",
@@ -155,21 +125,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "roots bass melody and organ bubble organ cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "organ"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "roots bass melody and organ bubble low anchor",
           "role": "bass",
           "onsets": [
@@ -191,21 +146,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.3,
             0.42
           ]
-        },
-        {
-          "name": "roots bass melody and organ bubble bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "roots bass melody and organ bubble kit",
@@ -242,26 +182,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "roots bass melody and organ bubble drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "roots bass melody and organ bubble shaker pulse",
           "role": "percussion",
           "onsets": [
@@ -279,21 +199,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "roots bass melody and organ bubble shaker cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "shaker"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -400,21 +305,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "one drop kick rim on beat three voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "one drop kick rim on beat three guitar accompaniment",
           "shortName": "Offbeat guitar skank",
           "description": "Strike clipped chords on beats two and four; keep the voicing light, the decay short, and beat one open for bass and drums.",
@@ -432,21 +322,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.16
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "one drop kick rim on beat three guitar cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "guitar"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "one drop kick rim on beat three organ accompaniment",
@@ -468,21 +343,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "one drop kick rim on beat three organ cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "organ"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "one drop kick rim on beat three low anchor",
           "role": "bass",
           "onsets": [
@@ -502,21 +362,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.82,
             0.35
           ]
-        },
-        {
-          "name": "one drop kick rim on beat three bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "one drop kick rim on beat three kit",
@@ -553,26 +398,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "one drop kick rim on beat three drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "one drop kick rim on beat three shaker pulse",
           "role": "percussion",
           "onsets": [
@@ -590,21 +415,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "one drop kick rim on beat three shaker cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "shaker"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -692,17 +502,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "rockers kick foundation and organ skank voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "rockers kick foundation and organ skank voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rockers kick foundation and organ skank guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "rockers kick foundation and organ skank guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rockers kick foundation and organ skank organ accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "rockers kick foundation and organ skank organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rockers kick foundation and organ skank low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "rockers kick foundation and organ skank bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "rockers kick foundation and organ skank kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "rockers kick foundation and organ skank drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "rockers kick foundation and organ skank shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "rockers kick foundation and organ skank shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "rockers kick foundation and organ skank kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1.5, 2.0, 2, 2, 2.5, 3.0, 3.5, 4.0, 4, 4.5, 5.0, 5.5, 6.0, 6, 6, 6.5, 7.0, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "hat", "hat", "kick", "rim", "hat", "hat", "hat", "hat", "kick", "hat", "hat", "hat", "hat", "kick", "rim", "hat", "hat", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.28, 0.42, 0.92, 0.65, 0.28, 0.42, 0.28, 0.42, 0.92, 0.28, 0.42, 0.28, 0.42, 0.92, 0.65, 0.28, 0.42, 0.28], "articulation": "accent", "shortName": "Rockers kick and rim", "description": "Practice this two-bar rockers kick and rim. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "rockers kick foundation and organ skank drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2, 2.5, 3.0, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "rim", "hat", "hat", "hat"], "accents": [0.5, 0.92, 0.5, 0.5, 0.5, 0.5], "shortName": "Rockers kick close", "description": "Close with the last two beats of the rockers kick and rim; keep the spaces clear and land the next phrase together."},
+        {"name": "rockers kick foundation and organ skank shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -789,17 +594,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "dub dropouts and echo chord responses voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice", "melodica"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "dub dropouts and echo chord responses voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice", "melodica"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dub dropouts and echo chord responses guitar accompaniment", "shortName": "Offbeat guitar skank", "description": "Strike clipped chords on beats two and four, then leave the spaces open so the dub delay can answer.", "role": "harmony", "onsets": [1, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.22, 0.22], "articulation": "staccato"},
-        {"name": "dub dropouts and echo chord responses guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dub dropouts and echo chord responses organ accompaniment", "shortName": "Organ 2/4 chop", "description": "Double the guitar on beats two and four with a compact chord stab; let the delay answer each hit before the next one.", "role": "harmony", "onsets": [1, 3], "instruments": ["organ"], "cycleLength": 1, "durations": [0.22, 0.22], "articulation": "staccato"},
-        {"name": "dub dropouts and echo chord responses organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dub dropouts and echo chord responses low anchor", "role": "bass", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.25]},
-        {"name": "dub dropouts and echo chord responses bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dub dropouts and echo chord responses kit", "shortName": "One-drop drums", "description": "Keep beat one empty; land kick and snare together on beat three, then leave the chord and melodica gaps open for echo.", "role": "percussion", "onsets": [0.5, 1.5, 2, 2, 2.5, 3.5], "instruments": ["drums"], "hits": ["hat", "hat", "kick", "snare", "hat", "hat"], "cycleLength": 1, "accents": [0.45, 0.45, 0.9, 0.88, 0.45, 0.45]},
-        {"name": "dub dropouts and echo chord responses drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "dub dropouts and echo chord responses shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "dub dropouts and echo chord responses shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "dub dropouts and echo chord responses shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -886,17 +685,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "rocksteady slow bass line and guitar offbeats voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "rocksteady slow bass line and guitar offbeats voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rocksteady slow bass line and guitar offbeats guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "rocksteady slow bass line and guitar offbeats guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rocksteady slow bass line and guitar offbeats organ accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "rocksteady slow bass line and guitar offbeats organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rocksteady slow bass line and guitar offbeats low anchor", "role": "bass", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.25]},
-        {"name": "rocksteady slow bass line and guitar offbeats bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "rocksteady slow bass line and guitar offbeats kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "rocksteady slow bass line and guitar offbeats drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "rocksteady slow bass line and guitar offbeats shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "rocksteady slow bass line and guitar offbeats shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "rocksteady slow bass line and guitar offbeats kit", "role": "percussion", "onsets": [0.5, 1.5, 2, 2, 2.5, 3.5, 4.5, 5.5, 6, 6, 6.5, 7.5], "instruments": ["drums"], "hits": ["hat", "hat", "kick", "rim", "hat", "hat", "hat", "hat", "kick", "rim", "hat", "hat"], "cycleLength": 2, "accents": [0.28, 0.28, 0.92, 0.65, 0.28, 0.28, 0.28, 0.28, 0.92, 0.65, 0.28, 0.28], "articulation": "accent", "shortName": "Rocksteady rim and space", "description": "Practice this two-bar rocksteady rim and space. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "rocksteady slow bass line and guitar offbeats drums cadence fill", "role": "percussion", "onsets": [2, 2, 2.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["kick", "rim", "hat", "hat"], "accents": [0.92, 0.5, 0.5, 0.5], "shortName": "Rocksteady rim close", "description": "Close with the last two beats of the rocksteady rim and space; keep the spaces clear and land the next phrase together."},
+        {"name": "rocksteady slow bass line and guitar offbeats shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -983,19 +777,13 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "ska walking bass and brisk offbeat horn reply voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ska walking bass and brisk offbeat horn reply voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ska walking bass and brisk offbeat horn reply trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ska walking bass and brisk offbeat horn reply trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ska walking bass and brisk offbeat horn reply tenor-sax statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ska walking bass and brisk offbeat horn reply tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ska walking bass and brisk offbeat horn reply guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "ska walking bass and brisk offbeat horn reply guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ska walking bass and brisk offbeat horn reply organ accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "ska walking bass and brisk offbeat horn reply organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ska walking bass and brisk offbeat horn reply low anchor", "role": "bass", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.25]},
-        {"name": "ska walking bass and brisk offbeat horn reply upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "ska walking bass and brisk offbeat horn reply kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "ska walking bass and brisk offbeat horn reply drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "ska walking bass and brisk offbeat horn reply kit", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5], "instruments": ["drums"], "hits": ["kick", "ride", "snare", "ride", "kick", "ride", "snare", "ride", "kick", "ride", "snare", "ride", "kick", "ride", "snare", "ride"], "cycleLength": 2, "accents": [0.92, 0.5, 0.85, 0.5, 0.92, 0.5, 0.85, 0.5, 0.92, 0.5, 0.85, 0.5, 0.92, 0.5, 0.85, 0.5], "articulation": "accent", "shortName": "Ska upbeat ride", "description": "Practice this two-bar ska upbeat ride. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "ska walking bass and brisk offbeat horn reply drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["kick", "ride", "snare", "ride"], "accents": [0.92, 0.5, 0.85, 0.5], "shortName": "Ska upbeat close", "description": "Close with the last two beats of the ska upbeat ride; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -1087,13 +875,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "dancehall electronic riddim and sub pickup voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "dancehall electronic riddim and sub pickup voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dancehall electronic riddim and sub pickup synth accompaniment", "role": "harmony", "onsets": [0.75, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "dancehall electronic riddim and sub pickup synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dancehall electronic riddim and sub pickup low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "dancehall electronic riddim and sub pickup synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "dancehall electronic riddim and sub pickup kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "snare", "hat", "kick", "hat", "hat", "snare", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85]},
-        {"name": "dancehall electronic riddim and sub pickup drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "dancehall electronic riddim and sub pickup kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "snare", "hat", "kick", "hat", "hat", "snare", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],

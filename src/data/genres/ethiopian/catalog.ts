@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "ethiopian",
   "name": "Ethiopian",
   "family": "Ethiopia",
@@ -64,17 +65,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Ethio-jazz pentatonic horn over syncopated organ tenor-sax statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ethio-jazz pentatonic horn over syncopated organ trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ethio-jazz pentatonic horn over syncopated organ organ accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ethio-jazz pentatonic horn over syncopated organ low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ kebero pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Ethio-jazz pentatonic horn over syncopated organ kebero cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kebero"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Ethio-jazz pentatonic horn over syncopated organ kit", "role": "percussion", "onsets": [0, 0, 0.75, 1.5, 1.5, 2, 2, 2.75, 3.25, 3.5, 4, 4, 4.75, 5.25, 5.5, 6, 6, 6.5, 6.75, 7.5], "instruments": ["drums"], "hits": ["kick", "ride", "ride", "kick", "ride", "ride", "snare", "ride", "ghost", "ride", "kick", "ride", "ride", "ghost", "ride", "ride", "snare", "kick", "ride", "ride"], "cycleLength": 2, "accents": [0.92, 0.5, 0.5, 0.92, 0.5, 0.5, 0.85, 0.5, 0.28, 0.5, 0.92, 0.5, 0.5, 0.28, 0.5, 0.5, 0.85, 0.92, 0.5, 0.5], "articulation": "accent", "shortName": "Ethio-jazz cross-accent", "description": "Practice this two-bar ethio-jazz cross-accent. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Ethio-jazz pentatonic horn over syncopated organ drums cadence fill", "role": "percussion", "onsets": [2, 2, 2.5, 2.75, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["ride", "snare", "kick", "ride", "ride"], "accents": [0.5, 0.85, 0.92, 0.5, 0.5], "shortName": "Ethio-jazz cross-accent close", "description": "Close with the last two beats of the ethio-jazz cross-accent; keep the spaces clear and land the next phrase together."},
+        {"name": "Ethio-jazz pentatonic horn over syncopated organ kebero pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "tenor-sax": ["staccato", "bend", "vibrato", "accent", "legato", "tenuto"],
@@ -159,13 +155,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Tizita slow ornamented pentatonic lament voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "Tizita slow ornamented pentatonic lament voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Tizita slow ornamented pentatonic lament masenqo statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["masenqo"], "cycleLength": 1, "durations": [1.5, 1.25, 0.5], "articulation": "legato"},
-        {"name": "Tizita slow ornamented pentatonic lament masenqo cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["masenqo"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Tizita slow ornamented pentatonic lament krar accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["krar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "Tizita slow ornamented pentatonic lament krar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["krar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Tizita slow ornamented pentatonic lament kebero pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Tizita slow ornamented pentatonic lament kebero cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kebero"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Tizita slow ornamented pentatonic lament kebero pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "vibrato", "accent", "legato"],
@@ -241,17 +233,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Ethiopian funk clipped horns and bass interlock tenor-sax statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Ethiopian funk clipped horns and bass interlock tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ethiopian funk clipped horns and bass interlock trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Ethiopian funk clipped horns and bass interlock trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ethiopian funk clipped horns and bass interlock organ accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Ethiopian funk clipped horns and bass interlock organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ethiopian funk clipped horns and bass interlock low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Ethiopian funk clipped horns and bass interlock bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Ethiopian funk clipped horns and bass interlock kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Ethiopian funk clipped horns and bass interlock drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Ethiopian funk clipped horns and bass interlock kebero pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Ethiopian funk clipped horns and bass interlock kebero cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kebero"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Ethiopian funk clipped horns and bass interlock kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 0.75, 1.0, 1, 1.5, 1.75, 2.0, 2.5, 2.5, 3.0, 3, 3.5, 4.0, 4, 4.5, 4.75, 5.0, 5, 5.5, 5.75, 6.0, 6.25, 6.5, 6.5, 7.0, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "kick", "hat", "snare", "hat", "ghost", "hat", "hat", "kick", "hat", "snare", "hat", "hat", "kick", "hat", "ghost", "hat", "snare", "hat", "kick", "hat", "ghost", "hat", "kick", "hat", "snare", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.92, 0.42, 0.85, 0.28, 0.28, 0.42, 0.28, 0.92, 0.42, 0.85, 0.28, 0.42, 0.92, 0.28, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.28, 0.28, 0.92, 0.42, 0.85, 0.28], "articulation": "accent", "shortName": "Ethio-funk pocket", "description": "Practice this two-bar ethio-funk pocket. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Ethiopian funk clipped horns and bass interlock drums cadence fill", "role": "percussion", "onsets": [2.0, 2.25, 2.5, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "ghost", "hat", "kick", "hat", "snare", "hat"], "accents": [0.5, 0.32, 0.5, 0.92, 0.5, 0.85, 0.5], "shortName": "Ethio-funk pocket close", "description": "Close with the last two beats of the ethio-funk pocket; keep the spaces clear and land the next phrase together."},
+        {"name": "Ethiopian funk clipped horns and bass interlock kebero pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "tenor-sax": ["staccato", "bend", "vibrato", "accent", "legato", "tenuto"],
@@ -336,13 +323,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "traditional modal vocal response and sparse pulse voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "traditional modal vocal response and sparse pulse voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "traditional modal vocal response and sparse pulse masenqo statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["masenqo"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "traditional modal vocal response and sparse pulse masenqo cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["masenqo"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "traditional modal vocal response and sparse pulse krar accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["krar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "traditional modal vocal response and sparse pulse krar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["krar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "traditional modal vocal response and sparse pulse kebero pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "traditional modal vocal response and sparse pulse kebero cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kebero"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "traditional modal vocal response and sparse pulse kebero pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "vibrato", "accent", "legato"],
@@ -418,17 +401,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "modern Ethio-jazz electric keys and horn exchange tenor-sax statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern Ethio-jazz electric keys and horn exchange tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern Ethio-jazz electric keys and horn exchange trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern Ethio-jazz electric keys and horn exchange trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern Ethio-jazz electric keys and horn exchange organ accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "modern Ethio-jazz electric keys and horn exchange organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern Ethio-jazz electric keys and horn exchange low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "modern Ethio-jazz electric keys and horn exchange bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern Ethio-jazz electric keys and horn exchange kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "modern Ethio-jazz electric keys and horn exchange drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "modern Ethio-jazz electric keys and horn exchange kebero pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "modern Ethio-jazz electric keys and horn exchange kebero cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kebero"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "modern Ethio-jazz electric keys and horn exchange kit", "role": "percussion", "onsets": [0, 0, 0.5, 1, 1, 1.5, 1.75, 2.5, 2.75, 3, 3.5, 3.5, 4, 4, 4.5, 5, 5.25, 5.5, 5.5, 6.5, 7, 7, 7.5, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "kick", "hat", "snare"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.28, 0.92, 0.42, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.28, 0.28, 0.92, 0.28, 0.42, 0.92, 0.28, 0.85], "articulation": "accent", "shortName": "Electric Ethio-jazz pocket", "description": "Practice this two-bar electric ethio-jazz pocket. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "modern Ethio-jazz electric keys and horn exchange drums cadence fill", "role": "percussion", "onsets": [2.5, 3, 3, 3.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "kick", "hat", "snare"], "accents": [0.5, 0.5, 0.92, 0.5, 0.85], "shortName": "Electric Ethio-jazz close", "description": "Close with the last two beats of the electric ethio-jazz pocket; keep the spaces clear and land the next phrase together."},
+        {"name": "modern Ethio-jazz electric keys and horn exchange kebero pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["kebero"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "tenor-sax": ["staccato", "bend", "vibrato", "accent", "legato", "tenuto"],
@@ -478,4 +456,9 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'washint', role: 'lead' },
+  { instrumentId: 'begena', role: 'harmony' },
+  { instrumentId: 'nagarit', role: 'percussion' },
+  { instrumentId: 'sistrum', role: 'percussion' },
+]);

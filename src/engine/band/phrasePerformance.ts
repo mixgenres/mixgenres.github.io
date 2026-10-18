@@ -234,8 +234,11 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
   const poly = Math.max(1, ctx.profile.capabilities.polyphony);
-  const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi,
-    voiceProfile(ctx.profile.instrumentId).centre + (voicing === 'power' ? -12 : 0)));
+  const authoredRegister = ctx.authoredPitch?.register;
+  const base = authoredRegister !== undefined
+    ? nearestMidi(parsed.rootPc, authoredRegister, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)
+    : Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi,
+      voiceProfile(ctx.profile.instrumentId).centre + (voicing === 'power' ? -12 : 0)));
   let pcs: number[];
   if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
   else if (voicing === 'guide-tone' || voicing === 'shell') pcs = [...guide, ...tension, ...tones];
@@ -249,7 +252,8 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   const out: number[] = [];
   const spacing = voicing === 'open' || voicing === 'drop-two' ? 7 : 4;
   for (let i = 0; i < Math.min(poly, pcs.length); i++) {
-    const target = (state.previousVoicing?.[i] ?? base + i * spacing + (voicing === 'montuno' || voicing === 'yumba' ? 7 : 0));
+    const writtenTarget = base + i * spacing + (voicing === 'montuno' || voicing === 'yumba' ? 7 : 0);
+    const target = authoredRegister !== undefined ? writtenTarget : state.previousVoicing?.[i] ?? writtenTarget;
     out.push(nearestMidi(pcs[i], target, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi));
   }
   state.previousVoicing = Array.from(new Set(out)).sort((a, b) => a - b);

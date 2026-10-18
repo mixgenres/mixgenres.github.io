@@ -173,10 +173,14 @@ async function renderPerformance(
       }
 
       if (options.onDiagnostics) {
-        const left = new Float32Array(trackSamples), right = new Float32Array(trackSamples);
+        // Observe exactly the retained excerpt. Including discarded history
+        // as leading zeros understated early-entering players and made stem
+        // comparisons depend on when an instrument first entered the song.
+        const diagnosticSamples = outputSamples;
+        const left = new Float32Array(diagnosticSamples), right = new Float32Array(diagnosticSamples);
         for (const chunk of chunks) for (let i=0;i<chunk.left.length;i++) {
-          const offset=chunk.startSample+i-trackStartSample;
-          if(offset>=0 && offset<trackSamples) {
+          const offset=chunk.startSample+i-outputStartSample;
+          if(offset>=0 && offset<diagnosticSamples) {
             left[offset]+=chunk.left[i]*(masterContext ? gainL : 1);
             right[offset]+=chunk.right[i]*(masterContext ? gainR : 1);
           }

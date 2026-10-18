@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "punk",
   "name": "Punk",
   "family": "Global popular music",
@@ -64,15 +65,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "punk downstroke power chords and fast backbeat voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "punk downstroke power chords and fast backbeat voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "punk downstroke power chords and fast backbeat guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "punk downstroke power chords and fast backbeat guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "punk downstroke power chords and fast backbeat guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "punk downstroke power chords and fast backbeat guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "punk downstroke power chords and fast backbeat low anchor", "role": "bass", "onsets": [0, 2], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "punk downstroke power chords and fast backbeat bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "punk downstroke power chords and fast backbeat kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "punk downstroke power chords and fast backbeat drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "punk downstroke power chords and fast backbeat kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5, 4.0, 4, 4.5, 5.0, 5, 5.5, 5.5, 6.0, 6, 6.5, 7.0, 7, 7.5, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "kick"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92], "articulation": "accent", "shortName": "Punk eighth-note drive", "description": "Practice this two-bar punk eighth-note drive. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "punk downstroke power chords and fast backbeat drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick"], "accents": [0.5, 0.92, 0.5, 0.5, 0.85, 0.5, 0.92], "shortName": "Punk eighth-note close", "description": "Close with the last two beats of the punk eighth-note drive; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -156,15 +153,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "hardcore rapid riff and half-time breakdown voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "hardcore rapid riff and half-time breakdown voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hardcore rapid riff and half-time breakdown guitar statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "hardcore rapid riff and half-time breakdown guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hardcore rapid riff and half-time breakdown guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "hardcore rapid riff and half-time breakdown guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hardcore rapid riff and half-time breakdown low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "hardcore rapid riff and half-time breakdown bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "hardcore rapid riff and half-time breakdown kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "hardcore rapid riff and half-time breakdown drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "hardcore rapid riff and half-time breakdown kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 2.5, 3.0, 3, 3.5, 3.5, 4.0, 4, 4.5, 4.5, 5.0, 5, 5.5, 5.5, 6.0, 6, 6.5, 6.5, 7.0, 7, 7.5, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.85], "articulation": "accent", "shortName": "Hardcore double-time", "description": "Practice this two-bar hardcore double-time. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "hardcore rapid riff and half-time breakdown drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2.5, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "hat", "snare", "hat", "kick", "hat", "snare"], "accents": [0.5, 0.92, 0.5, 0.85, 0.5, 0.92, 0.5, 0.85], "shortName": "Hardcore double-time close", "description": "Close with the last two beats of the hardcore double-time; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -248,15 +241,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "post hardcore angular riff and contrasting dynamics voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "post hardcore angular riff and contrasting dynamics voice cadence fill", "role": "lead", "onsets": [2.5, 3.0, 3.25], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "post hardcore angular riff and contrasting dynamics guitar statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45], "articulation": "legato"},
-        {"name": "post hardcore angular riff and contrasting dynamics guitar cadence fill", "role": "lead", "onsets": [2.5, 3.0, 3.25], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "post hardcore angular riff and contrasting dynamics guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "post hardcore angular riff and contrasting dynamics guitar cadence fill", "role": "harmony", "onsets": [2.5, 3.0, 3.25], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "post hardcore angular riff and contrasting dynamics low anchor", "role": "bass", "onsets": [0, 1.5, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "post hardcore angular riff and contrasting dynamics bass cadence fill", "role": "bass", "onsets": [2.5, 3.0, 3.25], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "post hardcore angular riff and contrasting dynamics kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
-        {"name": "post hardcore angular riff and contrasting dynamics drums cadence fill", "role": "percussion", "onsets": [2.5, 3.0, 3.25], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "post hardcore angular riff and contrasting dynamics kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -340,15 +328,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "pop punk octave guitar and melodic chorus voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "pop punk octave guitar and melodic chorus voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "pop punk octave guitar and melodic chorus guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "pop punk octave guitar and melodic chorus guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "pop punk octave guitar and melodic chorus guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "pop punk octave guitar and melodic chorus guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "pop punk octave guitar and melodic chorus low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "pop punk octave guitar and melodic chorus bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "pop punk octave guitar and melodic chorus kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "pop punk octave guitar and melodic chorus drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "pop punk octave guitar and melodic chorus kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 0.75, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5, 4.0, 4, 4.5, 5.0, 5, 5.5, 5.5, 6.0, 6, 6.5, 6.75, 7.0, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "kick", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "kick", "hat", "snare", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.92, 0.42, 0.85, 0.28, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.92, 0.42, 0.85, 0.28], "articulation": "accent", "shortName": "Pop-punk kick pickup", "description": "Practice this two-bar pop-punk kick pickup. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "pop punk octave guitar and melodic chorus drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2.5, 2.75, 3.0, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "hat", "kick", "hat", "snare", "hat"], "accents": [0.5, 0.92, 0.5, 0.92, 0.5, 0.85, 0.5], "shortName": "Pop-punk kick close", "description": "Close with the last two beats of the pop-punk kick pickup; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -432,15 +416,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "noise punk dissonant attacks and abrupt rests voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "noise punk dissonant attacks and abrupt rests voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "noise punk dissonant attacks and abrupt rests guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "noise punk dissonant attacks and abrupt rests guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "noise punk dissonant attacks and abrupt rests guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "noise punk dissonant attacks and abrupt rests guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "noise punk dissonant attacks and abrupt rests low anchor", "role": "bass", "onsets": [0, 1.75, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "noise punk dissonant attacks and abrupt rests bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "noise punk dissonant attacks and abrupt rests kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "noise punk dissonant attacks and abrupt rests drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "noise punk dissonant attacks and abrupt rests kit", "role": "percussion", "onsets": [0, 0, 1, 1, 1.5, 2, 2.75, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6, 7.25, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "snare", "kick", "hat", "kick", "snare", "hat", "hat", "kick", "hat", "snare", "hat", "kick", "snare", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.42, 0.85, 0.92, 0.42, 0.92, 0.85, 0.28, 0.42, 0.92, 0.42, 0.85, 0.42, 0.92, 0.85, 0.28], "articulation": "accent", "shortName": "Noise punk displaced stomp", "description": "Practice this two-bar noise punk displaced stomp. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "noise punk dissonant attacks and abrupt rests drums cadence fill", "role": "percussion", "onsets": [2, 2, 3.25, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "snare", "hat"], "accents": [0.5, 0.92, 0.85, 0.5], "shortName": "Noise punk close", "description": "Close with the last two beats of the noise punk displaced stomp; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -488,4 +468,10 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'synth', role: 'texture' },
+  { instrumentId: 'sampler', role: 'percussion' },
+  { instrumentId: 'piano', role: 'harmony' },
+  { instrumentId: 'organ', role: 'harmony' },
+  { instrumentId: 'rhodes', role: 'harmony' },
+]);

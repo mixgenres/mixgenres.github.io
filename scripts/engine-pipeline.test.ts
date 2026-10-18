@@ -10,6 +10,25 @@ import { exportMusicXml } from '../src/engine/score/musicXml';
 import { interpretRelationships } from '../src/engine/band/interactions';
 import type { PerfNote } from '../src/engine/band/performanceData';
 import { codeForGesture } from '../src/engine/band/gestures';
+import { createGenreWorld } from '../src/data/genres/_shared/genrePack';
+import { GENRE_PACK as ROCK_PACK } from '../src/data/genres/rock/catalog';
+
+test('optional written roles survive genre loading without shifting existing pattern IDs', () => {
+  const style = ROCK_PACK.styles[0];
+  const base = { ...ROCK_PACK, styles: [{ ...style,
+    cells: style.cells.filter(cell => style.roles[cell.role]),
+  }] };
+  const before = createGenreWorld(base);
+  const after = createGenreWorld({ ...ROCK_PACK, styles: [style] });
+  const afterIds = new Set(after.patterns.map(pattern => pattern.id));
+  for (const pattern of before.patterns) assert.ok(afterIds.has(pattern.id),
+    `${pattern.id} remains resolvable in a saved score`);
+  const optional = after.patterns.find(pattern => pattern.instruments?.includes('synth')
+    && pattern.roles.includes('texture'));
+  assert.ok(optional?.events?.length, 'the written synth texture survives outside the default rock ensemble');
+  assert.ok(!after.styleDefinitions[0].characteristicInstruments.includes('synth'),
+    'retaining an optional lesson does not force its player into the default ensemble');
+});
 import { resolveWrittenTies } from '../src/engine/band/writtenTies';
 
 test('notation and interpretation are reused while sample events stay out of the song pipeline', () => {
@@ -87,4 +106,37 @@ test('call/answer uses the actual call and local chord while preserving literal 
   const call = event(from.id,67,0), answer = event(to.id,90,.5), literal = { ...event(to.id,83,1),authoredPitch:true };
   const notes=[call,answer,literal]; interpretRelationships(notes,song,region);
   assert.notEqual(answer.midi,90); assert.equal(literal.midi,83);
+});
+
+// Support colors and beginner reductions must retain the written performance.
+import { addCatalogSupportCells } from '../src/data/genres/_shared/catalogSupport';
+import type { AuthoredCell } from '../src/data/genres/_shared/genrePack';
+
+test('support adaptations preserve timing and dynamics without inventing an unrelated role', () => {
+  const source: AuthoredCell = { name: 'Written organ phrase', role: 'harmony', instruments: ['organ'],
+    onsets: [0, .75, 2.5], durations: [.6, .4, 1], microtiming: [0, 12, -6],
+    velocities: [.8, .5, .72], probabilities: [1, .7, 1], accents: [.9, .5, .8],
+    notations: [{ tuplet: { actual: 3, normal: 2 } }, { tieToNext: true }, { string: 2, fret: 3 }],
+    pitches: [{ voicing: 'chord' }, { degree: 3 }, { degree: 1 }], sectionUsage: ['verse'], timingLock: 'ensemble' };
+  const pack = { ...ROCK_PACK, styles: [{ ...ROCK_PACK.styles[0], cells: [source] }] };
+  const added = addCatalogSupportCells(pack, [{ instrumentId: 'rhodes', role: 'harmony' },
+    { instrumentId: 'shaker', role: 'percussion' }]).styles[0].cells;
+  assert.ok(!added.some(cell => cell.instruments?.includes('shaker')), 'no written percussion means no fabricated shaker groove');
+  const part = added.find(cell => cell.instruments?.includes('rhodes'))!;
+  for (const field of ['onsets', 'durations', 'microtiming', 'velocities', 'probabilities', 'accents', 'sectionUsage', 'timingLock'] as const) {
+    assert.deepEqual(part[field], source[field], `${field} reaches the optional player`);
+  }
+  assert.deepEqual(part.notations, [{ tuplet: { actual: 3, normal: 2 } }, { tieToNext: true }, {}]);
+  assert.ok(!added.some(cell => cell.arrangementVariation), 'copying a single source does not pretend to add a new phrase');
+});
+
+test('only written parts are registered and authored cadence chances survive unchanged', () => {
+  const body: AuthoredCell = { name: 'Written piano body', role: 'harmony', instruments: ['piano'],
+    onsets: [0, .5, 1.5, 2.5, 3.5], velocities: [.9, .4, .75, .5, .8] };
+  const close: AuthoredCell = { name: 'Written piano close', role: 'harmony', instruments: ['piano'],
+    onsets: [2, 3], phraseEnd: true, pitches: [{degree:5}, {degree:1}], probabilities: [1, .6] };
+  const world = createGenreWorld({ ...ROCK_PACK, styles: [{ ...ROCK_PACK.styles[0], cells: [body, close] }] });
+  assert.equal(world.patterns.length, 2, 'one body and one close do not expand into practice choices');
+  assert.deepEqual(world.patterns[0].events?.map(event => event.velocity), body.velocities);
+  assert.deepEqual(world.patterns[1].events?.map(event => event.probability), [1, .6]);
 });

@@ -60,11 +60,8 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "jiangnan sizhu heterophonic melody exchange erhu statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["erhu"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "jiangnan sizhu heterophonic melody exchange erhu cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["erhu"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jiangnan sizhu heterophonic melody exchange dizi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["dizi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "jiangnan sizhu heterophonic melody exchange dizi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["dizi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jiangnan sizhu heterophonic melody exchange pipa accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["pipa"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "jiangnan sizhu heterophonic melody exchange pipa cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["pipa"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jiangnan sizhu heterophonic melody exchange guzheng accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "jiangnan sizhu heterophonic melody exchange guzheng cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guzheng"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
       ],
@@ -136,8 +133,7 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "guqin isolated plucks slides and harmonics guqin statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guqin"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "guqin isolated plucks slides and harmonics guqin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guqin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "guqin isolated plucks slides and harmonics guqin statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guqin"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "guqin": ["legato", "harmonic", "vibrato", "accent"]
@@ -193,8 +189,7 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "guzheng tremolo phrase and bending response guzheng statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "guzheng tremolo phrase and bending response guzheng cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guzheng"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "guzheng tremolo phrase and bending response guzheng statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "guzheng": ["legato", "tremolo", "bend", "accent", "staccato"]
@@ -250,8 +245,7 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "pipa rapid tremolo and strummed accents pipa statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["pipa"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "pipa rapid tremolo and strummed accents pipa cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["pipa"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "pipa rapid tremolo and strummed accents pipa statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["pipa"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "pipa": ["legato", "tremolo", "vibrato", "harmonic", "accent", "staccato", "tenuto"]
@@ -309,11 +303,8 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "jingju vocal line and percussion cues voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "jingju vocal line and percussion cues voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jingju vocal line and percussion cues jinghu statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["jinghu"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "jingju vocal line and percussion cues jinghu cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["jinghu"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jingju vocal line and percussion cues paigu pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["paigu"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "jingju vocal line and percussion cues paigu cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["paigu"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "jingju vocal line and percussion cues gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
@@ -387,11 +378,8 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Cantonese gaohu-led ornamented melody gaohu statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["gaohu"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Cantonese gaohu-led ornamented melody gaohu cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["gaohu"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Cantonese gaohu-led ornamented melody pipa accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["pipa"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Cantonese gaohu-led ornamented melody pipa cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["pipa"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Cantonese gaohu-led ornamented melody guzheng accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Cantonese gaohu-led ornamented melody guzheng cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guzheng"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "Cantonese gaohu-led ornamented melody guzheng accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "gaohu": ["legato", "vibrato", "tremolo", "accent"],
@@ -459,13 +447,10 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Chaozhou decorated melody and phrase cadences erhu statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["erhu"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Chaozhou decorated melody and phrase cadences erhu cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["erhu"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Chaozhou decorated melody and phrase cadences dizi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["dizi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Chaozhou decorated melody and phrase cadences dizi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["dizi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Chaozhou decorated melody and phrase cadences pipa accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["pipa"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Chaozhou decorated melody and phrase cadences pipa cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["pipa"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Chaozhou decorated melody and phrase cadences guzheng accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Chaozhou decorated melody and phrase cadences guzheng cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guzheng"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "Chaozhou decorated melody and phrase cadences guzheng accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guzheng"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "erhu": ["legato", "vibrato", "tremolo", "accent"],
@@ -538,9 +523,7 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "suona chuida piercing melody and gong cues suona statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["suona"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "suona chuida piercing melody and gong cues suona cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["suona"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "suona chuida piercing melody and gong cues paigu pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["paigu"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "suona chuida piercing melody and gong cues paigu cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["paigu"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "suona chuida piercing melody and gong cues gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {

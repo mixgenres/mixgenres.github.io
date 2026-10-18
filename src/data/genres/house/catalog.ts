@@ -111,21 +111,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "deep house warm offbeat chord and sub synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "deep house warm offbeat chord and sub rhodes accompaniment",
           "role": "harmony",
           "onsets": [
@@ -145,21 +130,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.8
           ],
           "articulation": "tenuto"
-        },
-        {
-          "name": "deep house warm offbeat chord and sub rhodes cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "rhodes"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "deep house warm offbeat chord and sub low anchor",
@@ -183,21 +153,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.35,
             0.45
           ]
-        },
-        {
-          "name": "deep house warm offbeat chord and sub synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "deep house warm offbeat chord and sub kit",
@@ -238,26 +193,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "deep house warm offbeat chord and sub drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "deep house warm offbeat chord and sub shaker pulse",
           "role": "percussion",
           "onsets": [
@@ -275,21 +210,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "deep house warm offbeat chord and sub shaker cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "shaker"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -423,21 +343,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Chicago drum machine and organ stab synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Chicago drum machine and organ stab organ accompaniment",
           "role": "harmony",
           "onsets": [
@@ -459,21 +364,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "Chicago drum machine and organ stab organ cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "organ"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Chicago drum machine and organ stab low anchor",
           "role": "bass",
           "onsets": [
@@ -493,21 +383,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.6,
             0.5
           ]
-        },
-        {
-          "name": "Chicago drum machine and organ stab synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "Chicago drum machine and organ stab kit",
@@ -548,26 +423,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "Chicago drum machine and organ stab drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "Chicago drum machine and organ stab shaker pulse",
           "role": "percussion",
           "onsets": [
@@ -585,21 +440,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Chicago drum machine and organ stab shaker cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "shaker"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -733,13 +573,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "piano house syncopated octave piano hook piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "piano house syncopated octave piano hook piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "piano house syncopated octave piano hook organ accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "piano house syncopated octave piano hook organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "piano house syncopated octave piano hook low anchor", "role": "bass", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "piano house syncopated octave piano hook synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "piano house syncopated octave piano hook kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "piano house syncopated octave piano hook drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "piano house syncopated octave piano hook kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]}
       ],
       "instrumentTechniques": {
         "piano": ["staccato", "accent", "legato", "tenuto"],
@@ -814,11 +650,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "acid house resonant mono bass sequence synth statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "acid house resonant mono bass sequence synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "acid house resonant mono bass sequence low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "acid house resonant mono bass sequence synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "acid house resonant mono bass sequence kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "acid house resonant mono bass sequence drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "acid house resonant mono bass sequence kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "filter-sweep", "accent", "legato", "vibrato"],
@@ -937,21 +770,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "tech house sparse bass and dry drum loop synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "tech house sparse bass and dry drum loop rhodes accompaniment",
           "role": "harmony",
           "onsets": [
@@ -967,21 +785,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.2
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "tech house sparse bass and dry drum loop rhodes cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "rhodes"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "tech house sparse bass and dry drum loop low anchor",
@@ -1001,21 +804,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.35,
             0.35
           ]
-        },
-        {
-          "name": "tech house sparse bass and dry drum loop synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "tech house sparse bass and dry drum loop kit",
@@ -1056,26 +844,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "tech house sparse bass and dry drum loop drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "tech house sparse bass and dry drum loop shaker pulse",
           "role": "percussion",
           "onsets": [
@@ -1093,21 +861,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "tech house sparse bass and dry drum loop shaker cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "shaker"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1191,15 +944,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "progressive house evolving arpeggio and long breakdown synth statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "progressive house evolving arpeggio and long breakdown synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "progressive house evolving arpeggio and long breakdown rhodes accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "progressive house evolving arpeggio and long breakdown rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "progressive house evolving arpeggio and long breakdown low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "progressive house evolving arpeggio and long breakdown synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "progressive house evolving arpeggio and long breakdown kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "progressive house evolving arpeggio and long breakdown drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "progressive house evolving arpeggio and long breakdown shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "progressive house evolving arpeggio and long breakdown shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "progressive house evolving arpeggio and long breakdown shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "filter-sweep", "accent", "legato", "vibrato"],
@@ -1282,15 +1030,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "Afro-house layered percussion and modal chord answer synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Afro-house layered percussion and modal chord answer synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Afro-house layered percussion and modal chord answer rhodes accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Afro-house layered percussion and modal chord answer rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Afro-house layered percussion and modal chord answer low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Afro-house layered percussion and modal chord answer synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Afro-house layered percussion and modal chord answer kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "Afro-house layered percussion and modal chord answer drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Afro-house layered percussion and modal chord answer shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Afro-house layered percussion and modal chord answer shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Afro-house layered percussion and modal chord answer shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "filter-sweep", "accent", "legato", "vibrato"],

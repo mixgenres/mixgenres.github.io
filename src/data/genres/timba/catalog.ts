@@ -85,21 +85,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "timba piano tumbao and bass gear changes voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "timba piano tumbao and bass gear changes trumpet statement",
           "role": "lead",
           "onsets": [
@@ -119,21 +104,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "timba piano tumbao and bass gear changes trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "timba piano tumbao and bass gear changes trombone statement",
           "role": "lead",
           "onsets": [
@@ -151,21 +121,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "timba piano tumbao and bass gear changes trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "timba piano tumbao and bass gear changes piano accompaniment",
@@ -193,21 +148,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "timba piano tumbao and bass gear changes piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "timba piano tumbao and bass gear changes low anchor",
           "role": "bass",
           "onsets": [
@@ -225,21 +165,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.6,
             0.5
           ]
-        },
-        {
-          "name": "timba piano tumbao and bass gear changes bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "timba piano tumbao and bass gear changes congas pulse",
@@ -271,21 +196,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "timba piano tumbao and bass gear changes congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
           "name": "timba piano tumbao and bass gear changes timbales pulse",
           "role": "percussion",
           "onsets": [
@@ -304,91 +214,8 @@ export const GENRE_PACK: GenrePackInput = {
           "cycleLength": 1,
           "articulation": "accent"
         },
-        {
-          "name": "timba piano tumbao and bass gear changes timbales cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
-          "name": "timba piano tumbao and bass gear changes kit",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0,
-            0.5,
-            1,
-            1,
-            1.5,
-            2,
-            2,
-            2.5,
-            3,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "hits": [
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat",
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat"
-          ],
-          "cycleLength": 1,
-          "accents": [
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45
-          ]
-        },
-        {
-          "name": "timba piano tumbao and bass gear changes drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
+        {"name":"timba piano tumbao and bass gear changes kit","role":"percussion","onsets":[0,0,0.5,1.5,1.5,1.75,2.5,2.75,3,3.5,4,4,5,5.5,5.5,5.75,6.5,7,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare","kick","cowbell","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78,0.92,0.48,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78],"articulation":"accent","shortName":"Timba kit interlock","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
+        {"name":"timba piano tumbao and bass gear changes drums cadence fill","role":"percussion","onsets":[2.5,3,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","cowbell","snare"],"accents":[0.48,0.92,0.48,0.78],"shortName":"Timba kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
           "name": "timba piano tumbao and bass gear changes cowbell pulse",
           "role": "percussion",
@@ -417,21 +244,6 @@ export const GENRE_PACK: GenrePackInput = {
             "bell",
             "bell"
           ]
-        },
-        {
-          "name": "timba piano tumbao and bass gear changes cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -534,23 +346,15 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "songo drum conga interlock and bass displacement voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "songo drum conga interlock and bass displacement voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "songo drum conga interlock and bass displacement trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "songo drum conga interlock and bass displacement trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "songo drum conga interlock and bass displacement trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "songo drum conga interlock and bass displacement trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "songo drum conga interlock and bass displacement piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "songo drum conga interlock and bass displacement piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "songo drum conga interlock and bass displacement low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "songo drum conga interlock and bass displacement bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "songo drum conga interlock and bass displacement congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "songo drum conga interlock and bass displacement congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "songo drum conga interlock and bass displacement timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "songo drum conga interlock and bass displacement timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "songo drum conga interlock and bass displacement kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "songo drum conga interlock and bass displacement drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "songo drum conga interlock and bass displacement cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "songo drum conga interlock and bass displacement cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "songo drum conga interlock and bass displacement kit", "role": "percussion", "onsets": [0, 0, 0.5, 0.75, 1.5, 1.5, 1.75, 2.25, 2.5, 3, 3, 3.5, 4, 4, 4.75, 5, 5.5, 5.5, 5.75, 6.25, 6.5, 7, 7, 7.5], "instruments": ["drums"], "hits": ["cowbell", "kick", "cowbell", "ghost", "cowbell", "kick", "snare", "ghost", "cowbell", "cowbell", "kick", "snare", "cowbell", "kick", "ghost", "cowbell", "cowbell", "kick", "snare", "ghost", "cowbell", "cowbell", "kick", "snare"], "cycleLength": 2, "accents": [0.65, 0.92, 0.65, 0.28, 0.65, 0.92, 0.85, 0.28, 0.65, 0.65, 0.92, 0.85, 0.65, 0.92, 0.28, 0.65, 0.65, 0.92, 0.85, 0.28, 0.65, 0.65, 0.92, 0.85], "articulation": "accent", "shortName": "Songo kit interlock", "description": "Practice this two-bar songo kit interlock. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "songo drum conga interlock and bass displacement drums cadence fill", "role": "percussion", "onsets": [2.25, 2.5, 3, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["ghost", "cowbell", "cowbell", "kick", "snare"], "accents": [0.32, 0.5, 0.5, 0.92, 0.85], "shortName": "Songo kit close", "description": "Close with the last two beats of the songo kit interlock; keep the spaces clear and land the next phrase together."},
+        {"name": "songo drum conga interlock and bass displacement cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -653,23 +457,15 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Irakere jazz funk horns and piano montuno voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Irakere jazz funk horns and piano montuno voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Irakere jazz funk horns and piano montuno trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Irakere jazz funk horns and piano montuno trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Irakere jazz funk horns and piano montuno trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Irakere jazz funk horns and piano montuno trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Irakere jazz funk horns and piano montuno piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Irakere jazz funk horns and piano montuno piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Irakere jazz funk horns and piano montuno low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Irakere jazz funk horns and piano montuno bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Irakere jazz funk horns and piano montuno congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Irakere jazz funk horns and piano montuno congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Irakere jazz funk horns and piano montuno timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Irakere jazz funk horns and piano montuno timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Irakere jazz funk horns and piano montuno kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Irakere jazz funk horns and piano montuno drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Irakere jazz funk horns and piano montuno cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Irakere jazz funk horns and piano montuno cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Irakere jazz funk horns and piano montuno kit", "role": "percussion", "onsets": [0, 0, 0.75, 1, 1, 1.5, 1.75, 2.5, 2.5, 3, 3.5, 4, 4, 4.75, 5, 5.5, 5.5, 5.75, 6.5, 6.75, 7, 7], "instruments": ["drums"], "hits": ["kick", "ride", "kick", "ride", "snare", "ride", "ghost", "kick", "ride", "snare", "ride", "kick", "ride", "ride", "snare", "kick", "ride", "ghost", "ride", "kick", "ride", "snare"], "cycleLength": 2, "accents": [0.92, 0.5, 0.92, 0.5, 0.85, 0.5, 0.28, 0.92, 0.5, 0.85, 0.5, 0.92, 0.5, 0.5, 0.85, 0.92, 0.5, 0.28, 0.5, 0.92, 0.5, 0.85], "articulation": "accent", "shortName": "Jazz-funk bell pocket", "description": "Practice this two-bar jazz-funk bell pocket. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Irakere jazz funk horns and piano montuno drums cadence fill", "role": "percussion", "onsets": [2.5, 2.75, 3, 3], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["ride", "kick", "ride", "snare"], "accents": [0.5, 0.92, 0.5, 0.85], "shortName": "Jazz-funk bell close", "description": "Close with the last two beats of the jazz-funk bell pocket; keep the spaces clear and land the next phrase together."},
+        {"name": "Irakere jazz funk horns and piano montuno cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -791,21 +587,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "NG La Banda dense horn bloques and bass tumbao voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "NG La Banda dense horn bloques and bass tumbao trumpet statement",
           "shortName": "Bb Trumpet accent",
           "role": "lead",
@@ -828,21 +609,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "accent"
         },
         {
-          "name": "NG La Banda dense horn bloques and bass tumbao trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "NG La Banda dense horn bloques and bass tumbao trombone statement",
           "shortName": "Trombone accent",
           "role": "lead",
@@ -863,21 +629,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.28
           ],
           "articulation": "accent"
-        },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "NG La Banda dense horn bloques and bass tumbao piano accompaniment",
@@ -905,21 +656,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "NG La Banda dense horn bloques and bass tumbao piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "NG La Banda dense horn bloques and bass tumbao low anchor",
           "role": "bass",
           "onsets": [
@@ -937,21 +673,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.6,
             0.5
           ]
-        },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "NG La Banda dense horn bloques and bass tumbao congas pulse",
@@ -973,21 +694,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "accent"
         },
         {
-          "name": "NG La Banda dense horn bloques and bass tumbao congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
           "name": "NG La Banda dense horn bloques and bass tumbao timbales pulse",
           "role": "percussion",
           "onsets": [
@@ -1006,91 +712,8 @@ export const GENRE_PACK: GenrePackInput = {
           "cycleLength": 1,
           "articulation": "accent"
         },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao timbales cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao kit",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0,
-            0.5,
-            1,
-            1,
-            1.5,
-            2,
-            2,
-            2.5,
-            3,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "hits": [
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat",
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat"
-          ],
-          "cycleLength": 1,
-          "accents": [
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45
-          ]
-        },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
+        {"name":"NG La Banda dense horn bloques and bass tumbao kit","role":"percussion","onsets":[0,0,0.75,1,1.5,1.5,2.5,2.5,3,3.5,4,4,4.5,5.5,5.5,5.5,6,6.75,7,7],"instruments":["drums"],"hits":["kick","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","cowbell","kick","snare","cowbell","cowbell","kick","snare","cowbell"],"cycleLength":2,"accents":[0.92,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.48,0.92,0.78,0.48,0.48,0.92,0.78,0.48],"articulation":"accent","shortName":"Bloque kit pocket","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
+        {"name":"NG La Banda dense horn bloques and bass tumbao drums cadence fill","role":"percussion","onsets":[2,2.75,3,3],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","snare","cowbell"],"accents":[0.48,0.92,0.78,0.48],"shortName":"Bloque kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
           "name": "NG La Banda dense horn bloques and bass tumbao cowbell pulse",
           "role": "percussion",
@@ -1111,21 +734,6 @@ export const GENRE_PACK: GenrePackInput = {
             "bell",
             "bell"
           ]
-        },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1229,24 +837,16 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Charanga Habanera synth piano and explosive breaks voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Charanga Habanera synth piano and explosive breaks voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Charanga Habanera synth piano and explosive breaks trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Charanga Habanera synth piano and explosive breaks trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Charanga Habanera synth piano and explosive breaks piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks synth countertumbao", "shortName": "Synth countertumbao", "role": "harmony", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "durations": [0.18, 0.18, 0.18, 0.18], "articulation": "staccato", "sectionUsage": ["coro", "mambo"]},
         {"name": "Charanga Habanera synth piano and explosive breaks low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Charanga Habanera synth piano and explosive breaks bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Charanga Habanera synth piano and explosive breaks congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Charanga Habanera synth piano and explosive breaks timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Charanga Habanera synth piano and explosive breaks timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Charanga Habanera synth piano and explosive breaks kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Charanga Habanera synth piano and explosive breaks drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Charanga Habanera synth piano and explosive breaks cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Charanga Habanera synth piano and explosive breaks cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Charanga Habanera synth piano and explosive breaks kit", "role": "percussion", "onsets": [0, 0, 0.5, 1, 1.5, 1.5, 2.5, 2.75, 3, 3.5, 3.5, 4, 4, 5, 5, 5.5, 5.5, 6.5, 7, 7, 7.5], "instruments": ["drums"], "hits": ["cowbell", "kick", "cowbell", "snare", "cowbell", "kick", "cowbell", "kick", "cowbell", "cowbell", "snare", "cowbell", "kick", "cowbell", "snare", "cowbell", "kick", "cowbell", "cowbell", "kick", "snare"], "cycleLength": 2, "accents": [0.65, 0.92, 0.65, 0.85, 0.65, 0.92, 0.65, 0.92, 0.65, 0.65, 0.85, 0.65, 0.92, 0.65, 0.85, 0.65, 0.92, 0.65, 0.65, 0.92, 0.85], "articulation": "accent", "shortName": "Charanga gear pocket", "description": "Practice this two-bar charanga gear pocket. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Charanga Habanera synth piano and explosive breaks drums cadence fill", "role": "percussion", "onsets": [2.5, 3, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["cowbell", "cowbell", "kick", "snare"], "accents": [0.5, 0.5, 0.92, 0.85], "shortName": "Charanga gear close", "description": "Close with the last two beats of the charanga gear pocket; keep the spaces clear and land the next phrase together."},
+        {"name": "Charanga Habanera synth piano and explosive breaks cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1355,23 +955,15 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Bamboleo funk bass and female vocal response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Bamboleo funk bass and female vocal response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Bamboleo funk bass and female vocal response trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Bamboleo funk bass and female vocal response trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Bamboleo funk bass and female vocal response trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Bamboleo funk bass and female vocal response trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Bamboleo funk bass and female vocal response piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Bamboleo funk bass and female vocal response piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Bamboleo funk bass and female vocal response low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Bamboleo funk bass and female vocal response bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Bamboleo funk bass and female vocal response congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Bamboleo funk bass and female vocal response congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Bamboleo funk bass and female vocal response timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Bamboleo funk bass and female vocal response timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Bamboleo funk bass and female vocal response kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Bamboleo funk bass and female vocal response drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Bamboleo funk bass and female vocal response cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Bamboleo funk bass and female vocal response cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Bamboleo funk bass and female vocal response kit", "role": "percussion", "onsets": [0, 0, 0.5, 1, 1.5, 1.75, 2, 2.5, 3, 3.5, 3.5, 4, 4, 4.5, 5.25, 5.5, 5.5, 6, 6.75, 7, 7.5, 7.5], "instruments": ["drums"], "hits": ["cowbell", "kick", "cowbell", "cowbell", "snare", "kick", "cowbell", "cowbell", "kick", "cowbell", "snare", "cowbell", "kick", "cowbell", "snare", "cowbell", "kick", "cowbell", "kick", "cowbell", "cowbell", "snare"], "cycleLength": 2, "accents": [0.65, 0.92, 0.65, 0.65, 0.85, 0.92, 0.65, 0.65, 0.92, 0.65, 0.85, 0.65, 0.92, 0.65, 0.85, 0.65, 0.92, 0.65, 0.92, 0.65, 0.65, 0.85], "articulation": "accent", "shortName": "Bamboleo kick dialogue", "description": "Practice this two-bar bamboleo kick dialogue. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Bamboleo funk bass and female vocal response drums cadence fill", "role": "percussion", "onsets": [2, 2.75, 3, 3.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["cowbell", "kick", "cowbell", "cowbell", "snare"], "accents": [0.5, 0.92, 0.5, 0.5, 0.85], "shortName": "Bamboleo kick close", "description": "Close with the last two beats of the bamboleo kick dialogue; keep the spaces clear and land the next phrase together."},
+        {"name": "Bamboleo funk bass and female vocal response cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "legato", "accent", "vibrato"],
@@ -1493,21 +1085,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Paulito FG coro development and gear shifts voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Paulito FG coro development and gear shifts trumpet statement",
           "role": "lead",
           "onsets": [
@@ -1527,21 +1104,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Paulito FG coro development and gear shifts trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Paulito FG coro development and gear shifts trombone statement",
           "role": "lead",
           "onsets": [
@@ -1559,21 +1121,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "Paulito FG coro development and gear shifts trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "Paulito FG coro development and gear shifts piano accompaniment",
@@ -1603,21 +1150,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "Paulito FG coro development and gear shifts piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Paulito FG coro development and gear shifts low anchor",
           "role": "bass",
           "onsets": [
@@ -1639,21 +1171,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "Paulito FG coro development and gear shifts bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Paulito FG coro development and gear shifts congas pulse",
           "role": "percussion",
           "onsets": [
@@ -1671,21 +1188,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Paulito FG coro development and gear shifts congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         },
         {
           "name": "Paulito FG coro development and gear shifts timbales pulse",
@@ -1706,91 +1208,8 @@ export const GENRE_PACK: GenrePackInput = {
           "cycleLength": 1,
           "articulation": "accent"
         },
-        {
-          "name": "Paulito FG coro development and gear shifts timbales cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
-          "name": "Paulito FG coro development and gear shifts kit",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0,
-            0.5,
-            1,
-            1,
-            1.5,
-            2,
-            2,
-            2.5,
-            3,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "hits": [
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat",
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat"
-          ],
-          "cycleLength": 1,
-          "accents": [
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45
-          ]
-        },
-        {
-          "name": "Paulito FG coro development and gear shifts drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
+        {"name":"Paulito FG coro development and gear shifts kit","role":"percussion","onsets":[0,0,0.5,1,1.5,1.75,2,2.5,3,3.5,3.5,4,4,4.75,5,5,5.5,6.5,6.5,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","snare","cowbell","kick","cowbell","cowbell","kick","snare","cowbell","kick","cowbell","kick","snare","cowbell","cowbell","kick","cowbell","cowbell","snare"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.78,0.48,0.92,0.48,0.48,0.92,0.78,0.48,0.92,0.48,0.92,0.78,0.48,0.48,0.92,0.48,0.48,0.78],"articulation":"accent","shortName":"Gear-change kit pocket","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
+        {"name":"Paulito FG coro development and gear shifts drums cadence fill","role":"percussion","onsets":[2.5,2.5,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["kick","cowbell","cowbell","snare"],"accents":[0.92,0.48,0.48,0.78],"shortName":"Gear-change kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
           "name": "Paulito FG coro development and gear shifts cowbell pulse",
           "role": "percussion",
@@ -1809,21 +1228,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Paulito FG coro development and gear shifts cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1946,21 +1350,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "Manolin chant coro and percussion breaks voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Manolin chant coro and percussion breaks trumpet statement",
           "role": "lead",
           "onsets": [
@@ -1980,21 +1369,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Manolin chant coro and percussion breaks trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Manolin chant coro and percussion breaks trombone statement",
           "role": "lead",
           "onsets": [
@@ -2012,21 +1386,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "Manolin chant coro and percussion breaks trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "Manolin chant coro and percussion breaks piano accompaniment",
@@ -2054,21 +1413,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "Manolin chant coro and percussion breaks piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Manolin chant coro and percussion breaks low anchor",
           "role": "bass",
           "onsets": [
@@ -2086,21 +1430,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.6,
             0.5
           ]
-        },
-        {
-          "name": "Manolin chant coro and percussion breaks bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "Manolin chant coro and percussion breaks congas pulse",
@@ -2126,21 +1455,6 @@ export const GENRE_PACK: GenrePackInput = {
             "ghost",
             "slap"
           ]
-        },
-        {
-          "name": "Manolin chant coro and percussion breaks congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         },
         {
           "name": "Manolin chant coro and percussion breaks timbales pulse",
@@ -2183,76 +1497,8 @@ export const GENRE_PACK: GenrePackInput = {
             "bell"
           ]
         },
-        {
-          "name": "Manolin chant coro and percussion breaks kit",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0,
-            0.5,
-            1,
-            1,
-            1.5,
-            2,
-            2,
-            2.5,
-            3,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "hits": [
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat",
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat"
-          ],
-          "cycleLength": 1,
-          "accents": [
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45
-          ]
-        },
-        {
-          "name": "Manolin chant coro and percussion breaks drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
+        {"name":"Manolin chant coro and percussion breaks kit","role":"percussion","onsets":[0,0,0.5,1,1.5,1.5,2.5,2.5,3,3,3.75,4,4,4.5,5.25,5.5,5.5,6.5,6.75,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","snare","kick","cowbell","kick","cowbell","snare","cowbell","kick","kick","cowbell","cowbell","snare","kick","cowbell","cowbell","kick","snare","cowbell"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.78,0.92,0.48,0.92,0.48,0.78,0.48,0.92,0.92,0.48,0.48,0.78,0.92,0.48,0.48,0.92,0.78,0.48],"articulation":"accent","shortName":"Coro kit drive","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
+        {"name":"Manolin chant coro and percussion breaks drums cadence fill","role":"percussion","onsets":[2.5,2.75,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","snare","cowbell"],"accents":[0.48,0.92,0.78,0.48],"shortName":"Coro kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
           "name": "Manolin chant coro and percussion breaks cowbell pulse",
           "role": "percussion",
@@ -2269,21 +1515,6 @@ export const GENRE_PACK: GenrePackInput = {
             "bell",
             "bell"
           ]
-        },
-        {
-          "name": "Manolin chant coro and percussion breaks cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -2406,21 +1637,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Havana D Primera melodic trumpet and vocal coro voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Havana D Primera melodic trumpet and vocal coro trumpet statement",
           "role": "lead",
           "onsets": [
@@ -2446,21 +1662,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Havana D Primera melodic trumpet and vocal coro trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Havana D Primera melodic trumpet and vocal coro trombone statement",
           "role": "lead",
           "onsets": [
@@ -2478,21 +1679,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "Havana D Primera melodic trumpet and vocal coro piano accompaniment",
@@ -2516,21 +1702,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "Havana D Primera melodic trumpet and vocal coro piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Havana D Primera melodic trumpet and vocal coro low anchor",
           "role": "bass",
           "onsets": [
@@ -2552,21 +1723,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "Havana D Primera melodic trumpet and vocal coro bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Havana D Primera melodic trumpet and vocal coro congas pulse",
           "role": "percussion",
           "onsets": [
@@ -2584,21 +1740,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         },
         {
           "name": "Havana D Primera melodic trumpet and vocal coro timbales pulse",
@@ -2619,91 +1760,8 @@ export const GENRE_PACK: GenrePackInput = {
           "cycleLength": 1,
           "articulation": "accent"
         },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro timbales cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro kit",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0,
-            0.5,
-            1,
-            1,
-            1.5,
-            2,
-            2,
-            2.5,
-            3,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "hits": [
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat",
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat"
-          ],
-          "cycleLength": 1,
-          "accents": [
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45
-          ]
-        },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
+        {"name":"Havana D Primera melodic trumpet and vocal coro kit","role":"percussion","onsets":[0,0,0.5,0.75,1.5,1.5,2,2.75,3,3.5,3.5,4,4,5,5,5.5,5.5,6.5,7,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","kick","snare","cowbell","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","cowbell","kick","cowbell","snare"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.92,0.78,0.48,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.48,0.92,0.48,0.78],"articulation":"accent","shortName":"Trumpet-response kit pocket","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
+        {"name":"Havana D Primera melodic trumpet and vocal coro drums cadence fill","role":"percussion","onsets":[2.5,3,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","cowbell","snare"],"accents":[0.48,0.92,0.48,0.78],"shortName":"Trumpet-response kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
           "name": "Havana D Primera melodic trumpet and vocal coro cowbell pulse",
           "role": "percussion",
@@ -2722,21 +1780,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -2859,21 +1902,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Maykel Blanco percussive piano and sharp bloques voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Maykel Blanco percussive piano and sharp bloques trumpet statement",
           "role": "lead",
           "onsets": [
@@ -2893,21 +1921,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "Maykel Blanco percussive piano and sharp bloques trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Maykel Blanco percussive piano and sharp bloques trombone statement",
           "role": "lead",
           "onsets": [
@@ -2925,21 +1938,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "Maykel Blanco percussive piano and sharp bloques trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "Maykel Blanco percussive piano and sharp bloques piano accompaniment",
@@ -2967,21 +1965,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "accent"
         },
         {
-          "name": "Maykel Blanco percussive piano and sharp bloques piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Maykel Blanco percussive piano and sharp bloques low anchor",
           "role": "bass",
           "onsets": [
@@ -3001,21 +1984,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "Maykel Blanco percussive piano and sharp bloques bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "Maykel Blanco percussive piano and sharp bloques congas pulse",
           "role": "percussion",
           "onsets": [
@@ -3033,21 +2001,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Maykel Blanco percussive piano and sharp bloques congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         },
         {
           "name": "Maykel Blanco percussive piano and sharp bloques timbales pulse",
@@ -3137,26 +2090,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "Maykel Blanco percussive piano and sharp bloques drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "Maykel Blanco percussive piano and sharp bloques cowbell pulse",
           "role": "percussion",
           "onsets": [
@@ -3174,21 +2107,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "Maykel Blanco percussive piano and sharp bloques cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -3292,23 +2210,15 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "timba funk slap bass and syncopated horn hits voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba funk slap bass and syncopated horn hits voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "timba funk slap bass and syncopated horn hits trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba funk slap bass and syncopated horn hits trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "timba funk slap bass and syncopated horn hits trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba funk slap bass and syncopated horn hits trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "timba funk slap bass and syncopated horn hits piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "timba funk slap bass and syncopated horn hits piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "timba funk slap bass and syncopated horn hits low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "timba funk slap bass and syncopated horn hits bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "timba funk slap bass and syncopated horn hits congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "timba funk slap bass and syncopated horn hits congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "timba funk slap bass and syncopated horn hits timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "timba funk slap bass and syncopated horn hits timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "timba funk slap bass and syncopated horn hits kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "timba funk slap bass and syncopated horn hits drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
+        {"name": "timba funk slap bass and syncopated horn hits kit", "role": "percussion", "onsets": [0, 0, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3, 3.25, 3.5, 3.5, 4, 4, 4.5, 5, 5.25, 5.5, 5.75, 6.25, 6.5, 6.5, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "kick", "snare", "hat", "hat", "ghost", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "snare", "ghost", "hat", "kick", "hat", "hat", "kick", "snare", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.92, 0.85, 0.28, 0.28, 0.28, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.85, 0.28, 0.28, 0.92, 0.28, 0.28, 0.92, 0.85, 0.28], "articulation": "accent", "shortName": "Timba funk cross-accent", "description": "Practice this two-bar timba funk cross-accent. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "timba funk slap bass and syncopated horn hits drums cadence fill", "role": "percussion", "onsets": [2.25, 2.5, 2.5, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "kick", "snare", "hat"], "accents": [0.5, 0.5, 0.92, 0.85, 0.5], "shortName": "Timba funk close", "description": "Close with the last two beats of the timba funk cross-accent; keep the spaces clear and land the next phrase together."},
         {"name": "timba funk slap bass and syncopated horn hits cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "timba funk slap bass and syncopated horn hits cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Timba funk muted guitar offbeat support", "role": "harmony", "instruments": ["guitar"], "onsets": [0.5, 1.5, 2.5, 3.5], "durations": [0.2, 0.2, 0.2, 0.2], "articulation": "muted-strum"}
       ],
       "instrumentTechniques": {
@@ -3431,21 +2341,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "modern timba layered coro and band breaks voice cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "voice"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "modern timba layered coro and band breaks trumpet statement",
           "role": "lead",
           "onsets": [
@@ -3465,21 +2360,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "modern timba layered coro and band breaks trumpet cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trumpet"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "modern timba layered coro and band breaks trombone statement",
           "role": "lead",
           "onsets": [
@@ -3497,21 +2377,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "modern timba layered coro and band breaks trombone cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "trombone"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "modern timba layered coro and band breaks piano accompaniment",
@@ -3541,21 +2406,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "modern timba layered coro and band breaks piano cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "piano"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "modern timba layered coro and band breaks low anchor",
           "role": "bass",
           "onsets": [
@@ -3573,21 +2423,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.6,
             0.5
           ]
-        },
-        {
-          "name": "modern timba layered coro and band breaks bass cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "bass"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "modern timba layered coro and band breaks congas pulse",
@@ -3619,21 +2454,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "modern timba layered coro and band breaks congas cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
           "name": "modern timba layered coro and band breaks timbales pulse",
           "role": "percussion",
           "onsets": [
@@ -3656,91 +2476,8 @@ export const GENRE_PACK: GenrePackInput = {
             "bell"
           ]
         },
-        {
-          "name": "modern timba layered coro and band breaks timbales cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
-        },
-        {
-          "name": "modern timba layered coro and band breaks kit",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0,
-            0.5,
-            1,
-            1,
-            1.5,
-            2,
-            2,
-            2.5,
-            3,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "hits": [
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat",
-            "hat",
-            "kick",
-            "hat",
-            "hat",
-            "snare",
-            "hat"
-          ],
-          "cycleLength": 1,
-          "accents": [
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45,
-            0.45,
-            0.85,
-            0.45
-          ]
-        },
-        {
-          "name": "modern timba layered coro and band breaks drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
+        {"name":"modern timba layered coro and band breaks kit","role":"percussion","onsets":[0,0,0.5,1,1.25,1.5,1.5,2.5,2.75,3.5,3.5,4,4,4.5,5,5.5,5.75,6,6.5,6.5,7.25,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","cowbell","snare","kick","cowbell","cowbell","kick","snare","cowbell","kick","cowbell","cowbell","snare","cowbell","kick","cowbell","kick","cowbell","snare","cowbell"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.48,0.78,0.92,0.48,0.48,0.92,0.78,0.48,0.92,0.48,0.48,0.78,0.48,0.92,0.48,0.92,0.48,0.78,0.48],"articulation":"accent","shortName":"Modern timba kit","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
+        {"name":"modern timba layered coro and band breaks drums cadence fill","role":"percussion","onsets":[2,2.5,2.5,3.25,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","cowbell","snare","cowbell"],"accents":[0.48,0.92,0.48,0.78,0.48],"shortName":"Modern timba close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
           "name": "modern timba layered coro and band breaks cowbell pulse",
           "role": "percussion",
@@ -3759,21 +2496,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "modern timba layered coro and band breaks cowbell cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {

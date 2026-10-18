@@ -3,7 +3,8 @@ import type { PatternEvent } from '../../schema';
 
 /** Original study phrases, not transcriptions of the named orchestras.
  * Rhythmic models: marcato en cuatro/en dos, habanera, síncopa, yumba,
- * umpa-umpa and nuevo 3+3+2. See docs/sample-authenticity.md for references.
+ * umpa-umpa and nuevo 3+3+2. Orchestral roles and marcato/arrastre context:
+ * https://www.ignaciovarchausky.com/ (Introduction to the Orquesta Típica).
  */
 const pitch = (degree: number, register: number): PatternEvent['pitch'] => ({ degree, register, voicing: 'single' });
 const chord: PatternEvent['pitch'] = { voicing: 'chord' };
@@ -13,7 +14,7 @@ function cell(name: string, role: string, instrument: string, onsets: number[], 
 }
 function line(instrument: string, name: string, onsets: number[], degrees: number[], durations: number[], articulation = 'legato', cycleLength = 2) {
   return cell(name, 'lead', instrument, onsets, durations, articulation,
-    degrees.map(degree => pitch(degree, instrument === 'violin' ? 74 : instrument === 'voice' ? 64 : 65)), undefined, cycleLength);
+    degrees.map(degree => pitch(degree, instrument === 'violin' ? 74 : instrument === 'cello' ? 58 : instrument === 'voice' ? 64 : 65)), undefined, cycleLength);
 }
 const four = [0, 1, 2, 3];
 const marcato = (instrument: string, accents = [1, .68, .92, .68]) => cell('Marcato en cuatro', 'harmony', instrument,
@@ -123,7 +124,8 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       if (!electronic) lines.push(line('violin', 'Nuevo sustained counterline', [0, 2, 4, 6], [5, 3, 4, 2], [1.7, 1.7, 1.7, 1.7]));
     } else if (id === 'chacarera-crossover') {
       lines = [line('voice', 'Chacarera compound motif', [0, .5, 1.5, 2, 3, 4.5, 5], [1, 3, 5, 3, 4, 2, 1], [.4, .7, .4, .7, 1.3, .4, .7]),
-        line('violin', 'Chacarera hemiola response', [0, 1, 2, 3, 4, 5], [5, 3, 1, 4, 2, 1], [.8, .8, .8, .8, .8, .8])];
+        line('violin', 'Chacarera hemiola response', [0, 1, 2, 3, 4, 5], [5, 3, 1, 4, 2, 1], [.8, .8, .8, .8, .8, .8]),
+        line('bandoneon', 'Chacarera bandoneon response', [1, 2.5, 4, 5.5], [3, 5, 4, 1], [.55, .45, .75, .6], 'staccato')];
     } else {
       const lyrical = ['di-sarli', 'troilo', 'guardia-nueva-de-caro'].includes(id);
       const urgent = id === 'darienzo';
@@ -301,6 +303,55 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       accompaniment = [piano, bass()];
     }
     else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .9, 1, .9] : id === 'golden-age' ? [1, .62, .94, .62] : id === 'canaro' ? [1, .74, .88, .72] : undefined), bass()];
+    // The expanded catalog roster uses Cello as a quiet chamber color in the
+    // strongest ensemble passage. Give it its own low bowed answer and a
+    // separate return phrase so it never inherits the Violin contour merely
+    // because both parts are bowed strings.
+    const celloOnsets = beats === 3 ? [0, 1, 2] : beats === 2 ? [0, .75, 1.5] : [0, 1.5, 2.5];
+    const celloDurations = beats === 3 ? [.95, .65, .9] : beats === 2 ? [.65, .45, .4] : [.9, .7, .9];
+    const celloDegrees = beats === 3 ? [1, 3, 5] : beats === 2 ? [1, 5, 3] : [1, 5, 3];
+    const celloCounterline = cell(`${id} low bowed counterline`, 'harmony', 'cello', celloOnsets, celloDurations,
+      'legato', celloDegrees.map(degree => pitch(degree, 58)), [1, .62, .82, .58].slice(0, celloOnsets.length));
+    celloCounterline.shortName = 'Cello counterline';
+    celloCounterline.description = 'Let the added Cello answer underneath the tango line with a low connected contour; keep the phrase light enough for the piano and bandoneon marcato to remain clear.';
+    const celloAnswer = cell(`${id} low bowed answer return`, 'harmony', 'cello',
+      celloOnsets.map((onset, index) => onset + (index === 0 ? .25 : 0)),
+      celloDurations.map(duration => Math.max(.35, duration * .82)),
+      'tenuto', celloDegrees.slice().reverse().map(degree => pitch(degree, 58)), [1, .72, .86, .6].slice(0, celloOnsets.length));
+    celloAnswer.shortName = 'Cello answer';
+    celloAnswer.description = 'Return with a shorter reversed Cello answer at the next ensemble entrance, leaving a small breath before the following tango phrase.';
+    accompaniment.push(celloCounterline, celloAnswer);
+    // Chamber teaching colors answer the principal orchestra. Keep electric
+    // bass and bombo out of an orquesta típica expansion; extra voices use
+    // separate registers and phrase gaps instead of another low pulse.
+    if (!electronic && id !== 'chacarera-crossover') {
+      const lyrical = ['di-sarli','troilo','tango-cancion','vals'].includes(id);
+      const shape = beats === 2 ? [.5,1.25,2.5,3.25] : beats === 3 ? [1,2,4,5] : lyrical ? [1,3,5,7] : [.75,2.5,4.75,6.5];
+      const viola = cell(`${id} viola inner answer`, 'harmony', 'viola', shape,
+        shape.map(()=>lyrical?.8:.38), 'arco', [3,2,4,3].map(d=>pitch(d,60)), [.55,.68,.5,.72], 2);
+      viola.shortName='Viola inner voice';
+      viola.description='Answer between the principal violin entries in a lower register. Keep the four-note inner line quiet; it is a chamber teaching color rather than a second melody in unison.';
+      const clarinet = cell(`${id} clarinet phrase answer`, 'lead', 'clarinet',
+        shape.map(p=>p+.125),shape.map(()=>lyrical?.65:.28),lyrical?'legato':'staccato',
+        [5,3,2,1].map(d=>pitch(d,70)),[.55,.66,.58,.72],2);
+      clarinet.shortName='Clarinet reply';
+      clarinet.description='Play a short breath-sized reply after the strings, tapering to the tonic. Leave the next melody entrance clear; this is an optional expanded-ensemble study.';
+      accompaniment.push(viola,clarinet);
+      if (!accompaniment.some(c=>c.instruments?.includes('guitar'))) {
+        const guitar = cell(`${id} guitar upper-string reply`, 'harmony', 'guitar',
+          shape,shape.map(()=>.22),'fingerstyle',[1,5,3,2].map(d=>pitch(d,55)),[.58,.44,.6,.48],2);
+        guitar.shortName='Guitar plucked reply';
+        guitar.description='Pick a quiet middle-register reply in the piano gaps. Do not double the contrabass or strum another chord on every marcato beat.';
+        accompaniment.push(guitar);
+      }
+    }
+    if (id === 'piazzolla-nuevo-tango') {
+      const samplerTexture = cell('Nuevo tango sampled texture answer', 'harmony', 'sampler', [1.5, 3.5], [.22, .22],
+        'staccato', [chord, chord], [.62, .78]);
+      samplerTexture.shortName = 'Sampler texture';
+      samplerTexture.description = 'Use two dry sampled texture hits as a restrained production color around the 3+3+2 ostinato; leave the bandoneon and piano attacks in front.';
+      accompaniment.push(samplerTexture);
+    }
     if (canyengueDrag) accompaniment.push(canyengueDrag);
     if (id === 'piazzolla-nuevo-tango') {
       const bassPickup = cell('Nuevo tango bass arrastre pickup', 'bass', 'upright-bass', [3.75], [.25],
@@ -400,12 +451,18 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       }
     }
     const techniques = { ...style.instrumentTechniques,
+      cello:['arco','legato','tenuto','accent'], viola:['arco','legato','tenuto','accent'],
+      clarinet:['legato','staccato','accent'],
       ...(id === 'pugliese' ? { piano: [...new Set([...(style.instrumentTechniques.piano ?? []), 'yumba'])] } : {}),
     };
     const dialects = { ...style.instrumentDialects };
+    dialects['cello:harmony']={allowedTechniques:techniques.cello,defaultTechnique:'arco'};
+    dialects['viola:harmony']={allowedTechniques:techniques.viola,defaultTechnique:'arco'};
+    dialects['clarinet:lead']={allowedTechniques:techniques.clarinet,defaultTechnique:'legato'};
     if (dialects['piano:harmony']) dialects['piano:harmony'] = { ...dialects['piano:harmony'], allowedTechniques: techniques.piano };
     const cells = [...lines, ...accompaniment].map(item => ({ ...item, shortName: conciseCellLabel(id, item) }));
     const authored = pedagogy[id];
+    const teachingPatterns = [...new Set([...(authored?.patterns ?? style.patterns), 'Cello counterline', 'Cello answer', ...(id === 'piazzolla-nuevo-tango' ? ['Sampler texture'] : [])])];
     const mix = id === 'canyengue' ? {
       ...style.mix,
       character: { ...style.mix.character, dryness: .76, bassForward: .58, width: .34, transientSnap: .84 },
@@ -414,7 +471,7 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
         roleWidth: { ...style.mix.stage.roleWidth, lead: .14, harmony: .38, bass: .12 },
       } } : {}),
     } : style.mix;
-    return { ...style, ...(authored ? { description: authored.description, patterns: authored.patterns } : {}),
+    return { ...style, ...(authored ? { description: authored.description } : {}), patterns: teachingPatterns,
       cells, instrumentTechniques: techniques, instrumentDialects: dialects, mix,
       bassMotion: 'root-fifth', groove: { ...style.groove, swingPercentage: 50,
         roughness: MUGRE_BY_STYLE[id] ?? .35 } };

@@ -61,14 +61,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "gagaku sustained sho and hichiriki heterophony hichiriki statement", "role": "lead", "onsets": [0], "instruments": ["hichiriki"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "gagaku sustained sho and hichiriki heterophony hichiriki cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["hichiriki"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "gagaku sustained sho and hichiriki heterophony ryuteki statement", "role": "lead", "onsets": [0], "instruments": ["ryuteki"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "gagaku sustained sho and hichiriki heterophony ryuteki cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["ryuteki"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "gagaku sustained sho and hichiriki heterophony sho accompaniment", "role": "harmony", "onsets": [0], "instruments": ["sho"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
         {"name": "gagaku sustained sho and hichiriki heterophony taiko pulse", "role": "percussion", "onsets": [0], "instruments": ["taiko"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "gagaku sustained sho and hichiriki heterophony taiko cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["taiko"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "gagaku sustained sho and hichiriki heterophony kane pulse", "role": "percussion", "onsets": [0], "instruments": ["kane"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "gagaku sustained sho and hichiriki heterophony kane cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kane"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "gagaku sustained sho and hichiriki heterophony kane pulse", "role": "percussion", "onsets": [0], "instruments": ["kane"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "hichiriki": ["bend", "vibrato", "accent", "legato", "tenuto"],
@@ -143,8 +139,7 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "shakuhachi breath-led honkyoku with silence shakuhachi statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["shakuhachi"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "shakuhachi breath-led honkyoku with silence shakuhachi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["shakuhachi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "shakuhachi breath-led honkyoku with silence shakuhachi statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["shakuhachi"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "shakuhachi": ["vibrato", "breath", "accent", "legato"]
@@ -202,11 +197,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "shamisen minyo strum and vocal answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "shamisen minyo strum and vocal answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "shamisen minyo strum and vocal answer shamisen statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["shamisen"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "shamisen minyo strum and vocal answer shamisen cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["shamisen"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "shamisen minyo strum and vocal answer taiko pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["taiko"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "shamisen minyo strum and vocal answer taiko cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["taiko"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "shamisen minyo strum and vocal answer taiko pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["taiko"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -274,11 +266,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "koto sankyoku plucked theme and shakuhachi reply koto statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["koto"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "koto sankyoku plucked theme and shakuhachi reply koto cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["koto"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "koto sankyoku plucked theme and shakuhachi reply shakuhachi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["shakuhachi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "koto sankyoku plucked theme and shakuhachi reply shakuhachi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["shakuhachi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "koto sankyoku plucked theme and shakuhachi reply shamisen accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["shamisen"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "koto sankyoku plucked theme and shakuhachi reply shamisen cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["shamisen"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "koto sankyoku plucked theme and shakuhachi reply shamisen accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["shamisen"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "koto": ["tremolo", "bend", "accent", "staccato", "legato"],
@@ -347,11 +336,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "taiko alternating ensemble strokes and kiai break taiko statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["taiko"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "taiko alternating ensemble strokes and kiai break taiko cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["taiko"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "taiko alternating ensemble strokes and kiai break taiko pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["taiko"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "taiko alternating ensemble strokes and kiai break taiko cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["taiko"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "taiko alternating ensemble strokes and kiai break kane pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["kane"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "taiko alternating ensemble strokes and kiai break kane cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kane"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "taiko alternating ensemble strokes and kiai break kane pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["kane"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "taiko": ["accent", "roll"],

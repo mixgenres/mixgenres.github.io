@@ -61,17 +61,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "tarab vocal melisma and oud answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tarab vocal melisma and oud answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tarab vocal melisma and oud answer ney statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tarab vocal melisma and oud answer ney cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["ney"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tarab vocal melisma and oud answer oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "tarab vocal melisma and oud answer oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tarab vocal melisma and oud answer qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "tarab vocal melisma and oud answer qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tarab vocal melisma and oud answer riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tarab vocal melisma and oud answer riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "tarab vocal melisma and oud answer darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tarab vocal melisma and oud answer darbuka cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["darbuka"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "tarab vocal melisma and oud answer darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -155,15 +149,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "takht heterophonic oud qanun and ney ney statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "takht heterophonic oud qanun and ney ney cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["ney"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "takht heterophonic oud qanun and ney violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "takht heterophonic oud qanun and ney violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "takht heterophonic oud qanun and ney oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "takht heterophonic oud qanun and ney oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "takht heterophonic oud qanun and ney qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "takht heterophonic oud qanun and ney qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "takht heterophonic oud qanun and ney riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "takht heterophonic oud qanun and ney riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "takht heterophonic oud qanun and ney riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "ney": ["breath-phrase", "microtonal-inflection", "ornament", "glissando"],
@@ -333,8 +322,7 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "maqam taqsim with sparse accompaniment oud statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["oud"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "maqam taqsim with sparse accompaniment oud cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "maqam taqsim with sparse accompaniment oud statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["oud"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "oud": ["tremolo", "accent", "staccato", "legato", "vibrato"]
@@ -393,19 +381,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "orchestral unison maqam theme voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "orchestral unison maqam theme voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "orchestral unison maqam theme ney statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "orchestral unison maqam theme ney cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["ney"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "orchestral unison maqam theme oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "orchestral unison maqam theme oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "orchestral unison maqam theme qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "orchestral unison maqam theme qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "orchestral unison maqam theme string-ensemble accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "orchestral unison maqam theme string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "orchestral unison maqam theme riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "orchestral unison maqam theme riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "orchestral unison maqam theme darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "orchestral unison maqam theme darbuka cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["darbuka"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "orchestral unison maqam theme darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

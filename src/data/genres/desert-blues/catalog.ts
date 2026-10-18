@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "desert-blues",
   "name": "Desert Blues",
   "family": "Sahel / Tuareg",
@@ -65,17 +66,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Tishoumaren guitar ostinato and sung response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Tishoumaren guitar ostinato and sung response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Tishoumaren guitar ostinato and sung response guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Tishoumaren guitar ostinato and sung response guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Tishoumaren guitar ostinato and sung response guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Tishoumaren guitar ostinato and sung response guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Tishoumaren guitar ostinato and sung response low anchor", "role": "bass", "onsets": [0, 1.5, 3], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "Tishoumaren guitar ostinato and sung response bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Tishoumaren guitar ostinato and sung response kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Tishoumaren guitar ostinato and sung response drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Tishoumaren guitar ostinato and sung response hand-percussion pulse", "role": "percussion", "onsets": [0, 1.5, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Tishoumaren guitar ostinato and sung response hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Tishoumaren guitar ostinato and sung response kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2.5, 3.0, 3, 3.5, 3.5, 4.0, 4, 4.5, 5.0, 5, 5.5, 5.5, 6.0, 6.5, 6.75, 7.0, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "hat", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "hat", "kick", "hat", "snare", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.28, 0.42, 0.92, 0.28, 0.85, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.28, 0.92, 0.42, 0.85, 0.28], "articulation": "accent", "shortName": "Tishoumaren syncopated kit", "description": "Practice this two-bar tishoumaren syncopated kit. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Tishoumaren guitar ostinato and sung response drums cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75, 3.0, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "kick", "hat", "snare", "hat"], "accents": [0.5, 0.5, 0.92, 0.5, 0.85, 0.5], "shortName": "Tishoumaren syncopated close", "description": "Close with the last two beats of the tishoumaren syncopated kit; keep the spaces clear and land the next phrase together."},
+        {"name": "Tishoumaren guitar ostinato and sung response hand-percussion pulse", "role": "percussion", "onsets": [0, 1.5, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -163,17 +159,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Sahel guitar syncopation and melodic bass voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Sahel guitar syncopation and melodic bass voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Sahel guitar syncopation and melodic bass guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Sahel guitar syncopation and melodic bass guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Sahel guitar syncopation and melodic bass guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Sahel guitar syncopation and melodic bass guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Sahel guitar syncopation and melodic bass low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Sahel guitar syncopation and melodic bass bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Sahel guitar syncopation and melodic bass kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Sahel guitar syncopation and melodic bass drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Sahel guitar syncopation and melodic bass hand-percussion pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Sahel guitar syncopation and melodic bass hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Sahel guitar syncopation and melodic bass kit", "role": "percussion", "onsets": [0, 0, 0.5, 0.75, 1, 1.5, 1.5, 2.5, 2.5, 3, 3, 3.5, 4, 4, 4.5, 5, 5.5, 5.5, 5.5, 6.5, 7, 7, 7.5, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "hat", "kick", "snare", "hat", "hat", "kick", "hat", "snare"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.92, 0.42, 0.28, 0.85, 0.28, 0.92, 0.42, 0.85, 0.28, 0.42, 0.92, 0.28, 0.42, 0.28, 0.92, 0.85, 0.28, 0.42, 0.92, 0.28, 0.85], "articulation": "accent", "shortName": "Sahel dance interlock", "description": "Practice this two-bar sahel dance interlock. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Sahel guitar syncopation and melodic bass drums cadence fill", "role": "percussion", "onsets": [2.5, 3, 3, 3.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "kick", "hat", "snare"], "accents": [0.5, 0.5, 0.92, 0.5, 0.85], "shortName": "Sahel dance close", "description": "Close with the last two beats of the sahel dance interlock; keep the spaces clear and land the next phrase together."},
+        {"name": "Sahel guitar syncopation and melodic bass hand-percussion pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -259,11 +250,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "acoustic Tuareg thumb bass and guitar ornaments voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "acoustic Tuareg thumb bass and guitar ornaments voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "acoustic Tuareg thumb bass and guitar ornaments guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "acoustic Tuareg thumb bass and guitar ornaments guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "acoustic Tuareg thumb bass and guitar ornaments hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "acoustic Tuareg thumb bass and guitar ornaments hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "acoustic Tuareg thumb bass and guitar ornaments hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -336,17 +324,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "psychedelic desert repeating guitar and long echoes voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "psychedelic desert repeating guitar and long echoes voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "psychedelic desert repeating guitar and long echoes guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "psychedelic desert repeating guitar and long echoes guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "psychedelic desert repeating guitar and long echoes guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "psychedelic desert repeating guitar and long echoes guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "psychedelic desert repeating guitar and long echoes low anchor", "role": "bass", "onsets": [0, 1.5, 3], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "psychedelic desert repeating guitar and long echoes bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "psychedelic desert repeating guitar and long echoes kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "psychedelic desert repeating guitar and long echoes drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "psychedelic desert repeating guitar and long echoes hand-percussion pulse", "role": "percussion", "onsets": [0, 1.5, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "psychedelic desert repeating guitar and long echoes hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "psychedelic desert repeating guitar and long echoes kit", "role": "percussion", "onsets": [0, 0.0, 0.5, 1.0, 1.5, 1.75, 2.0, 2, 2.5, 3.0, 3.5, 4, 4.0, 4.5, 5.0, 5.5, 6.0, 6, 6.5, 6.5, 7.0, 7.5], "instruments": ["drums"], "hits": ["kick", "ride", "ride", "ride", "ride", "kick", "ride", "snare", "ride", "ride", "ride", "kick", "ride", "ride", "ride", "ride", "ride", "snare", "kick", "ride", "ride", "ride"], "cycleLength": 2, "accents": [0.92, 0.5, 0.5, 0.5, 0.5, 0.92, 0.5, 0.85, 0.5, 0.5, 0.5, 0.92, 0.5, 0.5, 0.5, 0.5, 0.5, 0.85, 0.92, 0.5, 0.5, 0.5], "articulation": "accent", "shortName": "Desert rock open pocket", "description": "Practice this two-bar desert rock open pocket. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "psychedelic desert repeating guitar and long echoes drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2.5, 2.5, 3.0, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["ride", "snare", "kick", "ride", "ride", "ride"], "accents": [0.5, 0.85, 0.92, 0.5, 0.5, 0.5], "shortName": "Desert rock close", "description": "Close with the last two beats of the desert rock open pocket; keep the spaces clear and land the next phrase together."},
+        {"name": "psychedelic desert repeating guitar and long echoes hand-percussion pulse", "role": "percussion", "onsets": [0, 1.5, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -397,4 +380,10 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'harmonica', role: 'lead' },
+  { instrumentId: 'kora', role: 'harmony' },
+  { instrumentId: 'oud', role: 'harmony' },
+  { instrumentId: 'flute', role: 'lead' },
+  { instrumentId: 'frame-drum', role: 'percussion' },
+]);

@@ -12,7 +12,7 @@ export const PERCUSSION_SAMPLE_KEYS: Readonly<Record<string, readonly [number, n
   pandeiro: [54, 39, 54], bodhran: [35, 38, 40], tamborim: [75, 76, 77], darbuka: [64, 63, 62], tabla: [64, 63, 62], djembe: [64, 63, 62],
   shekere: [69, 70, 54], 'talking-drum': [64, 63, 62], janggu: [64, 38, 62], kendang: [64, 63, 38], 'log-drum': [45, 47, 50], timpani: [48, 50, 53],
   'cumbia-drum': [64, 63, 62], 'bombo-andino': [35, 36, 43], tambora: [35, 38, 64], 'tambor-alegre': [64, 63, 62], 'bombo-leguero': [35, 36, 43],
-  taiko: [35, 38, 50], paigu: [47, 50, 48], buk: [64, 63, 38], dholak: [64, 63, 62], 'frame-drum': [54, 64, 63], kebero: [64, 63, 62],
+  taiko: [35, 38, 50], paigu: [47, 50, 48], buk: [64, 63, 38], dholak: [64, 63, 62], 'frame-drum': [54, 64, 63], bendir: [54, 64, 63], kebero: [64, 63, 62], nagarit: [35, 38, 64], sistrum: [70, 69, 70], tbel: [35, 38, 64],
   mridangam: [64, 63, 62], pakhawaj: [64, 63, 62], qraqeb: [56, 67, 68], riq: [54, 75, 56], sabar: [64, 63, 62], tombak: [64, 63, 62],
 };
 
@@ -23,7 +23,7 @@ export const PERCUSSION_KIT_IDS = new Set(['drums', 'drum-kit']);
  * routes use their own named bank 66 presets; the GM note map below remains
  * for instruments without an appropriate compact recording source. */
 export const RECORDED_PERCUSSION_ALIASES: Readonly<Record<string,string>> = {
-  tombak:'darbuka', guira:'guiro', guacharaca:'guiro', dikanza:'guiro', washboard:'guiro',
+  tombak:'darbuka', guira:'guiro', guacharaca:'guiro', dikanza:'guiro', washboard:'guiro', sistrum:'shaker', bendir:'frame-drum',
   'frame-drum':'frame-drum', riq:'frame-drum', pandeiro:'frame-drum', shekere:'shaker', maracas:'shaker',
 };
 export const RECORDED_PERCUSSION_PATCHES: Readonly<Record<string,{program:number;takes:number}>> = {

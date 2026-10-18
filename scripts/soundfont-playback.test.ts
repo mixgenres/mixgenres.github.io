@@ -61,6 +61,21 @@ test('the shared sample plan sizes dense playback and export for its simultaneou
       'the exact score capacity is allocated before rendering, avoiding worklet-time allocation');
   } finally {runtime.destroy();}
 });
+test('live runtime rejects a planned attack with no playable sample zone', async () => {
+  const performance = performanceFixture({ notes: [noteFixture({ midi: 60 })], duration: 1.2 });
+  const plan = compileSamplePlan(performance, options);
+  const bankData = gunzipSync(readFileSync('src/assets/soundfonts/piano.sfpack'));
+  const runtime = new SampleRuntime(44100, 64);
+  try {
+    runtime.addBank('piano', bankData.buffer.slice(bankData.byteOffset, bankData.byteOffset + bankData.byteLength));
+    await runtime.synth.processorInitialized;
+    const on = plan.events.find(event => event.type === 'on');
+    assert(on && on.type === 'on');
+    on.key = 0;
+    plan.voiceDemand[0].key = 0;
+    assert.throws(() => runtime.setPlan(plan), /No playable SoundFont zone/);
+  } finally { runtime.destroy(); }
+});
 test('every catalog instrument maps to a shipped playable sample preset',()=>{
   const banks=new Map<BankId,ReturnType<typeof load>>();
   for(const def of Object.values(INSTRUMENTS_BY_ID)) {
@@ -497,6 +512,17 @@ test('live bank preparation retains every requested shared patch and removes unu
     }
   }
 });
+test('live bank preparation rejects an authored attack without a playable sample zone', async () => {
+  const compressed = gunzipSync(readFileSync('src/assets/soundfonts/piano.sfpack'));
+  const source = compressed.buffer.slice(compressed.byteOffset, compressed.byteOffset + compressed.byteLength);
+  const bank = SoundBankLoader.fromArrayBuffer(source);
+  const piano = bank.presets.find(p => p.bankMSB === 64 && p.program === 0 && !p.isGMGSDrum);
+  assert(piano);
+  assert.equal(piano.getVoiceParameters(0, 90).length, 0, 'the test key is outside the recorded piano range');
+  await assert.rejects(() => prepareBankForLive(source, [{
+    patch: { bank: 64, program: 0, drum: false, pack: 'piano' }, key: 0, velocity: 90,
+  }]), /No playable sample zone for piano:64:0:0/);
+});
 test('prepared percussion retains distinct instrument names, gestures and takes',async()=>{
   const file=gunzipSync(readFileSync('src/assets/soundfonts/percussion.sfpack'));
   const source=file.buffer.slice(file.byteOffset,file.byteOffset+file.byteLength),bank=SoundBankLoader.fromArrayBuffer(source);
@@ -524,6 +550,24 @@ test('new same-pitch attacks and simultaneous bends have separate ownership',()=
   const plan=compileSamplePlan(p,options),ons=plan.events.filter(e=>e.type==='on');
   assert.notEqual(ons[0].channel,ons.find(n=>n.time===.01)!.channel);assert.equal(ons[0].channel,ons.find(n=>n.key===64)!.channel);
   assert.equal(ons[0].channel,ons.find(n=>n.time===.6)!.channel,'same-pitch notes can share a lane after note-off while the static release rings');
+});
+test('sample planning rejects malformed events instead of clamping or dropping articulation',()=>{
+  assert.throws(
+    () => compileSamplePlan(performanceFixture({notes:[noteFixture({midi:-1})]}), options),
+    /Invalid sample note event/,
+  );
+  assert.throws(
+    () => compileSamplePlan(performanceFixture({notes:[noteFixture({vel:0})]}), options),
+    /Invalid sample note event/,
+  );
+  assert.throws(
+    () => compileSamplePlan(performanceFixture({notes:[noteFixture({pitchBend:[{offset:.5,value:9000}]})]}), options),
+    /Invalid pitch bend/,
+  );
+  assert.throws(
+    () => compileSamplePlan(performanceFixture({ccs:[{trackId:'keys',time:0,cc:11,value:128}]}), options),
+    /Invalid controller event/,
+  );
 });
 test('live loop duration retains sample release after a short score with no declared tail',()=>{
   const p=performanceFixture({notes:[noteFixture({dur:.1})],duration:.4,tail:0}),plan=compileSamplePlan(p,options);
@@ -657,4 +701,21 @@ test('corrupt bank reads cannot poison shared storage; cancelling one consumer p
     abort.abort();await assert.rejects(cancelled,{name:'AbortError'});unlock();
     assert((await kept).byteLength>1000);assert.equal(reads,1);assert.equal(soundfontBankStats().pending,0);
   } finally {setSoundfontBankReader(diskBank);}
+});
+
+
+test('stem diagnostics measure the returned excerpt without discarded-history silence', async () => {
+  const performance = performanceFixture({ duration: 7, tail: 0,
+    notes: [noteFixture({ time: .1, dur: 5, midi: 60, vel: 100 })] });
+  const observations: import('../src/engine/studio/audioMetrics').RenderDiagnostic[] = [];
+  const audio = await renderPerformanceToAudio(performance, { ...options, rawStem: true,
+    renderWindow: { start: 1, end: 2 }, maxDurationSeconds: 1,
+    onDiagnostics: event => observations.push(event) });
+  const stem = observations.find(event => event.stage === 'stem')!;
+  const output = observations.find(event => event.stage === 'output')!;
+  assert.equal(stem.metrics.frames, audio.left.length, 'every stem uses the same one-second comparison window');
+  assert.equal(stem.metrics.durationSeconds, 1);
+  assert.ok(stem.metrics.rmsDbfs !== null && output.metrics.rmsDbfs !== null);
+  assert.ok(Math.abs(stem.metrics.rmsDbfs! - output.metrics.rmsDbfs!) < 1e-6,
+    'an isolated raw stem has the same RMS as its returned PCM, not an earlier silent prefix');
 });

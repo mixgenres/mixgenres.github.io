@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "bass",
   "name": "Bass",
   "family": "United Kingdom / Global electronic",
@@ -98,21 +99,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "fast two-step kick and snare break synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "fast two-step kick and snare break synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -132,21 +118,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "fast two-step kick and snare break synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "fast two-step kick and snare break low anchor",
           "role": "bass",
           "onsets": [
@@ -164,21 +135,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.6,
             0.6
           ]
-        },
-        {
-          "name": "fast two-step kick and snare break synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "fast two-step kick and snare break kit",
@@ -219,26 +175,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "fast two-step kick and snare break drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "fast two-step kick and snare break sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -253,21 +189,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "fast two-step kick and snare break sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -389,21 +310,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "chopped jungle break with syncopated sub synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "chopped jungle break with syncopated sub synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -421,21 +327,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.4
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "chopped jungle break with syncopated sub synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "chopped jungle break with syncopated sub low anchor",
@@ -461,21 +352,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.55,
             0.3
           ]
-        },
-        {
-          "name": "chopped jungle break with syncopated sub synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "chopped jungle break with syncopated sub kit",
@@ -534,26 +410,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "chopped jungle break with syncopated sub drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "chopped jungle break with syncopated sub sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -570,21 +426,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "chopped jungle break with syncopated sub sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -706,21 +547,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "liquid broken beat under extended pads synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "liquid broken beat under extended pads synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -738,21 +564,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "tenuto"
         },
         {
-          "name": "liquid broken beat under extended pads synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "liquid broken beat under extended pads low anchor",
           "role": "bass",
           "onsets": [
@@ -768,21 +579,6 @@ export const GENRE_PACK: GenrePackInput = {
             1.75,
             1.75
           ]
-        },
-        {
-          "name": "liquid broken beat under extended pads synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "liquid broken beat under extended pads kit",
@@ -823,26 +619,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "liquid broken beat under extended pads drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "liquid broken beat under extended pads sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -859,21 +635,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "liquid broken beat under extended pads sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -957,15 +718,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "neurofunk staccato bass modulation synth statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "neurofunk staccato bass modulation synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "neurofunk staccato bass modulation synth accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "neurofunk staccato bass modulation synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "neurofunk staccato bass modulation low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "neurofunk staccato bass modulation synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "neurofunk staccato bass modulation kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.75, 2.0, 2.5, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "hat", "kick", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45]},
-        {"name": "neurofunk staccato bass modulation drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "neurofunk staccato bass modulation sampler pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "neurofunk staccato bass modulation sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "neurofunk staccato bass modulation sampler pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -1086,21 +842,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "swung garage skip and chord stabs synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "swung garage skip and chord stabs synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -1120,21 +861,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.24
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "swung garage skip and chord stabs synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "swung garage skip and chord stabs low anchor",
@@ -1158,21 +884,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.35,
             0.45
           ]
-        },
-        {
-          "name": "swung garage skip and chord stabs synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "swung garage skip and chord stabs kit",
@@ -1213,26 +924,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "swung garage skip and chord stabs drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "swung garage skip and chord stabs sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -1249,21 +940,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "swung garage skip and chord stabs sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1387,21 +1063,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "two-step skipped kick and offbeat chords synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "two-step skipped kick and offbeat chords synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -1423,21 +1084,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "two-step skipped kick and offbeat chords synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "two-step skipped kick and offbeat chords low anchor",
           "role": "bass",
           "onsets": [
@@ -1457,21 +1103,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.55,
             0.4
           ]
-        },
-        {
-          "name": "two-step skipped kick and offbeat chords synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "two-step skipped kick and offbeat chords kit",
@@ -1509,26 +1140,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "two-step skipped kick and offbeat chords drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "two-step skipped kick and offbeat chords sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -1545,21 +1156,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "two-step skipped kick and offbeat chords sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1662,21 +1258,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "half-time snare with sustained sub synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "half-time snare with sustained sub synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -1694,21 +1275,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "tenuto"
         },
         {
-          "name": "half-time snare with sustained sub synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "half-time snare with sustained sub low anchor",
           "role": "bass",
           "onsets": [
@@ -1724,21 +1290,6 @@ export const GENRE_PACK: GenrePackInput = {
             1.8,
             1.8
           ]
-        },
-        {
-          "name": "half-time snare with sustained sub synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "half-time snare with sustained sub kit",
@@ -1779,26 +1330,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "half-time snare with sustained sub drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "half-time snare with sustained sub sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -1814,21 +1345,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "half-time snare with sustained sub sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1931,21 +1447,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "grime sparse square bass and clipped hook synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "grime sparse square bass and clipped hook synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -1965,21 +1466,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "grime sparse square bass and clipped hook synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "grime sparse square bass and clipped hook low anchor",
           "role": "bass",
           "onsets": [
@@ -1997,21 +1483,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.38,
             0.32
           ]
-        },
-        {
-          "name": "grime sparse square bass and clipped hook synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "grime sparse square bass and clipped hook kit",
@@ -2052,26 +1523,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "grime sparse square bass and clipped hook drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "grime sparse square bass and clipped hook sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -2087,21 +1538,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "grime sparse square bass and clipped hook sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -2185,15 +1621,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "future garage displaced ghost percussion synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "future garage displaced ghost percussion synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "future garage displaced ghost percussion synth accompaniment", "role": "harmony", "onsets": [0.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "future garage displaced ghost percussion synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "future garage displaced ghost percussion low anchor", "role": "bass", "onsets": [0, 1.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [2, 2, 0.75]},
-        {"name": "future garage displaced ghost percussion synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "future garage displaced ghost percussion kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.75, 2.0, 2.5, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "hat", "kick", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45]},
-        {"name": "future garage displaced ghost percussion drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "future garage displaced ghost percussion sampler pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "future garage displaced ghost percussion sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "future garage displaced ghost percussion sampler pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -2318,21 +1749,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "broken funk beat with sample responses synth cadence fill",
-          "role": "lead",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "broken funk beat with sample responses synth accompaniment",
           "role": "harmony",
           "onsets": [
@@ -2352,21 +1768,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.28
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "broken funk beat with sample responses synth cadence fill",
-          "role": "harmony",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "broken funk beat with sample responses low anchor",
@@ -2390,21 +1791,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.35,
             0.45
           ]
-        },
-        {
-          "name": "broken funk beat with sample responses synth cadence fill",
-          "role": "bass",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "synth"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "broken funk beat with sample responses kit",
@@ -2457,26 +1843,6 @@ export const GENRE_PACK: GenrePackInput = {
           ]
         },
         {
-          "name": "broken funk beat with sample responses drums cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "drums"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll",
-          "hits": [
-            "tom",
-            "snare",
-            "snare"
-          ]
-        },
-        {
           "name": "broken funk beat with sample responses sampler pulse",
           "role": "percussion",
           "onsets": [
@@ -2492,21 +1858,6 @@ export const GENRE_PACK: GenrePackInput = {
           ],
           "cycleLength": 1,
           "articulation": "accent"
-        },
-        {
-          "name": "broken funk beat with sample responses sampler cadence fill",
-          "role": "percussion",
-          "onsets": [
-            3,
-            3.5,
-            3.75
-          ],
-          "instruments": [
-            "sampler"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -2553,4 +1904,10 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'bass', role: 'bass' },
+  { instrumentId: 'rhodes', role: 'harmony' },
+  { instrumentId: 'turntable', role: 'percussion' },
+  { instrumentId: 'piano', role: 'harmony' },
+  { instrumentId: 'guitar', role: 'harmony' },
+]);

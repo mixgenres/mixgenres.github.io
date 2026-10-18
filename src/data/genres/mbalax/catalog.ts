@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "mbalax",
   "name": "Mbalax",
   "family": "Senegal",
@@ -65,17 +66,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "mbalax sabar speech accents and bass guitar voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "mbalax sabar speech accents and bass guitar voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mbalax sabar speech accents and bass guitar guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "mbalax sabar speech accents and bass guitar guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mbalax sabar speech accents and bass guitar low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "mbalax sabar speech accents and bass guitar bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mbalax sabar speech accents and bass guitar sabar pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["sabar"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "mbalax sabar speech accents and bass guitar sabar cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sabar"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "mbalax sabar speech accents and bass guitar talking-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["talking-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "mbalax sabar speech accents and bass guitar talking-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["talking-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "mbalax sabar speech accents and bass guitar shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "mbalax sabar speech accents and bass guitar shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "mbalax sabar speech accents and bass guitar shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -163,17 +158,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "sabar heavy dense drum replies and breaks voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sabar heavy dense drum replies and breaks voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sabar heavy dense drum replies and breaks guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "sabar heavy dense drum replies and breaks guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sabar heavy dense drum replies and breaks low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "sabar heavy dense drum replies and breaks bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sabar heavy dense drum replies and breaks sabar pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["sabar"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sabar heavy dense drum replies and breaks sabar cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sabar"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "sabar heavy dense drum replies and breaks talking-drum pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["talking-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sabar heavy dense drum replies and breaks talking-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["talking-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "sabar heavy dense drum replies and breaks shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sabar heavy dense drum replies and breaks shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "sabar heavy dense drum replies and breaks shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -261,17 +250,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "pop mbalax vocal refrain and sabar punctuation voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "pop mbalax vocal refrain and sabar punctuation voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "pop mbalax vocal refrain and sabar punctuation guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "pop mbalax vocal refrain and sabar punctuation guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "pop mbalax vocal refrain and sabar punctuation low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "pop mbalax vocal refrain and sabar punctuation bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "pop mbalax vocal refrain and sabar punctuation sabar pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["sabar"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "pop mbalax vocal refrain and sabar punctuation sabar cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sabar"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "pop mbalax vocal refrain and sabar punctuation talking-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["talking-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "pop mbalax vocal refrain and sabar punctuation talking-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["talking-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "pop mbalax vocal refrain and sabar punctuation shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "pop mbalax vocal refrain and sabar punctuation shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "pop mbalax vocal refrain and sabar punctuation shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -359,17 +342,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "electronic mbalax sample cuts and sabar accents voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "electronic mbalax sample cuts and sabar accents voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "electronic mbalax sample cuts and sabar accents guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "electronic mbalax sample cuts and sabar accents guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "electronic mbalax sample cuts and sabar accents low anchor", "role": "bass", "onsets": [0, 1.75, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "electronic mbalax sample cuts and sabar accents bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "electronic mbalax sample cuts and sabar accents sabar pulse", "role": "percussion", "onsets": [0, 0.75, 1, 1.75, 2.5, 3, 3.75], "instruments": ["sabar"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "electronic mbalax sample cuts and sabar accents sabar cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sabar"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "electronic mbalax sample cuts and sabar accents talking-drum pulse", "role": "percussion", "onsets": [0, 0.75, 1, 1.75, 2.5, 3, 3.75], "instruments": ["talking-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "electronic mbalax sample cuts and sabar accents talking-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["talking-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "electronic mbalax sample cuts and sabar accents shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "electronic mbalax sample cuts and sabar accents shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "electronic mbalax sample cuts and sabar accents shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -420,4 +397,9 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'djembe', role: 'percussion' },
+  { instrumentId: 'kora', role: 'harmony' },
+  { instrumentId: 'piano', role: 'harmony' },
+  { instrumentId: 'balafon', role: 'lead' },
+]);

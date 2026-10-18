@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "soukous",
   "name": "Soukous",
   "family": "Democratic Republic of the Congo",
@@ -64,17 +65,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "soukous interlocking lead and rhythm guitar voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "soukous interlocking lead and rhythm guitar voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "soukous interlocking lead and rhythm guitar guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "soukous interlocking lead and rhythm guitar guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "soukous interlocking lead and rhythm guitar guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "soukous interlocking lead and rhythm guitar guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "soukous interlocking lead and rhythm guitar low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "soukous interlocking lead and rhythm guitar bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "soukous interlocking lead and rhythm guitar kit", "shortName": "Soukous guitar pulse", "description": "Keep the kit light beneath the interlocking guitars: eighth-note hats, a firm opening kick, and two off-center replies. Let the guitars, bass, and congas carry the busy motion instead of imposing a rock backbeat.", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "hat", "rim", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.92, 0.42, 0.4, 0.58, 0.4, 0.4, 0.72, 0.36], "sectionUsage": ["intro", "verse", "chorus", "refrain"]},
         {"name": "soukous interlocking lead and rhythm guitar guitar handoff fill", "shortName": "Guitar handoff fill", "description": "Use a short tom-to-snare pickup and crash to mark the move into the guitar-led sebene; leave the lead guitar's line in front.", "role": "percussion", "onsets": [2.5, 3, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["tom", "snare", "crash"], "sectionUsage": ["transition", "ending"]},
-        {"name": "soukous interlocking lead and rhythm guitar congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "soukous interlocking lead and rhythm guitar congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "soukous interlocking lead and rhythm guitar congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -161,17 +157,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Congolese rumba lyrical guitar and slower verse voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Congolese rumba lyrical guitar and slower verse voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Congolese rumba lyrical guitar and slower verse guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Congolese rumba lyrical guitar and slower verse guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Congolese rumba lyrical guitar and slower verse guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Congolese rumba lyrical guitar and slower verse guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Congolese rumba lyrical guitar and slower verse low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "Congolese rumba lyrical guitar and slower verse bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Congolese rumba lyrical guitar and slower verse kit", "shortName": "Rumba verse kit", "description": "A quiet kick on the first beat and a single rim-color answer on beat three leave room for the lyrical guitar and the conga pulse. Keep the remaining hats soft and even.", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "hat", "hat", "rim", "hat", "hat", "hat"], "cycleLength": 1, "accents": [0.82, 0.3, 0.32, 0.3, 0.62, 0.3, 0.3, 0.28], "sectionUsage": ["intro", "verse", "response", "bridge"]},
         {"name": "Congolese rumba lyrical guitar and slower verse phrase answer", "shortName": "Rumba phrase answer", "description": "A restrained rim answer followed by a low pickup closes the vocal phrase without turning the verse into a drum fill showcase.", "role": "percussion", "onsets": [2, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulations": ["accent", "accent"], "hits": ["rim", "kick"], "sectionUsage": ["response", "ending"]},
-        {"name": "Congolese rumba lyrical guitar and slower verse congas pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Congolese rumba lyrical guitar and slower verse congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Congolese rumba lyrical guitar and slower verse congas pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -258,17 +249,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "sebene long fast guitar interlock voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sebene long fast guitar interlock voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sebene long fast guitar interlock guitar statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sebene long fast guitar interlock guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sebene long fast guitar interlock guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "sebene long fast guitar interlock guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sebene long fast guitar interlock low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "sebene long fast guitar interlock bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sebene long fast guitar interlock kit", "shortName": "Sebene ride drive", "description": "Drive the extended guitar-dance section with an even ride pulse; put the kick on beat one and the late pickup, and move the snare answers off the usual two-and-four backbeat.", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "ride", "ride", "snare", "ride", "kick", "ride", "snare"], "cycleLength": 1, "accents": [0.88, 0.48, 0.48, 0.68, 0.48, 0.76, 0.48, 0.72], "sectionUsage": ["sebene", "solo", "chant", "climax"]},
         {"name": "sebene long fast guitar interlock guitar-section turn", "shortName": "Sebene section turn", "description": "Use the tom pickup and cymbal accent to mark a guitar-section turn; keep the kit's fill compact so the interlocking guitar parts stay prominent.", "role": "percussion", "onsets": [2.5, 3, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulations": ["accent", "accent", "accent", "accent"], "hits": ["tom", "kick", "crash", "snare"], "sectionUsage": ["transition", "ending"]},
-        {"name": "sebene long fast guitar interlock congas pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sebene long fast guitar interlock congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "sebene long fast guitar interlock congas pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -355,17 +341,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "kwassa kwassa guitar dance and bass bounce voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "kwassa kwassa guitar dance and bass bounce voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kwassa kwassa guitar dance and bass bounce guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "kwassa kwassa guitar dance and bass bounce guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kwassa kwassa guitar dance and bass bounce guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "kwassa kwassa guitar dance and bass bounce guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kwassa kwassa guitar dance and bass bounce low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "kwassa kwassa guitar dance and bass bounce bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kwassa kwassa guitar dance and bass bounce kit", "shortName": "Kwassa bounce kit", "description": "Keep this dance kit buoyant and sparse: a kick on the downbeat and a later bounce, with rim answers and hats around the syncopated bass and guitar figures.", "role": "percussion", "onsets": [0, 0.5, 0.75, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "hat", "rim", "hat", "kick", "hat", "rim"], "cycleLength": 1, "accents": [0.88, 0.38, 0.45, 0.62, 0.35, 0.78, 0.38, 0.65], "sectionUsage": ["verse", "chorus", "solo", "sebene"]},
         {"name": "kwassa kwassa guitar dance and bass bounce guitar-dance pickup", "shortName": "Kwassa dance pickup", "description": "A syncopated kick and paired rim pickup point into the next guitar-dance phrase; preserve the bounce rather than adding a straight snare roll.", "role": "percussion", "onsets": [2.5, 2.75, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulations": ["accent", "ghost", "accent", "accent"], "hits": ["kick", "rim", "kick", "rim"], "sectionUsage": ["transition", "ending"]},
-        {"name": "kwassa kwassa guitar dance and bass bounce congas pulse", "shortName": "Kwassa conga bounce", "description": "Practice the spaced, offbeat conga answers against the bass bounce; leave a hole after the opening tone so the guitar pickup can be heard.", "role": "percussion", "onsets": [0, 0.75, 1.5, 2, 2.75, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent", "sectionUsage": ["verse", "chorus", "solo", "sebene"]},
-        {"name": "kwassa kwassa guitar dance and bass bounce congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "kwassa kwassa guitar dance and bass bounce congas pulse", "shortName": "Kwassa conga bounce", "description": "Practice the spaced, offbeat conga answers against the bass bounce; leave a hole after the opening tone so the guitar pickup can be heard.", "role": "percussion", "onsets": [0, 0.75, 1.5, 2, 2.75, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent", "sectionUsage": ["verse", "chorus", "solo", "sebene"]}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -452,17 +433,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "ndombolo driven bass and dense guitar response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ndombolo driven bass and dense guitar response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ndombolo driven bass and dense guitar response guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ndombolo driven bass and dense guitar response guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ndombolo driven bass and dense guitar response guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "ndombolo driven bass and dense guitar response guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ndombolo driven bass and dense guitar response low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "ndombolo driven bass and dense guitar response bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ndombolo driven bass and dense guitar response kit", "shortName": "Ndombolo dance drive", "description": "Use a denser dance-kit cell with displaced kick pickups, snare calls, and a final open-hat lift. The bass and guitar responses keep the groove moving between those accents.", "role": "percussion", "onsets": [0, 0.5, 0.75, 1, 1.5, 2, 2.5, 2.75, 3, 3.5, 3.75], "instruments": ["drums"], "hits": ["kick", "hat", "kick", "snare", "hat", "kick", "hat", "kick", "snare", "hat", "openHat"], "cycleLength": 1, "accents": [0.9, 0.4, 0.72, 0.78, 0.42, 0.86, 0.42, 0.72, 0.82, 0.42, 0.7], "sectionUsage": ["chant", "verse", "chorus", "sebene", "climax"]},
         {"name": "ndombolo driven bass and dense guitar response dance-break fill", "shortName": "Ndombolo dance-break fill", "description": "A compact tom/snare burst closes the phrase before the groove returns; leave the break itself open for the chant and ensemble response.", "role": "percussion", "onsets": [2.5, 3, 3.25, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulations": ["accent", "accent", "ghost", "accent", "accent"], "hits": ["tom", "snare", "snare", "kick", "crash"], "sectionUsage": ["transition", "ending"]},
-        {"name": "ndombolo driven bass and dense guitar response congas pulse", "shortName": "Ndombolo conga drive", "description": "Build the busy dance pulse with alternating spaces and quick double answers; keep each hand light enough for the bass and guitar figures to remain clear.", "role": "percussion", "onsets": [0, 0.25, 0.75, 1, 1.5, 1.75, 2.25, 2.5, 3, 3.25, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent", "sectionUsage": ["chant", "verse", "chorus", "sebene", "climax"]},
-        {"name": "ndombolo driven bass and dense guitar response congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "ndombolo driven bass and dense guitar response congas pulse", "shortName": "Ndombolo conga drive", "description": "Build the busy dance pulse with alternating spaces and quick double answers; keep each hand light enough for the bass and guitar figures to remain clear.", "role": "percussion", "onsets": [0, 0.25, 0.75, 1, 1.5, 1.75, 2.25, 2.5, 3, 3.25, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent", "sectionUsage": ["chant", "verse", "chorus", "sebene", "climax"]}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -513,4 +489,9 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'shaker', role: 'percussion' },
+  { instrumentId: 'organ', role: 'harmony' },
+  { instrumentId: 'rhodes', role: 'harmony' },
+  { instrumentId: 'piano', role: 'harmony' },
+]);

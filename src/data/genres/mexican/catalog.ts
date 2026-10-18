@@ -62,17 +62,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "mariachi violin trumpet answer and vihuela strum voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "mariachi violin trumpet answer and vihuela strum voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mariachi violin trumpet answer and vihuela strum trumpet statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "mariachi violin trumpet answer and vihuela strum trumpet cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mariachi violin trumpet answer and vihuela strum violin statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "mariachi violin trumpet answer and vihuela strum violin cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mariachi violin trumpet answer and vihuela strum guitar accompaniment", "role": "harmony", "onsets": [1, 2], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "mariachi violin trumpet answer and vihuela strum guitar cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "mariachi violin trumpet answer and vihuela strum vihuela accompaniment", "role": "harmony", "onsets": [1, 2], "instruments": ["vihuela"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "mariachi violin trumpet answer and vihuela strum vihuela cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["vihuela"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "mariachi violin trumpet answer and vihuela strum low anchor", "role": "bass", "onsets": [0], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "mariachi violin trumpet answer and vihuela strum guitarron cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitarron"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "mariachi violin trumpet answer and vihuela strum low anchor", "role": "bass", "onsets": [0], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -158,17 +152,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "ranchera vocal phrase and guitarron waltz voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ranchera vocal phrase and guitarron waltz voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ranchera vocal phrase and guitarron waltz trumpet statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "ranchera vocal phrase and guitarron waltz trumpet cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ranchera vocal phrase and guitarron waltz violin statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ranchera vocal phrase and guitarron waltz violin cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ranchera vocal phrase and guitarron waltz guitar accompaniment", "role": "harmony", "onsets": [1, 2], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "ranchera vocal phrase and guitarron waltz guitar cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ranchera vocal phrase and guitarron waltz vihuela accompaniment", "role": "harmony", "onsets": [1, 2], "instruments": ["vihuela"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "ranchera vocal phrase and guitarron waltz vihuela cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["vihuela"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "ranchera vocal phrase and guitarron waltz low anchor", "role": "bass", "onsets": [0], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "ranchera vocal phrase and guitarron waltz guitarron cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitarron"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "ranchera vocal phrase and guitarron waltz low anchor", "role": "bass", "onsets": [0], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -255,15 +243,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "norteño accordion and bajo sexto polka voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "norteño accordion and bajo sexto polka voice cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "norteño accordion and bajo sexto polka accordion statement", "role": "lead", "onsets": [0], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "norteño accordion and bajo sexto polka accordion cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "norteño accordion and bajo sexto polka bajo-sexto accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["bajo-sexto"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "norteño accordion and bajo sexto polka bajo-sexto cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["bajo-sexto"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "norteño accordion and bajo sexto polka low anchor", "role": "bass", "onsets": [0], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "norteño accordion and bajo sexto polka bass cadence fill", "role": "bass", "onsets": [1.0, 1.5, 1.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "norteño accordion and bajo sexto polka kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "norteño accordion and bajo sexto polka drums cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "norteño accordion and bajo sexto polka kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -344,17 +327,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "banda brass response and tuba bass dance voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "banda brass response and tuba bass dance voice cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "banda brass response and tuba bass dance trumpet statement", "role": "lead", "onsets": [0], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "banda brass response and tuba bass dance trumpet cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "banda brass response and tuba bass dance clarinet statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["clarinet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "banda brass response and tuba bass dance clarinet cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["clarinet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "banda brass response and tuba bass dance trombone accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "banda brass response and tuba bass dance trombone cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "banda brass response and tuba bass dance low anchor", "role": "bass", "onsets": [0], "instruments": ["tuba"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "banda brass response and tuba bass dance tuba cadence fill", "role": "bass", "onsets": [1.0, 1.5, 1.75], "instruments": ["tuba"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "banda brass response and tuba bass dance kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "banda brass response and tuba bass dance drums cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "banda brass response and tuba bass dance kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -440,15 +417,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "son jarocho sesquialtera jarana and harp exchange voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "son jarocho sesquialtera jarana and harp exchange voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son jarocho sesquialtera jarana and harp exchange harp statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["harp"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "son jarocho sesquialtera jarana and harp exchange harp cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["harp"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son jarocho sesquialtera jarana and harp exchange jarana accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 2.5], "instruments": ["jarana"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "son jarocho sesquialtera jarana and harp exchange jarana cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["jarana"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son jarocho sesquialtera jarana and harp exchange low anchor", "role": "bass", "onsets": [0, 1.5], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "son jarocho sesquialtera jarana and harp exchange guitarron cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitarron"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son jarocho sesquialtera jarana and harp exchange foot-stomp pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["foot-stomp"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "son jarocho sesquialtera jarana and harp exchange foot-stomp cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["foot-stomp"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Son jarocho requinto answer in the sesquialtera cycle", "role": "lead", "instruments": ["requinto"], "onsets": [1.5, 2, 2.5], "durations": [0.4, 0.4, 0.4], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -528,13 +500,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "son huasteco violin flourishes and vocal falsetto voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "son huasteco violin flourishes and vocal falsetto voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son huasteco violin flourishes and vocal falsetto violin statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "son huasteco violin flourishes and vocal falsetto violin cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son huasteco violin flourishes and vocal falsetto guitar accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "son huasteco violin flourishes and vocal falsetto guitar cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "son huasteco violin flourishes and vocal falsetto jarana accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 2.5], "instruments": ["jarana"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "son huasteco violin flourishes and vocal falsetto jarana cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["jarana"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "son huasteco violin flourishes and vocal falsetto jarana accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 2.5], "instruments": ["jarana"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -610,13 +578,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "corrido narrative verse and accordion turnaround voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "corrido narrative verse and accordion turnaround voice cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "corrido narrative verse and accordion turnaround accordion statement", "role": "lead", "onsets": [0], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "corrido narrative verse and accordion turnaround accordion cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "corrido narrative verse and accordion turnaround bajo-sexto accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["bajo-sexto"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "corrido narrative verse and accordion turnaround bajo-sexto cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["bajo-sexto"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "corrido narrative verse and accordion turnaround low anchor", "role": "bass", "onsets": [0], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "corrido narrative verse and accordion turnaround bass cadence fill", "role": "bass", "onsets": [1.0, 1.5, 1.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "corrido narrative verse and accordion turnaround low anchor", "role": "bass", "onsets": [0], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -692,15 +656,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "tierra caliente fiddle and guitar dance voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tierra caliente fiddle and guitar dance voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tierra caliente fiddle and guitar dance violin statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "tierra caliente fiddle and guitar dance violin cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tierra caliente fiddle and guitar dance guitar accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "tierra caliente fiddle and guitar dance guitar cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tierra caliente fiddle and guitar dance low anchor", "role": "bass", "onsets": [0, 1.5], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "tierra caliente fiddle and guitar dance guitarron cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitarron"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "tierra caliente fiddle and guitar dance bombo pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["bombo"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tierra caliente fiddle and guitar dance bombo cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["bombo"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "tierra caliente fiddle and guitar dance bombo pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["bombo"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -782,13 +741,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "conjunto accordion polka and bajo sexto accordion statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "conjunto accordion polka and bajo sexto accordion cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "conjunto accordion polka and bajo sexto bajo-sexto accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["bajo-sexto"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "conjunto accordion polka and bajo sexto bajo-sexto cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["bajo-sexto"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "conjunto accordion polka and bajo sexto low anchor", "role": "bass", "onsets": [0], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "conjunto accordion polka and bajo sexto bass cadence fill", "role": "bass", "onsets": [1.0, 1.5, 1.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "conjunto accordion polka and bajo sexto kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "conjunto accordion polka and bajo sexto drums cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "conjunto accordion polka and bajo sexto kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45]}
       ],
       "instrumentTechniques": {
         "accordion": ["tremolo", "accent", "staccato", "legato", "tenuto"],
@@ -863,17 +818,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "bolero ranchero intimate guitar and trumpet answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "bolero ranchero intimate guitar and trumpet answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero ranchero intimate guitar and trumpet answer trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "bolero ranchero intimate guitar and trumpet answer trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero ranchero intimate guitar and trumpet answer violin statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "bolero ranchero intimate guitar and trumpet answer violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero ranchero intimate guitar and trumpet answer guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "bolero ranchero intimate guitar and trumpet answer guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero ranchero intimate guitar and trumpet answer vihuela accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["vihuela"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "bolero ranchero intimate guitar and trumpet answer vihuela cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["vihuela"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "bolero ranchero intimate guitar and trumpet answer low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "bolero ranchero intimate guitar and trumpet answer guitarron cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitarron"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "bolero ranchero intimate guitar and trumpet answer low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],

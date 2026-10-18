@@ -20,6 +20,10 @@ export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>
   country: { 'upright-bass': 1.5, violin: 1.5 },
   tango: { violin: 6, bandoneon: 2, 'upright-bass': 22 },
   flamenco: { guitar: 3 },
+  // Four-second ensemble renders put the recorded scrape/shake sources
+  // 40–50 dB below the guitar and the bass 8–14 dB below it. Restore a readable
+  // Angolan rhythm section without lifting drum-kit transients with them.
+  kizomba: { bass: 5, guitar: -1.5, dikanza: 20, shaker: 14 },
   // The VCSL one-shot conga, clave and bell recordings sit well below the
   // melodic bank at the same MIDI velocity. These salsa-only trims put the
   // timekeeping and hand-drum attacks back in the pocket without affecting
@@ -29,6 +33,15 @@ export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>
 
 /** Track trims backed by source-level audits of the named sample arrangements. */
 export const STYLE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>> = {
+  // The exposed martinete guide has no band to balance against. Its existing
+  // ensemble vocal trim rendered the entire study around -35 dBFS RMS. Restore
+  // the solo line here without lifting sustained vowel guides in other songs.
+  'flamenco-tonas-martinetes': { voice: 10 },
+  'kizomba-semba-derived': { synth: 5 },
+  'kizomba-passada': { synth: 5 },
+  'kizomba-urban-kiz': { synth: 8 },
+  'kizomba-ghetto-zouk-crossover': { synth: 6 },
+  'kizomba-fusion-kiz': { synth: 6 },
   // Upright-bass attacks were 14 dB below guitar peaks in the Bluegrass
   // sample, and 29 dB below the big-band horns in this low, soft walk.
   'country-bluegrass': { 'upright-bass': 8 },

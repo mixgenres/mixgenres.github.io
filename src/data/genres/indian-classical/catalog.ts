@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "indian-classical",
   "name": "Indian Classical",
   "family": "South Asia",
@@ -61,12 +62,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "khayal vilambit bol alap and drut taan voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "khayal vilambit bol alap and drut taan voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "khayal vilambit bol alap and drut taan sarangi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "khayal vilambit bol alap and drut taan sarangi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sarangi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "khayal vilambit bol alap and drut taan tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "khayal vilambit bol alap and drut taan tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "khayal vilambit bol alap and drut taan tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "khayal vilambit bol alap and drut taan tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -140,12 +138,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "dhrupad long alap and pakhawaj cycle voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "dhrupad long alap and pakhawaj cycle voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dhrupad long alap and pakhawaj cycle rudra-veena statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["rudra-veena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "dhrupad long alap and pakhawaj cycle rudra-veena cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["rudra-veena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dhrupad long alap and pakhawaj cycle tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "dhrupad long alap and pakhawaj cycle pakhawaj pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["pakhawaj"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "dhrupad long alap and pakhawaj cycle pakhawaj cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["pakhawaj"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "dhrupad long alap and pakhawaj cycle pakhawaj pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["pakhawaj"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -219,10 +214,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "instrumental gat with tabla and jhala plucks sitar statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["sitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "instrumental gat with tabla and jhala plucks sitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "instrumental gat with tabla and jhala plucks tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "instrumental gat with tabla and jhala plucks tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "instrumental gat with tabla and jhala plucks tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "instrumental gat with tabla and jhala plucks tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "sitar": ["tremolo", "accent", "staccato", "legato"],
@@ -291,12 +284,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "thumri lyrical bol banav and flexible cadence voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "thumri lyrical bol banav and flexible cadence voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "thumri lyrical bol banav and flexible cadence sarangi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "thumri lyrical bol banav and flexible cadence sarangi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sarangi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "thumri lyrical bol banav and flexible cadence tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "thumri lyrical bol banav and flexible cadence tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "thumri lyrical bol banav and flexible cadence tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "thumri lyrical bol banav and flexible cadence tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -370,12 +360,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Carnatic kriti pallavi anupallavi charanam voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Carnatic kriti pallavi anupallavi charanam voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Carnatic kriti pallavi anupallavi charanam sarangi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Carnatic kriti pallavi anupallavi charanam sarangi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sarangi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Carnatic kriti pallavi anupallavi charanam tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "Carnatic kriti pallavi anupallavi charanam tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Carnatic kriti pallavi anupallavi charanam tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Carnatic kriti pallavi anupallavi charanam tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -451,12 +438,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "ragam tanam pallavi and rhythmic improvisation voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ragam tanam pallavi and rhythmic improvisation voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ragam tanam pallavi and rhythmic improvisation sarangi statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ragam tanam pallavi and rhythmic improvisation sarangi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sarangi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ragam tanam pallavi and rhythmic improvisation tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "ragam tanam pallavi and rhythmic improvisation tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "ragam tanam pallavi and rhythmic improvisation tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "ragam tanam pallavi and rhythmic improvisation tabla pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -530,12 +514,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "varnam composed phrases and swara passages voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "varnam composed phrases and swara passages voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "varnam composed phrases and swara passages sarangi statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "varnam composed phrases and swara passages sarangi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sarangi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "varnam composed phrases and swara passages tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "varnam composed phrases and swara passages tabla pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "varnam composed phrases and swara passages tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "varnam composed phrases and swara passages tabla pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -609,12 +590,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "tillana rhythmic syllables and brisk melodic cadence voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tillana rhythmic syllables and brisk melodic cadence voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tillana rhythmic syllables and brisk melodic cadence sarangi statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tillana rhythmic syllables and brisk melodic cadence sarangi cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sarangi"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tillana rhythmic syllables and brisk melodic cadence tanpura accompaniment", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "tillana rhythmic syllables and brisk melodic cadence tabla pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tillana rhythmic syllables and brisk melodic cadence tabla cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "tillana rhythmic syllables and brisk melodic cadence tabla pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["tabla"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -654,4 +632,11 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'bansuri', role: 'lead' },
+  { instrumentId: 'flute', role: 'lead' },
+  { instrumentId: 'veena', role: 'lead' },
+  { instrumentId: 'mridangam', role: 'percussion' },
+  { instrumentId: 'tabla', role: 'percussion' },
+  { instrumentId: 'tanpura', role: 'harmony' },
+]);

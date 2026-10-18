@@ -37,6 +37,8 @@ export interface NativeSlice {
   velocities: number[];
   durations: number[];
   microtiming: number[];
+  /** Rich events use milliseconds; absent units retain legacy grid inference. */
+  microtimingUnit?: 'milliseconds' | 'grid';
   hitTypes: string[];
   articulations: string[];
   /** how many steps this pattern puts in one bar */
@@ -64,19 +66,56 @@ export function sliceBarNative(
   pitches?: Array<PatternEvent['pitch']>,
   notations?: Array<PatternEvent['notation']>,
   durationAuthoredByOnset?: boolean[],
+  microtimingUnit?: NativeSlice['microtimingUnit'],
 ): NativeSlice {
   if (!Number.isInteger(subdivisions) || subdivisions < 1
     || !Number.isInteger(cycleLength) || cycleLength < 1
     || !Number.isInteger(barInCycle) || barInCycle < 0) {
     throw new Error(`Invalid authored pattern grid: subdivisions=${subdivisions}, cycle=${cycleLength}, bar=${barInCycle}`);
   }
+  const aligned = <T>(name: string, values: T[] | undefined): T[] | undefined => {
+    if (values !== undefined && values.length !== onsets.length) {
+      throw new Error(`Misaligned authored pattern array ${name}: ${values.length} values for ${onsets.length} onsets`);
+    }
+    return values;
+  };
+  aligned('accents', accents);
+  aligned('velocities', velocities);
+  aligned('durations', durations);
+  aligned('microtiming', micro);
+  aligned('hitTypes', hitTypes);
+  aligned('articulations', articulations);
+  aligned('fractionalPositions', fractionalSteps);
+  aligned('pitches', pitches);
+  aligned('notations', notations);
+  aligned('durationAuthoredByOnset', durationAuthoredByOnset);
+  onsets.forEach((onset, index) => {
+    if (!Number.isFinite(onset) || onset < 0) throw new Error(`Invalid authored onset at index ${index}: ${String(onset)}`);
+    const fractional = fractionalSteps?.[index];
+    if (fractional !== undefined && (!Number.isFinite(fractional) || fractional < 0)) {
+      throw new Error(`Invalid authored fractional position at index ${index}: ${String(fractional)}`);
+    }
+    const duration = durations?.[index];
+    if (duration !== undefined && (!Number.isFinite(duration) || duration <= 0)) {
+      throw new Error(`Invalid authored duration at index ${index}: ${String(duration)}`);
+    }
+    const microtiming = micro?.[index];
+    if (microtiming !== undefined && !Number.isFinite(microtiming)) {
+      throw new Error(`Invalid authored microtiming at index ${index}: ${String(microtiming)}`);
+    }
+  });
   const declared = subdivisions;
   const authoredMax = onsets.length ? Math.max(...onsets.map((onset, i) => fractionalSteps?.[i] ?? onset)) : -1;
   const total = authoredMax >= declared ? Math.floor(authoredMax) + 1 : declared;
 
   let cycleBars = cycleLength;
   if (total > declared) cycleBars = Math.max(cycleBars, Math.ceil(total / declared));
-  const stepsPerBar = Math.max(1, Math.round(total / cycleBars));
+  // `subdivisions` describes the authored cycle, not an inferred extension
+  // beyond it. When a legacy cell runs long, keep that per-bar resolution and
+  // use the extra bars only as a wider selection window. Deriving this from
+  // `total` would compress a 16-step bar to 11 steps for a six-beat spill,
+  // shifting gates and making the continuation sound late.
+  const stepsPerBar = Math.max(1, Math.round(declared / cycleLength));
 
   const from = (barInCycle % cycleBars) * stepsPerBar;
   const keepP: Array<PatternEvent['pitch']> = [];
@@ -86,7 +125,10 @@ export function sliceBarNative(
   onsets.forEach((o, i) => {
     const exactStep = fractionalSteps?.[i] ?? o;
     if (exactStep < from || exactStep >= from + stepsPerBar) return;
-    const barStep = o - from;
+    // Keep the integer compatibility grid inside the bar even when a rich
+    // event lands on a fractional step that rounds across the display edge.
+    // The exact fractional position below remains the timing source of truth.
+    const barStep = Math.max(0, Math.min(stepsPerBar - 1, Math.round(exactStep - from)));
     keepO.push(barStep);
     const authoredFraction = fractionalSteps?.[i];
     keepF.push(authoredFraction !== undefined
@@ -103,7 +145,7 @@ export function sliceBarNative(
     keepN.push(notations?.[i]);
   });
 
-  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, pitches: keepP, notations: keepN, stepsPerBar, fractionalPositions: keepF, durationsAuthored: keepDA.length > 0 && keepDA.every(Boolean), durationAuthoredByOnset: keepDA };
+  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, microtimingUnit, hitTypes: keepH, articulations: keepT, pitches: keepP, notations: keepN, stepsPerBar, fractionalPositions: keepF, durationsAuthored: keepDA.length > 0 && keepDA.every(Boolean), durationAuthoredByOnset: keepDA };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */

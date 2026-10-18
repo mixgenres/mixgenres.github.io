@@ -67,20 +67,17 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "modern thematic piano and orchestral swell piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "modern thematic piano and orchestral swell piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern thematic piano and orchestral swell french-horn statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["french-horn"], "cycleLength": 1, "durations": [1.5, 1.25, 0.5], "articulation": "legato"},
-        {"name": "modern thematic piano and orchestral swell french-horn cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["french-horn"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "modern thematic piano and orchestral swell violin answer", "shortName": "Violin score answer", "description": "Let the added violin answer the piano with a short bowed three-note rise, then leave space for the horn entrance.", "role": "lead", "onsets": [0.75, 1.75, 2.75], "instruments": ["violin"], "cycleLength": 1, "durations": [0.65, 0.55, 0.75], "pitches": [{"degree": 3, "register": 67}, {"degree": 4, "register": 67}, {"degree": 5, "register": 67}], "accents": [0.56, 0.68, 0.82], "articulation": "legato"},
         {"name": "modern thematic piano and orchestral swell string-ensemble accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "modern thematic piano and orchestral swell string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern thematic piano and orchestral swell low anchor", "role": "bass", "onsets": [0], "instruments": ["cello"], "cycleLength": 1, "articulation": "staccato", "durations": [2]},
-        {"name": "modern thematic piano and orchestral swell cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern thematic piano and orchestral swell timpani pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "modern thematic piano and orchestral swell timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "modern thematic piano and orchestral swell synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "piano": ["staccato", "legato", "accent", "tenuto"],
         "french-horn": ["staccato", "legato", "accent", "tenuto"],
+        "violin": ["legato", "tremolo", "accent", "vibrato"],
         "string-ensemble": ["legato", "tremolo", "staccato", "accent"],
         "cello": ["legato", "staccato", "tremolo", "tenuto", "vibrato", "accent"],
         "timpani": ["staccato", "roll", "accent", "ghost", "open"],
@@ -94,6 +91,10 @@ export const GENRE_PACK: GenrePackInput = {
         "french-horn:lead": {
           "allowedTechniques": ["staccato", "legato", "accent", "tenuto"],
           "defaultTechnique": "staccato"
+        },
+        "violin:lead": {
+          "allowedTechniques": ["legato", "tremolo", "accent", "vibrato"],
+          "defaultTechnique": "legato"
         },
         "string-ensemble:harmony": {
           "allowedTechniques": ["legato", "tremolo", "staccato", "accent"],
@@ -167,15 +168,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Golden Age lyrical strings and brass cadence piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Golden Age lyrical strings and brass cadence piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Golden Age lyrical strings and brass cadence french-horn statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["french-horn"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Golden Age lyrical strings and brass cadence french-horn cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["french-horn"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Golden Age lyrical strings and brass cadence string-ensemble accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Golden Age lyrical strings and brass cadence string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Golden Age lyrical strings and brass cadence low anchor", "role": "bass", "onsets": [0, 2], "instruments": ["cello"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "Golden Age lyrical strings and brass cadence cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Golden Age lyrical strings and brass cadence timpani pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Golden Age lyrical strings and brass cadence timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Golden Age lyrical strings and brass cadence synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -194,6 +190,10 @@ export const GENRE_PACK: GenrePackInput = {
         "french-horn:lead": {
           "allowedTechniques": ["staccato", "legato", "accent", "tenuto"],
           "defaultTechnique": "staccato"
+        },
+        "violin:lead": {
+          "allowedTechniques": ["legato", "tremolo", "accent", "vibrato"],
+          "defaultTechnique": "legato"
         },
         "string-ensemble:harmony": {
           "allowedTechniques": ["legato", "tremolo", "staccato", "accent"],
@@ -265,20 +265,23 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "minimal tension repeated short ostinato piano statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "minimal tension repeated short ostinato piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "minimal tension repeated short ostinato french-horn statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["french-horn"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "minimal tension repeated short ostinato french-horn cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["french-horn"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "minimal tension repeated short ostinato string-ensemble accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "minimal tension repeated short ostinato string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "minimal tension repeated short ostinato low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cello"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "minimal tension repeated short ostinato cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "minimal tension repeated short ostinato timpani pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "minimal tension repeated short ostinato timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "minimal tension repeated short ostinato synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
+        {"name": "minimal tension repeated short ostinato synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
+        {"name": "minimal tension repeated short ostinato violin additive answer", "shortName": "Violin additive answer", "description": "Let the added Violin enter one step after the piano pulse, then climb through three connected tones before leaving the next attack open.", "role": "lead", "onsets": [0.5, 1.5, 2.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.42, 0.5, 0.72], "pitches": [{"degree": 3, "register": 72}, {"degree": 4, "register": 72}, {"degree": 5, "register": 72}], "accents": [0.52, 0.68, 0.82], "articulation": "legato"},
+        {"name": "minimal tension repeated short ostinato harp split harmony", "shortName": "Harp split harmony", "description": "Place two quiet Harp plucks between the repeated piano attacks; keep the resonance short enough for the cello pulse to remain audible.", "role": "harmony", "onsets": [0.75, 2.75], "instruments": ["harp"], "cycleLength": 1, "durations": [0.55, 0.7], "pitches": [{"degree": 3, "register": 67}, {"degree": 5, "register": 67}], "accents": [0.55, 0.74], "articulation": "staccato"},
+        {"name": "minimal tension repeated short ostinato oboe breath line", "shortName": "Oboe breath line", "description": "Answer the narrow ostinato with two soft Oboe notes and a clear breath before the next cycle.", "role": "lead", "onsets": [1.25, 3.25], "instruments": ["oboe"], "cycleLength": 1, "durations": [0.72, 0.5], "pitches": [{"degree": 5, "register": 69}, {"degree": 3, "register": 69}], "accents": [0.62, 0.78], "articulation": "legato"},
+        {"name": "minimal tension repeated short ostinato flute thread", "shortName": "Flute thread", "description": "Thread a light Flute pickup through the spaces in the pulse, ending before the downbeat so the process stays transparent.", "role": "lead", "onsets": [0.25, 2.25], "instruments": ["flute"], "cycleLength": 1, "durations": [0.35, 0.5], "pitches": [{"degree": 2, "register": 74}, {"degree": 4, "register": 74}], "accents": [0.48, 0.68], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "piano": ["staccato", "legato", "accent", "tenuto"],
         "french-horn": ["staccato", "legato", "accent", "tenuto"],
+        "violin": ["legato", "tremolo", "accent", "vibrato"],
+        "harp": ["staccato", "legato", "accent", "harmonics"],
+        "oboe": ["legato", "staccato", "accent", "vibrato"],
+        "flute": ["legato", "staccato", "accent", "vibrato"],
         "string-ensemble": ["legato", "tremolo", "staccato", "accent"],
         "cello": ["legato", "staccato", "tremolo", "tenuto", "vibrato", "accent"],
         "timpani": ["staccato", "roll", "accent", "ghost", "open"],
@@ -292,6 +295,22 @@ export const GENRE_PACK: GenrePackInput = {
         "french-horn:lead": {
           "allowedTechniques": ["staccato", "legato", "accent", "tenuto"],
           "defaultTechnique": "staccato"
+        },
+        "violin:lead": {
+          "allowedTechniques": ["legato", "tremolo", "accent", "vibrato"],
+          "defaultTechnique": "legato"
+        },
+        "harp:harmony": {
+          "allowedTechniques": ["staccato", "legato", "accent", "harmonics"],
+          "defaultTechnique": "staccato"
+        },
+        "oboe:lead": {
+          "allowedTechniques": ["legato", "staccato", "accent", "vibrato"],
+          "defaultTechnique": "legato"
+        },
+        "flute:lead": {
+          "allowedTechniques": ["legato", "staccato", "accent", "vibrato"],
+          "defaultTechnique": "legato"
         },
         "string-ensemble:harmony": {
           "allowedTechniques": ["legato", "tremolo", "staccato", "accent"],
@@ -361,15 +380,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "hybrid pulse and layered orchestral hits piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "hybrid pulse and layered orchestral hits piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hybrid pulse and layered orchestral hits french-horn statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["french-horn"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "hybrid pulse and layered orchestral hits french-horn cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["french-horn"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hybrid pulse and layered orchestral hits string-ensemble accompaniment", "role": "harmony", "onsets": [0.5, 2.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "hybrid pulse and layered orchestral hits string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hybrid pulse and layered orchestral hits low anchor", "role": "bass", "onsets": [0, 1.5, 3.25], "instruments": ["cello"], "cycleLength": 1, "articulation": "staccato", "durations": [2, 2, 0.75]},
-        {"name": "hybrid pulse and layered orchestral hits cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hybrid pulse and layered orchestral hits timpani pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3.5], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "hybrid pulse and layered orchestral hits timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "hybrid pulse and layered orchestral hits synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -463,15 +477,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "epic low ostinato and brass climax piano statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "epic low ostinato and brass climax piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "epic low ostinato and brass climax french-horn statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["french-horn"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "epic low ostinato and brass climax french-horn cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["french-horn"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "epic low ostinato and brass climax string-ensemble accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "epic low ostinato and brass climax string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "epic low ostinato and brass climax low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cello"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "epic low ostinato and brass climax cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "epic low ostinato and brass climax timpani pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "epic low ostinato and brass climax timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "epic low ostinato and brass climax synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -557,24 +566,27 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "ambient score synthetic long-tone lead motif", "shortName": "Synth slow motif", "description": "Play a beginner three-note contour with long, connected tones and a small breath before the next phrase. Let the performance layer vary register and note color without speeding up the calm pulse.", "role": "lead", "onsets": [0, 1.5, 2.75], "instruments": ["synth"], "cycleLength": 1, "durations": [1.2, 0.9, 1.0], "articulation": "legato", "pedagogicalStudy": "answer", "arrangementVariation": true},
-        {"name": "ambient score synthetic phrase answer", "shortName": "Synth answering phrase", "description": "Answer after the lead breath with two soft, connected notes. Keep the contour inside the same slow harmonic color and leave the bar line open.", "role": "lead", "onsets": [1.75, 3], "instruments": ["synth"], "cycleLength": 1, "durations": [0.65, 0.8], "articulation": "legato", "pedagogicalStudy": "answer", "arrangementVariation": true},
-        {"name": "ambient score soft piano breath reply", "shortName": "Piano breath reply", "description": "Place two quiet piano tones in the open space after the sustained lead. This beginner answer marks a breath without turning the piano into a regular beat.", "role": "texture", "onsets": [1.5, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.75], "articulation": "tenuto", "pedagogicalStudy": "answer", "arrangementVariation": true},
+        {"name": "ambient score synthetic long-tone lead motif", "shortName": "Synth slow motif", "description": "Play a beginner three-note contour with long, connected tones and a small breath before the next phrase. Let the performance layer vary register and note color without speeding up the calm pulse.", "role": "lead", "onsets": [0, 1.5, 2.75], "instruments": ["synth"], "cycleLength": 1, "durations": [1.2, 0.9, 1.0], "articulation": "legato", "arrangementVariation": true},
+        {"name": "ambient score synthetic phrase answer", "shortName": "Synth answering phrase", "description": "Answer after the lead breath with two soft, connected notes. Keep the contour inside the same slow harmonic color and leave the bar line open.", "role": "lead", "onsets": [1.75, 3], "instruments": ["synth"], "cycleLength": 1, "durations": [0.65, 0.8], "articulation": "legato", "arrangementVariation": true},
+        {"name": "ambient score soft piano breath reply", "shortName": "Piano breath reply", "description": "Place two quiet piano tones in the open space after the sustained lead. This beginner answer marks a breath without turning the piano into a regular beat.", "role": "texture", "onsets": [1.5, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.75], "articulation": "tenuto", "arrangementVariation": true},
         {"name": "ambient score floating motif and long textures piano statement", "role": "lead", "onsets": [0], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "ambient score floating motif and long textures piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ambient score floating motif and long textures french-horn statement", "role": "lead", "onsets": [0], "instruments": ["french-horn"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "ambient score floating motif and long textures french-horn cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["french-horn"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ambient score floating motif and long textures string-ensemble accompaniment", "role": "harmony", "onsets": [0], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "ambient score floating motif and long textures string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ambient score floating motif and long textures low anchor", "role": "bass", "onsets": [0], "instruments": ["cello"], "cycleLength": 1, "articulation": "legato", "durations": [2]},
-        {"name": "ambient score floating motif and long textures cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ambient score floating motif and long textures timpani pulse", "role": "percussion", "onsets": [0], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "ambient score floating motif and long textures timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "ambient score floating motif and long textures synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
+        {"name": "ambient score floating motif and long textures synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
+        {"name": "ambient score floating motif and long textures violin breath line", "shortName": "Violin breath line", "description": "Let the added Violin carry a single long answer after the synth breath, then leave the next chord change open.", "role": "lead", "onsets": [1.25, 3.25], "instruments": ["violin"], "cycleLength": 1, "durations": [1.0, 0.55], "pitches": [{"degree": 3, "register": 72}, {"degree": 2, "register": 72}], "accents": [0.58, 0.72], "articulation": "legato"},
+        {"name": "ambient score floating motif and long textures harp resonance", "shortName": "Harp resonance", "description": "Place two quiet Harp tones under the floating lead, allowing the resonance to connect the chord without creating a regular pulse.", "role": "harmony", "onsets": [0, 2.5], "instruments": ["harp"], "cycleLength": 1, "durations": [1.2, 1.0], "pitches": [{"degree": 1, "register": 67}, {"degree": 5, "register": 67}], "accents": [0.5, 0.66], "articulation": "legato"},
+        {"name": "ambient score floating motif and long textures oboe answer", "shortName": "Oboe answer", "description": "Answer the synth with one warm Oboe tone and a shorter release, keeping the phrase human and spacious.", "role": "lead", "onsets": [2.0], "instruments": ["oboe"], "cycleLength": 1, "durations": [1.1], "pitches": [{"degree": 4, "register": 69}], "accents": [0.68], "articulation": "legato"},
+        {"name": "ambient score floating motif and long textures flute glint", "shortName": "Flute glint", "description": "Use one high Flute glint near the end of the bar, then let the room decay before the next harmony.", "role": "lead", "onsets": [3.25], "instruments": ["flute"], "cycleLength": 1, "durations": [0.55], "pitches": [{"degree": 5, "register": 76}], "accents": [0.62], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "piano": ["staccato", "legato", "accent", "tenuto"],
         "french-horn": ["staccato", "legato", "accent", "tenuto"],
+        "violin": ["legato", "tremolo", "accent", "vibrato"],
+        "harp": ["staccato", "legato", "accent", "harmonics"],
+        "oboe": ["legato", "staccato", "accent", "vibrato"],
+        "flute": ["legato", "staccato", "accent", "vibrato"],
         "string-ensemble": ["legato", "tremolo", "staccato", "accent"],
         "cello": ["legato", "staccato", "tremolo", "tenuto", "vibrato", "accent"],
         "timpani": ["staccato", "roll", "accent", "ghost", "open"],
@@ -596,6 +608,22 @@ export const GENRE_PACK: GenrePackInput = {
         "french-horn:lead": {
           "allowedTechniques": ["staccato", "legato", "accent", "tenuto"],
           "defaultTechnique": "staccato"
+        },
+        "violin:lead": {
+          "allowedTechniques": ["legato", "tremolo", "accent", "vibrato"],
+          "defaultTechnique": "legato"
+        },
+        "harp:harmony": {
+          "allowedTechniques": ["staccato", "legato", "accent", "harmonics"],
+          "defaultTechnique": "legato"
+        },
+        "oboe:lead": {
+          "allowedTechniques": ["legato", "staccato", "accent", "vibrato"],
+          "defaultTechnique": "legato"
+        },
+        "flute:lead": {
+          "allowedTechniques": ["legato", "staccato", "accent", "vibrato"],
+          "defaultTechnique": "legato"
         },
         "string-ensemble:harmony": {
           "allowedTechniques": ["legato", "tremolo", "staccato", "accent"],

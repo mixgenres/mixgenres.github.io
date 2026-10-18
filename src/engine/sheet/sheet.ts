@@ -17,6 +17,7 @@ import { SECTION_ENERGY_DEFAULT } from '../../data/performance/sectionEnergyDefa
 import { getPerformanceGrammar } from '../band/performanceGrammar.ts';
 import { BASS_INSTRUMENT_ROLE_PATTERN, VOICE_INSTRUMENT_ROLE_PATTERN, VOICE_FAMILY_ROLE_PATTERN } from '../../data/instruments/roleAssignmentPatterns';
 import { ELECTRONIC_TRACK_GENRE_PATTERN, ACOUSTIC_BASS_TRACK_VOLUME_STEPS, ELECTRONIC_BASS_TRACK_VOLUME_STEPS, FIXED_INSTRUMENT_TRACK_VOLUME, TRACK_VOLUME_BY_ROLE, DEFAULT_TRACK_VOLUME } from '../../data/sound/mix/trackVolume';
+import { CATALOG_ROSTER_EXTENSIONS, CATALOG_ROSTER_EXCLUSIONS } from '../../data/songs/catalogEnsembles';
 
 export interface Voice extends Track {
   instrumentId: string;
@@ -176,6 +177,7 @@ import {
   PROGRESSIONS,
   TEMPOS,
   TITLES,
+  starterTitleForGenre,
 } from "../../data/genreForms";
 
 export type { FormIntensity, FormStep, GenreForm };
@@ -185,6 +187,7 @@ export {
   PROGRESSIONS,
   TEMPOS,
   TITLES,
+  starterTitleForGenre,
 };
 
 
@@ -255,10 +258,17 @@ export function toBar(
   const sourceGrid = authoredMax >= declared ? Math.max(16, authoredMax + 1) : declared;
 
   if (sourceGrid === 16) {
+    const keep: number[] = [], a: number[] = [], d: number[] = [];
+    onsets.forEach((o, i) => {
+      if (o < 0 || o >= 16) return;
+      keep.push(o);
+      if (accents) a.push(accents[i] ?? 0.75);
+      if (durations) d.push(durations[i] ?? 1);
+    });
     return {
-      onsets: onsets.filter(o => o >= 0 && o < 16),
-      accents: accents?.slice(0, onsets.length),
-      durations: durations?.slice(0, onsets.length),
+      onsets: keep,
+      accents: accents ? a : undefined,
+      durations: durations ? d : undefined,
     };
   }
 
@@ -358,25 +368,15 @@ export function canonicalPatternSection(sectionKind?: string): string | undefine
   return k;
 }
 
-/** Generic phrase lessons span any statement/return/contrast region, including
- * tradition-specific form names not covered by the common section aliases.
- * Explicitly section-scoped variations keep their authored limits. */
+/** Section limits come from the authored part, including local form names. */
 export function patternAvailableInSection(pattern: MusicalPattern, sectionKind?: string): boolean {
   if (!pattern.sectionUsage?.length) return true;
   const canonical = canonicalPatternSection(sectionKind);
-  if (canonical && pattern.sectionUsage.some(section => canonicalPatternSection(section) === canonical)) return true;
-  const broadPhraseLesson = pattern.arrangementVariation === true
-    && ['verse', 'chorus', 'bridge', 'solo'].every(section => pattern.sectionUsage!.includes(section as NonNullable<MusicalPattern['sectionUsage']>[number]));
-  return broadPhraseLesson;
+  return !!canonical && pattern.sectionUsage.some(section => canonicalPatternSection(section) === canonical);
 }
 
-/** Source-derived reduction/technique drills and neutral timing placeholders
- * stay available for deliberate study, while full folder-authored cells can
- * remain part of the automatic style vocabulary. */
 function automaticPatternCandidate(pattern: MusicalPattern): boolean {
-  if (pattern.enabled === false || pattern.provenance?.startsWith('Generic phrase-close')
-    || pattern.provenance?.startsWith('Recomposition of')) return false;
-  return !pattern.pedagogicalSourcePatternId || pattern.arrangementVariation === true;
+  return pattern.enabled !== false;
 }
 
 export function patternStyleFit(
@@ -460,9 +460,6 @@ export function affinity(
   if (vocalMismatch) score -= 50;
   if (explicitMismatch) score -= p.canCrossRole ? 85 : 140;
   if (authoredMismatch) score -= 20;
-  // Keep the opening pattern on the authored core cell. Arrangement-aware
-  // studies are promoted only by the phrase-development selector below.
-  if (p.pedagogicalStudy) score -= 64;
   if (instrumentMatch) score += 30;
   if (roleMatch) score += 14;
   else if (p.roles.length) score -= 10;
@@ -506,6 +503,40 @@ function patternSupportsVoice(pattern: MusicalPattern, voice: Voice, allowInstru
 /** Project an authored event pattern into the legacy grid arrays at the render
  * boundary. The rich event model remains the source of truth for probability,
  * phrase/section conditions, tuplets and fractional microtiming. */
+function patternCycleBarsFor(
+  pattern: MusicalPattern,
+  variant?: PatternVariant,
+  events?: NonNullable<MusicalPattern['events']>,
+): number {
+  const [numerator = 4, denominator = 4] = pattern.meter.split('/').map(Number);
+  const quarterBeats = numerator * 4 / denominator || 4;
+  const authoredCycle = Math.max(1, Math.round(pattern.cycleLength || 1));
+  const declared = Math.max(1, Math.round(pattern.subdivisions || 16));
+  const stepsPerBar = declared / authoredCycle;
+  let cycleBars = authoredCycle;
+
+  const grid = variant?.onsetGrid ?? pattern.onsetGrid ?? [];
+  const maxGrid = grid.length ? Math.max(...grid) : -1;
+  if (Number.isFinite(maxGrid) && maxGrid >= 0 && stepsPerBar > 0) {
+    cycleBars = Math.max(cycleBars, Math.floor(maxGrid / stepsPerBar) + 1);
+  }
+
+  const sourceEvents = events ?? variant?.events ?? pattern.events ?? [];
+  const maxEventPosition = sourceEvents.length
+    ? Math.max(...sourceEvents.map(event => event.position))
+    : -1;
+  if (Number.isFinite(maxEventPosition) && maxEventPosition >= 0) {
+    cycleBars = Math.max(cycleBars, Math.floor(maxEventPosition / quarterBeats) + 1);
+  }
+  return cycleBars;
+}
+
+function subdivisionsForPatternCycle(pattern: MusicalPattern, cycleBars: number): number {
+  const authoredCycle = Math.max(1, Math.round(pattern.cycleLength || 1));
+  const declared = Math.max(1, Math.round(pattern.subdivisions || 16));
+  return Math.max(1, Math.round(declared * cycleBars / authoredCycle));
+}
+
 function projectPatternEvents(
   events: NonNullable<MusicalPattern['events']>,
   pattern: MusicalPattern,
@@ -514,10 +545,21 @@ function projectPatternEvents(
   phraseRole: 'transition' | 'cadence' | 'body',
   energy: SectionEnergy,
   role: string,
+  hitGrid?: MusicalPattern['hitGrid'],
+  /**
+   * A few generated teaching cells contain an authored continuation beyond
+   * their old one-cycle metadata. Keep that continuation in the event stream
+   * instead of applying the legacy modulo and folding it back onto beat one.
+   * The authored cycle still determines the event grid resolution; this value
+   * only widens the phrase window used for event positions.
+   */
+  cycleLengthOverride?: number,
 ) {
   const [numerator = 4, denominator = 4] = pattern.meter.split('/').map(Number);
   const quarterBeats = numerator * 4 / denominator || 4;
   const stepsPerBeat = (pattern.subdivisions || 16) / (quarterBeats * Math.max(1, pattern.cycleLength || 1));
+  const authoredCycleBeats = quarterBeats * Math.max(1, pattern.cycleLength || 1);
+  const eventCycleBeats = quarterBeats * Math.max(1, cycleLengthOverride ?? pattern.cycleLength ?? 1);
   const sectionName = String(region.kind ?? '');
   // Keep the authored cue through notation even when this part's instrument or
   // role cannot perform its literal gesture. Playback resolves it against the
@@ -537,7 +579,7 @@ function projectPatternEvents(
   const result = { onsets: [] as number[], accents: [] as number[], velocities: [] as number[], durations: [] as number[], durationAuthoredByOnset: [] as boolean[],
     microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[], pitches: [] as Array<import('../../data/schema').PatternEvent['pitch']>, notations: [] as Array<import('../../data/schema').PatternEvent['notation']> };
   let priorBeat = 0;
-  for (const { event } of chosen) {
+  for (const { event, eventIndex } of chosen) {
     if (event.kind === 'rest') {
       if (result.durations.length) {
         result.durations[result.durations.length - 1] = Math.max(0.000001,
@@ -554,11 +596,12 @@ function projectPatternEvents(
       }
       continue;
     }
-    const cycleBeats = quarterBeats * Math.max(1, pattern.cycleLength || 1);
     const phaseOffset = event.polyrhythm
       ? (event.polyrhythm.phase ?? 0) * event.polyrhythm.denominator / Math.max(1, event.polyrhythm.numerator)
       : 0;
-    const eventPosition = ((event.position + phaseOffset) % cycleBeats + cycleBeats) % cycleBeats;
+    const eventPosition = eventCycleBeats > authoredCycleBeats
+      ? event.position + phaseOffset
+      : ((event.position + phaseOffset) % authoredCycleBeats + authoredCycleBeats) % authoredCycleBeats;
     const fractionalStep = eventPosition * stepsPerBeat;
     result.onsets.push(Math.max(0, Math.round(fractionalStep)));
     result.fractionalSteps.push(fractionalStep);
@@ -568,7 +611,7 @@ function projectPatternEvents(
     result.durations.push(Math.max(0.000001, (event.duration ?? .25) * stepsPerBeat));
     result.durationAuthoredByOnset.push(event.duration !== undefined);
     result.microtiming.push(event.microtiming ?? 0);
-    result.hitTypes.push(event.hitType ?? '');
+    result.hitTypes.push(event.hitType ?? hitGrid?.[eventIndex] ?? '');
     result.articulations.push(event.articulation ?? '');
     result.pitches.push(event.pitch);
     result.notations.push({ ...event.notation, ...(event.tuplet ? { tuplet: event.tuplet } : {}), ...(event.tieToNext ? { tieToNext: true } : {}) });
@@ -595,6 +638,7 @@ function choosePatternVariant(
 ): PatternVariant | undefined {
   if (!variants?.length) return undefined;
   const eligible = variants.filter(v => {
+    if (!(v.probability > 0)) return false;
     if (phraseRole === 'cadence') return ['cadence', 'fill', 'phraseEnd'].includes(v.variationType);
     if (phraseRole === 'transition') return ['transition', 'phraseStart'].includes(v.variationType);
     return !['cadence', 'fill', 'phraseEnd', 'transition', 'phraseStart'].includes(v.variationType);
@@ -605,7 +649,7 @@ function choosePatternVariant(
   const BUSY: string[] = ['dense', 'syncopated', 'anticipated', 'ornamented', 'development'];
 
   const variantWeight = (v: PatternVariant) => {
-    let base = Math.max(0, Number(v.probability) || 0.25);
+    let base = v.probability;
     if (partEnergy <= 2) {
       if (SPARSE.includes(v.variationType)) base *= 4.0;
       else if (v.variationType === 'dense' || v.variationType === 'ornamented') base *= 0.1;
@@ -687,8 +731,6 @@ export function suggestPattern(
   // repeat unchanged through the whole starter song.
   const sectionPatterns = preferSectionSpecificPatterns && patternSection
     ? candidatePatterns.filter(p => p.sourceLevel === 'style-authored'
-      && !p.pedagogicalStudy
-      && !p.pedagogicalSourcePatternId
       && p.sectionUsage?.some(section => canonicalPatternSection(section) === patternSection))
     : [];
   let preferredPatterns = sectionPatterns.length ? sectionPatterns : candidatePatterns;
@@ -696,12 +738,19 @@ export function suggestPattern(
     const previous = PATTERNS_BY_ID[previousPatternId];
     const sectionAndGeneralPatterns = candidatePatterns.filter(pattern => !pattern.sectionUsage?.length
       || pattern.sectionUsage.some(section => canonicalPatternSection(section) === patternSection));
-    const alternatives = sectionAndGeneralPatterns.filter(pattern => pattern.id !== previousPatternId
+    // If this section has authored cells, develop inside that local set. A
+    // broad sectionless cell is only eligible when no section-specific cell
+    // exists at all, so it cannot displace the written phrase on a return.
+    const alternativeSource = sectionPatterns.length ? sectionPatterns : sectionAndGeneralPatterns;
+    const alternatives = alternativeSource.filter(pattern => pattern.id !== previousPatternId
       && pattern.sourceLevel === 'style-authored'
-      && !pattern.pedagogicalStudy
-      && !pattern.pedagogicalSourcePatternId
       && (!previous?.category || pattern.category === previous.category));
-    if (alternatives.length) preferredPatterns = alternatives;
+    // Keep a returning section inside its authored section vocabulary when a
+    // second local phrase exists. Only fall back to a sectionless variation
+    // when the style has no other phrase for this section.
+    const scopedAlternatives = alternatives.filter(pattern =>
+      pattern.sectionUsage?.some(section => canonicalPatternSection(section) === patternSection));
+    if (alternatives.length) preferredPatterns = scopedAlternatives.length ? scopedAlternatives : alternatives;
   }
   const scored = preferredPatterns
     .map(p => {
@@ -930,7 +979,6 @@ export function rebuild(sheet: Sheet): Sheet {
                 && (p.styleIds?.includes(hostStyle)
                   || (lensWeight > 0 && !!guestStyleId && p.styleIds?.includes(guestStyleId)))
               ))
-              .filter(p => !p.pedagogicalStudy || p.arrangementVariation)
               .filter(p => patternAvailableInSection(p, r.kind))
               .filter(p => !base || p.family === base.family || p.category === base.category
                 || (p.arrangementVariation && p.sourceLevel === 'style-authored'
@@ -988,11 +1036,15 @@ export function rebuild(sheet: Sheet): Sheet {
 
         const p = PATTERNS_BY_ID[patternId];
         if (!p) {
-          detailsByBar.push(undefined);
-          continue;
+          throw new Error(`Unknown authored pattern ${patternId} in ${r.id}/${track.id} at bar ${index + 1}`);
         }
 
-        const cycleBars = phraseBarsForStyle(resolvedStyle, p.cycleLength ?? 1);
+        // Use the authored event/grid span when older generated cells contain
+        // more than one bar of material but still declare cycleLength: 1.
+        // That span is part of the teaching phrase and must influence cadence
+        // and transition decisions as well as the final bar slice.
+        const declaredPatternCycleBars = patternCycleBarsFor(p);
+        const cycleBars = phraseBarsForStyle(resolvedStyle, declaredPatternCycleBars);
         const atPhraseStart = i % cycleBars === 0;
         const atPhraseEnd = (i + 1) % cycleBars === 0;
         const phraseRole = atPhraseEnd ? 'cadence' as const
@@ -1003,29 +1055,42 @@ export function rebuild(sheet: Sheet): Sheet {
         let v = choosePatternVariant(
               p.variants, phraseRole, variantSeed, partEnergy, phraseDevelopment,
         );
-        const sub = p.subdivisions || 16;
-        const patternCycleBars = Math.max(1, p.cycleLength || Math.ceil(sub / 16));
-        const eventProjection = projectPatternEvents(v?.events ?? p.events ?? [], p, variantSeed, r, phraseRole, partEnergy, track.role);
-        const useEventProjection = !!(v?.events?.length || (!v && p.events?.length));
+        const useEventProjection = v ? v.events !== undefined : p.events !== undefined;
+        const patternCycleBars = patternCycleBarsFor(
+          p,
+          v,
+          useEventProjection ? v?.events ?? p.events ?? [] : undefined,
+        );
+        // `subdivisions` is the authored cycle's total grid. If the effective
+        // cycle is wider, expand the render grid so each bar retains the
+        // original per-bar resolution instead of compressing attacks.
+        const renderSubdivisions = subdivisionsForPatternCycle(p, patternCycleBars);
+        const eventProjection = projectPatternEvents(useEventProjection ? v?.events ?? p.events ?? [] : [],
+          p, variantSeed, r, phraseRole, partEnergy, track.role, v ? v.hitGrid : p.hitGrid,
+          useEventProjection ? patternCycleBars : undefined);
         const rawOnsets = useEventProjection ? eventProjection.onsets : v?.onsetGrid ?? p.onsetGrid;
         const rawAccents = useEventProjection ? eventProjection.accents : v?.accentProfile ?? p.accentProfile;
         const rawVelocities = useEventProjection ? eventProjection.velocities : v?.velocityProfile ?? p.velocityProfile;
         const rawDurations = useEventProjection ? eventProjection.durations : v?.durationGrid ?? p.durationGrid;
         const rawMicro = useEventProjection ? eventProjection.microtiming : v?.microtimingOffset;
-        const projectedHits = eventProjection.hitTypes.some(Boolean) ? eventProjection.hitTypes : undefined;
-        const candidateHitTypes = v?.hitGrid ?? p.hitGrid ?? projectedHits;
+        // Event selection can sort, remove or phase-shift attacks. Keep each
+        // component attached to its event instead of reusing the original grid.
+        const candidateHitTypes = useEventProjection
+          ? eventProjection.hitTypes
+          : v?.hitGrid ?? p.hitGrid;
         const rawHitTypes = candidateHitTypes && candidateHitTypes.length === rawOnsets.length
           ? candidateHitTypes
           : undefined;
 
-        const bar = toBar(rawOnsets, rawAccents, rawDurations, sub, i % patternCycleBars);
+        const bar = toBar(rawOnsets, rawAccents, rawDurations, renderSubdivisions, i % patternCycleBars);
         const perf = sliceBarNative(
-          rawOnsets, rawAccents, rawVelocities, rawDurations, rawMicro, rawHitTypes, sub, patternCycleBars, i % patternCycleBars,
+          rawOnsets, rawAccents, rawVelocities, rawDurations, rawMicro, rawHitTypes, renderSubdivisions, patternCycleBars, i % patternCycleBars,
           useEventProjection && eventProjection.articulations.length ? eventProjection.articulations : undefined,
           useEventProjection && eventProjection.fractionalSteps.length ? eventProjection.fractionalSteps : undefined,
           useEventProjection ? eventProjection.pitches : undefined,
           useEventProjection ? eventProjection.notations : undefined,
           useEventProjection ? eventProjection.durationAuthoredByOnset : undefined,
+          useEventProjection ? 'milliseconds' : undefined,
         );
 
         const lens = partLens && partLens.weight > 0 ? partLens : undefined;
@@ -2226,6 +2291,7 @@ export function makeSheet(
   influences?: StyleInfluence[],
   overrides?: Partial<SongStyle>,
   preferSectionSpecificPatterns = true,
+  allowInstrumentAdaptation = false,
 ): Sheet {
   const genreId = typeof worldOrOptions === 'string' ? worldOrOptions : worldOrOptions.genreId;
   const styleId = (typeof worldOrOptions === 'string' ? explicitStyleId : worldOrOptions.styleId) ?? getCanonicalStyle(genreId).id;
@@ -2316,7 +2382,7 @@ export function makeSheet(
       }
 
       const p = suggestPattern(v, genreId, ri * 31 + i * 13 + 7, String(r.kind), taken, d, resolved.id,
-        undefined, false, preferSectionSpecificPatterns,
+        undefined, allowInstrumentAdaptation, preferSectionSpecificPatterns,
         preferSectionSpecificPatterns
           ? previousPatternByTrackSection.get(`${v.id}:${canonicalPatternSection(r.kind) ?? r.kind}`)
           : undefined);
@@ -2334,7 +2400,7 @@ export function makeSheet(
   const effectiveMeter = runtime.getMeter();
 
   return rebuild({
-    id: 'sheet', title: TITLES[genreId] ?? 'Untitled',
+    id: 'sheet', title: TITLES[genreId] ?? starterTitleForGenre(genreId),
     bpm: effectiveBpm,
     timeSignature: effectiveMeter,
     durationMeasures: 0,
@@ -2347,12 +2413,9 @@ export function makeSheet(
   });
 }
 
-/**
- * Create a teaching starter with up to eight instruments when the selected
- * style has additional playable, style-authored parts. Reference-song catalog
- * arrangements keep their hand-picked ensembles; this expansion is only for
- * newly generated starters and never borrows another style's material.
- */
+/** Create a teaching starter with eight distinct, audible instruments. The
+ * style's own cells are adapted to the added world-native colors; no generic
+ * emergency groove is introduced. */
 export function makeStarterSheet(
   worldOrOptions: string | { genreId: string; styleId?: string; influences?: StyleInfluence[]; overrides?: Partial<SongStyle> },
   explicitStyleId?: string,
@@ -2360,8 +2423,8 @@ export function makeStarterSheet(
   overrides?: Partial<SongStyle>,
 ): Sheet {
   const rawBase = makeSheet(worldOrOptions, explicitStyleId, influences, overrides);
-  const base = rawBase.tracks.length > 8 ? trimStarterToEight(rawBase) : rawBase;
-  if (base.tracks.length >= 8) return base;
+  const base = rawBase;
+  if (new Set(base.tracks.map(track => track.instrumentId)).size >= 8) return trimStarterToEight(base);
 
   const genreId = base.worldId;
   const styleId = base.styleId ?? getCanonicalStyle(genreId).id;
@@ -2372,31 +2435,74 @@ export function makeStarterSheet(
   });
   const allowed = new Set(resolved.patterns?.allowed ?? []);
   const existing = new Set(base.tracks.map(track => track.instrumentId));
-  const candidates = (PATTERNS_BY_WORLD[genreId] ?? [])
+  const authoredEnsemble = resolved.arrangement.ensemble;
+  const authoredIds = new Set(authoredEnsemble.flatMap(part => part.instrumentIds));
+  const authoredRoles = new Set(authoredEnsemble.map(part => String(part.role)));
+  const rosterExcluded = new Set([
+    ...(CATALOG_ROSTER_EXCLUSIONS[genreId] ?? []),
+    ...(CATALOG_ROSTER_EXCLUSIONS[styleId] ?? []),
+  ]);
+  const roleForStarterInstrument = (instrumentId: string): string => {
+    const natural = roleForInstrument(instrumentId);
+    if (authoredRoles.has(natural)) return natural;
+    if (natural === 'voice' && authoredRoles.has('lead')) return 'lead';
+    if ((natural === 'lead' || natural === 'harmony') && authoredRoles.has('texture')) return 'texture';
+    const fallbackOrder = natural === 'bass'
+      ? ['bass', 'harmony', 'texture', 'percussion', 'lead']
+      : natural === 'percussion'
+        ? ['percussion', 'bass', 'harmony', 'texture', 'lead']
+        : natural === 'harmony'
+          ? ['harmony', 'texture', 'bass', 'lead', 'percussion']
+          : ['lead', 'texture', 'harmony', 'bass', 'percussion'];
+    return fallbackOrder.find(role => authoredRoles.has(role)) ?? natural;
+  };
+  const stylePatterns = (PATTERNS_BY_WORLD[genreId] ?? [])
     .filter(pattern => automaticPatternCandidate(pattern)
       && pattern.sourceLevel === 'style-authored'
       && pattern.styleIds?.includes(styleId)
-      && allowed.has(pattern.id)
-      // Only full authored arrangement variations can introduce a new part;
-      // reduction/technique drills stay out of the song.
-      && pattern.arrangementVariation === true)
+      && allowed.has(pattern.id));
+  const candidates = stylePatterns
     .flatMap(pattern => (pattern.instruments ?? []).map(instrumentId => ({ pattern, instrumentId })))
     .filter(({ pattern, instrumentId }) => {
       if (existing.has(instrumentId) || !INSTRUMENTS_BY_ID[instrumentId]) return false;
-      const role = roleForInstrument(instrumentId);
-      return pattern.roles.includes(role);
+      if (rosterExcluded.has(instrumentId)) return false;
+      const role = roleForStarterInstrument(instrumentId);
+      return pattern.roles.includes(role) || (role === 'voice' && pattern.roles.includes('lead'));
     });
-  const candidateInstrumentIds = [...new Set(candidates.map(candidate => candidate.instrumentId))];
+  const palette = [
+    ...(GENRE_WORLDS_BY_ID[genreId]?.instruments ?? []),
+    ...(WORLD_INSTRUMENT_HINTS[genreId] ?? []),
+    ...(CATALOG_ROSTER_EXTENSIONS[genreId] ?? []),
+    ...(CATALOG_ROSTER_EXTENSIONS[styleId] ?? []),
+  ];
+  const candidateInstrumentIds = [...new Set([
+    ...candidates.map(candidate => candidate.instrumentId),
+    ...palette,
+  ])].filter(instrumentId => {
+    if (existing.has(instrumentId) || !INSTRUMENTS_BY_ID[instrumentId]) return false;
+    if (rosterExcluded.has(instrumentId)) return false;
+    if (!authoredIds.has('voice') && (instrumentId === 'voice' || instrumentId === 'choir')) return false;
+    if (instrumentId === 'pakhawaj' && !authoredIds.has('pakhawaj')) return false;
+    return true;
+  });
   const arrangement: Arrangement = { ...base.arrangement };
   let energies: Sheet['energies'] = { ...base.energies };
   const tracks: Voice[] = [...base.tracks] as Voice[];
   let regions = base.regions.map(region => ({ ...region }));
 
   for (const instrumentId of candidateInstrumentIds) {
-    if (tracks.length >= 8) break;
+    if (new Set(tracks.map(item => item.instrumentId)).size >= 8) break;
     const def = instrument(instrumentId);
-    const role = roleForInstrument(instrumentId);
-    const partPatterns = candidates.filter(candidate => candidate.instrumentId === instrumentId).map(candidate => candidate.pattern);
+    const role = roleForStarterInstrument(instrumentId);
+    const partPatterns = [
+      ...candidates.filter(candidate => candidate.instrumentId === instrumentId).map(candidate => candidate.pattern),
+      ...stylePatterns.filter(pattern => pattern.roles.includes(role) || (role === 'voice' && pattern.roles.includes('lead'))),
+    ].filter((pattern, index, all) => all.findIndex(candidate => candidate.id === pattern.id) === index);
+    // Some intentionally single-line styles (drone, free-time, guqin, or
+    // process studies) author one role only. Their added colors still need a
+    // real style cell, so adapt that authored cell to the support instrument
+    // instead of leaving a silent track or inventing a generic groove.
+    if (!partPatterns.length) partPatterns.push(...stylePatterns);
     let number = tracks.length;
     while (tracks.some(track => track.id === `v${number}`)) number++;
     const track: Voice = {
@@ -2413,14 +2519,19 @@ export function makeStarterSheet(
     for (const [regionIndex, region] of candidateRegions.entries()) {
       candidateEnergies[region.id] = { ...(candidateEnergies[region.id] ?? {}), [track.id]: region.energy ?? 3 };
       const inSection = partPatterns.filter(pattern => patternAvailableInSection(pattern, String(region.kind)));
-      if (!inSection.length) {
+      // A support player inherits the style's own authored cell even in a
+      // section whose source cell was written for another role. The adapted
+      // phrase remains style material; leaving the new part silent would make
+      // the promised teaching roster decorative only.
+      const playable = inSection.length ? inSection : partPatterns;
+      if (!playable.length) {
         assigned[region.id] = 'silent';
         continue;
       }
       const taken = new Set(Object.values(arrangement[region.id] ?? {}));
-      const available = inSection.filter(pattern => !taken.has(pattern.id));
-      if (!available.length) { assigned[region.id] = 'silent'; continue; }
-      const chosen = available[Math.floor(hash(`${styleId}:${instrumentId}:${region.formKey ?? region.kind}`, regionIndex + tracks.length * 13) * available.length)];
+      const available = playable.filter(pattern => !taken.has(pattern.id));
+      const choices = available.length ? available : playable;
+      const chosen = choices[Math.floor(hash(`${styleId}:${instrumentId}:${region.formKey ?? region.kind}`, regionIndex + tracks.length * 13) * choices.length)];
       if (!chosen) { complete = false; break; }
       assigned[region.id] = chosen.id;
       activeRegionCount++;
@@ -2438,17 +2549,20 @@ export function makeStarterSheet(
   }
 
   if (tracks.length === base.tracks.length) return base;
-  return rebuild({ ...base, tracks, regions, arrangement, energies });
+  const expanded = rebuild({ ...base, tracks, regions, arrangement, energies });
+  return trimStarterToEight(expanded);
 }
 
 function trimStarterToEight(sheet: Sheet): Sheet {
   const tracks = [...sheet.tracks];
   const removedIds = new Set<string>();
   while (tracks.length > 8) {
-    const removableIndex = tracks.findIndex(track => track.instrumentId === 'voice') >= 0
-      ? tracks.findIndex(track => track.instrumentId === 'voice')
-      : tracks.findIndex(track => !!track.instrumentId && ['choir','synth'].includes(track.instrumentId));
-    const index = removableIndex >= 0 ? removableIndex : tracks.length - 1;
+    const counts = new Map<string, number>();
+    for (const track of tracks) if (track.instrumentId) counts.set(track.instrumentId, (counts.get(track.instrumentId) ?? 0) + 1);
+    const removableIndex = tracks.findIndex(track => !!track.instrumentId && (counts.get(track.instrumentId) ?? 0) > 1
+      && ['voice', 'choir', 'synth'].includes(track.instrumentId));
+    const duplicateIndex = tracks.findIndex(track => !!track.instrumentId && (counts.get(track.instrumentId) ?? 0) > 1);
+    const index = removableIndex >= 0 ? removableIndex : duplicateIndex >= 0 ? duplicateIndex : tracks.length - 1;
     removedIds.add(tracks[index].id);
     tracks.splice(index, 1);
   }
@@ -2484,7 +2598,13 @@ export function switchWorld(sheet: Sheet, worldId: string, styleId?: string): Sh
   // identity/title so a genre change does not unexpectedly rename the song.
   const canonical = getCanonicalStyle(worldId);
   const targetStyleId = styleId ?? canonical.id;
-  const fresh = makeSheet(worldId, targetStyleId);
+  // Whole-song genre changes use the same eight-part teaching expansion as a
+  // new style selection. Calling makeSheet directly here silently dropped
+  // compact worlds (Chinese, guqin, tango, and others) back to their small
+  // authored core, so the UI could show four or fewer instruments after a
+  // genre switch. Build the starter roster first, then preserve the transport
+  // identity and user-owned title below.
+  const fresh = makeStarterSheet({ genreId: worldId, styleId: targetStyleId });
   return rebuild({
     ...fresh,
     id: sheet.id,

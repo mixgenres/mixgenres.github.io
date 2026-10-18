@@ -65,17 +65,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Zanzibar oud violin and sung poetic response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Zanzibar oud violin and sung poetic response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Zanzibar oud violin and sung poetic response violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Zanzibar oud violin and sung poetic response violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Zanzibar oud violin and sung poetic response oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Zanzibar oud violin and sung poetic response oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Zanzibar oud violin and sung poetic response qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Zanzibar oud violin and sung poetic response qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Zanzibar oud violin and sung poetic response low anchor", "role": "bass", "onsets": [3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "Zanzibar oud violin and sung poetic response upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Zanzibar oud violin and sung poetic response riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Zanzibar oud violin and sung poetic response riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Zanzibar oud violin and sung poetic response riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -162,17 +156,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "classical taarab orchestral unison and oud answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "classical taarab orchestral unison and oud answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "classical taarab orchestral unison and oud answer violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "classical taarab orchestral unison and oud answer violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "classical taarab orchestral unison and oud answer oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "classical taarab orchestral unison and oud answer oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "classical taarab orchestral unison and oud answer qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "classical taarab orchestral unison and oud answer qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "classical taarab orchestral unison and oud answer low anchor", "role": "bass", "onsets": [3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "classical taarab orchestral unison and oud answer upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "classical taarab orchestral unison and oud answer riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "classical taarab orchestral unison and oud answer riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "classical taarab orchestral unison and oud answer riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -259,17 +247,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "modern taarab keyboard hook and bass dance voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern taarab keyboard hook and bass dance voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern taarab keyboard hook and bass dance violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern taarab keyboard hook and bass dance violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern taarab keyboard hook and bass dance oud accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "modern taarab keyboard hook and bass dance oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern taarab keyboard hook and bass dance qanun accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "modern taarab keyboard hook and bass dance qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modern taarab keyboard hook and bass dance low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "modern taarab keyboard hook and bass dance upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern taarab keyboard hook and bass dance riq pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "modern taarab keyboard hook and bass dance riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "modern taarab keyboard hook and bass dance riq pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -356,17 +338,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Swahili orchestra string melody and vocal refrain voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Swahili orchestra string melody and vocal refrain voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Swahili orchestra string melody and vocal refrain violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Swahili orchestra string melody and vocal refrain violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Swahili orchestra string melody and vocal refrain oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Swahili orchestra string melody and vocal refrain oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Swahili orchestra string melody and vocal refrain qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Swahili orchestra string melody and vocal refrain qanun cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Swahili orchestra string melody and vocal refrain low anchor", "role": "bass", "onsets": [3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6]},
-        {"name": "Swahili orchestra string melody and vocal refrain upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Swahili orchestra string melody and vocal refrain riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Swahili orchestra string melody and vocal refrain riq cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Swahili orchestra string melody and vocal refrain riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -452,15 +428,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "kidumbak violin and small percussion dance voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "kidumbak violin and small percussion dance voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kidumbak violin and small percussion dance violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "kidumbak violin and small percussion dance violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kidumbak violin and small percussion dance low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "kidumbak violin and small percussion dance bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "kidumbak violin and small percussion dance bongos pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bongos"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "kidumbak violin and small percussion dance bongos cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bongos"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "kidumbak violin and small percussion dance shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "kidumbak violin and small percussion dance shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "kidumbak violin and small percussion dance shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],

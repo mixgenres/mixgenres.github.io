@@ -162,6 +162,7 @@ export interface PatternEvent {
   accent?: number;
   velocity?: number;
   articulation?: string;
+  /** Authored timing displacement in milliseconds, including sub-millisecond values. */
   microtiming?: number;
   probability?: number;
   condition?: { section?: string[]; phrasePosition?: string[]; energy?: SectionEnergy[]; role?: Role | string };
@@ -227,12 +228,8 @@ export interface MusicalPattern {
   danceTags?: DanceTag[];
   tuningSystem?: TuningSystemTag;
   difficulty?: number;
-  /** Local student exercise generated from an authored source cell. */
-  pedagogicalStudy?: 'reduction' | 'answer' | 'technique' | 'variation';
-  /** A source-faithful practice variation that may also develop a song phrase. */
+  /** A complete authored alternative for developing a song phrase. */
   arrangementVariation?: boolean;
-  /** Full style cell behind a reduction or technique drill; song examples use the full cell. */
-  pedagogicalSourcePatternId?: string;
   weight?: number;
   enabled?: boolean;
 }
@@ -396,6 +393,9 @@ export interface GenreWorld {
   substyles: string[];
   artists: string[];
   concepts: string[];
+  /** Genre-authored instrument palette. Styles may use a subset, while
+   * catalog sample rosters can deliberately expose the full teaching palette. */
+  instruments?: string[];
   roles: Partial<Record<Role, string[]>>;
   patterns: MusicalPattern[];
   tuningSystem?: TuningSystemTag;
@@ -423,6 +423,8 @@ export interface PatternPerformanceDetails {
   hitTypes: string[];
   articulations?: string[];
   microtiming: number[];
+  /** Rich event projections store timing displacement in milliseconds. */
+  microtimingUnit?: 'milliseconds' | 'grid';
   fractionalPositions: number[];
   durationsAuthored: boolean;
   /** Per-attack authored gate flags when projected pattern events mix explicit and inferred lengths. */

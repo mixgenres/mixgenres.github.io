@@ -15,7 +15,13 @@ export function compileMixSceneTimeline(sheet: Sheet, performance: Performance):
   bars.forEach(bar => beats.push(beats.at(-1)! + bar.beatsPerBar));
   const notesByTrack = new Map<string, PerfNote[]>();
   for (const note of performance.notes) {
-    if (!Number.isFinite(note.time) || !Number.isFinite(note.dur)) continue;
+    // The mix timeline must describe the exact same notes that playback and
+    // export render. Silently skipping a malformed event here made a part
+    // disappear from masking, foreground, and headroom analysis while the
+    // SoundFont planner later handled the same event differently.
+    if (!Number.isFinite(note.time) || !Number.isFinite(note.dur) || note.dur <= 0) {
+      throw new Error(`Invalid mix note timing for ${note.trackId}: time and duration must be finite and duration must be positive.`);
+    }
     const notes = notesByTrack.get(note.trackId) ?? []; notes.push(note); notesByTrack.set(note.trackId, notes);
   }
   for (const notes of notesByTrack.values()) notes.sort((a, b) => a.time - b.time);

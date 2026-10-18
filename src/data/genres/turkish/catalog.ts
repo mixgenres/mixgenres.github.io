@@ -60,11 +60,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Turkish folk baglama motif and aksak accents voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Turkish folk baglama motif and aksak accents voice cadence fill", "role": "lead", "onsets": [3.5, 4.0, 4.25], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Turkish folk baglama motif and aksak accents baglama statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["baglama"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Turkish folk baglama motif and aksak accents baglama cadence fill", "role": "lead", "onsets": [3.5, 4.0, 4.25], "instruments": ["baglama"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Turkish folk baglama motif and aksak accents frame-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3], "instruments": ["frame-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Turkish folk baglama motif and aksak accents frame-drum cadence fill", "role": "percussion", "onsets": [3.5, 4.0, 4.25], "instruments": ["frame-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Turkish folk baglama motif and aksak accents frame-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3], "instruments": ["frame-drum"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -134,13 +131,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Ottoman classical samai cycle and makam phrase ney statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Ottoman classical samai cycle and makam phrase ney cadence fill", "role": "lead", "onsets": [9.0, 9.5, 9.75], "instruments": ["ney"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ottoman classical samai cycle and makam phrase oud statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Ottoman classical samai cycle and makam phrase oud cadence fill", "role": "lead", "onsets": [9.0, 9.5, 9.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Ottoman classical samai cycle and makam phrase qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Ottoman classical samai cycle and makam phrase qanun cadence fill", "role": "harmony", "onsets": [9.0, 9.5, 9.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Ottoman classical samai cycle and makam phrase frame-drum pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["frame-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Ottoman classical samai cycle and makam phrase frame-drum cadence fill", "role": "percussion", "onsets": [9.0, 9.5, 9.75], "instruments": ["frame-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Ottoman classical samai cycle and makam phrase frame-drum pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["frame-drum"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "ney": ["microtonal-inflection", "ornament", "glissando"],
@@ -216,15 +209,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Anatolian rock baglama ostinato and electric band voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Anatolian rock baglama ostinato and electric band voice cadence fill", "role": "lead", "onsets": [3.5, 4.0, 4.25], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Anatolian rock baglama ostinato and electric band baglama statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["baglama"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Anatolian rock baglama ostinato and electric band baglama cadence fill", "role": "lead", "onsets": [3.5, 4.0, 4.25], "instruments": ["baglama"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Anatolian rock baglama ostinato and electric band guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Anatolian rock baglama ostinato and electric band guitar cadence fill", "role": "harmony", "onsets": [3.5, 4.0, 4.25], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Anatolian rock baglama ostinato and electric band low anchor", "role": "bass", "onsets": [0, 1.5, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "Anatolian rock baglama ostinato and electric band bass cadence fill", "role": "bass", "onsets": [3.5, 4.0, 4.25], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Anatolian rock baglama ostinato and electric band kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Anatolian rock baglama ostinato and electric band drums cadence fill", "role": "percussion", "onsets": [3.5, 4.0, 4.25], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "Anatolian rock baglama ostinato and electric band kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 4.0, 4.5, 4.5, 5.0, 5.5, 5.5, 6.0, 6.5, 6.5, 7.0, 7.5, 7.5, 8.0, 8, 8.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat"], "cycleLength": 2, "accents": [0.4, 0.9, 0.28, 0.4, 0.8, 0.28, 0.4, 0.9, 0.28, 0.4, 0.8, 0.28, 0.4, 0.28, 0.9, 0.4, 0.28, 0.8, 0.4, 0.28, 0.9, 0.4, 0.28, 0.8, 0.4, 0.9, 0.28], "articulation": "accent", "shortName": "Anatolian rock kit", "description": "Count each 9/8 bar in 2+2+2+3 eighths. Keep the last three-eighth group open and land the next downbeat with the bass. Original teaching adaptation."},
+        {"name": "Anatolian rock baglama ostinato and electric band drums cadence fill", "role": "percussion", "onsets": [2.5, 3, 3, 3.5, 3.5, 4], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "snare", "hat", "kick", "hat"], "accents": [0.28, 0.4, 0.8, 0.28, 0.9, 0.4], "shortName": "Anatolian rock kit close", "description": "Count each 9/8 bar in 2+2+2+3 eighths. Keep the last three-eighth group open and land the next downbeat with the bass. Original teaching adaptation."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -305,13 +294,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "arabesque sustained vocal and string answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "arabesque sustained vocal and string answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "arabesque sustained vocal and string answer string-ensemble accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "arabesque sustained vocal and string answer string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "arabesque sustained vocal and string answer oud accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "arabesque sustained vocal and string answer oud cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "arabesque sustained vocal and string answer darbuka pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "arabesque sustained vocal and string answer darbuka cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["darbuka"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "arabesque sustained vocal and string answer darbuka pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -386,13 +371,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Roman halk asymmetric dance accents clarinet statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["clarinet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Roman halk asymmetric dance accents clarinet cadence fill", "role": "lead", "onsets": [3.5, 4.0, 4.25], "instruments": ["clarinet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Roman halk asymmetric dance accents zurna statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["zurna"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Roman halk asymmetric dance accents zurna cadence fill", "role": "lead", "onsets": [3.5, 4.0, 4.25], "instruments": ["zurna"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Roman halk asymmetric dance accents oud accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Roman halk asymmetric dance accents oud cadence fill", "role": "harmony", "onsets": [3.5, 4.0, 4.25], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Roman halk asymmetric dance accents darbuka pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Roman halk asymmetric dance accents darbuka cadence fill", "role": "percussion", "onsets": [3.5, 4.0, 4.25], "instruments": ["darbuka"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Roman halk asymmetric dance accents darbuka pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "clarinet": ["trill", "accent", "staccato", "legato", "tenuto", "vibrato"],

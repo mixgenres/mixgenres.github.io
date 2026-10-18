@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "electronic",
   "name": "Electronic",
   "family": "Global electronic",
@@ -699,4 +700,11 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'bass', role: 'bass' },
+  { instrumentId: 'synth-bass', role: 'bass' },
+  { instrumentId: 'sampler', role: 'percussion' },
+  { instrumentId: 'turntable', role: 'percussion' },
+  { instrumentId: 'rhodes', role: 'harmony' },
+  { instrumentId: 'piano', role: 'harmony' },
+]);

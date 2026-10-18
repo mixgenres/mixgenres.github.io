@@ -1,3 +1,0 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { songCatalog } from '../src/data/songs/catalog';
-for(const e of songCatalog){const path=`docs/genres/${e.genreId}/references.json`;if(!existsSync(path)){console.log(e.genreId,e.styleId,0,'missing-file');continue;}const d=JSON.parse(readFileSync(path,'utf8'));const rows=d.styles??d.references??[];const row=rows.find((r:any)=>r.styleId===e.styleId);const recs=row?.recordings??row?.references??[];const urls=new Set(recs.map((r:any)=>r.url??r.youtube??r.appleMusic??r.spotify).filter(Boolean));if(urls.size<5)console.log(e.genreId,e.styleId,urls.size,row?'under-five':'missing-style-row');}

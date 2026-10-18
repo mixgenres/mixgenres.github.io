@@ -343,7 +343,18 @@ export const TEMPOS: Record<string,number> = {
   house:124,jazz:140,kizomba:92,tango:120,flamenco:96,metal:150,'r-and-b':82,reggae:78,reggaeton:96,rock:128,salsa:96,
   ska:168,soul:94,swing:160,timba:100,zouk:100,'drum-and-bass':174,industrial:128,'punk-hardcore':180,'uk-bass':132,
 };
-export const TITLES: Record<string,string> = Object.fromEntries(Object.keys(GENRE_FORMS).map(id => [id, `${id} sketch`]));
+/** Resolve the visible title for a newly created song. Tango's neutral
+ * starter name is intentional; every other world keeps a stable genre cue,
+ * including worlds whose form is supplied by its authored style pack rather
+ * than the compact legacy form table above. */
+export function starterTitleForGenre(genreId: string): string {
+  const id = genreId.trim().toLowerCase();
+  return id === 'tango' ? 'sketch' : `${id} sketch`;
+}
+
+export const TITLES: Record<string,string> = Object.fromEntries(
+  Object.keys(GENRE_FORMS).map(id => [id, starterTitleForGenre(id)]),
+);
 
 /** Optional preference hints; empty keeps selection catalog-driven. */
 export const DEFAULT_PATTERN_PREFERENCES: Record<string, Record<string, string>> = {};

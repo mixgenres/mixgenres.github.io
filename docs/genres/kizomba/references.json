@@ -1,7 +1,7 @@
 {
   "genreId": "kizomba",
   "reviewed": "2026-10-15",
-  "status": "Five linked Apple Music candidates are collected for all seven Kizomba styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "status": "At least five linked candidates per style. Rosa Baila was located in the native Music app on 2026-10-17. Reference audio is not returned by the available tools, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
   "references": [
     {
@@ -14,6 +14,7 @@
         "the balance of voice, guitar, bass, and percussion in the recorded ensemble"
       ],
       "recordings": [
+        { "title": "Rosa Baila", "artist": "Eduardo Paim", "url": "https://music.apple.com/us/song/944383257", "timecodes": [] },
         { "title": "Casamento", "artist": "C4 Pedro", "url": "https://music.apple.com/us/song/1043940236", "timecodes": [] },
         { "title": "Céu", "artist": "C4 Pedro", "url": "https://music.apple.com/us/song/1456619233", "timecodes": [] },
         { "title": "Porquê?", "artist": "Matias Damásio", "url": "https://music.apple.com/us/song/358399987", "timecodes": [] },
@@ -123,5 +124,15 @@
         { "title": "Urban Kiz 2.0", "artist": "Afro Connexion, Said & Oksana & Battle Kizz", "url": "https://music.apple.com/us/song/1739020745", "timecodes": [] }
       ]
     }
-  ]
+  ],
+  "implementationReview": {
+    "date": "2026-10-17",
+    "basis": "Score, compilation and rendered sample-path diagnostics; no claimed auditory A/B.",
+    "source": "https://www.ableton.com/en/blog/henrique-j-paris-rs-producoes-mapping-batidas-heritage/",
+    "fixes": [
+      "Replace the identical rock kit with seven separate two-bar rhythm-section studies.",
+      "Separate bass releases, guitar answers, keyboard cushions and light scrape/shake interlocks.",
+      "Preserve the Urban Kiz break and Tarraxinha texture-only breakdown."
+    ]
+  }
 }

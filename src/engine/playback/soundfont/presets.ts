@@ -39,21 +39,21 @@ assign(8, 'celeste'); assign(9, 'glockenspiel'); assign(10, 'music-box'); assign
 assign(12, 'marimba marimba-de-chonta'); assign(13, 'xylophone');
 assign(14, 'tubular-bells'); assign(117, 'steel-drums'); assign(15, 'dulcimer santur qanun'); assign(16, 'organ');
 assign(20, 'harmonium sho'); assign(21, 'accordion concertina melodica'); assign(22, 'harmonica'); assign(23, 'bandoneon');
-assign(24, 'guitar requinto cuatro cavaquinho charango tres jarana vihuela krar');
+assign(24, 'guitar requinto cuatro cavaquinho charango tres jarana vihuela krar tovshuur');
 assign(25, 'resonator-guitar bajo-sexto'); assign(26, 'pedal-steel lap-steel');
 assign(32, 'upright-bass guitarron guembri'); assign(33, 'bass'); assign(38, 'synth-bass');
-assign(40, 'violin sarangi haegeum erhu jinghu gaohu ajaeng masenqo morin-khuur rebab');
-assign(41, 'viola'); assign(42, 'cello'); assign(48, 'string-ensemble'); assign(46, 'harp kora');
+assign(40, 'violin sarangi haegeum erhu jinghu gaohu ajaeng masenqo morin-khuur rebab kemenche');
+assign(41, 'viola'); assign(42, 'cello'); assign(48, 'string-ensemble'); assign(46, 'harp kora begena');
 assign(52, 'choir'); assign(53, 'voice'); assign(56, 'trumpet'); assign(57, 'trombone');
 assign(58, 'tuba'); assign(60, 'french-horn'); assign(61, 'horn-section');
 assign(64, 'soprano-sax'); assign(65, 'alto-sax'); assign(66, 'tenor-sax'); assign(67, 'bari-sax');
 assign(68, 'oboe hichiriki'); assign(69, 'english-horn duduk'); assign(70, 'bassoon'); assign(71, 'clarinet');
-assign(72, 'piccolo'); assign(73, 'flute ney bansuri quena xiao dizi ryuteki'); assign(74, 'recorder');
+assign(72, 'piccolo'); assign(73, 'flute ney bansuri quena xiao dizi ryuteki washint'); assign(74, 'recorder');
 assign(75, 'pan-flute siku'); assign(77, 'shakuhachi'); assign(79, 'ocarina');
 assign(81, 'synth'); assign(98, 'crystal'); assign(109, 'bagpipes uilleann-pipes'); assign(111, 'suona zurna');
 assign(104, 'sitar tanpura rudra-veena veena'); assign(105, 'banjo');
-assign(106, 'shamisen biwa oud bouzouki bandola-llanera baglama dombra setar tar');
-assign(107, 'koto gayageum guqin pipa guzheng'); assign(108, 'kalimba berimbau');
+assign(106, 'shamisen biwa oud bouzouki bandola-llanera baglama dombra setar tar tanbur');
+assign(107, 'koto gayageum guqin pipa guzheng yatga'); assign(108, 'kalimba berimbau');
 export const INSTRUMENT_PROGRAMS: Readonly<Record<string, number>> = ids;
 
 export function patchForInstrument(id: string, percussion = false): SamplePatch {
@@ -102,7 +102,7 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   if (id === 'upright-bass') return {bank:64,program:0,drum:false,pack:'upright'};
   if (id === 'khomus') return {bank:66,program:22,drum:false,pack:'percussion'};
   if (id === 'balafon') return {bank:66,program:23,drum:false,pack:'mallets'};
-  if (id === 'gamelan-metallophone' || id === 'bonang' || id === 'reyong') return {bank:0,program:14,drum:false,pack:'mallets'};
+  if (id === 'gamelan-metallophone' || id === 'bonang' || id === 'reyong' || id === 'saron' || id === 'gangsa') return {bank:0,program:14,drum:false,pack:'mallets'};
   // Sampler is a playable multisample palette, not the generic synth patch.
   // Notes select individual recorded kit hits in the pitched MIDI range.
   if (id === 'sampler') return {bank:67,program:0,drum:false,pack:'drumkit'};

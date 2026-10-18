@@ -46,6 +46,7 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
       for (const track of sheet.tracks) {
         const role = sheet.partRoles?.[region.id]?.[track.id] ?? track.role;
         const def = INSTRUMENTS_BY_ID[track.instrumentId ?? track.instrument], percussion = Boolean(def?.voicing === 'unpitched' || def?.kit || def?.drum);
+        if (!def) throw new Error(`Unknown written instrument ${track.instrumentId ?? track.instrument} for ${region.id}/${track.id}`);
         const rules: NotationRules = { clef: percussion ? 'percussion' : /bass|low-anchor/.test(role) ? 'bass' : 'treble',
           staffLines: percussion && !def?.kit ? 1 : 5, views: percussion ? ['staff', 'drum-lanes', 'technique'] : def?.tuningAndMechanics?.openStrings?.length ? ['staff','tablature','technique'] : ['staff','technique'], vocabulary: [],
           ...GENRE_NOTATION_RULES[genre], ...INSTRUMENT_NOTATION_RULES[def?.id], ...(percussion ? { views: ['staff','drum-lanes','technique'] as NotationRules['views'] } : {}), ...def?.notationRules };
@@ -59,10 +60,29 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
             const native = detail?.perf as NativeSlice | undefined;
             const onsets = patternId === 'silent' ? [] : native?.onsets ?? detail?.onsetGrid ?? [];
             const steps = native?.stepsPerBar ?? 16;
+            // A partial legacy duration grid cannot describe the surviving
+            // attacks after filtering. Treat it as missing authored timing so
+            // performer inference can keep the phrase open instead of turning
+            // the unlisted attacks into clipped one-step gates.
+            const detailDurationGrid = detail?.durationGrid;
+            const detailDurationAligned = Array.isArray(detailDurationGrid)
+              && detailDurationGrid.length === onsets.length;
             const attacks = onsets.flatMap((onset, index): WrittenAttack | WrittenAttack[] => {
               const position = (native?.fractionalPositions?.[index] ?? onset / steps) * beats + (pattern?.anticipationOffset ?? 0) / steps * beats;
-              const sourceHit = native?.hitTypes?.[index] || detail?.hitTypes?.[index] || pattern?.hitGrid?.[index];
-              const hit = notatedHit(pattern, index, native?.hitTypes?.[index] || detail?.hitTypes?.[index]);
+              // A rich projection has already sorted, filtered and aligned its
+              // hit labels with the surviving events. Do not fall back to the
+              // source pattern's positional grid when that projection carries
+              // an intentional empty label; doing so moves a kick/snare/hat
+              // identity onto a different attack after conditional removal.
+              const projectedHit = native
+                ? (native.hitTypes?.[index] ?? '')
+                : detail?.hitTypes?.[index];
+              const sourceHit = native
+                ? projectedHit || undefined
+                : projectedHit || pattern?.hitGrid?.[index];
+              const hit = notatedHit(pattern, index, projectedHit, native ? {
+                accent: native.accents[index], onset: native.onsets[index], subdivisions: native.stepsPerBar,
+              } : undefined);
               let value = native?.pitches?.[index];
               let directions = native?.notations?.[index];
               if (directions?.tuplet && (!Number.isInteger(directions.tuplet.actual) || directions.tuplet.actual < 1 || !Number.isInteger(directions.tuplet.normal) || directions.tuplet.normal < 1)) throw new Error('Invalid written tuplet');
@@ -90,12 +110,16 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
                 ? notatedDrum(def.id, Array.isArray(value.midi) ? value.midi[0] : value.midi) : resolveNotatedDrum(def.id, sourceHit, hit, index) }
                 : value ? { kind: 'notes', value } : { kind: 'instruction', instruction: /bass|low-anchor/.test(role) ? 'bass-motion' : /lead|melody|counterline|voice/.test(role) ? 'improvise' : 'voice-chord', role };
               const technique = native?.articulations?.[index] || detail?.articulations?.[index] || detail?.articulation;
-              const attack: WrittenAttack = { position: beatFraction(position), duration: beatFraction((native?.durations?.[index] ?? detail?.durationGrid?.[index] ?? 1) / steps * beats), pitch,
+              const duration = native?.durations?.[index]
+                ?? (detailDurationAligned ? detailDurationGrid?.[index] : undefined)
+                ?? 1;
+              const attack: WrittenAttack = { position: beatFraction(position), duration: beatFraction(duration / steps * beats), pitch,
                 pitchIdentity: technique ? techniqueMechanics(def, technique).pitchIdentity : undefined,
                 velocity: native?.velocities?.[index] ?? pattern?.velocityProfile?.[index] ?? .72, accent: native?.accents?.[index] ?? detail?.accentProfile?.[index] ?? .72,
                 hit, sourceHit, technique,
-                microtiming: { value: native?.microtiming?.[index] ?? 0, unit: Math.abs(native?.microtiming?.[index] ?? 0) > .5 ? 'milliseconds' : 'grid' },
-                durationAuthored: native?.durationAuthoredByOnset?.[index] ?? native?.durationsAuthored ?? Boolean(detail?.durationGrid), notation: directions };
+                microtiming: { value: native?.microtiming?.[index] ?? 0, unit: native?.microtimingUnit
+                  ?? (Math.abs(native?.microtiming?.[index] ?? 0) > .5 ? 'milliseconds' : 'grid') },
+                durationAuthored: native?.durationAuthoredByOnset?.[index] ?? native?.durationsAuthored ?? detailDurationAligned, notation: directions };
               if (percussion && Array.isArray(value?.midi)) {
                 return value.midi.map(midi => ({ ...attack, pitch: { kind: 'drum', drum: notatedDrum(def.id, midi) } }));
               }

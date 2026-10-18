@@ -209,7 +209,9 @@ export function applyFeel(g: GrooveProfile, input: FeelInput): FeelOutput {
     input.role === 'hat' || input.role === 'perc' || input.role === 'ride' ? 0.7 :
     input.role === 'bass' ? 0.75 : 1.0;
   const intensityTighten = 1 - 0.25 * (input.intensity ?? 0.5);
-  const humanizeScale = input.authoredTimingOnly ? 0.18 : 1;
+  // Authored displacement and locked ensemble cues already specify timing.
+  // Independent player drift here would move a written unison apart again.
+  const humanizeScale = input.authoredTimingOnly ? 0 : 1;
 
   // Use low-frequency Cosine-Interpolated noise to modulate timing and velocity curves over bars
   const smoothDrift = noise1D(phraseBeat / 4 + (input.seed % 100), 101);

@@ -7,14 +7,14 @@ const chord: NonNullable<AuthoredCell['pitches']>[number] = { voicing: 'chord' }
 function guitar(name: string, onsets: number[], articulation: string[], options: {
   durations?: number[]; accents?: number[]; pitches?: Array<NonNullable<AuthoredCell['pitches']>[number]>;
   notations?: Array<NonNullable<AuthoredCell['notations']>[number]>; cycleLength?: number; phraseEnd?: boolean;
-  sectionUsage?: AuthoredCell['sectionUsage']; difficulty?: number; pedagogicalStudy?: AuthoredCell['pedagogicalStudy'];
+  sectionUsage?: AuthoredCell['sectionUsage']; difficulty?: number;
   supportedEnergy?: AuthoredCell['supportedEnergy']; description?: string;
   timingLock?: AuthoredCell['timingLock'];
 } = {}): AuthoredCell {
   return { name, role: 'lead', instruments: ['guitar'], onsets, articulations: articulation,
     durations: options.durations, accents: options.accents, pitches: options.pitches,
     notations: options.notations, cycleLength: options.cycleLength ?? 1, phraseEnd: options.phraseEnd,
-    sectionUsage: options.sectionUsage, difficulty: options.difficulty, pedagogicalStudy: options.pedagogicalStudy,
+    sectionUsage: options.sectionUsage, difficulty: options.difficulty,
     supportedEnergy: options.supportedEnergy, timingLock: options.timingLock, description: options.description };
 }
 
@@ -106,7 +106,7 @@ function flamencoLead(id: string): AuthoredCell[] {
       pitches: [pitch(1, 45), pitch(3, 64), pitch(2, 64), pitch(3, 65), pitch(5, 67),
         pitch(1, 48), pitch(3, 65), pitch(4, 67), pitch(3, 65), pitch(1, 64)],
       notations: ['p', 'i', 'a', 'm', 'i', 'p', 'i', 'a', 'm', 'i'].map(fingering => ({ fingering })),
-      sectionUsage: ['solo'], difficulty: 3, pedagogicalStudy: 'technique', supportedEnergy: [2, 3, 4],
+      sectionUsage: ['solo'], difficulty: 3, supportedEnergy: [2, 3, 4],
       description: 'Original two-bar falseta study: anchor each five-note tremolo group with the thumb, shape a small rising-and-returning melody, then leave the following compás free for the ensemble.' },
     { name: 'Soleá llamada: open chord summons the next letra', role: 'lead', instruments: ['guitar'],
       cycleLength: 1, onsets: [0, 1.5, 2, 2.5, 3, 4, 5], durations: [.6, .3, .22, .3, .5, .55, .35],
@@ -170,6 +170,30 @@ function flamencoLead(id: string): AuthoredCell[] {
         description: 'Original free-time falseta study: answer the voice with a compact rising line, return to the bass, and reserve the cadence for the singer’s final release.' }),
   ];
   if (id === 'bulerias') {
+    const compas = guitar('Bulerías alternating thumb and rasgueado compás',
+      [0,.5,1.5,2.5,3,4,5,6,7,7.5,8.5,9,10,11],
+      ['thumb','rasgueado','rasgueado','picado','rasgueado','thumb','rasgueado',
+        'thumb','picado','rasgueado','rasgueado','rasgueado','thumb','rasgueado'], {
+        cycleLength:2, durations:[.38,.18,.3,.2,.26,.32,.3,.38,.18,.26,.18,.3,.32,.36],
+        accents:[1,.36,.82,.45,.96,.66,.88,.92,.42,.86,.38,1,.68,.94],
+        pitches:[pitch(1,45),chord,chord,pitch(3,60),chord,pitch(5,45),chord,
+          pitch(1,45),pitch(2,60),chord,chord,chord,pitch(5,45),chord],
+        notations:Array.from({length:14},(_,i)=>({stroke:i%2?'up' as const:'down' as const})),
+        sectionUsage:['intro','compas','verse','chorus'],difficulty:2,
+        description:'Count two complete twelve-count compases. Alternate thumb anchors, light returning strokes and accented rasgueados; the second compás answers the first. Reserve the llamada and remate for their written cues.',
+      });
+    compas.shortName='Bulería compás';
+    const falseta = guitar('Bulerías picado falseta with bass and chord landing',
+      [0,.5,1,1.5,2,2.5,3,3.5,4,5,6,6.5,7,7.5,8.5,9,10,11],
+      ['thumb',...Array(7).fill('picado'),'thumb','rasgueado','thumb',...Array(5).fill('picado'),'thumb','rasgueado'], {
+        cycleLength:2,durations:[.3,.18,.18,.2,.18,.18,.22,.18,.4,.35,.3,.18,.2,.18,.22,.3,.45,.4],
+        pitches:[pitch(1,45),...([3,4,5,6,5,4,3].map(d=>pitch(d,60))),pitch(5,45),chord,
+          pitch(1,45),...([5,6,5,3,2].map(d=>pitch(d,60))),pitch(1,45),chord],
+        accents:[1,.46,.58,.8,.44,.6,.94,.5,.7,1,.94,.5,.7,.8,.52,.94,.72,1],
+        sectionUsage:['solo','falseta'],difficulty:3,
+        description:'Learn a two-compás melodic answer with alternating picado, a separate thumb bass and clear chord landings. Keep the compás moving beneath the line and leave the cue to the following llamada.',
+      });
+    falseta.shortName='Bulería falseta';
     const llamada = guitar('Bulerías llamada: rasgueado cue before the returning cante', [0, .5, 1, 1.5, 2.5, 3, 3.5, 4, 5],
       ['rasgueado', 'picado', 'rasgueado', 'rasgueado', 'alzapua', 'rasgueado', 'rasgueado', 'picado', 'rasgueado'],
       { durations: [.18, .16, .2, .24, .18, .2, .16, .22, .32], accents: [1, .45, .72, .9, .48, .95, .4, .8, 1],
@@ -185,7 +209,7 @@ function flamencoLead(id: string): AuthoredCell[] {
         sectionUsage: ['remate'], difficulty: 3, timingLock: 'ensemble',
         description: 'Original one-compás closing study: place three concise accents late in the 12-count cycle, then leave the final space open for the dancer’s punctuation.' });
     remate.shortName = 'Guitar remate';
-    return [llamada, remate];
+    return [compas, falseta, llamada, remate];
   }
   if (id === 'alegrias' || id === 'guajira') {
     const brightCompas = guitar(`${id} bright compás with answering thumb and abanico`, [0, .5, 1.5, 2.5, 3, 4, 4.5, 5.5],
@@ -209,7 +233,7 @@ function flamencoLead(id: string): AuthoredCell[] {
       { cycleLength: 2, durations: [.85, .7, .8, .42, .95, .85, .7, .4, .8, .7],
         accents: [.95, .48, .62, .78, .5, .9, .48, .72, .58, 1],
         pitches: [pitch(1, 45), pitch(5, 64), pitch(6, 67), pitch(5, 69), pitch(4, 67), pitch(3, 64), pitch(2, 62), pitch(1, 60), pitch(7, 59), chord],
-        sectionUsage: ['silencio-answer'], difficulty: 3, pedagogicalStudy: 'variation',
+        sectionUsage: ['silencio-answer'], difficulty: 3,
         description: 'A contrasting two-compás answer for the Alegrías silencio: move the melody into the upper register, descend by short picado pairs, and broaden the final chord before the compás returns.' });
     silencioAnswer.shortName = 'Silencio answer';
     silencioAnswer.arrangementVariation = true;
@@ -320,10 +344,12 @@ export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInpu
     if (pulse) {
       pulse.onsets = id === 'tangos' || id === 'tientos' ? [0, .5, 1, 1.5, 2, 2.5, 3, 3.5]
         : id === 'sevillanas' || id === 'fandangos' ? [0, 1, 2]
-          : id === 'bulerias' ? COMPAS_12
+          : ['bulerias','solea','alegrias','guajira'].includes(id) ? COMPAS_12
+            : id === 'seguiriya' ? [0,1,2,3.5,5]
             : COMPAS_12.filter((_, i) => i % 2 === 0);
       pulse.accents = id === 'bulerias' ? COMPAS_ACCENTS
-        : id === 'solea' || id === 'alegrias' || id === 'seguiriya' || id === 'guajira' ? COMPAS_12.map((_, i) => SOLEA_BEATS.includes(COMPAS_12[i]) ? 1 : .34)
+        : ['solea','alegrias','guajira'].includes(id) ? pulse.onsets.map(onset => SOLEA_BEATS.includes(onset) ? 1 : .34)
+          : id === 'seguiriya' ? [1,.72,.88,1,.92]
           : undefined;
       pulse.durations = pulse.onsets.map(() => .12);
       pulse.articulations = pulse.onsets.map((_, i) => i % 4 === 0 ? 'palmas-fuertes' : i % 2 ? 'palmas-sordas' : 'palmas-claras');

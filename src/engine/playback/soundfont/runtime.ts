@@ -48,14 +48,44 @@ export class SampleRuntime {
     for (const entry of this.synth.soundBankManager.soundBankList) for (const preset of entry.soundBank.presets) {
       presets.set(`${entry.id}:${preset.bankMSB}:${preset.program}:${preset.isGMGSDrum}`, preset);
     }
+    const onEvents = plan.events.filter((event): event is Extract<SampleEvent, { type: 'on' }> => event.type === 'on');
+    // Validate the events that will actually reach the synth. This is separate
+    // from voiceDemand because a live preparation step may replace a patch
+    // while keeping the musical timing plan intact.
+    for (const event of onEvents) {
+      const key = `${event.patch.pack}:${event.patch.bank}:${event.patch.program}:${event.patch.drum}`;
+      const preset = presets.get(key);
+      if (!preset) throw new Error(`Missing SoundFont preset for ${key}:${event.key}:${event.velocity}`);
+      if (preset.getVoiceParameters(event.key, event.velocity).length < 1) {
+        throw new Error(`No playable SoundFont zone for ${key}:${event.key}:${event.velocity}`);
+      }
+    }
     const zoneCounts = new Map<string, number>();
     const edges: Array<{ time: number; count: number }> = [];
     for (const demand of plan.voiceDemand) {
-      const zoneKey = `${demand.patch.pack}:${demand.patch.bank}:${demand.patch.program}:${demand.patch.drum}:${demand.key}:${demand.velocity}`;
+      const eventPatchKey = `${demand.patch.pack}:${demand.patch.bank}:${demand.patch.program}:${demand.patch.drum}`;
+      let patch = demand.patch;
+      let preset = presets.get(eventPatchKey);
+      let voiceCount = preset?.getVoiceParameters(demand.key, demand.velocity).length ?? 0;
+      if (voiceCount < 1) {
+        const replacement = onEvents.find(event => Math.abs(event.time - demand.start) < 1e-9
+          && event.key === demand.key && event.velocity === demand.velocity);
+        if (replacement) {
+          patch = replacement.patch;
+          preset = presets.get(`${patch.pack}:${patch.bank}:${patch.program}:${patch.drum}`);
+          voiceCount = preset?.getVoiceParameters(demand.key, demand.velocity).length ?? 0;
+        }
+      }
+      const zoneKey = `${patch.pack}:${patch.bank}:${patch.program}:${patch.drum}:${demand.key}:${demand.velocity}`;
       let voices = zoneCounts.get(zoneKey);
       if (voices === undefined) {
-        const preset = presets.get(`${demand.patch.pack}:${demand.patch.bank}:${demand.patch.program}:${demand.patch.drum}`);
-        voices = preset?.getVoiceParameters(demand.key, demand.velocity).length ?? 1;
+        if (!preset) {
+          throw new Error(`Missing SoundFont preset for ${zoneKey}`);
+        }
+        voices = voiceCount;
+        if (voices < 1) {
+          throw new Error(`No playable SoundFont zone for ${zoneKey}`);
+        }
         zoneCounts.set(zoneKey, voices);
       }
       edges.push({ time: demand.start, count: voices }, { time: demand.end, count: -voices });

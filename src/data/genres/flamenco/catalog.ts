@@ -1,9 +1,10 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 import { SOLEA_FALSETA_CIERRE, RUMBA_STRUM } from './techniqueCells';
 import { authorFlamencoArrangements } from './arrangements';
 import { authorFlamencoStudies } from './studies';
 
-export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoArrangements({
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells(authorFlamencoStudies(authorFlamencoArrangements({
   "id": "flamenco",
   "name": "Flamenco",
   "family": "Andalusia / Iberian",
@@ -64,13 +65,10 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "soleá twelve-count accents and falseta voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "soleá twelve-count accents and falseta voice cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Soleá guitar compás with bass and upper chord answers", "role": "lead", "instruments": ["guitar"], "onsets": [0, 1.5, 3, 4, 5], "durations": [1.4, 1.4, .9, .9, .9], "pitches": [{"degree": 1, "register": 45}, {"degree": 5, "register": 45}, {"voicing": "chord"}, {"degree": 1, "register": 45}, {"voicing": "chord"}], "articulations": ["legato", "legato", "rasgueado", "legato", "rasgueado"], "notations": [{"fingering": "p"}, {"fingering": "p"}, {"stroke": "down", "bodyTechnique": "golpe"}, {"fingering": "p"}, {"stroke": "down"}]},
         {"name": "Soleá tremolo falseta at the phrase ending", ...SOLEA_FALSETA_CIERRE},
         {"name": "soleá twelve-count accents and falseta palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "soleá twelve-count accents and falseta palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "soleá twelve-count accents and falseta cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "soleá twelve-count accents and falseta cajon cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "soleá twelve-count accents and falseta cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -146,13 +144,9 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "bulerías fast compás with remate voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "bulerías fast compás with remate voice cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bulerías fast compás with remate guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "bulerías fast compás with remate guitar cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bulerías fast compás with remate palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "bulerías fast compás with remate palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "bulerías fast compás with remate cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "bulerías fast compás with remate cajon cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "bulerías fast compás with remate cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -227,13 +221,9 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "alegrías major-key compás and bright llamada voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "alegrías major-key compás and bright llamada voice cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "alegrías major-key compás and bright llamada guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "alegrías major-key compás and bright llamada guitar cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "alegrías major-key compás and bright llamada palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "alegrías major-key compás and bright llamada palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "alegrías major-key compás and bright llamada cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "alegrías major-key compás and bright llamada cajon cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "alegrías major-key compás and bright llamada cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -308,13 +298,9 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "tangos flamencos duple guitar and palmas voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tangos flamencos duple guitar and palmas voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tangos flamencos duple guitar and palmas guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tangos flamencos duple guitar and palmas guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tangos flamencos duple guitar and palmas palmas pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tangos flamencos duple guitar and palmas palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "tangos flamencos duple guitar and palmas cajon pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tangos flamencos duple guitar and palmas cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "tangos flamencos duple guitar and palmas cajon pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -388,11 +374,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "seguiriya asymmetric five-accent compás voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "seguiriya asymmetric five-accent compás voice cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "seguiriya asymmetric five-accent compás guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "seguiriya asymmetric five-accent compás guitar cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "seguiriya asymmetric five-accent compás palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "seguiriya asymmetric five-accent compás palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "seguiriya asymmetric five-accent compás cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "seguiriya asymmetric five-accent compás cajon cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -468,11 +451,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "tientos slow tangos pulse and cante voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tientos slow tangos pulse and cante voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tientos slow tangos pulse and cante guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tientos slow tangos pulse and cante guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tientos slow tangos pulse and cante palmas pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tientos slow tangos pulse and cante palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "tientos slow tangos pulse and cante cajon pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "tientos slow tangos pulse and cante cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -548,11 +528,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "fandangos ternary cante and guitar response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "fandangos ternary cante and guitar response voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "fandangos ternary cante and guitar response guitar statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "fandangos ternary cante and guitar response guitar cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "fandangos ternary cante and guitar response palmas pulse", "role": "percussion", "onsets": [0, 1, 2], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "fandangos ternary cante and guitar response palmas cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "fandangos ternary cante and guitar response cajon pulse", "role": "percussion", "onsets": [0, 1, 2], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "fandangos ternary cante and guitar response cajon cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -631,13 +608,9 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "rumba percussive strum and bass syncopation voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "rumba percussive strum and bass syncopation voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rumba percussive strum and bass syncopation guitar statement", ...RUMBA_STRUM},
-        {"name": "rumba percussive strum and bass syncopation guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "rumba percussive strum and bass syncopation palmas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "rumba percussive strum and bass syncopation palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "rumba percussive strum and bass syncopation cajon pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "rumba percussive strum and bass syncopation cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Rumba bass syncopation", "role": "bass", "instruments": ["bass"], "onsets": [0, 1.5, 2.5, 3.5], "durations": [0.65, 0.4, 0.4, 0.35], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
@@ -709,8 +682,7 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "tonás unaccompanied cante and breathing space voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "tonás unaccompanied cante and breathing space voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "tonás unaccompanied cante and breathing space voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"]
@@ -897,11 +869,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "guajira bright major compound compás voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "guajira bright major compound compás voice cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "guajira bright major compound compás guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "guajira bright major compound compás guitar cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "guajira bright major compound compás palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "guajira bright major compound compás palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "guajira bright major compound compás cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "guajira bright major compound compás cajon cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -976,11 +945,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "farruca minor duple guitar and closing accent voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "farruca minor duple guitar and closing accent voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "farruca minor duple guitar and closing accent guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "farruca minor duple guitar and closing accent guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "farruca minor duple guitar and closing accent palmas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "farruca minor duple guitar and closing accent palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "farruca minor duple guitar and closing accent cajon pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "farruca minor duple guitar and closing accent cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -1055,11 +1021,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "sevillanas four coplas and ternary cierre voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sevillanas four coplas and ternary cierre voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sevillanas four coplas and ternary cierre guitar statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "sevillanas four coplas and ternary cierre guitar cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sevillanas four coplas and ternary cierre palmas pulse", "role": "percussion", "onsets": [0, 1, 2], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sevillanas four coplas and ternary cierre palmas cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "sevillanas four coplas and ternary cierre cajon pulse", "role": "percussion", "onsets": [0, 1, 2], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "sevillanas four coplas and ternary cierre cajon cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -1135,13 +1098,9 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "nuevo flamenco guitar hook and cajon groove voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "nuevo flamenco guitar hook and cajon groove voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "nuevo flamenco guitar hook and cajon groove guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "nuevo flamenco guitar hook and cajon groove guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "nuevo flamenco guitar hook and cajon groove palmas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "nuevo flamenco guitar hook and cajon groove palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "nuevo flamenco guitar hook and cajon groove cajon pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "nuevo flamenco guitar hook and cajon groove cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "nuevo flamenco guitar hook and cajon groove cajon pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -1217,15 +1176,10 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "flamenco jazz compás with extended comping guitar statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "flamenco jazz compás with extended comping guitar cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco jazz compás with extended comping tenor-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "flamenco jazz compás with extended comping tenor-sax cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco jazz compás with extended comping piano accompaniment", "role": "harmony", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "flamenco jazz compás with extended comping piano cadence fill", "role": "harmony", "onsets": [5.0, 5.5, 5.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco jazz compás with extended comping low anchor", "role": "bass", "onsets": [0, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "flamenco jazz compás with extended comping upright-bass cadence fill", "role": "bass", "onsets": [5.0, 5.5, 5.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco jazz compás with extended comping palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "flamenco jazz compás with extended comping palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "flamenco jazz compás with extended comping cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
         {"name": "flamenco jazz compás with extended comping cajon cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
@@ -1312,15 +1266,11 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "flamenco rock riff and palmas accent voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "flamenco rock riff and palmas accent voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco rock riff and palmas accent guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "flamenco rock riff and palmas accent guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco rock riff and palmas accent low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "flamenco rock riff and palmas accent bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "flamenco rock riff and palmas accent palmas pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "flamenco rock riff and palmas accent palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "flamenco rock riff and palmas accent kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "flamenco rock riff and palmas accent drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "flamenco rock riff and palmas accent kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2.5, 2.5, 3.0, 3, 3.5, 4.0, 4, 4.5, 5.0, 5, 5.5, 5.5, 6.0, 6.5, 7.0, 7, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "hat", "kick", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "hat", "hat", "kick", "snare", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.28, 0.92, 0.42, 0.85, 0.28, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.28, 0.42, 0.92, 0.85, 0.28], "articulation": "accent", "shortName": "Flamenco rock accent pocket", "description": "Practice this two-bar flamenco rock accent pocket. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "flamenco rock riff and palmas accent drums cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 3.0, 3, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "hat", "kick", "snare", "hat"], "accents": [0.5, 0.5, 0.5, 0.92, 0.85, 0.5], "shortName": "Flamenco rock close", "description": "Close with the last two beats of the flamenco rock accent pocket; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -1400,17 +1350,12 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "urban flamenco fragmented compás and electronic low end voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "urban flamenco fragmented compás and electronic low end voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "urban flamenco fragmented compás and electronic low end guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "urban flamenco fragmented compás and electronic low end guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "urban flamenco fragmented compás and electronic low end low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "urban flamenco fragmented compás and electronic low end synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "urban flamenco fragmented compás and electronic low end palmas pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "urban flamenco fragmented compás and electronic low end palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "urban flamenco fragmented compás and electronic low end kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "urban flamenco fragmented compás and electronic low end drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "urban flamenco fragmented compás and electronic low end sampler pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "urban flamenco fragmented compás and electronic low end sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "urban flamenco fragmented compás and electronic low end kit", "role": "percussion", "onsets": [0, 0, 0.5, 0.75, 1.5, 2, 2.5, 2.5, 3, 3.75, 4, 4, 4.5, 5.5, 5.5, 6, 6.5, 7, 7.25, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "hat", "hat", "kick", "hat", "hat", "kick", "snare", "hat", "hat", "kick", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.92, 0.28, 0.85, 0.28, 0.92, 0.42, 0.28, 0.42, 0.92, 0.28, 0.28, 0.92, 0.85, 0.28, 0.42, 0.92, 0.28], "articulation": "accent", "shortName": "Urban flamenco half-time", "description": "Practice this two-bar urban flamenco half-time. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "urban flamenco fragmented compás and electronic low end drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3, 3.25, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["snare", "hat", "hat", "kick", "hat"], "accents": [0.85, 0.5, 0.5, 0.92, 0.5], "shortName": "Urban flamenco close", "description": "Close with the last two beats of the urban flamenco half-time; keep the spaces clear and land the next phrase together."},
+        {"name": "urban flamenco fragmented compás and electronic low end sampler pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -1462,4 +1407,12 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       }
     }
   ]
-}));
+})), [
+  { instrumentId: 'palmas', role: 'percussion' },
+  { instrumentId: 'cajon', role: 'percussion' },
+  { instrumentId: 'zapateado', role: 'percussion' },
+  { instrumentId: 'flute', role: 'lead' },
+  { instrumentId: 'castanets', role: 'percussion' },
+  { instrumentId: 'shaker', role: 'percussion' },
+  { instrumentId: 'hand-percussion', role: 'percussion' },
+]);

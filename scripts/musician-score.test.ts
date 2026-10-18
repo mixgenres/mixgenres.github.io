@@ -197,19 +197,21 @@ test('country sample phrases develop through same-instrument teaching variations
   }
 });
 
-test('catalog songs do not invent support instruments outside the authored style roster', () => {
+test('catalog songs expose an explicit full teaching roster without generic support cells', () => {
   for (const styleId of ['blues-piedmont', 'persian-radif', 'ambient-drone']) {
     const song = createCatalogSong(`${styleId}_song`);
     const authoredIds = new Set(getStyle(styleId)!.arrangement!.ensemble!.flatMap(part => part.instrumentIds));
     const songIds = new Set(song.tracks.map(track => track.instrumentId!));
-    const expectedIds = new Set([...authoredIds].filter(instrumentId => instrumentId !== 'voice'));
-    assert.deepEqual(songIds, expectedIds, `${styleId} keeps its assigned roster without an unrequested vowel lead`);
+    assert.ok([...authoredIds].filter(instrumentId => instrumentId !== 'voice').every(instrumentId => songIds.has(instrumentId)),
+      `${styleId} keeps its authored core roster`);
+    assert.ok(songIds.size >= 8, `${styleId} exposes the full teaching roster`);
     assert.equal(Object.values(song.lockedPatternAssignments ?? {}).flatMap(Object.values)
       .some(patternId => PATTERNS_BY_ID[patternId]?.sourceLevel === 'sample-support'), false);
   }
   const tonas = createCatalogSong('flamenco-tonas-martinetes_song');
-  assert.deepEqual(tonas.tracks.map(track => track.instrumentId), ['voice'],
-    'unaccompanied tonás should not gain an invented accompaniment ensemble');
+  assert.ok(tonas.tracks.some(track => track.instrumentId === 'voice'));
+  assert.ok(new Set(tonas.tracks.map(track => track.instrumentId)).size >= 8,
+    'unaccompanied tonás retains its vocal core while exposing the full teaching roster');
 });
 
 test('score fractions retain tuplets and fine authored positions', () => {

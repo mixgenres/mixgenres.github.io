@@ -65,6 +65,7 @@ export interface RhythmOnset {
   hit: HitFunction;
   sourceHit?: string;
   microtiming?: number;
+  microtimingUnit?: 'milliseconds' | 'grid';
   sourceGenre: string;
   /** True when the pattern explicitly authored this onset duration. */
   durationAuthored?: boolean;
@@ -147,12 +148,21 @@ function hitFrom(pattern: MusicalPattern, i: number, rawHit?: string): HitFuncti
 
 function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string, beatsPerBar = 4): RhythmIdea {
   const sub = Math.max(1, p.subdivisions ?? 16);
+  // A duration grid is only authored when it covers every onset. Partial
+  // arrays are malformed compatibility metadata; treating their missing cells
+  // as authored would replace the performer's natural gap inference with a
+  // one-step gate and make the part sound clipped.
+  const durationGridAligned = Array.isArray(p.durationGrid)
+    && p.durationGrid.length === (p.onsetGrid?.length ?? 0);
   const onsets = (p.onsetGrid ?? []).map((position: number, i: number) => ({
     position: (position + Number(p.anticipationOffset ?? 0)) / sub,
     accent: clamp(Number(p.accentProfile?.[i] ?? 0.72)),
     velocity: clamp(Number(p.velocityProfile?.[i] ?? p.accentProfile?.[i] ?? 0.72)),
-    duration: Math.max(0.001, Number(p.durationGrid?.[i] ?? 1) / sub * beatsPerBar),
-    durationAuthored: Array.isArray(p.durationGrid),
+    // A partial legacy duration array is not an authored gate. Do not let the
+    // values that happen to exist shorten only the first attacks while the
+    // remaining attacks use performer inference.
+    duration: Math.max(0.001, Number(durationGridAligned ? p.durationGrid?.[i] ?? 1 : 1) / sub * beatsPerBar),
+    durationAuthored: durationGridAligned,
     hit: hitFrom(p, i),
     // A pattern's display name is not a struck drum surface. Pass only an
     // authored per-event hit label; otherwise the explicit hit function below
@@ -520,7 +530,8 @@ function grooveTime(
   const beatSec = 60 / bt.bpm;
   const beat = onset.position * bt.beatsPerBar;
   const rawMicrotiming = Number(onset.microtiming ?? 0);
-  const authoredMs = Math.abs(rawMicrotiming) > 0.5
+  const authoredMs = onset.microtimingUnit === 'milliseconds'
+    || onset.microtimingUnit === undefined && Math.abs(rawMicrotiming) > 0.5
     ? rawMicrotiming
     : rawMicrotiming * beatSec * 1000 / Math.max(1, groove.subdivision);
   const input = {
@@ -789,6 +800,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               position: beatValue(attack.position) / bt.beatsPerBar, duration: beatValue(attack.duration),
               durationAuthored: attack.durationAuthored, accent: attack.accent, velocity: attack.velocity,
               hit: attack.hit, sourceHit: attack.sourceHit, microtiming: attack.microtiming.value,
+              microtimingUnit: attack.microtiming.unit,
               sourceGenre: PATTERNS_BY_ID[writtenBar.patternId]?.worldId ?? lane.rhythm.sourceGenre,
             })) };
           if (!rhythm.onsets.length) continue;
@@ -913,7 +925,11 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               ctx.pattern.events?.some(event => event.accent !== undefined) ?? false,
               timingLockedCue || String(detail?.variationType ?? '').toLowerCase() === 'cadence'));
             const pv = voiceProfile(track.instrumentId);
-            const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + onset.duration / bt.beatsPerBar);
+            // Simultaneous tones belong to one rhythmic instant. They cannot
+            // shorten each other's inferred gates; the final implicit note
+            // has the remaining bar available, rather than a placeholder step.
+            const nextPosition = rhythm.onsets.reduce((next, candidate) =>
+              candidate.position > onset.position + 1e-9 ? Math.min(next, candidate.position) : next, 1);
             const localGapBeats = Math.max(0.08, (nextPosition - onset.position) * bt.beatsPerBar);
             const authoredIsDefaultStep = onset.durationAuthored !== true;
             const sustainEligible = pv.sustain === 'sustained' || pv.sustain === 'blown' || pv.sustain === 'decaying';

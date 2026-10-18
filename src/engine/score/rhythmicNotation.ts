@@ -1,6 +1,14 @@
 import type { MusicalPattern } from '../../types';
 import type { HitFunction } from '../../data/performance/hitFunctions';
-export function notatedHit(pattern: MusicalPattern | undefined, index: number, rawHit?: string): HitFunction {
+export interface NotatedHitProjection {
+  /** Transformed per-attack accent, when a rich event slice is available. */
+  accent?: number;
+  /** Transformed per-attack grid position, when a rich event slice is available. */
+  onset?: number;
+  /** Grid resolution belonging to the transformed slice. */
+  subdivisions?: number;
+}
+export function notatedHit(pattern: MusicalPattern | undefined, index: number, rawHit?: string, projection?: NotatedHitProjection): HitFunction {
   const raw = String(rawHit ?? pattern?.hitGrid?.[index] ?? '').toLowerCase();
   if (/kick|downbeat|bombo|bass-drum|grave/.test(raw)) return 'downbeat';
   if (/ghost|heel|toe|tap|tip|brush/.test(raw)) return 'ghost';
@@ -10,8 +18,10 @@ export function notatedHit(pattern: MusicalPattern | undefined, index: number, r
   if (/rim|edge|cascara|campana|bell/.test(raw)) return 'edge';
   if (/fill|roll|tremolo/.test(raw)) return 'fill';
   if (/bell|punct|hit|chique|accent/.test(raw)) return 'punctuation';
-  const accent = Number(pattern?.accentProfile?.[index] ?? .7);
+  const accent = Number(projection?.accent ?? pattern?.accentProfile?.[index] ?? .7);
   if (accent >= .92) return 'downbeat';
   if (accent <= .42) return 'ghost';
-  return Number(pattern?.onsetGrid?.[index] ?? 0) % Math.max(1, Math.round((pattern?.subdivisions ?? 16) / 4)) ? 'offbeat-chop' : 'tone';
+  const onset = projection?.onset ?? pattern?.onsetGrid?.[index] ?? 0;
+  const subdivisions = projection?.subdivisions ?? pattern?.subdivisions ?? 16;
+  return Number(onset) % Math.max(1, Math.round(subdivisions / 4)) ? 'offbeat-chop' : 'tone';
 }

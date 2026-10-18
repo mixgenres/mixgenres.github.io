@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "gnawa",
   "name": "Gnawa",
   "family": "Morocco",
@@ -62,11 +63,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "guembri pluck and qraqeb ternary response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "guembri pluck and qraqeb ternary response voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "guembri pluck and qraqeb ternary response low anchor", "role": "bass", "onsets": [0, 1.5], "instruments": ["guembri"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "guembri pluck and qraqeb ternary response guembri cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guembri"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "guembri pluck and qraqeb ternary response qraqeb pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["qraqeb"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "guembri pluck and qraqeb ternary response qraqeb cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["qraqeb"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "guembri pluck and qraqeb ternary response qraqeb pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["qraqeb"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -136,11 +134,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "lila trance cyclic guembri and accelerating chant voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "lila trance cyclic guembri and accelerating chant voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "lila trance cyclic guembri and accelerating chant low anchor", "role": "bass", "onsets": [0, 1.5], "instruments": ["guembri"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "lila trance cyclic guembri and accelerating chant guembri cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guembri"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "lila trance cyclic guembri and accelerating chant qraqeb pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["qraqeb"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "lila trance cyclic guembri and accelerating chant qraqeb cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["qraqeb"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "lila trance cyclic guembri and accelerating chant qraqeb pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["qraqeb"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -208,15 +203,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Gnawa jazz guembri vamp and improvised horn voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Gnawa jazz guembri vamp and improvised horn voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Gnawa jazz guembri vamp and improvised horn tenor-sax statement", "role": "lead", "onsets": [2, 2.75], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.25], "articulation": "legato"},
-        {"name": "Gnawa jazz guembri vamp and improvised horn tenor-sax cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Gnawa jazz guembri vamp and improvised horn low anchor", "role": "bass", "onsets": [0, 1.5], "instruments": ["guembri"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "Gnawa jazz guembri vamp and improvised horn guembri cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guembri"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Gnawa jazz guembri vamp and improvised horn qraqeb pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["qraqeb"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Gnawa jazz guembri vamp and improvised horn qraqeb cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["qraqeb"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Gnawa jazz guembri vamp and improvised horn kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Gnawa jazz guembri vamp and improvised horn drums cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "Gnawa jazz guembri vamp and improvised horn kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -294,15 +284,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Gnawa rock guembri figure and guitar response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Gnawa rock guembri figure and guitar response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Gnawa rock guembri figure and guitar response guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Gnawa rock guembri figure and guitar response guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Gnawa rock guembri figure and guitar response low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["guembri"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "Gnawa rock guembri figure and guitar response guembri cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["guembri"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Gnawa rock guembri figure and guitar response qraqeb pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["qraqeb"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Gnawa rock guembri figure and guitar response qraqeb cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["qraqeb"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Gnawa rock guembri figure and guitar response kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Gnawa rock guembri figure and guitar response drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "Gnawa rock guembri figure and guitar response kit", "role": "percussion", "onsets": [0, 0, 1, 1, 1.5, 2, 3, 3, 3.5, 4, 4, 5, 5, 5.5, 6, 7, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "snare", "kick", "hat", "hat", "kick", "snare", "hat", "kick", "hat", "snare", "kick", "hat", "hat", "kick", "snare"], "cycleLength": 2, "accents": [0.42, 0.92, 0.42, 0.85, 0.92, 0.42, 0.42, 0.92, 0.85, 0.42, 0.92, 0.42, 0.85, 0.92, 0.42, 0.42, 0.92, 0.85], "articulation": "accent", "shortName": "Gnawa rock cross-accent", "description": "Practice this two-bar gnawa rock cross-accent. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "Gnawa rock guembri figure and guitar response drums cadence fill", "role": "percussion", "onsets": [2, 3, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "hat", "kick", "snare"], "accents": [0.5, 0.5, 0.92, 0.85], "shortName": "Gnawa rock close", "description": "Close with the last two beats of the gnawa rock cross-accent; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -348,4 +334,10 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'darbuka', role: 'percussion' },
+  { instrumentId: 'oud', role: 'harmony' },
+  { instrumentId: 'flute', role: 'lead' },
+  { instrumentId: 'bendir', role: 'percussion' },
+  { instrumentId: 'tbel', role: 'percussion' },
+]);

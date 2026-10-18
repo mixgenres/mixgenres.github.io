@@ -14,6 +14,31 @@ const DEVELOPMENTS: Record<string, Array<{
   cycleLength?: number; phraseEnd?: boolean; difficulty?: number;
   timingLock?: AuthoredCell['timingLock'];
 }>> = {
+  'country-bluegrass': [
+    {instrument:'banjo',role:'lead',name:'bluegrass forward reverse roll return',shortName:'Forward-reverse return',onsets:[0,.5,1,1.5,2,2.5,3,3.5],durations:[.42,.42,.42,.42,.42,.42,.42,.42],pitches:[1,3,5,8,5,3,2,5].map(degree=>({degree,register:62,voicing:'single'})),notations:['T','I','M','T','M','I','T','M'].map(fingering=>({fingering})),accents:[.9,.5,.65,.75,.55,.5,.72,.6],articulation:'pick',sections:['verse','chorus','banjo-break'],description:'Keep the picking hand moving through the full forward-reverse roll. Bring out the melody notes and let the remaining strings ring lightly; this is a complete roll, not a shortened motif.'},
+  ],
+  'tango-pugliese': [
+    {instrument:'bandoneon',role:'lead',name:'Pugliese yumba theme return',shortName:'Bandoneon theme return',onsets:[0,.75,1.5,2.5,3.25,4,5,5.5,6.5,7],durations:[.6,.45,.8,.5,.5,.8,.35,.7,.35,.7],pitches:[1,3,5,4,3,5,6,5,2,1].map(degree=>({degree,register:62,voicing:'single'})),accents:[.95,.6,.8,.55,.7,.92,.55,.78,.6,.9],articulation:'legato',sections:['tema-reprise'],cycleLength:2,description:'Return to the theme with weighted arrivals and connected shorter notes. Release the phrase before the next yumba attack; keep the accompaniment pulse audible underneath.'},
+  ],
+  'blues-modern-blues': [
+    {instrument:'guitar',role:'lead',name:'modern blues two-bar call and bent answer',shortName:'Blues call and answer',onsets:[0,.5,1.5,2,4.5,5,5.5,6.5,7],durations:[.38,.7,.35,1,.3,.3,.65,.3,.7],pitches:[0,3,5,7,7,6,5,3,0].map(semitoneOffset=>({semitoneOffset,register:64,voicing:'single'})),accents:[.85,.6,.72,.9,.65,.5,.82,.6,.9],articulation:'legato',sections:['verse','solo'],cycleLength:2,description:'Play a short minor-pentatonic call, leave room for the singer, then answer through the blue fifth into the root. Shape the long notes; keep the quick notes connected.'},
+  ],
+  'latin-cumbia': [
+    {instrument:'bass',role:'bass',name:'cumbia two-bar root fifth answer',shortName:'Cumbia bass answer',onsets:[0,1.5,2,3.5,4,5.5,6,7,7.5],durations:[.9,.3,.9,.3,.9,.3,.6,.3,.3],pitches:[1,5,1,5,1,5,1,3,5].map(degree=>({degree,register:40,voicing:'single'})),accents:[.9,.6,.85,.6,.9,.6,.82,.5,.65],articulation:'staccato',sections:['verse','chorus','bridge','solo'],cycleLength:2,description:'Keep the two-beat root and fifth foundation. Answer at the end of the second bar with a light third and fifth, leaving the drum and scrape audible.'},
+  ],
+  'salsa-salsa-calena': [
+    {instrument:'piano',role:'harmony',name:'Cali two-bar montuno response',shortName:'Piano montuno answer',onsets:[0,.5,1.5,2,2.5,3.5,4.5,5,5.5,6.5,7,7.5],durations:[.28,.28,.35,.28,.28,.35,.28,.28,.35,.28,.28,.35],pitches:[1,3,5,8,5,3,1,5,3,8,5,3].map(degree=>({degree,register:60,voicing:'single'})),accents:[.8,.55,.85,.6,.5,.88,.6,.5,.82,.62,.5,.9],articulation:'staccato',sections:['verse','chorus','solo','mambo'],cycleLength:2,description:'Practice the two-bar broken-chord montuno. Keep the syncopated high notes clear and the repeated inner notes light; retain the same cycle across the horn reply.'},
+    {instrument:'tres',role:'harmony',name:'Cali tres two-bar guajeo answer',shortName:'Tres guajeo answer',onsets:[.5,1,1.5,2.5,3,3.5,4,4.5,5.5,6,6.5,7.5],durations:[.22,.22,.32,.22,.22,.32,.22,.22,.32,.22,.22,.32],pitches:[3,5,8,5,3,1,1,3,5,8,5,3].map(degree=>({degree,register:60,voicing:'single'})),articulation:'pick',sections:['verse','chorus','solo','mambo'],cycleLength:2,description:'Pick the guajeo across two bars with a clear upper note and a lighter return. Let the bass anticipation and percussion keep their own positions.'},
+  ],
+  'timba-manolin': [
+    {instrument:'piano',role:'harmony',name:'Manolin-style two-bar displaced tumbao study',shortName:'Piano tumbao answer',onsets:[0,.75,1.5,2.5,3.5,4.5,5.25,5.5,6.5,7.25,7.5],durations:[.3,.25,.4,.3,.3,.3,.18,.35,.3,.18,.35],pitches:[1,5,3,8,5,3,5,8,3,5,1].map(degree=>({degree,register:58,voicing:'single'})),accents:[.9,.55,.8,.6,.85,.6,.45,.85,.62,.45,.9],articulation:'staccato',sections:['verse','chorus','solo','mambo'],cycleLength:2,description:'Learn the two-bar displaced piano figure in small groups. Keep the accented upper notes together with the percussion cues, and leave the holes in the tumbao open.'},
+  ],
+  'mexican-corrido': [
+    {instrument:'bajo-sexto',role:'harmony',name:'corrido bass chord return study',shortName:'Bajo sexto return',onsets:[0,.5,1,1.5,2,2.5,3,3.5],durations:[.35,.18,.35,.18,.35,.18,.35,.18],pitches:[{degree:1,register:45,voicing:'single'},{voicing:'chord',register:57},{degree:5,register:45,voicing:'single'},{voicing:'chord',register:57},{degree:1,register:45,voicing:'single'},{voicing:'chord',register:57},{degree:3,register:45,voicing:'single'},{voicing:'chord',register:57}],articulation:'pick',sections:['verse','chorus','solo'],cycleLength:2,description:'Alternate a low picked note and a short upper chord. Change only the last bass note for the return; keep the singer and accordion in front.'},
+  ],
+  'mexican-norteno': [
+    {instrument:'accordion',role:'lead',name:'norteno two-bar accordion pickup answer',shortName:'Accordion pickup answer',onsets:[.25,.5,.75,1.25,1.5,2,2.25,2.75,3,3.25,3.5],durations:[.15,.15,.3,.15,.3,.15,.3,.15,.15,.15,.35],pitches:[3,5,6,5,3,2,3,5,3,2,1].map(degree=>({degree,register:69,voicing:'single'})),articulation:'legato',sections:['verse','chorus','solo'],cycleLength:2,description:'Play the picked-up accordion answer as two connected gestures. Release after the first gesture, then descend into the final root while bajo sexto keeps the dance pulse.'},
+  ],
   'indian-classical-instrumental-gat': [
     {instrument:'sitar',role:'lead',name:'instrumental gat three-part tihai phrase',shortName:'Sitar tihai phrase',onsets:[12.25,12.5,12.75,13,13.75,14,14.25,14.5,15.25,15.5,15.75],durations:[.25,.25,.25,.25,.25,.25,.25,.25,.25,.25,.25],pitches:[5,4,3,1,5,4,3,1,5,4,3].map(degree=>({degree,register:74})),accents:[.72,.55,.62,.95,.72,.55,.62,.95,.82,.68,.88],articulation:'staccato',sections:['tihai'],cycleLength:4,difficulty:3,description:'In the last four-beat phrase of this 16-beat practice cycle, repeat the same four-note descent three times. Leave an even half-beat gap between statements; the third descent’s tonic lands with the ensemble on the next sam.'},
     {instrument:'tabla',role:'percussion',name:'instrumental gat tabla theka into tihai',shortName:'Tabla tihai accents',onsets:[0,1,2,3,4,5,6,7,8,9,10,11,12.25,12.5,12.75,13,13.75,14,14.25,14.5,15.25,15.5,15.75],durations:[.18,.18,.18,.18,.18,.18,.18,.18,.18,.18,.18,.18,.16,.16,.16,.16,.16,.16,.16,.16,.16,.16,.25],accents:[.9,.54,.68,.54,.86,.5,.66,.52,.88,.48,.66,.5,.74,.52,.62,.96,.74,.52,.62,.96,.82,.68,1],hits:['open','ghost','open','ghost','open','ghost','open','ghost','open','ghost','open','ghost','open','ghost','open','slap','open','ghost','open','slap','open','ghost','open'],articulation:'accent',sections:['tihai'],cycleLength:4,difficulty:3,description:'Keep light cycle strokes through count twelve, then join the sitar in three identical four-stroke answers. Give the final open stroke enough length to meet the shared sam cleanly.'},
@@ -303,7 +328,7 @@ export function authorSampleSongDevelopment(pack: GenrePackInput): GenrePackInpu
     if (!additions.length) return style;
     const cells: AuthoredCell[] = additions.map(({ sections, ...addition }) => ({
       ...addition, instruments: [addition.instrument], sectionUsage: sections,
-      difficulty: 2, supportedEnergy: [2, 3, 4], pedagogicalStudy: 'variation',
+      difficulty: 2, supportedEnergy: [2, 3, 4],
       arrangementVariation: !addition.phraseEnd,
     }));
     return { ...style, cells: [...style.cells, ...cells] };

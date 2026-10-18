@@ -68,7 +68,22 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const hatChannel = instrumentId==='sampler' || !!def.kit && instrumentId !== 'timpani' && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
     if(hatChannel)occupied.push(new Map());
     for (const note of notes) {
-      if (!Number.isFinite(note.time + note.dur + note.vel + note.midi) || note.dur <= 0) throw new Error('Invalid sample note timing or velocity.');
+      // Do not repair malformed score events at the SoundFont boundary. MIDI
+      // key clamping and skipped bends make a bad upstream event sound like a
+      // different note or a missing articulation, which is much harder to
+      // diagnose than a compile error. Negative times remain valid here: an
+      // excerpt can retain the age of an attack that began before its window.
+      if (!Number.isFinite(note.time) || !Number.isFinite(note.dur) || note.dur <= 0
+        || !Number.isFinite(note.midi) || note.midi < 0 || note.midi > 127
+        || !Number.isFinite(note.vel) || note.vel < 1 || note.vel > 127) {
+        throw new Error(`Invalid sample note event for ${note.trackId}: time, duration, MIDI key, or velocity is out of range.`);
+      }
+      for (const bend of note.pitchBend ?? []) {
+        if (!Number.isFinite(bend.offset) || bend.offset < 0 || bend.offset >= note.dur
+          || !Number.isFinite(bend.value) || bend.value < 0 || bend.value > 16383) {
+          throw new Error(`Invalid pitch bend for ${note.trackId}: offset or value is out of range.`);
+        }
+      }
       const gesture = resolveSampleGesture(instrumentId, note.gestureCode, note.vel, note.pitchIdentity);
       const action = gesture.action;
       const context = note.soundContext;
@@ -77,7 +92,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         ? soundFor(context.worldId, context.styleId, context.role)
         : params;
       let patch = base;
-      let key = Math.max(0, Math.min(127, Math.round(note.midi)));
+      let key = Math.round(note.midi);
       if(instrumentId==='bandoneon')patch={...patch,bank:note.bellowsDirectionCode===2?74:73,pack:'bandoneon'};
       if(instrumentId==='upright-bass') {
         const arco=/bow|arco|arrastre|lija/.test(action);
@@ -155,7 +170,11 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         else if((SAMPLED_KIT_KEYS as readonly number[]).includes(key))patch={bank:/choke/.test(action)?68:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
       }
       banks.add(patch.pack);
-      const cents = patch.drum ? 0 : pitch(note);
+      // Selecting a MIDI sample key must not quantize a fractional written
+      // pitch. Percussion/sampler keys select contacts, rather than pitches.
+      const keyRoundingCents = !percussion && instrumentId !== 'sampler'
+        && gesture.pitchIdentity !== 'unpitched' ? (note.midi - Math.round(note.midi)) * 100 : 0;
+      const cents = patch.drum ? 0 : pitch(note) + keyRoundingCents;
       if (!Number.isFinite(cents)) throw new Error('Invalid sampled note tuning.');
       const initialBend = instrumentId==='pedal-steel' && action==='chordal-glissando' && !note.pitchBend?.length ? -200 : 0;
       const onsetCents=cents+initialBend;
@@ -208,7 +227,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       noteLifetimes.push({note,end:releaseEnd});
       voiceDemand.push({start:note.time,end:releaseEnd,patch,key,velocity:timbreVelocity});
       events.push({ time: note.time, type: 'on', channel, key, velocity: timbreVelocity,
-        patch, gain: track.gain, cents:cents+initialBend });
+        patch, gain: sound.roleGain, cents:cents+initialBend });
       events.push({ time: note.time + hold, type: 'off', channel, key });
       // Filter sweep is a real synth gesture, not a note-length hint. CC 74 is
       // bipolar in the shipped SoundFont engine: 64 leaves the authored patch
@@ -254,6 +273,10 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       }
     }
     for (const cc of performance.ccs.filter(cc => cc.trackId === id)) {
+      if (!Number.isFinite(cc.time) || !Number.isInteger(cc.cc) || cc.cc < 0 || cc.cc > 127
+        || !Number.isFinite(cc.value) || cc.value < 0 || cc.value > 127) {
+        throw new Error(`Invalid controller event for ${id}: time, controller, or value is out of range.`);
+      }
       // Physical custom CCs must not accidentally become unrelated GM controls.
       const mapped = cc.cc === 18 ? 74 : cc.cc === 24 ? 11 : cc.cc;
       if (![1,7,10,11,64,66,67,71,72,73,74].includes(mapped)) continue;

@@ -1,8 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { makeSheet, makeStarterSheet } from '../src/engine/sheet/sheet';
+import { makeSheet, makeStarterSheet, switchSongWorld } from '../src/engine/sheet/sheet';
+import { GENRE_WORLDS } from '../src/data/genres';
 import { PATTERNS_BY_ID } from '../src/data/genres';
-import { resolveStyle } from '../src/engine/style';
+import { ALL_STYLES, resolveStyle } from '../src/engine/style';
+
+test('every style starter exposes eight distinct instruments', () => {
+  for (const style of ALL_STYLES) {
+    const starter = makeStarterSheet({ genreId: style.primaryGenre, styleId: style.id });
+    assert.equal(starter.tracks.length, 8, `${style.id} starter has eight tracks`);
+    assert.equal(new Set(starter.tracks.map(track => track.instrumentId)).size, 8,
+      `${style.id} starter has eight distinct instruments`);
+    for (const track of starter.tracks) {
+      assert.ok(starter.regions.some(region => starter.arrangement[region.id]?.[track.id]
+        && starter.arrangement[region.id][track.id] !== 'silent'),
+      `${style.id}/${track.instrumentId} enters at least one section`);
+    }
+  }
+});
 
 test('new starters retain the style-authored ensemble and only add audible, genre-native parts', () => {
   for (const [genreId, styleId] of [
@@ -41,5 +56,36 @@ test('new starters retain the style-authored ensemble and only add audible, genr
         }
       }
     }
+  }
+});
+
+test('traditional starter additions stay inside the style-native acoustic palette', () => {
+  for (const [genreId, styleId] of [
+    ['tango', 'tango-golden-age'],
+    ['tango', 'tango-pugliese'],
+    ['flamenco', 'flamenco-solea'],
+    ['flamenco', 'flamenco-seguiriya'],
+  ] as const) {
+    const starter = makeStarterSheet({ genreId, styleId });
+    const authored = new Set(resolveStyle({ genreId, styleId }).arrangement.ensemble.flatMap(part => part.instrumentIds));
+    const additions = starter.tracks.map(track => track.instrumentId)
+      .filter((id): id is string => !!id && !authored.has(id));
+    assert.ok(additions.length > 0, `${styleId} should expose authored support colors`);
+    assert.ok(additions.every(id => !['synth', 'sampler', 'drums'].includes(id)),
+      `${styleId} should not reach eight by adding generic electronic or drum-kit parts`);
+  }
+});
+
+test('whole-song genre changes retain the eight-part teaching roster', () => {
+  const original = makeStarterSheet({ genreId: 'tango', styleId: 'tango-golden-age' });
+  for (const world of GENRE_WORLDS) {
+    const changed = switchSongWorld(original, world.id);
+    const instruments = new Set(changed.tracks.map(track => track.instrumentId));
+    assert.equal(instruments.size, 8, `${world.id} genre switch keeps eight distinct instruments`);
+    assert.ok(changed.tracks.every(track => changed.regions.some(region =>
+      region.activeInstrumentIds?.includes(track.instrumentId ?? '')
+      && changed.arrangement[region.id]?.[track.id]
+      && changed.arrangement[region.id][track.id] !== 'silent')),
+    `${world.id} genre switch keeps every roster part audible in at least one section`);
   }
 });

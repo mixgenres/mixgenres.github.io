@@ -61,13 +61,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Javanese balungan and gong punctuation gamelan-metallophone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Javanese balungan and gong punctuation gamelan-metallophone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Javanese balungan and gong punctuation rebab statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["rebab"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Javanese balungan and gong punctuation rebab cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["rebab"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Javanese balungan and gong punctuation bonang accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bonang"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Javanese balungan and gong punctuation bonang cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["bonang"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Javanese balungan and gong punctuation kendang pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["kendang"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Javanese balungan and gong punctuation kendang cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Javanese balungan and gong punctuation gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
@@ -147,13 +143,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues reyong accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["reyong"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Balinese kotekan interlock and abrupt ensemble cues reyong cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["reyong"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues kendang pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Balinese kotekan interlock and abrupt ensemble cues kendang cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
@@ -232,13 +224,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Sundanese degung bonang phrase and gong cadence gamelan-metallophone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Sundanese degung bonang phrase and gong cadence gamelan-metallophone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Sundanese degung bonang phrase and gong cadence rebab statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["rebab"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Sundanese degung bonang phrase and gong cadence rebab cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["rebab"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Sundanese degung bonang phrase and gong cadence bonang accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bonang"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Sundanese degung bonang phrase and gong cadence bonang cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["bonang"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Sundanese degung bonang phrase and gong cadence kendang pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["kendang"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Sundanese degung bonang phrase and gong cadence kendang cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Sundanese degung bonang phrase and gong cadence gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
@@ -318,13 +306,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "angklung short repeating interlock and drum cues gamelan-metallophone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "angklung short repeating interlock and drum cues gamelan-metallophone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "angklung short repeating interlock and drum cues rebab statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["rebab"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "angklung short repeating interlock and drum cues rebab cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["rebab"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "angklung short repeating interlock and drum cues bonang accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bonang"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "angklung short repeating interlock and drum cues bonang cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["bonang"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "angklung short repeating interlock and drum cues kendang pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["kendang"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "angklung short repeating interlock and drum cues kendang cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "angklung short repeating interlock and drum cues gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {

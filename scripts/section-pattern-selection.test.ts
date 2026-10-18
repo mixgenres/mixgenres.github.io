@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { instrumentPatternKinds } from '../src/engine/lookup/instruments';
-import { canonicalPatternSection, makeSheet } from '../src/engine/sheet/sheet';
+import { canonicalPatternSection, makeSheet, rebuild } from '../src/engine/sheet/sheet';
 import { resolveStyle } from '../src/engine/style';
 import { ALL_STYLES } from '../src/engine/style/registry';
 
@@ -29,8 +29,7 @@ test('generated starters use compatible section-authored parts across the full s
             || pattern.sourceLevel !== 'style-authored'
             || pattern.provenance?.startsWith('Generic phrase-close')
             || pattern.provenance?.startsWith('Recomposition of')
-            || pattern.pedagogicalStudy
-            || pattern.pedagogicalSourcePatternId) return false;
+) return false;
           const roleMatch = pattern.roles.includes(track.role) || pattern.roles.includes(roleAlias)
             || pattern.compatibleRoles?.includes(track.role) || pattern.compatibleRoles?.includes(roleAlias)
             || pattern.canCrossRole === true;
@@ -56,23 +55,35 @@ test('generated starters use compatible section-authored parts across the full s
 });
 
 test('a returning starter section develops with a second full cell when the style authors one', () => {
-  const sheet = makeSheet({ genreId: 'country', styleId: 'country-honky-tonk' });
+  const sheet = makeSheet({ genreId: 'country', styleId: 'country-bluegrass' });
   const verses = sheet.regions.filter(region => region.kind === 'verse');
-  const fiddle = sheet.tracks.find(track => track.instrumentId === 'violin');
-  assert.ok(verses.length >= 2 && fiddle);
+  const banjo = sheet.tracks.find(track => track.instrumentId === 'banjo');
+  assert.ok(verses.length >= 2 && banjo);
 
-  const firstId = sheet.arrangement[verses[0].id]?.[fiddle.id];
-  const returnId = sheet.arrangement[verses[1].id]?.[fiddle.id];
+  const firstId = sheet.arrangement[verses[0].id]?.[banjo.id];
+  const returnId = sheet.arrangement[verses[1].id]?.[banjo.id];
   const first = firstId && PATTERNS_BY_ID[firstId];
   const returned = returnId && PATTERNS_BY_ID[returnId];
-  const allowed = new Set(resolveStyle({ genreId: 'country', styleId: 'country-honky-tonk' }).patterns?.allowed ?? []);
+  const allowed = new Set(resolveStyle({ genreId: 'country', styleId: 'country-bluegrass' }).patterns?.allowed ?? []);
 
-  assert.notEqual(returnId, firstId, 'the second verse should use an authored fiddle phrase instead of copying the opening');
+  assert.notEqual(returnId, firstId, 'the second verse should use an authored banjo phrase instead of copying the opening');
   assert.ok(first && returned && allowed.has(first.id) && allowed.has(returned.id));
-  assert.equal(first.pedagogicalStudy, undefined);
-  assert.equal(returned.pedagogicalStudy, undefined);
   assert.equal(first.sourceLevel, 'style-authored');
   assert.equal(returned.sourceLevel, 'style-authored');
-  assert.equal(first.category, returned.category, 'the phrase change keeps the fiddle part function');
+  assert.equal(first.category, returned.category, 'the phrase change keeps the banjo part function');
+});
+
+test('a missing authored pattern fails rebuild instead of becoming a silent bar', () => {
+  const sheet = makeSheet({ genreId: 'tango', styleId: 'tango-golden-age' });
+  const region = sheet.regions[0];
+  const track = sheet.tracks[0];
+  const arrangement = {
+    ...sheet.arrangement,
+    [region.id]: { ...sheet.arrangement[region.id], [track.id]: 'missing-authored-pattern' },
+  };
+  assert.throws(
+    () => rebuild({ ...sheet, arrangement }),
+    /Unknown authored pattern missing-authored-pattern/,
+  );
 });
 

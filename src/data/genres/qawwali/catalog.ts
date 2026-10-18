@@ -63,15 +63,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "qawwali lead chorus response and handclap cycle voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "qawwali lead chorus response and handclap cycle voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "qawwali lead chorus response and handclap cycle choir statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["choir"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "qawwali lead chorus response and handclap cycle choir cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["choir"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "qawwali lead chorus response and handclap cycle harmonium accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["harmonium"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "qawwali lead chorus response and handclap cycle harmonium cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["harmonium"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "qawwali lead chorus response and handclap cycle dholak pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["dholak"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "qawwali lead chorus response and handclap cycle dholak cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["dholak"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "qawwali lead chorus response and handclap cycle hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "qawwali lead chorus response and handclap cycle hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "qawwali lead chorus response and handclap cycle hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "legato", "vibrato", "staccato"],
@@ -152,15 +147,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "hamd naat devotional verse and restrained response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "hamd naat devotional verse and restrained response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hamd naat devotional verse and restrained response choir statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["choir"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "hamd naat devotional verse and restrained response choir cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["choir"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hamd naat devotional verse and restrained response harmonium accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["harmonium"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "hamd naat devotional verse and restrained response harmonium cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["harmonium"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hamd naat devotional verse and restrained response dholak pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["dholak"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "hamd naat devotional verse and restrained response dholak cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["dholak"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "hamd naat devotional verse and restrained response hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "hamd naat devotional verse and restrained response hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "hamd naat devotional verse and restrained response hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "legato", "vibrato", "staccato"],
@@ -242,15 +232,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "ghazal qawwali long vocal line and harmonium answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ghazal qawwali long vocal line and harmonium answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ghazal qawwali long vocal line and harmonium answer choir statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["choir"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "ghazal qawwali long vocal line and harmonium answer choir cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["choir"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ghazal qawwali long vocal line and harmonium answer harmonium accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["harmonium"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "ghazal qawwali long vocal line and harmonium answer harmonium cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["harmonium"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ghazal qawwali long vocal line and harmonium answer dholak pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["dholak"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "ghazal qawwali long vocal line and harmonium answer dholak cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["dholak"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "ghazal qawwali long vocal line and harmonium answer hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "ghazal qawwali long vocal line and harmonium answer hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "ghazal qawwali long vocal line and harmonium answer hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "legato", "vibrato", "staccato"],
@@ -329,20 +314,21 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "fusion qawwali band groove under melismatic response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "fusion qawwali band groove under melismatic response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "fusion qawwali band groove under melismatic response choir statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["choir"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "fusion qawwali band groove under melismatic response choir cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["choir"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "fusion qawwali band groove under melismatic response harmonium accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["harmonium", "synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "fusion qawwali band groove under melismatic response harmonium cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["harmonium", "synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "fusion qawwali band groove under melismatic response tanpura drone", "shortName": "Tanpura drone", "description": "Hold the tonic drone beneath the call: one long pluck per bar, with no melisma or rhythmic fill competing with the singer.", "role": "harmony", "onsets": [0], "instruments": ["tanpura"], "cycleLength": 1, "durations": [3.8], "pitches": [{"degree": 1, "register": 48}], "articulation": "legato"},
+        {"name": "fusion qawwali band groove under melismatic response sarangi answer", "shortName": "Sarangi answer", "description": "Answer the singer with a connected three-note turn; keep the bowed line behind the lead and release before the next call.", "role": "lead", "onsets": [0.75, 1.5, 2.75], "instruments": ["sarangi"], "cycleLength": 1, "durations": [0.55, 0.45, 0.65], "pitches": [{"degree": 3, "register": 62}, {"degree": 4, "register": 62}, {"degree": 5, "register": 62}], "accents": [0.62, 0.7, 0.82], "articulation": "legato"},
+        {"name": "fusion qawwali band groove under melismatic response sitar answer", "shortName": "Sitar answer", "description": "Use four bright plucks between the vocal phrases, then leave the final half-beat open for the response.", "role": "lead", "onsets": [0.5, 1.75, 2.5, 3.25], "instruments": ["sitar"], "cycleLength": 1, "durations": [0.3, 0.28, 0.32, 0.42], "pitches": [{"degree": 3, "register": 74}, {"degree": 5, "register": 74}, {"degree": 4, "register": 74}, {"degree": 2, "register": 74}], "accents": [0.75, 0.54, 0.78, 0.9], "articulation": "staccato"},
         {"name": "fusion qawwali band groove under melismatic response dholak pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["dholak"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "fusion qawwali band groove under melismatic response dholak cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["dholak"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "fusion qawwali band groove under melismatic response hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "fusion qawwali band groove under melismatic response hand-percussion cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["hand-percussion"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "fusion qawwali band groove under melismatic response hand-percussion pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["hand-percussion"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "legato", "vibrato", "staccato"],
         "choir": ["legato", "accent", "tenuto"],
         "harmonium": ["accent", "legato", "tenuto", "staccato"],
+        "tanpura": ["legato", "tenuto", "accent"],
+        "sarangi": ["legato", "ornament", "vibrato", "accent"],
+        "sitar": ["staccato", "accent", "ornament", "tremolo"],
         "dholak": ["accent", "open", "slap"],
         "hand-percussion": ["accent", "roll", "ghost", "open"]
       },
@@ -358,6 +344,18 @@ export const GENRE_PACK: GenrePackInput = {
         "harmonium:harmony": {
           "allowedTechniques": ["accent", "legato", "tenuto", "staccato"],
           "defaultTechnique": "accent"
+        },
+        "tanpura:harmony": {
+          "allowedTechniques": ["legato", "tenuto", "accent"],
+          "defaultTechnique": "legato"
+        },
+        "sarangi:lead": {
+          "allowedTechniques": ["legato", "ornament", "vibrato", "accent"],
+          "defaultTechnique": "legato"
+        },
+        "sitar:lead": {
+          "allowedTechniques": ["staccato", "accent", "ornament", "tremolo"],
+          "defaultTechnique": "staccato"
         },
         "dholak:percussion": {
           "allowedTechniques": ["accent", "open", "slap"],

@@ -110,6 +110,22 @@ test('voice leading preserves chord tones when the bass changes inversion', () =
   assert.deepEqual(new Set(voiced.map(midi => midi % 12)), new Set(chord.map(midi => midi % 12)));
 });
 
+test('authored chord registers survive voicing and a preceding lower chord', () => {
+  const theory = getGenreTheory('jazz');
+  const context = { profile: getInstrumentPerformanceProfile('piano'),
+    pattern: { roles: ['harmony'] }, role: 'harmony', chord: 'Cmaj7', phrasePosition: .2,
+    hybridTheory: { ...theory, harmony: { ...theory.harmony, voicing: 'close' } },
+    authoredPitch: { voicing: 'chord', register: 48 },
+  } as PhraseContext;
+  const state = createPhraseState();
+  const low = realizeMidi(context, 0, 2, state);
+  const high = realizeMidi({ ...context, authoredPitch: { voicing: 'chord', register: 72 } }, 1, 2, state);
+  assert.ok(Math.min(...low) < 60);
+  assert.ok(Math.min(...high) >= 72, 'a written upper chord cannot inherit the preceding lower voicing');
+  assert.deepEqual(new Set(high.map(midi => midi % 12)), new Set(low.map(midi => midi % 12)),
+    'the register change preserves the written chord quality');
+});
+
 test('sustained musicians retain each authored attack and whole-bar durations follow meter', () => {
   const compile = (meter: string) => {
     const sheet = makeSheet('jazz');
@@ -137,6 +153,13 @@ test('grid conversion retains all tuplets and fine subdivisions', () => {
   const dense = toBar(Array.from({ length: 30 }, (_, i) => i), undefined, undefined, 30, 0);
   assert.equal(dense.onsets.length, 30);
   assert.equal(new Set(dense.onsets).size, 30);
+});
+
+test('grid filtering keeps each surviving onset attached to its authored accent and gate', () => {
+  const bar = toBar([-1, 3, 15], [.1, .82, .2], [2, 5, 7], 16, 0);
+  assert.deepEqual(bar.onsets, [3, 15]);
+  assert.deepEqual(bar.accents, [.82, .2]);
+  assert.deepEqual(bar.durations, [5, 7]);
 });
 
 test('final tuning follows phrase-shaped pitches and chord/phrase attacks stay coherent', () => {
@@ -168,5 +191,22 @@ test('section sound identity and per-part pitch bends reach sample planning dire
   const attack = (plan: ReturnType<typeof compileSamplePlan>) => plan.events.find(event => event.type === 'on');
   assert.deepEqual(attack(withContext)?.type === 'on' ? attack(withContext)?.patch : undefined,
     attack(explicitContext)?.type === 'on' ? attack(explicitContext)?.patch : undefined);
+  assert.equal(attack(withContext)?.type === 'on' ? attack(withContext)?.gain : undefined,
+    attack(explicitContext)?.type === 'on' ? attack(explicitContext)?.gain : undefined,
+    'a section or role change uses its own source gain as well as its patch');
   assert.ok(withContext.events.some(event => event.type === 'bend' && event.cents > 0), 'the part keeps its authored bend trajectory');
+});
+
+test('sample-key selection preserves fractional MIDI pitches and tuning offsets', () => {
+  for (const frequency of [false, true]) {
+    const authored = { ...note(0, 60.5), tuningCents: 23,
+      ...(frequency ? { frequencyHz: 440 * 2 ** ((60.5 - 69) / 12 + 23 / 1200) } : {}) };
+    const plan = compileSamplePlan(samplePerformance('piano', [authored]),
+      { trackInstruments: new Map([['keys', 'piano']]), worldId: 'folk' });
+    const attack = plan.events.find(event => event.type === 'on');
+    assert.ok(attack?.type === 'on');
+    assert.equal(attack.key, 61);
+    assert.ok(Math.abs(attack.cents - -27) < 1e-8,
+      'the sampled key retains the written half-semitone and additional tuning');
+  }
 });

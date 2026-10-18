@@ -171,6 +171,17 @@ test('scene compilation is deterministic, honours section role/solo changes and 
   assert.match(formatMixTrace(perf.mixTimeline!), /sound.mix.ambience.roomSize/);
 });
 
+test('mix planning rejects malformed note timing instead of dropping the part from analysis', () => {
+  const sheet = makeSheet('tango', 'tango-troilo');
+  const performance = arrangeBand(sheet);
+  const notes = performance.notes.slice();
+  notes[0] = { ...notes[0], time: Number.NaN };
+  assert.throws(
+    () => compileMixSceneTimeline(sheet, { ...performance, notes }),
+    /Invalid mix note timing/,
+  );
+});
+
 test('catalog styles have calibrated mixes and explicitly disabled mix contracts produce neutral track automation', () => {
   const style = resolveStyle({ genreId: 'jazz', styleId: Object.values(ALL_STYLES_BY_ID).find(s => s.primaryGenre === 'jazz')!.id });
   assert.equal(style.resolvedMix.contract.enabled, true);

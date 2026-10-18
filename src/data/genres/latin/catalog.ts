@@ -64,17 +64,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "cumbia guiro and bass two-beat interlock voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "cumbia guiro and bass two-beat interlock voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia guiro and bass two-beat interlock accordion statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "cumbia guiro and bass two-beat interlock accordion cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia guiro and bass two-beat interlock guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "cumbia guiro and bass two-beat interlock guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia guiro and bass two-beat interlock low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "cumbia guiro and bass two-beat interlock bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia guiro and bass two-beat interlock cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "cumbia guiro and bass two-beat interlock cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "cumbia guiro and bass two-beat interlock guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "cumbia guiro and bass two-beat interlock guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "cumbia guiro and bass two-beat interlock guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -161,17 +155,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "merengue tambora guira and bass drive voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "merengue tambora guira and bass drive voice cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "merengue tambora guira and bass drive accordion statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "merengue tambora guira and bass drive accordion cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "merengue tambora guira and bass drive piano accompaniment", "role": "harmony", "onsets": [0, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "merengue tambora guira and bass drive piano cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "merengue tambora guira and bass drive low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "merengue tambora guira and bass drive bass cadence fill", "role": "bass", "onsets": [1.0, 1.5, 1.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "merengue tambora guira and bass drive tambora pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75], "instruments": ["tambora"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "merengue tambora guira and bass drive tambora cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tambora"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "merengue tambora guira and bass drive guira pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75], "instruments": ["guira"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "merengue tambora guira and bass drive guira cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["guira"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "merengue tambora guira and bass drive guira pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75], "instruments": ["guira"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -256,15 +244,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "vallenato accordion and guacharaca answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "vallenato accordion and guacharaca answer voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "vallenato accordion and guacharaca answer accordion statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "vallenato accordion and guacharaca answer accordion cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "vallenato accordion and guacharaca answer low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "vallenato accordion and guacharaca answer bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "vallenato accordion and guacharaca answer guacharaca pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guacharaca"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "vallenato accordion and guacharaca answer guacharaca cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guacharaca"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "vallenato accordion and guacharaca answer bongos pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bongos"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "vallenato accordion and guacharaca answer bongos cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bongos"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "vallenato accordion and guacharaca answer bongos pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["bongos"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -345,17 +328,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "bolero sustained vocal with guitar arpeggio voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "bolero sustained vocal with guitar arpeggio voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero sustained vocal with guitar arpeggio guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "bolero sustained vocal with guitar arpeggio guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero sustained vocal with guitar arpeggio piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "bolero sustained vocal with guitar arpeggio piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero sustained vocal with guitar arpeggio low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "bolero sustained vocal with guitar arpeggio upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bolero sustained vocal with guitar arpeggio bongos pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["bongos"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "bolero sustained vocal with guitar arpeggio bongos cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bongos"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "bolero sustained vocal with guitar arpeggio maracas pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["maracas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "bolero sustained vocal with guitar arpeggio maracas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["maracas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "bolero sustained vocal with guitar arpeggio maracas pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["maracas"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -442,15 +419,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "chicha electric guitar melody and cumbia pulse guitar statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "chicha electric guitar melody and cumbia pulse guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "chicha electric guitar melody and cumbia pulse guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "chicha electric guitar melody and cumbia pulse guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "chicha electric guitar melody and cumbia pulse low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "chicha electric guitar melody and cumbia pulse bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "chicha electric guitar melody and cumbia pulse cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "chicha electric guitar melody and cumbia pulse cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "chicha electric guitar melody and cumbia pulse guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "chicha electric guitar melody and cumbia pulse guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Chicha organ offbeat chord support", "role": "harmony", "instruments": ["organ"], "onsets": [0.5, 1.5, 2.5, 3.5], "durations": [0.3, 0.3, 0.3, 0.3], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
@@ -533,17 +505,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "sonidera keyboard hook and cumbia guiro voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sonidera keyboard hook and cumbia guiro voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sonidera keyboard hook and cumbia guiro synth statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sonidera keyboard hook and cumbia guiro synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sonidera keyboard hook and cumbia guiro synth accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "sonidera keyboard hook and cumbia guiro synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sonidera keyboard hook and cumbia guiro low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "sonidera keyboard hook and cumbia guiro bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sonidera keyboard hook and cumbia guiro kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "sonidera keyboard hook and cumbia guiro drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "sonidera keyboard hook and cumbia guiro guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sonidera keyboard hook and cumbia guiro guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "sonidera keyboard hook and cumbia guiro kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 4.0, 4, 4.5, 5.0, 5, 5.5, 6.0, 6, 6.5, 7.0, 7, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "rim", "hat", "hat", "kick", "hat", "hat", "rim", "hat", "hat", "kick", "hat", "hat", "rim", "hat", "hat", "kick", "hat", "hat", "rim", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.65, 0.28, 0.42, 0.92, 0.28, 0.42, 0.65, 0.28, 0.42, 0.92, 0.28, 0.42, 0.65, 0.28, 0.42, 0.92, 0.28, 0.42, 0.65, 0.28], "articulation": "accent", "shortName": "Sonidera cumbia kit", "description": "Practice this two-bar sonidera cumbia kit. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "sonidera keyboard hook and cumbia guiro drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "hat", "hat", "rim", "hat"], "accents": [0.5, 0.92, 0.5, 0.5, 0.5, 0.5], "shortName": "Sonidera cumbia close", "description": "Close with the last two beats of the sonidera cumbia kit; keep the spaces clear and land the next phrase together."},
+        {"name": "sonidera keyboard hook and cumbia guiro guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -630,17 +597,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "tropical horn response over dance percussion voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tropical horn response over dance percussion voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tropical horn response over dance percussion accordion statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tropical horn response over dance percussion accordion cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tropical horn response over dance percussion guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "tropical horn response over dance percussion guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tropical horn response over dance percussion low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "tropical horn response over dance percussion bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "tropical horn response over dance percussion cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tropical horn response over dance percussion cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "tropical horn response over dance percussion guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tropical horn response over dance percussion guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Tropical horn answer after the vocal call", "role": "lead", "instruments": ["horn-section"], "onsets": [2, 2.75, 3.5], "durations": [0.4, 0.4, 0.35], "articulation": "staccato"},
         {"name": "Tropical piano syncopated chord support", "role": "harmony", "instruments": ["piano"], "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "durations": [0.35, 0.35, 0.35, 0.35, 0.2, 0.35], "articulation": "staccato"},
         {"name": "Tropical conga open tones and slap", "role": "percussion", "instruments": ["congas"], "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "hits": ["mute", "mute", "slap", "mute", "mute", "mute", "open", "open"], "articulation": "accent"},
@@ -731,17 +692,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Latin pop vocal hook and acoustic syncopation voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Latin pop vocal hook and acoustic syncopation voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin pop vocal hook and acoustic syncopation accordion statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Latin pop vocal hook and acoustic syncopation accordion cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin pop vocal hook and acoustic syncopation guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Latin pop vocal hook and acoustic syncopation guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin pop vocal hook and acoustic syncopation low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "Latin pop vocal hook and acoustic syncopation bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin pop vocal hook and acoustic syncopation cumbia-drum pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Latin pop vocal hook and acoustic syncopation cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Latin pop vocal hook and acoustic syncopation guiro pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Latin pop vocal hook and acoustic syncopation guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Latin pop vocal hook and acoustic syncopation guiro pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -828,17 +783,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Latin funk guitar scratch and percussion break voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Latin funk guitar scratch and percussion break voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin funk guitar scratch and percussion break accordion statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Latin funk guitar scratch and percussion break accordion cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin funk guitar scratch and percussion break guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Latin funk guitar scratch and percussion break guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin funk guitar scratch and percussion break low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Latin funk guitar scratch and percussion break bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin funk guitar scratch and percussion break cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Latin funk guitar scratch and percussion break cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Latin funk guitar scratch and percussion break guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Latin funk guitar scratch and percussion break guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Latin funk guitar scratch and percussion break guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -925,17 +874,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "cumbia villera keyboard riff and clipped bass voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "cumbia villera keyboard riff and clipped bass voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia villera keyboard riff and clipped bass synth statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "cumbia villera keyboard riff and clipped bass synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia villera keyboard riff and clipped bass synth accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "cumbia villera keyboard riff and clipped bass synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cumbia villera keyboard riff and clipped bass low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "cumbia villera keyboard riff and clipped bass bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "cumbia villera keyboard riff and clipped bass kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "cumbia villera keyboard riff and clipped bass drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "cumbia villera keyboard riff and clipped bass guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "cumbia villera keyboard riff and clipped bass guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "cumbia villera keyboard riff and clipped bass kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5, 4.0, 4, 4.5, 5.0, 5, 5.5, 6.0, 6, 6.5, 7.0, 7, 7.5, 7.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "kick", "hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat", "kick"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.42, 0.92, 0.28, 0.42, 0.85, 0.28, 0.92], "articulation": "accent", "shortName": "Villera dance kit", "description": "Practice this two-bar villera dance kit. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "cumbia villera keyboard riff and clipped bass drums cadence fill", "role": "percussion", "onsets": [2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "kick"], "accents": [0.5, 0.92, 0.5, 0.5, 0.85, 0.5, 0.92], "shortName": "Villera dance close", "description": "Close with the last two beats of the villera dance kit; keep the spaces clear and land the next phrase together."},
+        {"name": "cumbia villera keyboard riff and clipped bass guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -1022,17 +966,12 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "electrocumbia synth hook and electronic cumbia beat voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "electrocumbia synth hook and electronic cumbia beat voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "electrocumbia synth hook and electronic cumbia beat synth statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "electrocumbia synth hook and electronic cumbia beat synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "electrocumbia synth hook and electronic cumbia beat synth accompaniment", "role": "harmony", "onsets": [0.75, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "electrocumbia synth hook and electronic cumbia beat synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "electrocumbia synth hook and electronic cumbia beat low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "electrocumbia synth hook and electronic cumbia beat bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "electrocumbia synth hook and electronic cumbia beat kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "electrocumbia synth hook and electronic cumbia beat drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "electrocumbia synth hook and electronic cumbia beat guiro pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "electrocumbia synth hook and electronic cumbia beat guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "electrocumbia synth hook and electronic cumbia beat kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5, 4, 4.5, 5, 5, 5.5, 6, 6.5, 7, 7, 7.5], "instruments": ["drums"], "hits": ["kick", "hat", "kick", "snare", "hat", "kick", "hat", "kick", "snare", "hat", "kick", "hat", "kick", "snare", "hat", "kick", "hat", "kick", "snare", "hat"], "cycleLength": 2, "accents": [0.92, 0.28, 0.92, 0.85, 0.28, 0.92, 0.28, 0.92, 0.85, 0.28, 0.92, 0.28, 0.92, 0.85, 0.28, 0.92, 0.28, 0.92, 0.85, 0.28], "articulation": "accent", "shortName": "Electrocumbia machine pulse", "description": "Practice this two-bar electrocumbia machine pulse. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "electrocumbia synth hook and electronic cumbia beat drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["kick", "hat", "kick", "snare", "hat"], "accents": [0.92, 0.5, 0.92, 0.85, 0.5], "shortName": "Electrocumbia machine close", "description": "Close with the last two beats of the electrocumbia machine pulse; keep the spaces clear and land the next phrase together."},
+        {"name": "electrocumbia synth hook and electronic cumbia beat guiro pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -1119,17 +1058,11 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Latin fusion extended comping and percussion exchange voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Latin fusion extended comping and percussion exchange voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin fusion extended comping and percussion exchange accordion statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["accordion"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Latin fusion extended comping and percussion exchange accordion cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["accordion"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin fusion extended comping and percussion exchange guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Latin fusion extended comping and percussion exchange guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin fusion extended comping and percussion exchange low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Latin fusion extended comping and percussion exchange bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Latin fusion extended comping and percussion exchange cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Latin fusion extended comping and percussion exchange cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Latin fusion extended comping and percussion exchange guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Latin fusion extended comping and percussion exchange guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Latin fusion extended comping and percussion exchange guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

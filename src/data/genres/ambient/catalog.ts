@@ -121,7 +121,6 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "continuous drone with sparse overtones synth statement", "role": "lead", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "continuous drone with sparse overtones synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "continuous drone with sparse overtones synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -185,7 +184,6 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "dark low drones and isolated metallic attacks synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "dark low drones and isolated metallic attacks synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "dark low drones and isolated metallic attacks synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -249,9 +247,10 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "acoustic harmonics over breathing texture guitar statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "acoustic harmonics over breathing texture guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "acoustic harmonics over breathing texture flute accompaniment", "role": "texture", "onsets": [0], "instruments": ["flute"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "acoustic harmonics over breathing texture string-ensemble accompaniment", "role": "texture", "onsets": [0], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
+        {"name": "acoustic harmonics over breathing texture flute answering phrase", "shortName": "Flute variation", "role": "texture", "onsets": [1.5, 3.0], "instruments": ["flute"], "cycleLength": 1, "durations": [0.9, 0.7], "accents": [0.58, 0.78], "articulation": "tenuto", "arrangementVariation": true, "sectionUsage": ["verse", "chorus", "bridge", "solo"], "description": "Answer the guitar's open harmonic phrase with two gently separated flute tones; keep the second tone lighter and leave the next downbeat clear."},
+        {"name": "acoustic harmonics over breathing texture string-ensemble accompaniment", "role": "texture", "onsets": [0], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
+        {"name": "acoustic harmonics over breathing texture string-ensemble suspended response", "shortName": "String Ensemble variation", "role": "texture", "onsets": [0.5, 2.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [1.1, 1.0], "accents": [0.54, 0.7], "articulation": "slow-attack", "arrangementVariation": true, "sectionUsage": ["verse", "chorus", "bridge", "solo"], "description": "Let two soft string entrances answer around the guitar instead of holding one flat pad; overlap them gently and preserve the breathing gaps."}
       ],
       "instrumentTechniques": {
         "guitar": ["legato", "harmonic", "glissando", "legato-single-note", "accent", "staccato", "vibrato"],
@@ -319,7 +318,6 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "quiet piano motif with long string tails piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "quiet piano motif with long string tails piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "quiet piano motif with long string tails synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
         {"name": "quiet piano motif with long string tails string-ensemble accompaniment", "role": "texture", "onsets": [0], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
@@ -390,10 +388,8 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "glitch fragments separated by silence piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "glitch fragments separated by silence piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "glitch fragments separated by silence synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "glitch fragments separated by silence sampler pulse", "role": "percussion", "onsets": [0, 0.75, 1, 1.75, 2.5, 3, 3.75], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "glitch fragments separated by silence sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "glitch fragments separated by silence sampler pulse", "role": "percussion", "onsets": [0, 0.75, 1, 1.75, 2.5, 3, 3.75], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "piano": ["legato", "accent", "staccato", "tenuto"],
@@ -461,7 +457,6 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "independent repeating processes synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "independent repeating processes synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "independent repeating processes synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -525,7 +520,6 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "long orchestral swell and motif return piano statement", "role": "lead", "onsets": [0], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "long orchestral swell and motif return piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "long orchestral swell and motif return synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
         {"name": "long orchestral swell and motif return string-ensemble accompaniment", "role": "texture", "onsets": [0], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
@@ -598,13 +592,10 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "soft downtempo beat under evolving pads piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "soft downtempo beat under evolving pads piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "soft downtempo beat under evolving pads rhodes accompaniment", "role": "harmony", "onsets": [0.5, 2.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "soft downtempo beat under evolving pads rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "soft downtempo beat under evolving pads low anchor", "role": "bass", "onsets": [0, 1.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [2, 2, 0.75]},
-        {"name": "soft downtempo beat under evolving pads synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "soft downtempo beat under evolving pads kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "soft downtempo beat under evolving pads drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
+        {"name": "soft downtempo beat under evolving pads kit", "role": "percussion", "onsets": [0, 0, 0.75, 1.5, 1.75, 2, 3, 4, 4, 4.75, 5.5, 6, 6.5, 7], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "kick", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "kick", "hat"], "cycleLength": 2, "accents": [0.42, 0.92, 0.28, 0.28, 0.92, 0.85, 0.42, 0.42, 0.92, 0.28, 0.28, 0.85, 0.92, 0.42], "articulation": "accent", "shortName": "Downtempo half-time space", "description": "Practice this two-bar downtempo half-time space. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "soft downtempo beat under evolving pads drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["snare", "kick", "hat"], "accents": [0.85, 0.92, 0.5], "shortName": "Downtempo half-time close", "description": "Close with the last two beats of the downtempo half-time space; keep the spaces clear and land the next phrase together."},
         {"name": "soft downtempo beat under evolving pads synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {

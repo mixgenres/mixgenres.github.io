@@ -62,15 +62,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "huayno duple dance and quena reply quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "huayno duple dance and quena reply quena cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "huayno duple dance and quena reply siku statement", "role": "lead", "onsets": [0], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "huayno duple dance and quena reply siku cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "huayno duple dance and quena reply charango accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.22, 0.22, 0.22, 0.22], "articulation": "staccato"},
-        {"name": "huayno duple dance and quena reply charango cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "huayno duple dance and quena reply guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "huayno duple dance and quena reply guitar cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "huayno duple dance and quena reply bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "huayno duple dance and quena reply bombo-andino cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "huayno duple dance and quena reply bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],
@@ -225,21 +220,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "sanjuanito even duple flute and charango siku cadence fill",
-          "role": "lead",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "siku"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "sanjuanito even duple flute and charango charango accompaniment",
           "role": "harmony",
           "onsets": [
@@ -261,21 +241,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "sanjuanito even duple flute and charango charango cadence fill",
-          "role": "harmony",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "charango"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "sanjuanito even duple flute and charango guitar accompaniment",
           "role": "harmony",
           "onsets": [
@@ -291,21 +256,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.4
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "sanjuanito even duple flute and charango guitar cadence fill",
-          "role": "harmony",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "guitar"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "sanjuanito even duple flute and charango bombo-andino pulse",
@@ -327,21 +277,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.86,
             0.4
           ]
-        },
-        {
-          "name": "sanjuanito even duple flute and charango bombo-andino cadence fill",
-          "role": "percussion",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "bombo-andino"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -423,15 +358,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "saya drum and vocal response quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "saya drum and vocal response quena cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "saya drum and vocal response siku statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "saya drum and vocal response siku cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "saya drum and vocal response charango accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.25, 3], "instruments": ["charango"], "cycleLength": 1, "durations": [0.24, 0.24, 0.24, 0.24, 0.24], "articulation": "staccato"},
-        {"name": "saya drum and vocal response charango cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "saya drum and vocal response guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "saya drum and vocal response guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "saya drum and vocal response bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "saya drum and vocal response bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Saya vocal call before the instrumental response", "role": "lead", "instruments": ["voice"], "onsets": [0, 0.5, 1], "durations": [0.45, 0.45, 0.8], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -552,21 +482,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "accent"
         },
         {
-          "name": "tinku heavy duple accents quena cadence fill",
-          "role": "lead",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "quena"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "tinku heavy duple accents siku statement",
           "role": "lead",
           "onsets": [
@@ -580,21 +495,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "tinku heavy duple accents siku cadence fill",
-          "role": "lead",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "siku"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "tinku heavy duple accents charango accompaniment",
@@ -616,21 +516,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "tinku heavy duple accents charango cadence fill",
-          "role": "harmony",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "charango"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "tinku heavy duple accents guitar accompaniment",
           "role": "harmony",
           "onsets": [
@@ -646,21 +531,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.4
           ],
           "articulation": "staccato"
-        },
-        {
-          "name": "tinku heavy duple accents guitar cadence fill",
-          "role": "harmony",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "guitar"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "tinku heavy duple accents bombo-andino pulse",
@@ -820,21 +690,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "legato"
         },
         {
-          "name": "carnavalito charango dance ostinato quena cadence fill",
-          "role": "lead",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "quena"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "carnavalito charango dance ostinato siku statement",
           "role": "lead",
           "onsets": [
@@ -848,21 +703,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.45
           ],
           "articulation": "legato"
-        },
-        {
-          "name": "carnavalito charango dance ostinato siku cadence fill",
-          "role": "lead",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "siku"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
         },
         {
           "name": "carnavalito charango dance ostinato charango accompaniment",
@@ -920,21 +760,6 @@ export const GENRE_PACK: GenrePackInput = {
           "articulation": "staccato"
         },
         {
-          "name": "carnavalito charango dance ostinato guitar cadence fill",
-          "role": "harmony",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "guitar"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "ornament"
-        },
-        {
           "name": "carnavalito charango dance ostinato bombo-andino pulse",
           "role": "percussion",
           "onsets": [
@@ -952,21 +777,6 @@ export const GENRE_PACK: GenrePackInput = {
             0.68,
             0.44
           ]
-        },
-        {
-          "name": "carnavalito charango dance ostinato bombo-andino cadence fill",
-          "role": "percussion",
-          "onsets": [
-            1,
-            1.5,
-            1.75
-          ],
-          "instruments": [
-            "bombo-andino"
-          ],
-          "cycleLength": 1,
-          "phraseEnd": true,
-          "articulation": "roll"
         }
       ],
       "instrumentTechniques": {
@@ -1048,15 +858,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "nueva canción acoustic verse and instrumental reply quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "nueva canción acoustic verse and instrumental reply quena cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "nueva canción acoustic verse and instrumental reply siku statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "nueva canción acoustic verse and instrumental reply siku cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "nueva canción acoustic verse and instrumental reply charango accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 3.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.3, 0.3, 0.3, 0.3], "articulation": "staccato"},
-        {"name": "nueva canción acoustic verse and instrumental reply charango cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "nueva canción acoustic verse and instrumental reply guitar accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "nueva canción acoustic verse and instrumental reply guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "nueva canción acoustic verse and instrumental reply bombo-andino pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "nueva canción acoustic verse and instrumental reply bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "nueva canción acoustic verse and instrumental reply bombo-andino pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],
@@ -1139,15 +944,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Andean flute hook over digital cumbia shuffle quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Andean flute hook over digital cumbia shuffle quena cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Andean flute hook over digital cumbia shuffle siku statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Andean flute hook over digital cumbia shuffle siku cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Andean flute hook over digital cumbia shuffle charango accompaniment", "role": "harmony", "onsets": [0.75, 2.25, 3.25], "instruments": ["charango"], "cycleLength": 1, "durations": [0.3, 0.3, 0.3], "articulation": "staccato"},
-        {"name": "Andean flute hook over digital cumbia shuffle charango cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Andean flute hook over digital cumbia shuffle guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Andean flute hook over digital cumbia shuffle guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Andean flute hook over digital cumbia shuffle bombo-andino pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Andean flute hook over digital cumbia shuffle bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Andean flute hook over digital cumbia shuffle syncopated bass", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["bass"], "cycleLength": 1, "durations": [0.8, 0.35, 0.7, 0.35], "articulations": ["accent", "staccato", "accent", "staccato"], "arrangementVariation": true},
         {"name": "Andean flute hook over digital cumbia shuffle kit backbeat", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "hat", "snare", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.9, 0.35, 0.4, 0.8, 0.7, 0.35, 0.4, 0.8], "arrangementVariation": true},
         {"name": "Andean flute hook over digital cumbia shuffle synth chord jab", "role": "texture", "onsets": [0.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.35, 0.35], "articulation": "staccato", "arrangementVariation": true},

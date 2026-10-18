@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { addCatalogSupportCells } from '../_shared/catalogSupport';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   "id": "korean",
   "name": "Korean",
   "family": "Korea",
@@ -61,11 +62,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "jeongak long heterophonic melody and slow jangdan haegeum statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["haegeum"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "jeongak long heterophonic melody and slow jangdan haegeum cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["haegeum"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jeongak long heterophonic melody and slow jangdan gayageum accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["gayageum"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "jeongak long heterophonic melody and slow jangdan gayageum cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["gayageum"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "jeongak long heterophonic melody and slow jangdan janggu pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "jeongak long heterophonic melody and slow jangdan janggu cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["janggu"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "jeongak long heterophonic melody and slow jangdan janggu pulse", "role": "percussion", "onsets": [0, 2.75], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "haegeum": ["continuous-pitch", "vibrato", "ornament", "glissando"],
@@ -133,9 +131,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "pansori solo voice and buk cues voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "pansori solo voice and buk cues voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "pansori solo voice and buk cues buk pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["buk"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "pansori solo voice and buk cues buk cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["buk"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "pansori solo voice and buk cues buk pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["buk"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "vibrato", "staccato", "legato"],
@@ -198,9 +194,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "sanjo slow to fast ornamented solo and janggu gayageum statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["gayageum"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sanjo slow to fast ornamented solo and janggu gayageum cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["gayageum"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sanjo slow to fast ornamented solo and janggu janggu pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sanjo slow to fast ornamented solo and janggu janggu cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["janggu"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "sanjo slow to fast ornamented solo and janggu janggu pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "gayageum": ["vibrato", "bend", "glissando", "plucked-ornament"],
@@ -264,9 +258,7 @@ export const GENRE_PACK: GenrePackInput = {
       "cells": [
         {"name": "samulnori four percussion interlocking jangdan gongs statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["gongs"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "samulnori four percussion interlocking jangdan janggu pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "samulnori four percussion interlocking jangdan janggu cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["janggu"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "samulnori four percussion interlocking jangdan buk pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["buk"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "samulnori four percussion interlocking jangdan buk cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["buk"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "samulnori four percussion interlocking jangdan gongs pulse", "role": "percussion", "onsets": [2.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
@@ -340,11 +332,8 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "minyo folk vocal response and janggu cycle voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "minyo folk vocal response and janggu cycle voice cadence fill", "role": "lead", "onsets": [2.0, 2.5, 2.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "minyo folk vocal response and janggu cycle gayageum accompaniment", "role": "harmony", "onsets": [0.5, 1, 2, 2.5], "instruments": ["gayageum"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "minyo folk vocal response and janggu cycle gayageum cadence fill", "role": "harmony", "onsets": [2.0, 2.5, 2.75], "instruments": ["gayageum"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "minyo folk vocal response and janggu cycle janggu pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "minyo folk vocal response and janggu cycle janggu cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["janggu"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "minyo folk vocal response and janggu cycle janggu pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["janggu"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "vibrato", "staccato", "legato"],
@@ -379,4 +368,8 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+}, [
+  { instrumentId: 'flute', role: 'lead' },
+  { instrumentId: 'violin', role: 'lead' },
+  { instrumentId: 'cello', role: 'harmony' },
+]);

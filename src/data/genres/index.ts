@@ -302,10 +302,7 @@ function disambiguateChoiceLabels(patterns: MusicalPattern[]): MusicalPattern[] 
         .map(pattern => normalized(labels.get(pattern.id) ?? pattern.name)));
       const baseWords = new Set(normalized(baseLabel).match(/[a-z0-9]+/g) ?? []);
       const descriptorWords = duplicates.map(pattern => new Set(sourceWords(pattern).map(normalized)));
-      const ordered = [...duplicates].sort((a, b) => {
-        const studyOrder: Record<string, number> = { reduction: 0, answer: 1, variation: 2, technique: 3 };
-        return (studyOrder[a.pedagogicalStudy ?? ''] ?? -1) - (studyOrder[b.pedagogicalStudy ?? ''] ?? -1);
-      });
+      const ordered = duplicates;
       const used = new Set<string>();
 
       for (const pattern of ordered) {
@@ -314,8 +311,6 @@ function disambiguateChoiceLabels(patterns: MusicalPattern[]): MusicalPattern[] 
         if (used.has(normalized(candidate)) || (pattern !== ordered[0] && normalized(candidate) === normalized(baseLabel))) {
           const instrument = instrumentLabel(pattern);
           const shortInstrument = instrument.split(/\s+/).at(-1) ?? instrument;
-          const studyWord: Record<string, string> = { reduction: 'basics', answer: 'reply', variation: 'variation', technique: 'technique' };
-          const studyCandidate = pattern.pedagogicalStudy ? `${shortInstrument} ${studyWord[pattern.pedagogicalStudy]}` : '';
           const tokens = sourceWords(pattern).filter(word => {
             const key = normalized(word);
             if (key.length < 3 || stopWords.has(key) || baseWords.has(key)) return false;
@@ -324,7 +319,7 @@ function disambiguateChoiceLabels(patterns: MusicalPattern[]): MusicalPattern[] 
             return descriptorWords.filter(words => words.has(key)).length === 1;
           });
           const ordinal = pattern.name.match(/variation\s+(\d+)/i)?.[1];
-          const options = [...tokens.map(word => `${instrument} ${title(word)}`), studyCandidate,
+          const options = [...tokens.map(word => `${instrument} ${title(word)}`),
             ...(ordinal ? [`${shortInstrument} option ${ordinal}`] : []), `${shortInstrument} option 2`, `${shortInstrument} option 3`]
             .filter(Boolean);
           candidate = options.find(option => !used.has(normalized(option))

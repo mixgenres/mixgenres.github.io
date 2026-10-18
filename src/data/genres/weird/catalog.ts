@@ -61,9 +61,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "deconstructed interrupted pulse and isolated attacks piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "deconstructed interrupted pulse and isolated attacks piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "deconstructed interrupted pulse and isolated attacks sampler accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 3.25], "instruments": ["sampler"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "deconstructed interrupted pulse and isolated attacks sampler cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "deconstructed interrupted pulse and isolated attacks synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -133,7 +131,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "musique concrete sparse sample montage sampler statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["sampler"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "musique concrete sparse sample montage sampler cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "musique concrete sparse sample montage sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -194,8 +191,7 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "prepared piano dry repeated figures and metallic response piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "prepared piano dry repeated figures and metallic response piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
+        {"name": "prepared piano dry repeated figures and metallic response piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "piano": ["staccato", "accent", "legato", "tenuto"]
@@ -253,7 +249,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "glitch short gated fragments and displaced clicks synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "glitch short gated fragments and displaced clicks synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "glitch short gated fragments and displaced clicks sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -318,7 +313,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "microsound tiny isolated attacks and long gaps synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "microsound tiny isolated attacks and long gaps synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "microsound tiny isolated attacks and long gaps sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -383,7 +377,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "generative independent cycle entries synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "generative independent cycle entries synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "generative independent cycle entries sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -449,9 +442,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "phase repeating ostinati with displaced entrances piano statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "phase repeating ostinati with displaced entrances piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "phase repeating ostinati with displaced entrances sampler accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["sampler"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "phase repeating ostinati with displaced entrances sampler cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "phase repeating ostinati with displaced entrances synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -521,7 +512,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "microtonal sustained inflected pitch cells synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "microtonal sustained inflected pitch cells synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "microtonal sustained inflected pitch cells sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -587,9 +577,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "free improvisation irregular calls and silence piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "free improvisation irregular calls and silence piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "free improvisation irregular calls and silence sampler accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["sampler"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "free improvisation irregular calls and silence sampler cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "free improvisation irregular calls and silence synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -659,7 +647,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "noise dense attacks and abrupt rests synth statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "noise dense attacks and abrupt rests synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "noise dense attacks and abrupt rests sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -724,7 +711,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "drone sustained resonance and overtone change synth statement", "role": "lead", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "drone sustained resonance and overtone change synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "drone sustained resonance and overtone change sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -789,7 +775,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "spectral slow harmonic resonance and timbral swell synth statement", "role": "lead", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "spectral slow harmonic resonance and timbral swell synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "spectral slow harmonic resonance and timbral swell sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -855,13 +840,10 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "no wave jagged guitar and dry drum interruptions voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "no wave jagged guitar and dry drum interruptions voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "no wave jagged guitar and dry drum interruptions guitar statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "no wave jagged guitar and dry drum interruptions guitar cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "no wave jagged guitar and dry drum interruptions low anchor", "role": "bass", "onsets": [0, 1.75, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "no wave jagged guitar and dry drum interruptions bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "no wave jagged guitar and dry drum interruptions kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "no wave jagged guitar and dry drum interruptions drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "no wave jagged guitar and dry drum interruptions kit", "role": "percussion", "onsets": [0, 0, 0.5, 0.75, 1.25, 2, 2.5, 3.25, 3.5, 4, 4.75, 5, 5.75, 6, 6.5, 7.25, 7.5], "instruments": ["drums"], "hits": ["kick", "ride", "ride", "snare", "kick", "ride", "snare", "ride", "kick", "ride", "kick", "snare", "ride", "ride", "kick", "snare", "ride"], "cycleLength": 2, "accents": [0.92, 0.5, 0.5, 0.85, 0.92, 0.5, 0.85, 0.5, 0.92, 0.5, 0.92, 0.85, 0.5, 0.5, 0.92, 0.85, 0.5], "articulation": "accent", "shortName": "No-wave displaced attacks", "description": "Practice this two-bar no-wave displaced attacks. Keep the strong anchors clear, play the smaller strokes lightly, and leave its written gaps open. Original ensemble study, not a recording transcription."},
+        {"name": "no wave jagged guitar and dry drum interruptions drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3.25, 3.5], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "accent", "hits": ["ride", "kick", "snare", "ride"], "accents": [0.5, 0.92, 0.85, 0.5], "shortName": "No-wave displaced close", "description": "Close with the last two beats of the no-wave displaced attacks; keep the spaces clear and land the next phrase together."}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -937,13 +919,9 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "Zeuhl repeated bass and chanted angular figures voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Zeuhl repeated bass and chanted angular figures voice cadence fill", "role": "lead", "onsets": [2.5, 3.0, 3.25], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Zeuhl repeated bass and chanted angular figures piano accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Zeuhl repeated bass and chanted angular figures piano cadence fill", "role": "harmony", "onsets": [2.5, 3.0, 3.25], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Zeuhl repeated bass and chanted angular figures low anchor", "role": "bass", "onsets": [0, 1.5, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "Zeuhl repeated bass and chanted angular figures bass cadence fill", "role": "bass", "onsets": [2.5, 3.0, 3.25], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Zeuhl repeated bass and chanted angular figures kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
-        {"name": "Zeuhl repeated bass and chanted angular figures drums cadence fill", "role": "percussion", "onsets": [2.5, 3.0, 3.25], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "Zeuhl repeated bass and chanted angular figures kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1017,9 +995,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "polymetric displaced repeating accents piano statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "polymetric displaced repeating accents piano cadence fill", "role": "lead", "onsets": [2.5, 3.0, 3.25], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "polymetric displaced repeating accents sampler accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["sampler"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "polymetric displaced repeating accents sampler cadence fill", "role": "harmony", "onsets": [2.5, 3.0, 3.25], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "polymetric displaced repeating accents synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [3.5], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -1089,7 +1065,6 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "circuit bent unstable sample pulses and stops synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "circuit bent unstable sample pulses and stops synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "circuit bent unstable sample pulses and stops sampler accompaniment", "role": "texture", "onsets": [0], "instruments": ["sampler"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
