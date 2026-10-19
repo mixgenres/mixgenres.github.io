@@ -452,7 +452,36 @@
       ],
       "samples": 272,
       "format": "sf3"
+    },
+    "regional": {
+      "bytes": 463191,
+      "unpackedBytes": 530974,
+      "sha256": "14beada2d8d8e5168c87826fc722460e5a491f88fb80d8ada48e3fa8c017aeae",
+      "unpackedSha256": "e71b8b6f898743e8efbc95a4e365cb47d9b4c3d3649ad22c4c6d2d5445ada4c6",
+      "presets": [
+        "0:76:0",
+        "0:76:1",
+        "0:76:2",
+        "0:76:3"
+      ],
+      "samples": 20,
+      "format": "sf3"
     }
+  },
+  "regionalSourceSha256": {
+    "Quena_ScaleTounged_Gmaj": "4a9c7f66cdd76311ba632513bb4ccce47c1d850df81720c9b9e7e5f1ddb600ce",
+    "Erhu_Vibrato_Regular_A4_BPM100": "827a01ad57d6c701f2e8271199c673ec84d0d8c462bd46ab3c2dd45854d61550",
+    "Erhu_Vibrato_Regular_E5_BPM100": "e2e32d7a6747d40f69a9a9c29e02b1840d15dd23b2c8d20c54e58244899cc95e",
+    "PersianTar_OneShot_Forte_C3": "a536d15f53865da8fef066cc2a861bf4566be60e0088f0e04ffb23981e910c5e",
+    "PersianTar_OneShot_Forte_F3": "ee30332e43c46494b966d92d69ec1e3d9acd2c2fb4ebb03b46722017efa38c37",
+    "PersianTar_OneShot_Forte_Bb3": "f806663ed0901bbf2765468b0f02a2c1e20ed8af8ca9471143ed58656c89960b",
+    "PersianTar_OneShot_OpenString_Forte_C4": "da756e5c962bc717827c16c90c363d2d53ef33e671e300c81456f5976ab5c24e",
+    "PersianTar_OneShot_Forte_Eb4": "eaeedf3de65b8e6bb3df994c016c680cd473848eaab24c49715c323cf94417b2",
+    "PersianTar_OneShot_Forte_Ab4": "d56ac104c2ccfcae380bf063195699f6db9cf1aa0d8656d5f6c52d7b82d274c3",
+    "PersianTar_OneShot_Forte_Db5": "cf45a80f586177acb469703dd6d3344e38314cede32d8d7bd1af584c8bd705fb",
+    "PersianTar_OneShot_Forte_Gb5": "b4438f5c1ae05842b14bcb2ff5c8211496b4c56de66daef69bf70f1fe8d87f37",
+    "Erhu_Pizzicatto_A5": "bc97132fb006b7857fe613909ade57b696f25b3acbf2b3e6e5240cb7a7292dbb",
+    "Erhu_Pizzicatto_E5": "b0c37c2a4d382886bd36a8808d3215c838683fc51ce467a7f2033b8f2725b292"
   },
   "qualitySourceSha256": {
     "piano": "712d0e681efbe5203a8014e9b3e84168f1908c82f2f6fb13bd2c77d6d72c70b7",

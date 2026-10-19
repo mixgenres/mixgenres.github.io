@@ -87,6 +87,23 @@ test('written ties produce one attack and reject a pitch-changing continuation',
   assert.throws(()=>resolveWrittenTies(performanceFixture({bars:performance.bars,notes:[event(0),event(.5,70)]})),/no matching continuation/);
 });
 
+test('written ties preserve continuation bends and reject tuning or unpitched substitutions', () => {
+  const bars=[{index:0,start:0,end:2,regionId:'a',bpm:120,beatsPerBar:4}];
+  const event=(beat:number):PerfNote=>({trackId:'p',midi:69,time:beat/2,dur:.25,vel:80,bar:0,
+    gestureCode:0,hitFunctionCode:0,accent:1,notation:{beat,durationBeats:.5},musicianNotation:{tieToNext:beat<1}});
+  const a=event(0),b={...event(.5),pitchBend:[{offset:.1,value:10000}]},c={...event(1),pitchBend:[{offset:.05,value:8192}]};
+  const p=performanceFixture({bars,notes:[a,b,c]});resolveWrittenTies(p);
+  assert.equal(p.notes.length,1);assert.equal(p.notes[0].dur,.75);
+  assert.deepEqual(p.notes[0].pitchBend,[{offset:.35,value:10000},{offset:.55,value:8192}]);
+  for(const change of [{tuningCents:25},{frequencyHz:446.42},{pitchIdentity:'unpitched' as const}]) {
+    assert.throws(()=>resolveWrittenTies(performanceFixture({bars,notes:[event(0),{...event(.5),...change}]})),/no matching continuation/);
+  }
+  assert.throws(()=>resolveWrittenTies(performanceFixture({bars,notes:[{...event(0),notation:{beat:0,durationBeats:0}}]})),/positive notated duration/);
+  const cymbal=performanceFixture({bars,notes:[0,.5].map(beat=>({...event(beat),pitchIdentity:'unpitched' as const,drum:true,midi:49,
+    musicianNotation:{tieToNext:beat===0},percussion:notatedDrum('drums',49)}))});
+  resolveWrittenTies(cymbal);assert.equal(cymbal.notes.length,1,'matching cymbal contacts can still tie without another strike');
+});
+
 test('drummers have separate kit components, staff positions and noteheads in notation and MusicXML', () => {
   const song = makeSheet('rock'), written = compileNotatedScore(song);
   const drums = written.sections.flatMap(s => Object.values(s.cells)).flatMap(cell => cell.bars.flatMap(bar => bar.attacks.flatMap(a => a.pitch.kind==='drum' ? [a.pitch.drum] : [])));

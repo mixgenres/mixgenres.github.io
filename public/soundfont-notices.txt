@@ -1,5 +1,33 @@
 MixGenres distilled SoundFont banks
 
+BISA.txt
+
+Berklee Intersectional Soundbox Archive (2025)
+https://remix.berklee.edu/bisa/
+Creative Commons Attribution 4.0: https://creativecommons.org/licenses/by/4.0/
+
+quena: Ximena Núñez (instrumentalist), Daun Park (engineer), Asher Deverna (editor)
+erhu: Yu Chun Chan (instrumentalist), Josefina Ugarte (engineer), Asher Deverna (editor)
+tar: Erfan Hessampour (instrumentalist), Yangyang Hua (engineer), Shuyi Xiong (editor)
+
+Sources:
+Quena_ScaleTounged_Gmaj.wav: https://remix.berklee.edu/bisa-peruvian-quena-oneshots-scale/2/
+Erhu_Vibrato_Regular_A4_BPM100.wav: https://remix.berklee.edu/bisa-chinese-erhu-oneshots-vibrato/7/
+Erhu_Vibrato_Regular_E5_BPM100.wav: https://remix.berklee.edu/bisa-chinese-erhu-oneshots-vibrato/8/
+PersianTar_OneShot_Forte_C3.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/5/
+PersianTar_OneShot_Forte_F3.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/9/
+PersianTar_OneShot_Forte_Bb3.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/4/
+PersianTar_OneShot_OpenString_Forte_C4.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/12/
+PersianTar_OneShot_Forte_Eb4.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/8/
+PersianTar_OneShot_Forte_Ab4.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/2/
+PersianTar_OneShot_Forte_Db5.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/6/
+PersianTar_OneShot_Forte_Gb5.wav: https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/10/
+Erhu_Pizzicatto_A5.wav: https://remix.berklee.edu/bisa-chinese-erhu-oneshots-pizzicato/1/
+Erhu_Pizzicatto_E5.wav: https://remix.berklee.edu/bisa-chinese-erhu-oneshots-pizzicato/3/
+
+Modified for the app: mono 44.1 kHz, pinned single-note crops, source-group gain, small edge fades, pitch-center corrections, crossfaded sustain loops for quena and bowed erhu, SF3/Ogg Vorbis q6. The full source files and individual hashes are listed in scripts/lib/regional-sources.json.
+
+
 GeneralUser-GS.txt
 
 GeneralUser GS 2.0.3 BETA

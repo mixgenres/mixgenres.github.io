@@ -15,5 +15,6 @@ import electricClean from '../../../assets/soundfonts/electricClean.sfpack?url';
 import electricDrive from '../../../assets/soundfonts/electricDrive.sfpack?url';
 import bandoneon from '../../../assets/soundfonts/bandoneon.sfpack?url';
 import upright from '../../../assets/soundfonts/upright.sfpack?url';
+import regional from '../../../assets/soundfonts/regional.sfpack?url';
 import type { BankId } from './presets';
-export const bankURLs: Record<BankId, string> = { keys, mallets, guitars, strings, winds, brass, electronic, percussion, nylon, steel, piano, bass, drumkit, electricClean, electricDrive, bandoneon, upright };
+export const bankURLs: Record<BankId, string> = { keys, mallets, guitars, strings, winds, brass, electronic, percussion, nylon, steel, piano, bass, drumkit, electricClean, electricDrive, bandoneon, upright, regional };

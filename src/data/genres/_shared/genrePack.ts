@@ -3,6 +3,7 @@ import type { MixOverride, MixContract } from '../../sound/schema/dynamicMix';
 import { INSTRUMENTS_BY_ID } from '../../instruments';
 import { authorSampleSongDevelopment } from './sampleSongDevelopment';
 import { authorGenreProduction } from './production';
+import { authorCatalogSupportParts } from './catalogSupportParts';
 
 /** Authored beat positions, in quarter-note units; no style-name hashing. */
 export interface AuthoredCell {
@@ -609,7 +610,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
     return [...patterns, ...endings, ...optionalPatterns];
   });
   const homeStyleId = styles.find(style => style.name === input.defaultStyle)?.id ?? styles[0]?.id;
-  return {
+  return authorCatalogSupportParts({
     id: input.id, name: input.name, catalogGeneration: 'genre-style-map-v1', homeStyleId,
     family: input.family, color: input.color, description: input.description, level: 'world', kind: 'world', strictness: 'strict',
     styleDefinitions: styles, substyles: styles.map(style => style.name), artists: [],
@@ -619,5 +620,5 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
     patterns: patternItems, tuningSystem: input.tuningSystem, signatureCell: styles[0]?.signatureCell,
     prominentChords: input.chordQualities,
     rhythm: { syncopation: .5, swing: .5, pocket: 'ahead', pocketDepth: 0 },
-  };
+  });
 }

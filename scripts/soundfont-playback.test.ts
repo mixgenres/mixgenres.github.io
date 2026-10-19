@@ -18,7 +18,9 @@ import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { StereoPeakGuard } from '../src/engine/playback/soundfont/peakGuard';
 import { OUTPUT_SAMPLE_PEAK_CEILING } from '../src/engine/studio/outputHeadroom';
 import { performanceWindow, renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
-import { SAMPLE_RELEASES_BY_PATCH, SAMPLE_RELEASE_PROFILES } from '../src/engine/playback/soundfont/bankIdentity';
+import { SAMPLE_RELEASES_BY_PATCH, SAMPLE_RELEASE_PROFILES, SAMPLE_RELEASE_MODULATION_BY_KEY } from '../src/engine/playback/soundfont/bankIdentity';
+import { releaseModulationReserve } from './lib/soundfontReleaseModulation';
+import { measureAudio } from '../src/engine/studio/audioMetrics';
 import { prepareBankForLive } from '../src/engine/playback/soundfont/prepareBank';
 import { StbVorbis } from 'stb-vorbis';
 import { ALL_STYLES } from '../src/engine/style';
@@ -40,6 +42,42 @@ async function runtimeFor(plan:ReturnType<typeof compileSamplePlan>) {
   for(const bank of plan.banks){const f=gunzipSync(readFileSync(`src/assets/soundfonts/${bank}.sfpack`));r.addBank(bank,f.buffer.slice(f.byteOffset,f.byteOffset+f.byteLength));}
   await r.synth.processorInitialized;r.setPlan(plan);return r;
 }
+test('sostenuto captures only already-held notes and preserves independent same-key attacks', async () => {
+  const notes=[noteFixture({midi:60,time:0,dur:.3}),noteFixture({midi:64,time:.15,dur:.15}),noteFixture({midi:60,time:.4,dur:.2})];
+  const ccs=[{trackId:'keys',time:.1,cc:66,value:127},{trackId:'keys',time:.2,cc:66,value:100},{trackId:'keys',time:.8,cc:66,value:0}];
+  const plan=compileSamplePlan(performanceFixture({notes,ccs}),options);
+  const ons=plan.events.filter(event=>event.type==='on'),offs=plan.events.filter(event=>event.type==='off');
+  assert.deepEqual(offs.map(event=>[event.key,Number(event.time.toFixed(6))]),[[64,.3],[60,.6],[60,.8]]);
+  assert.notEqual(ons[0].channel,ons[2].channel,'the captured C cannot be released by the new C');
+  const manual=compileSamplePlan(performanceFixture({notes:notes.map((note,i)=>i===0?{...note,dur:.8}:note)}),options);
+  const a=await runtimeFor(plan),b=await runtimeFor(manual);
+  try {
+    const l=new Float32Array(44100),r=new Float32Array(l.length),expectedL=new Float32Array(l.length),expectedR=new Float32Array(l.length);
+    a.render(l,r);b.render(expectedL,expectedR);
+    for(let i=0;i<l.length;i++)assert(Math.abs(l[i]-expectedL[i])<1e-7&&Math.abs(r[i]-expectedR[i])<1e-7);
+    a.seek(.5);const scratchL=new Float32Array(128),scratchR=new Float32Array(128);
+    while(a.isSeeking)a.prime(scratchL,scratchR,128);
+    const croppedL=new Float32Array(8820),croppedR=new Float32Array(croppedL.length);a.render(croppedL,croppedR);
+    assert.deepEqual(croppedL,l.slice(22050,30870));assert.deepEqual(croppedR,r.slice(22050,30870));
+  } finally {a.destroy();b.destroy();}
+  const combined=compileSamplePlan(performanceFixture({notes,ccs:[...ccs,{trackId:'keys',time:.7,cc:64,value:127},{trackId:'keys',time:1.1,cc:64,value:0}]}),options);
+  assert(combined.noteLifetimes[0].end>=1.1,'damper pedal continues the selectively held note after sostenuto releases');
+  const boundary=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:60,dur:.1}),noteFixture({midi:64,time:.1,dur:.2})],ccs}),options);
+  assert.deepEqual(boundary.events.filter(event=>event.type==='off').map(event=>[event.key,Number(event.time.toFixed(6))]),[[64,.3],[60,.8]],
+    'pedal-down precedes same-time note-offs and note-ons: capture the released key, not the new key');
+});
+test('release-controller extensions reach exported PCM and reserve their full decay', async () => {
+  const p=performanceFixture({duration:.2,tail:0,notes:[noteFixture({dur:.2,vel:100})],ccs:[{trackId:'keys',time:0,cc:72,value:127}]});
+  const plan=compileSamplePlan(p,options);
+  assert(plan.noteLifetimes[0].end>7,'CC72 extends the default one-second piano release');
+  assert.equal(plan.voiceDemand[0].end,plan.noteLifetimes[0].end);
+  const audio=await renderPerformanceToAudio(p,{...options,rawStem:true});
+  assert(audio.left.length>7*44100,'the actual export retains the controller-extended tail');
+  assert(audio.left.slice(Math.ceil(1.21*44100),Math.floor(1.4*44100)).some(value=>Math.abs(value)>.0001),
+    'samples beyond the previous 1.2-second cut remain audible');
+  const reset=compileSamplePlan({...p,notes:[noteFixture({time:1,dur:.2})],ccs:[...p.ccs,{trackId:'keys',time:.5,cc:72,value:64}]},options);
+  assert(reset.noteLifetimes[0].end<2.3,'an earlier reset does not leave every future note with a long release');
+});
 test('the shared sample plan sizes dense playback and export for its simultaneous recorded zones',async()=>{
   const performance=performanceFixture({notes:Array.from({length:400},()=>noteFixture({midi:60,time:0,dur:1})),duration:1.2});
   const plan=compileSamplePlan(performance,options);
@@ -145,7 +183,7 @@ test('regional lutes use the nearest matching sampled attack family instead of a
   assert.deepEqual(patchForInstrument('dombra'),mandolinLike);
   const longNeck=patchForInstrument('setar');
   assert.deepEqual(longNeck,{bank:0,program:104,drum:false,pack:'guitars'});
-  assert.deepEqual(patchForInstrument('tar'),longNeck);
+  assert.notDeepEqual(patchForInstrument('tar'),longNeck,'tar has its own recorded source');
   assert.deepEqual(patchForInstrument('baglama'),longNeck);
   const qanun=patchForInstrument('qanun');
   assert.deepEqual(qanun,{bank:0,program:107,drum:false,pack:'guitars'});
@@ -156,11 +194,59 @@ test('pipa and end-blown flutes use closer bundled source families',()=>{
   const pipa=patchForInstrument('pipa');
   assert.deepEqual(pipa,{bank:16,program:25,drum:false,pack:'guitars'});
   assert(load('guitars').presets.find(p=>p.bankMSB===16&&p.program===25)?.getVoiceParameters(60,90).length);
-  for(const id of ['ney','xiao','quena']) {
+  for(const id of ['ney','xiao']) {
     assert.deepEqual(patchForInstrument(id),{bank:0,program:77,drum:false,pack:'winds'},id);
   }
   assert(load('winds').presets.find(p=>p.bankMSB===0&&p.program===77)?.getVoiceParameters(60,90).length);
   assert.deepEqual(patchForInstrument('siku'),{bank:0,program:75,drum:false,pack:'winds'},'panpipes keep the pan-flute source');
+});
+test('quena, erhu and tar use their recorded notes and independent erhu pizzicato', async () => {
+  const bank=load('regional');
+  assert.equal(bank.presets.length,4);assert.equal(bank.samples.length,20);
+  for(const [id,program,roots] of [['quena',0,[67,69,71,72,74,76,78,79]],['erhu',1,[69,76]],['tar',2,[48,53,58,60,63,68,73,78]]] as const) {
+    assert.deepEqual(patchForInstrument(id),{pack:'regional',bank:76,program,drum:false});
+    const preset=bank.presets.find(p=>p.bankMSB===76&&p.program===program);assert(preset);
+    assert.deepEqual([...new Set(preset.zones.flatMap(zone=>zone.instrument.zones.map(zone=>zone.sample.originalKey)))].sort((a,b)=>a-b),roots);
+    const range=INSTRUMENTS_BY_ID[id].acousticProfile!;
+    for(let key=range.low;key<=range.high;key++)assert(preset.getVoiceParameters(key,90).length,`${id}/${key} has a recorded zone`);
+  }
+  const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:76,gestureCode:codeForGesture('pizzicato')})]}),
+    {...options,trackInstruments:new Map([['keys','erhu']]),worldId:'chinese'});
+  const on=plan.events.find(event=>event.type==='on');assert(on&&on.type==='on');
+  assert.deepEqual(on.patch,{pack:'regional',bank:76,program:3,drum:false});
+  for(const id of ['quena','erhu']) {
+    const p=performanceFixture({duration:4.5,tail:0,notes:[noteFixture({midi:76,dur:4,vel:100})]});
+    const audio=await renderPerformanceToAudio(p,{...options,trackInstruments:new Map([['keys',id]]),worldId:'chinese',rawStem:true});
+    const held=audio.left.subarray(3*44100,3.5*44100);let power=0;for(const sample of held)power+=sample*sample;
+    assert(Math.sqrt(power/held.length)>.0001,`${id}: the source sustain does not cut off at its file boundary`);
+    assert(audio.left.every(Number.isFinite));
+  }
+});
+test('per-key lifetime reserves include recorded velocity/envelope modulation without leaking across kit keys',()=>{
+  for(const pack of ['strings','electronic','percussion'] as const) {
+    const bank=load(pack);
+    for(const preset of bank.presets)for(const key of [36,48,60,72,84]) {
+      let reserve=0;for(const velocity of [1,36,80,127])for(const voice of preset.getVoiceParameters(key,velocity))reserve=Math.max(reserve,releaseModulationReserve(voice.modulators));
+      assert.equal(SAMPLE_RELEASE_MODULATION_BY_KEY[`${pack}:${preset.bankMSB}:${preset.program}:${preset.isGMGSDrum}:${key}`]??0,reserve);
+    }
+  }
+  assert.equal(SAMPLE_RELEASE_MODULATION_BY_KEY['percussion:0:25:true:36']??0,0,'a different drum’s modulation cannot lengthen the kick');
+  const p=performanceFixture({notes:[noteFixture({dur:.2})]});
+  const plan=compileSamplePlan(p,{...options,trackInstruments:new Map([['keys','string-ensemble']])});
+  const on=plan.events.find(event=>event.type==='on');assert(on&&on.type==='on');
+  const profile=SAMPLE_RELEASE_PROFILES[`${on.patch.pack}:${on.patch.bank}:${on.patch.program}:${on.patch.drum}:${on.key}`];
+  assert(plan.noteLifetimes[0].end>=.2+profile[2]*2**(500/1200)-.00001);
+});
+test('recorded regional leads retain usable source balance at equal note and velocity',async()=>{
+  const rms=async(instrument:string,worldId:string)=> {
+    const audio=await renderPerformanceToAudio(performanceFixture({worldId,duration:1.6,tail:0,notes:[noteFixture({midi:72,dur:1.2,vel:90})]}),
+      {...options,worldId,trackInstruments:new Map([['keys',instrument]]),trackRoles:new Map([['keys','lead']]),rawStem:true});
+    return measureAudio(audio.left.subarray(4410,44100),audio.right.subarray(4410,44100),44100).rmsDbfs!;
+  };
+  for(const [recorded,comparison,world] of [['quena','flute','andean'],['erhu','violin','chinese'],['tar','setar','persian']]) {
+    assert(Math.abs(await rms(recorded,world)-await rms(comparison,world))<3,
+      `${recorded} must not become an inaudible replacement for the prior source family`);
+  }
 });
 test('projected event gates keep mixed authored and performer-derived lengths distinct',()=>{
   const slice=sliceBarNative([0,4],undefined,undefined,[1,2],undefined,undefined,16,1,0,

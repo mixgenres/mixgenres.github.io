@@ -200,6 +200,8 @@ test('catalog support adaptations preserve the receiving part role', () => {
         const patternId = sheet.arrangement[region.id]?.[track.id];
         const pattern = patternId && PATTERNS_BY_ID[patternId];
         assert.ok(pattern, `${entry.styleId}/${instrumentId} has a support cell in ${region.kind}`);
+        assert.ok(pattern.styleIds?.includes(entry.styleId),
+          `${entry.styleId}/${instrumentId} uses a local lesson instead of silently importing a neighboring style`);
         if (pattern!.sourceLevel !== 'style-authored' || pattern!.canCrossRole) continue;
         assert.ok(pattern!.roles.includes(track.role),
           `${entry.styleId}/${instrumentId} receives ${pattern!.shortName} as ${track.role}, not ${pattern!.roles.join('/')}`);

@@ -1,4 +1,4 @@
-import { SAMPLE_RELEASE_PROFILES } from './bankIdentity';
+import { SAMPLE_RELEASE_PROFILES, SAMPLE_RELEASE_MODULATION_BY_KEY } from './bankIdentity';
 import type { Performance, PerfNote } from '../../band/performanceData';
 import type { Mp3RenderOptions } from '../mp3Export';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
@@ -8,6 +8,7 @@ import { codeForGesture } from '../../band/gestures';
 import { patchForInstrument, electronicKitPatch, SYNTH_SAMPLE_PROGRAMS, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
 import { PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey, recordedPercussionTake } from './percussion';
+import { ERHU_PIZZICATO_PROGRAM, REGIONAL_SAMPLE_GAIN_DB } from '../../../data/sound/playback/regionalSamples';
 
 export { SOUNDFONT_RELEASE_RESERVE as SAMPLE_RELEASE_RESERVE } from './release';
 
@@ -72,7 +73,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const captures=sostenuto.filter((cc,i)=>cc.value>=64 && (sostenuto[i-1]?.value ?? 0)<64);
     const physicalEnd=(note:PerfNote)=> {
       const end=note.time+note.dur;
-      return captures.filter(cc=>cc.time>note.time && cc.time<end)
+      return captures.filter(cc=>cc.time>note.time && cc.time<=end)
         .reduce((held,cc)=>Math.max(held,sostenuto.find(next=>next.time>cc.time&&next.value<64)?.time ?? performance.duration),end);
     };
     const notes = performance.notes.filter(note => note.trackId === id).flatMap(note => {
@@ -140,7 +141,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         }
         if (/harmonic|flageolet/.test(action)) patch = patch.pack==='nylon' ? {...NYLON_PATCH,bank:66} : patchForProgram(31, 'guitars');
       }
-      if (def.family === 'bowed' && /pluck|pizz/.test(action)) patch = patchForProgram(45, 'strings');
+      if (def.family === 'bowed' && /pluck|pizz/.test(action)) patch = instrumentId === 'erhu'
+        ? {bank:76,program:ERHU_PIZZICATO_PROGRAM,drum:false,pack:'regional'} : patchForProgram(45, 'strings');
       if (instrumentId === 'trumpet' && /mute/.test(action)) patch = patchForProgram(59, 'brass');
       if (instrumentId === 'bass' && /slap|pop/.test(action)) patch = patchForProgram(36, 'guitars');
       else if(instrumentId==='bass'&&/fretless/.test(sound.variantId??''))patch=patchForProgram(35,'guitars');
@@ -245,7 +247,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const releaseAtOnset=controls.filter(cc=>cc.cc===72&&cc.time<=note.time).at(-1)?.value ?? 64;
       const maxRelease=controls.filter(cc=>cc.cc===72&&cc.time>note.time&&cc.time<=releaseStart)
         .reduce((value,cc)=>Math.max(value,cc.value),Math.max(64,releaseAtOnset));
-      const releaseScale=2**(3*(maxRelease-64)/64);
+      const additionalRelease=SAMPLE_RELEASE_MODULATION_BY_KEY[`${patch.pack}:${patch.bank}:${patch.program}:${patch.drum}:${key}`] ?? 0;
+      const releaseScale=2**(3*(maxRelease-64)/64+additionalRelease/1200);
       const loopTail=profile&&profile[2]>.0011?Math.max(.015625,profile[2]*releaseScale):0;
       const estimatedTail=profile
         ?Math.max(loopTail,Math.min(Math.max(.015625,profile[0]*releaseScale),Math.max(0,profile[1]-(releaseStart-note.time))))
@@ -274,7 +277,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       noteLifetimes.push({note,end:releaseEnd});
       voiceDemand.push({start:note.time,end:releaseEnd,patch,key,velocity:timbreVelocity});
       events.push({ time: note.time, type: 'on', channel, key, velocity: timbreVelocity,
-        patch, gain: sound.roleGain, cents:cents+initialBend });
+        patch, gain: sound.roleGain * (patch.pack === 'regional' ? 10**((REGIONAL_SAMPLE_GAIN_DB[instrumentId]??0)/20) : 1), cents:cents+initialBend });
       events.push({ time: end, type: 'off', channel, key });
       // Filter sweep is a real synth gesture, not a note-length hint. CC 74 is
       // bipolar in the shipped SoundFont engine: 64 leaves the authored patch

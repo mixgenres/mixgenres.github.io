@@ -1,6 +1,7 @@
 import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES } from './percussion';
 import { ELECTRONIC_KIT_PROGRAMS } from '../../../data/sound/playback/electronicKits';
 import { SAMPLED_SYNTH_PATCHES } from '../../../data/sound/playback/sampledSynthPatches';
+import { REGIONAL_SAMPLE_PROGRAMS } from '../../../data/sound/playback/regionalSamples';
 
 /** Zero-based General MIDI programs. World instruments with no sampled match
  * use an explicit family approximation, exposed in the bank coverage report. */
@@ -23,6 +24,7 @@ export const BANK_PROGRAMS = {
   electricDrive: [],
   bandoneon: [],
   upright: [],
+  regional: [],
 } as const;
 export type BankId = keyof typeof BANK_PROGRAMS;
 export interface SamplePatch { bank: number; program: number; drum: boolean; pack: BankId }
@@ -57,6 +59,7 @@ assign(107, 'koto gayageum guqin pipa guzheng yatga'); assign(108, 'kalimba beri
 export const INSTRUMENT_PROGRAMS: Readonly<Record<string, number>> = ids;
 
 export function patchForInstrument(id: string, percussion = false): SamplePatch {
+  if (REGIONAL_SAMPLE_PROGRAMS[id] !== undefined) return {bank:76,program:REGIONAL_SAMPLE_PROGRAMS[id],drum:false,pack:'regional'};
   if (id === 'synth' || id === 'synth-bass') return {bank:75,program:id==='synth-bass'?0:3,drum:false,pack:'electronic'};
   // GeneralUser GS includes an actual mandolin in its GS variation bank. The
   // GM slot used by the old mapping is Shamisen, which is the wrong timbre for
@@ -65,10 +68,10 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   // Keep other bright folk lutes on the actual GS mandolin variation, rather
   // than the Japanese Shamisen patch that is a poor fit for their attack.
   if (id === 'bouzouki' || id === 'dombra') return {bank:16,program:25,drum:false,pack:'guitars'};
-  // Setar/tar/baglama are long-neck plucked lutes. The available GS sitar is
+  // Setar/baglama are long-neck plucked lutes. The available GS sitar is
   // still an approximation, but its sustained buzz/twang is a closer source
   // family than the default Shamisen sample.
-  if (id === 'setar' || id === 'tar' || id === 'baglama') return patchForProgram(104, 'guitars');
+  if (id === 'setar' || id === 'baglama') return patchForProgram(104, 'guitars');
   // No dedicated kamancheh multisample is packaged yet. Keep it in the bowed
   // strings bank with the violin proxy, rather than failing playback or
   // silently selecting a plucked-string patch.
@@ -80,9 +83,9 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   // gives it a closer bright, course-like attack than the Koto patch; it is
   // still a family approximation rather than a dedicated pipa recording.
   if (id === 'pipa') return { bank: 16, program: 25, drum: false, pack: 'guitars' };
-  // Ney, xiao, and quena are end-blown flutes. The breathier GS shakuhachi
+  // Ney and xiao still need dedicated recordings. The breathier GS shakuhachi
   // variation is a closer source family than the straight concert-flute patch.
-  if (id === 'ney' || id === 'xiao' || id === 'quena') return patchForProgram(77, 'winds');
+  if (id === 'ney' || id === 'xiao') return patchForProgram(77, 'winds');
   // Oud is a short-necked gut-string lute; the GM Shamisen slot is a bright
   // Japanese plucked-string patch and reads as the wrong instrument. The
   // curated nylon-guitar source is the closer available warm, rounded pluck.

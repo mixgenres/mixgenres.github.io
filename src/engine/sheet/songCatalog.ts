@@ -415,8 +415,6 @@ export function createCatalogSong(id: string): Sheet {
   const eligibleStylePatterns = [...new Set([...(style.patterns?.allowed ?? []), ...samplePatternIds])]
     .map(patternId => PATTERNS_BY_ID[patternId])
     .filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern);
-  const eligibleGenreSupportPatterns = (PATTERNS_BY_WORLD[entry.genreId] ?? [])
-    .filter(pattern => pattern.sourceLevel === 'style-authored');
   // Explicit vocal/feature sections may name a player whose style cell was
   // authored for a neighboring instrument (for example a sung crossover over
   // a synth lead). Repair only that missing cell with the closest local role
@@ -429,18 +427,13 @@ export function createCatalogSong(id: string): Sheet {
     for (const track of sheet.tracks) {
       if (!region.activeInstrumentIds?.includes(track.instrumentId ?? '')) continue;
       const supportTrack = selected.supportIds.has(track.instrumentId ?? '');
-      if (cells[track.id] && cells[track.id] !== 'silent' && !supportTrack) continue;
+      const existing = PATTERNS_BY_ID[cells[track.id]];
+      if (existing?.styleIds?.includes(style.id) && !supportTrack) continue;
       const instrumentId = track.instrumentId ?? '';
-      // Keep the selected style's cells first. A same-genre cell is only used
-      // when an explicitly added support color has no local style phrase.
-      const patternPool = [...eligibleStylePatterns,
-        ...(supportTrack
-          ? eligibleGenreSupportPatterns.filter(pattern =>
-            pattern.instruments?.includes(instrumentId)
-            || pattern.roles.includes(track.role)
-            || pattern.compatibleRoles?.includes(track.role))
-          : [])]
-        .filter((pattern, index, all) => all.findIndex(candidate => candidate.id === pattern.id) === index);
+      // Default songs use local lessons, including explicitly authored
+      // support adaptations. User-assigned foreign cells retain their lens
+      // through the normal editor/interpretation path after song creation.
+      const patternPool = eligibleStylePatterns.filter(pattern => pattern.styleIds?.includes(style.id));
       const patternRole = track.role === 'voice' ? 'lead' : track.role;
       const supportOccurrence = supportTrack
         ? (supportOccurrences.get(track.id) ?? 0)

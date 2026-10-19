@@ -9,11 +9,13 @@ export function resolveWrittenTies(performance: Performance): void {
   const pitch=(note:PerfNote)=>note.frequencyHz === undefined
     ? note.midi * 100 + (note.tuningCents ?? 0) : 6900 + 1200 * Math.log2(note.frequencyHz / 440);
   const pitched=(note:PerfNote)=>note.pitchIdentity !== 'unpitched' && !note.drum && !note.percussion;
+  const sameSound=(a:PerfNote,b:PerfNote)=>a.midi===b.midi && pitched(a)===pitched(b)
+    && (pitched(a) ? Math.abs(pitch(a)-pitch(b))<.01
+      : a.percussion?.componentId===b.percussion?.componentId && a.gestureCode===b.gestureCode);
   const removed=new Set<PerfNote>();
   const ordered=performance.notes.slice().sort((a,b)=>start(a)-start(b));
   for (const note of ordered) {
     if (removed.has(note) || !note.musicianNotation?.tieToNext) continue;
-    if (!pitched(note)) throw new Error('Written ties require a pitched note.');
     let current=note;
     while (current.musicianNotation?.tieToNext) {
       if (!Number.isFinite(start(current)) || !(current.notation?.durationBeats! > 0)) {
@@ -21,7 +23,7 @@ export function resolveWrittenTies(performance: Performance): void {
       }
       const end=start(current)+(current.notation?.durationBeats ?? 0);
       const next=ordered.find(candidate=>!removed.has(candidate) && candidate!==note && candidate.trackId===note.trackId
-        && pitched(candidate) && candidate.midi===note.midi && Math.abs(pitch(candidate)-pitch(note))<.01
+        && sameSound(note,candidate)
         && Math.abs(start(candidate)-end)<1e-9);
       if (!next) throw new Error(`Written tie has no matching continuation: ${current.notationEventId ?? current.attackId}`);
       if (next.pitchBend?.length) {
@@ -30,7 +32,9 @@ export function resolveWrittenTies(performance: Performance): void {
           .sort((a,b)=>a.offset-b.offset);
       }
       removed.add(next);
-      note.dur=Math.max(0.000001,next.time+next.dur-note.time);
+      const duration=next.time+next.dur-note.time;
+      if (!Number.isFinite(duration) || duration<=0) throw new Error('Written tie has an invalid performed duration.');
+      note.dur=duration;
       note.notation={...note.notation!,durationBeats:start(next)+next.notation!.durationBeats-start(note)};
       current=next;
     }

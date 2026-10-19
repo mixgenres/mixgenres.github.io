@@ -138,6 +138,16 @@ for sample in harmonium_sources['samples']:
     url = f"https://raw.githubusercontent.com/nbrosowsky/tonejs-instruments/{harmonium_sources['commit']}/samples/harmonium/{urllib.parse.quote(sample['file'])}"
     download(url, harmonium_dir / sample['file'], sample['sha256'])
 
+regional_sources = json.loads((ROOT / 'scripts/lib/regional-sources.json').read_text())
+regional_dir = DEST / 'bisa'
+regional_dir.mkdir(exist_ok=True)
+for sample in regional_sources['sources']:
+    try:
+        download(sample['download'], regional_dir / sample['file'], sample['sha256'])
+    except Exception as error:
+        raise RuntimeError(f"The BISA server may require a browser download. Download {sample['url']} "
+                           f"to {regional_dir / sample['file']}, then rerun; its hash will be checked.") from error
+
 if '--verify-only' in sys.argv:
     print('All pinned SoundFont and WAV sources match the manifests.')
 else:

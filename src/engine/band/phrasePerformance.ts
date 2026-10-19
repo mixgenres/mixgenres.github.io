@@ -288,8 +288,9 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   // Guide tones carry the third/seventh and optional written extensions;
   // shells add the root but leave the fifth and color tones to other players.
   // Appending every chord tone made both policies the same full chord.
-  if (voicing === 'guide-tone') pcs = guide.length ? [...guide, ...tension] : tones.filter(pc => pc !== parsed.rootPc);
-  else if (voicing === 'shell') pcs = [parsed.rootPc, ...(guide.length ? guide : tones.filter(pc => pc !== (parsed.rootPc + 7) % 12))];
+  if (voicing === 'guide-tone') pcs = guide.length
+    ? [...(guide.length > 1 ? guide : tones.filter(pc => pc !== parsed.rootPc)), ...tension] : tones;
+  else if (voicing === 'shell') pcs = guide.length ? [parsed.rootPc, ...guide] : tones;
   else if (voicing === 'montuno' || voicing === 'yumba') pcs = [...tones.filter(pc => pc !== parsed.rootPc), ...guide, ...tension];
   else pcs = [...tones, ...tension, ...guide];
   pcs = Array.from(new Set(pcs));

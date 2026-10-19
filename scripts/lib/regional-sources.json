@@ -1,0 +1,318 @@
+{
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "archive": "https://remix.berklee.edu/bisa/",
+  "credits": {
+    "quena": "Ximena Núñez (instrumentalist), Daun Park (engineer), Asher Deverna (editor)",
+    "erhu": "Yu Chun Chan (instrumentalist), Josefina Ugarte (engineer), Asher Deverna (editor)",
+    "tar": "Erfan Hessampour (instrumentalist), Yangyang Hua (engineer), Shuyi Xiong (editor)"
+  },
+  "sources": [
+    {
+      "id": "Quena_ScaleTounged_Gmaj",
+      "file": "Quena_ScaleTounged_Gmaj.wav",
+      "instrument": "quena",
+      "url": "https://remix.berklee.edu/bisa-peruvian-quena-oneshots-scale/2/",
+      "download": "https://remix.berklee.edu/context/bisa-peruvian-quena-oneshots-scale/article/1001/type/native/viewcontent",
+      "sha256": "4a9c7f66cdd76311ba632513bb4ccce47c1d850df81720c9b9e7e5f1ddb600ce"
+    },
+    {
+      "id": "Erhu_Vibrato_Regular_A4_BPM100",
+      "file": "Erhu_Vibrato_Regular_A4_BPM100.wav",
+      "instrument": "erhu",
+      "url": "https://remix.berklee.edu/bisa-chinese-erhu-oneshots-vibrato/7/",
+      "download": "https://remix.berklee.edu/context/bisa-chinese-erhu-oneshots-vibrato/article/1006/type/native/viewcontent",
+      "sha256": "827a01ad57d6c701f2e8271199c673ec84d0d8c462bd46ab3c2dd45854d61550"
+    },
+    {
+      "id": "Erhu_Vibrato_Regular_E5_BPM100",
+      "file": "Erhu_Vibrato_Regular_E5_BPM100.wav",
+      "instrument": "erhu",
+      "url": "https://remix.berklee.edu/bisa-chinese-erhu-oneshots-vibrato/8/",
+      "download": "https://remix.berklee.edu/context/bisa-chinese-erhu-oneshots-vibrato/article/1007/type/native/viewcontent",
+      "sha256": "e2e32d7a6747d40f69a9a9c29e02b1840d15dd23b2c8d20c54e58244899cc95e"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_C3",
+      "file": "PersianTar_OneShot_Forte_C3.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/5/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1004/type/native/viewcontent",
+      "sha256": "a536d15f53865da8fef066cc2a861bf4566be60e0088f0e04ffb23981e910c5e"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_F3",
+      "file": "PersianTar_OneShot_Forte_F3.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/9/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1008/type/native/viewcontent",
+      "sha256": "ee30332e43c46494b966d92d69ec1e3d9acd2c2fb4ebb03b46722017efa38c37"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_Bb3",
+      "file": "PersianTar_OneShot_Forte_Bb3.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/4/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1003/type/native/viewcontent",
+      "sha256": "f806663ed0901bbf2765468b0f02a2c1e20ed8af8ca9471143ed58656c89960b"
+    },
+    {
+      "id": "PersianTar_OneShot_OpenString_Forte_C4",
+      "file": "PersianTar_OneShot_OpenString_Forte_C4.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/12/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1011/type/native/viewcontent",
+      "sha256": "da756e5c962bc717827c16c90c363d2d53ef33e671e300c81456f5976ab5c24e"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_Eb4",
+      "file": "PersianTar_OneShot_Forte_Eb4.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/8/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1007/type/native/viewcontent",
+      "sha256": "eaeedf3de65b8e6bb3df994c016c680cd473848eaab24c49715c323cf94417b2"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_Ab4",
+      "file": "PersianTar_OneShot_Forte_Ab4.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/2/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1001/type/native/viewcontent",
+      "sha256": "d56ac104c2ccfcae380bf063195699f6db9cf1aa0d8656d5f6c52d7b82d274c3"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_Db5",
+      "file": "PersianTar_OneShot_Forte_Db5.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/6/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1005/type/native/viewcontent",
+      "sha256": "cf45a80f586177acb469703dd6d3344e38314cede32d8d7bd1af584c8bd705fb"
+    },
+    {
+      "id": "PersianTar_OneShot_Forte_Gb5",
+      "file": "PersianTar_OneShot_Forte_Gb5.wav",
+      "instrument": "tar",
+      "url": "https://remix.berklee.edu/bisa-persian-tar-oneshots-forte/10/",
+      "download": "https://remix.berklee.edu/context/bisa-persian-tar-oneshots-forte/article/1009/type/native/viewcontent",
+      "sha256": "b4438f5c1ae05842b14bcb2ff5c8211496b4c56de66daef69bf70f1fe8d87f37"
+    },
+    {
+      "id": "Erhu_Pizzicatto_A5",
+      "file": "Erhu_Pizzicatto_A5.wav",
+      "instrument": "erhu",
+      "url": "https://remix.berklee.edu/bisa-chinese-erhu-oneshots-pizzicato/1/",
+      "download": "https://remix.berklee.edu/context/bisa-chinese-erhu-oneshots-pizzicato/article/1000/type/native/viewcontent",
+      "sha256": "bc97132fb006b7857fe613909ade57b696f25b3acbf2b3e6e5240cb7a7292dbb"
+    },
+    {
+      "id": "Erhu_Pizzicatto_E5",
+      "file": "Erhu_Pizzicatto_E5.wav",
+      "instrument": "erhu",
+      "url": "https://remix.berklee.edu/bisa-chinese-erhu-oneshots-pizzicato/3/",
+      "download": "https://remix.berklee.edu/context/bisa-chinese-erhu-oneshots-pizzicato/article/1002/type/native/viewcontent",
+      "sha256": "b0c37c2a4d382886bd36a8808d3215c838683fc51ce467a7f2033b8f2725b292"
+    }
+  ],
+  "programs": [
+    {
+      "program": 0,
+      "instrument": "quena",
+      "name": "BISA Quena",
+      "release": 0.2
+    },
+    {
+      "program": 1,
+      "instrument": "erhu",
+      "name": "BISA Erhu bowed",
+      "release": 0.22
+    },
+    {
+      "program": 2,
+      "instrument": "tar",
+      "name": "BISA Persian Tar",
+      "release": 1.2
+    },
+    {
+      "program": 3,
+      "instrument": "erhu",
+      "name": "BISA Erhu pizzicato",
+      "release": 0.4
+    }
+  ],
+  "zones": [
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 79,
+      "start": 0,
+      "end": 1.3,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 7
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 78,
+      "start": 1.4,
+      "end": 2.6,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 30
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 76,
+      "start": 2.72,
+      "end": 4.0,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 34
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 74,
+      "start": 4.13,
+      "end": 5.24,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 34
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 72,
+      "start": 5.4,
+      "end": 6.42,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 26
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 71,
+      "start": 6.62,
+      "end": 7.8,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 46
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 69,
+      "start": 8,
+      "end": 9.11,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 41
+    },
+    {
+      "source": "Quena_ScaleTounged_Gmaj",
+      "program": 0,
+      "key": 67,
+      "start": 9.23,
+      "end": 10.75,
+      "loop": [
+        0.28,
+        0.75
+      ],
+      "fineTune": 28
+    },
+    {
+      "source": "Erhu_Vibrato_Regular_A4_BPM100",
+      "program": 1,
+      "key": 69,
+      "loop": [
+        0.65,
+        1.65
+      ],
+      "fineTune": -44
+    },
+    {
+      "source": "Erhu_Vibrato_Regular_E5_BPM100",
+      "program": 1,
+      "key": 76,
+      "loop": [
+        0.65,
+        1.65
+      ],
+      "fineTune": -50
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_C3",
+      "program": 2,
+      "key": 48,
+      "fineTune": -2
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_F3",
+      "program": 2,
+      "key": 53,
+      "fineTune": 7
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_Bb3",
+      "program": 2,
+      "key": 58,
+      "fineTune": 5
+    },
+    {
+      "source": "PersianTar_OneShot_OpenString_Forte_C4",
+      "program": 2,
+      "key": 60,
+      "fineTune": 0
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_Eb4",
+      "program": 2,
+      "key": 63,
+      "fineTune": 2
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_Ab4",
+      "program": 2,
+      "key": 68,
+      "fineTune": 12
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_Db5",
+      "program": 2,
+      "key": 73,
+      "fineTune": 3
+    },
+    {
+      "source": "PersianTar_OneShot_Forte_Gb5",
+      "program": 2,
+      "key": 78,
+      "fineTune": 11
+    },
+    {
+      "source": "Erhu_Pizzicatto_A5",
+      "program": 3,
+      "key": 81
+    },
+    {
+      "source": "Erhu_Pizzicatto_E5",
+      "program": 3,
+      "key": 76
+    }
+  ],
+  "processing": "Mono 44.1 kHz. Quena G-major note crops are pinned in seconds. Bowed erhu and quena sustain loops have a 5 ms crossfade. Group gain preserves note and articulation levels. Per-root fine tuning centers the recorded note before applying the score tuning; source vibrato remains."
+}

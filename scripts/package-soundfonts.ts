@@ -8,13 +8,15 @@ import { gzipSync } from 'node:zlib';
 import { BasicSoundBank, BasicPreset, BasicInstrument, EmptySample, SoundBankLoader, SpessaLog, GeneratorTypes } from 'spessasynth_core';
 import { BANK_PROGRAMS, SOUNDFONT_VERSION } from '../src/engine/playback/soundfont/presets';
 import { SYNTH_SAMPLE_PROGRAMS } from '../src/engine/playback/soundfont/presets';
-import { SAMPLE_RELEASES, SAMPLE_RELEASES_BY_PATCH, SAMPLE_RELEASE_PROFILES } from '../src/engine/playback/soundfont/bankIdentity';
+import { SAMPLE_RELEASES, SAMPLE_RELEASES_BY_PATCH, SAMPLE_RELEASE_PROFILES, SAMPLE_RELEASE_MODULATION_BY_KEY } from '../src/engine/playback/soundfont/bankIdentity';
+import { releaseModulationReserve } from './lib/soundfontReleaseModulation';
 import { ELECTRONIC_KIT_PROGRAMS } from '../src/data/sound/playback/electronicKits';
 import { synth } from '../src/data/instruments/catalog/electronic/synth';
 import { SAMPLED_SYNTH_PATCHES } from '../src/data/sound/playback/sampledSynthPatches';
 import { RECORDED_PERCUSSION_PATCHES } from '../src/engine/playback/soundfont/percussion';
 import { qualityPiano, qualityBass, qualityDrumKit, qualityElectric, qualityBandoneon, qualityUprightBass, QUALITY_SOURCES } from './lib/qualitySoundfonts';
 import { recordedGroupGainLinear } from './lib/recordedGroupGain';
+import { regionalSoundfont, type RegionalSources } from './lib/regionalSoundfonts';
 SpessaLog.setLogLevel(false, true, false);
 const args = process.argv.slice(2);
 const sources = args.filter(arg=>!arg.startsWith('--'));
@@ -63,13 +65,15 @@ const output = 'src/assets/soundfonts'; mkdirSync(output, { recursive: true });
 const staging='.cache/soundfont-package';mkdirSync(staging,{recursive:true});
 const releases:Record<string,number>=rebuildingAllPacks?{}:{...SAMPLE_RELEASES};
 const releasesByPatch:Record<string,number>=rebuildingAllPacks?{}:{...SAMPLE_RELEASES_BY_PATCH};
+const releaseModulationByKey:Record<string,number>=rebuildingAllPacks?{}:{...SAMPLE_RELEASE_MODULATION_BY_KEY};
 const releaseProfiles:Record<string,readonly [number,number,number]>=rebuildingAllPacks?{}:{...SAMPLE_RELEASE_PROFILES};
 const manifest: Record<string, { bytes: number; unpackedBytes: number; sha256: string; unpackedSha256:string; presets: string[]; samples: number; format:'sf2'|'sf3' }> = requestedPacks?JSON.parse(readFileSync(`${output}/manifest.json`,'utf8')).packs:{};
 const changedPacks:string[]=[];
 for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
   if(requestedPacks&&!requestedPacks.includes(id))continue;
   changedPacks.push(id);
-  const quality=id==='piano'?qualityPiano(sources[4]):id==='bass'?qualityBass(sources[4]):id==='drumkit'?qualityDrumKit(sources[4],banks[0]):id==='electricClean'||id==='electricDrive'?qualityElectric(sources[4],id):id==='bandoneon'?qualityBandoneon(sources[4]):id==='upright'?qualityUprightBass(sources[4]):undefined;
+  for(const table of [releasesByPatch,releaseProfiles,releaseModulationByKey])for(const key of Object.keys(table))if(key.startsWith(`${id}:`))delete table[key];
+  const quality=id==='regional'?regionalSoundfont(sources[4]):id==='piano'?qualityPiano(sources[4]):id==='bass'?qualityBass(sources[4]):id==='drumkit'?qualityDrumKit(sources[4],banks[0]):id==='electricClean'||id==='electricDrive'?qualityElectric(sources[4],id):id==='bandoneon'?qualityBandoneon(sources[4]):id==='upright'?qualityUprightBass(sources[4]):undefined;
   const source = banks[id === 'nylon' ? 1 : id === 'steel' ? 2 : 0];
   const selected = source.presets.filter(preset => {
     if(id==='nylon'||id==='steel')return !preset.isDrum&&(id==='nylon'?[0,4,24].includes(preset.bankMSB):preset.bankMSB===0);
@@ -239,9 +243,10 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
   for(const preset of bank.presets) {
     let release=.001;
     for(let key=0;key<128;key++) {
-      let oneShotRelease=.001,oneShotDuration=0,loopRelease=.001,hasVoices=false;
+      let oneShotRelease=.001,oneShotDuration=0,loopRelease=.001,hasVoices=false,releaseModulation=0;
       for(const velocity of [1,36,56,78,99,119,127]) for(const voice of preset.getVoiceParameters(key,velocity)) {
         hasVoices=true;
+        releaseModulation=Math.max(releaseModulation,releaseModulationReserve(voice.modulators));
         // Match SpessaSynth's -7200 timecent release floor, then bound one-shot
         // lifetimes by the selected sample's actual end below.
         const voiceRelease=Math.pow(2,Math.max(-7200,voice.generators[GeneratorTypes.releaseVolEnv])/1200);
@@ -255,6 +260,7 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
         if(voice.generators[GeneratorTypes.sampleModes]&1)loopRelease=Math.max(loopRelease,voiceRelease);
         else {oneShotRelease=Math.max(oneShotRelease,voiceRelease);oneShotDuration=Math.max(oneShotDuration,sampleSeconds);}
       }
+      if(releaseModulation>0)releaseModulationByKey[`${id}:${preset.bankMSB}:${preset.program}:${preset.isGMGSDrum}:${key}`]=releaseModulation;
       if(hasVoices)releaseProfiles[`${id}:${preset.bankMSB}:${preset.program}:${preset.isGMGSDrum}:${key}`]=[
         Math.round(oneShotRelease*10000)/10000,Math.round(oneShotDuration*10000)/10000,Math.round(loopRelease*10000)/10000,
       ];
@@ -277,7 +283,7 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
 }
 for(const id of changedPacks)renameSync(`${staging}/${id}.sfpack`,`${output}/${id}.sfpack`);
 const contentKey = createHash('sha256').update(SOUNDFONT_VERSION+JSON.stringify(manifest)).digest('hex').slice(0, 16);
-writeFileSync('src/engine/playback/soundfont/bankIdentity.ts', `// Generated by scripts/package-soundfonts.ts; invalidates every physical sample cache.\nexport const SOUNDFONT_CONTENT_KEY = '${contentKey}';\nexport const SAMPLE_RELEASES:Readonly<Record<string,number>> = ${JSON.stringify(releases)};\nexport const SAMPLE_RELEASES_BY_PATCH:Readonly<Record<string,number>> = ${JSON.stringify(releasesByPatch)};\nexport const SAMPLE_RELEASE_PROFILES:Readonly<Record<string,readonly [oneShotRelease:number,oneShotDuration:number,loopRelease:number]>> = ${JSON.stringify(releaseProfiles)};\nexport const BANK_FILES = ${JSON.stringify(Object.fromEntries(Object.entries(manifest).map(([id,{bytes,unpackedBytes,sha256,unpackedSha256}])=>[id,{bytes,unpackedBytes,sha256,unpackedSha256}])))};\n`);
+writeFileSync('src/engine/playback/soundfont/bankIdentity.ts', `// Generated by scripts/package-soundfonts.ts; invalidates every physical sample cache.\nexport const SOUNDFONT_CONTENT_KEY = '${contentKey}';\nexport const SAMPLE_RELEASES:Readonly<Record<string,number>> = ${JSON.stringify(releases)};\nexport const SAMPLE_RELEASES_BY_PATCH:Readonly<Record<string,number>> = ${JSON.stringify(releasesByPatch)};\nexport const SAMPLE_RELEASE_PROFILES:Readonly<Record<string,readonly [oneShotRelease:number,oneShotDuration:number,loopRelease:number]>> = ${JSON.stringify(releaseProfiles)};\nexport const SAMPLE_RELEASE_MODULATION_BY_KEY:Readonly<Record<string,number>> = ${JSON.stringify(releaseModulationByKey)};\nexport const BANK_FILES = ${JSON.stringify(Object.fromEntries(Object.entries(manifest).map(([id,{bytes,unpackedBytes,sha256,unpackedSha256}])=>[id,{bytes,unpackedBytes,sha256,unpackedSha256}])))};\n`);
 const vcslSha256=Object.fromEntries(Array.from({length:3},(_,i)=>[`Cajon_hit${i+1}_mp_rr1.wav`,`Cajon_hit${i+1}_f_rr1.wav`,`Clap_rr${i+1}.wav`]).flat().map(file=>[file,createHash('sha256').update(readFileSync(join(sources[3],file))).digest('hex')]));
 const balafonSha256=Object.fromEntries(balafonSources.samples.map(row=>[row.file,createHash('sha256').update(readFileSync(join(sources[3],'balafon',row.file))).digest('hex')]));
 writeFileSync(`${output}/manifest.json`, JSON.stringify({ version: SOUNDFONT_VERSION,
@@ -285,6 +291,8 @@ writeFileSync(`${output}/manifest.json`, JSON.stringify({ version: SOUNDFONT_VER
   vcslPercussionSha256:Object.fromEntries(percussionSources.samples.map(row=>[row.id,createHash('sha256').update(readFileSync(join(sources[4],'vcsl-curated',row.file))).digest('hex')])),packs:manifest }, null, 2) + '\n');
 const qualitySourceSha256=Object.fromEntries(Object.entries(QUALITY_SOURCES).map(([id,path])=>[id,createHash('sha256').update(readFileSync(join(sources[4],path))).digest('hex')]));
 const completeManifest=JSON.parse(readFileSync(`${output}/manifest.json`,'utf8'));
+const regionalSources=JSON.parse(readFileSync('scripts/lib/regional-sources.json','utf8')) as RegionalSources;
+completeManifest.regionalSourceSha256=Object.fromEntries(regionalSources.sources.map(source=>[source.id,source.sha256]));
 completeManifest.qualitySourceSha256=qualitySourceSha256;
 completeManifest.extraSourceSha256={museScoreGeneral:createHash('sha256').update(timpaniData).digest('hex'),jawHarp:createHash('sha256').update(jawHarpData).digest('hex'),turntable:createHash('sha256').update(readFileSync(sources[7])).digest('hex')};
 completeManifest.distillation={allBanks:{format:'SF3',codec:'Ogg Vorbis',quality:6},piano:{velocityLayers:[4,8,12,16],sampleRate:44100,recordedDecay:'complete source sample',vorbisQuality:6},drumkit:{velocityLayers:6,takes:3,layout:'GM',sourceLayout:'chromatic C3-F#4',brushKit:{source:'GeneralUser GS bank 0/program 40',program:3},recordedDecay:'complete source sample',vorbisQuality:6},electric:{recordedDynamics:2,softMaxVelocity:92,takes:3,upperRangeDynamics:'source hard recordings where soft recordings are absent',recordedDecay:'complete source sample',vorbisQuality:6},recordedPercussion:Object.fromEntries(Object.entries(RECORDED_PERCUSSION_PATCHES).map(([id,route])=>[id,{program:route.program,takes:route.takes,source:'VCSL CC0'}]))};
@@ -311,4 +319,8 @@ writeFileSync(`${output}/notices/FSBS-electric.txt`,readFileSync(join(sources[4]
 writeFileSync(`${output}/notices/D-Smolken-double-bass.txt`,readFileSync(join(sources[4],'dsmolken_double_bass/LICENSE'),'utf8')+'\n\n'+readFileSync(join(sources[4],'dsmolken_double_bass/readme.txt'),'utf8')+'\n\nSource: https://github.com/sfzinstruments/dsmolken.double-bass\n');
 writeFileSync(`${output}/notices/Tonejs-harmonium.txt`,'Indian harmonium samples by donyaquick, Freesound sound 330410, distributed in tonejs-instruments.\nSource sample: https://freesound.org/people/donyaquick/sounds/330410/\nSource library: https://github.com/nbrosowsky/tonejs-instruments/tree/622c2f1c32c8cfce4158ddc3eb26e518ddef37e5/samples/harmonium\nThe tonejs-instruments sample license is Creative Commons Attribution 3.0: https://creativecommons.org/licenses/by/3.0/\nThe samples are trimmed, converted to mono 44.1 kHz, given a short terminal fade and encoded to Ogg Vorbis in the distributed SF3 bank.\n');
 mkdirSync('public',{recursive:true});
-writeFileSync('public/soundfont-notices.txt', 'MixGenres distilled SoundFont banks\n\n'+['GeneralUser-GS.txt','MuseScore-General.txt','Jaw-Harp.txt','Vinyl-Scratch.txt','Ichiyanagi.txt','FSS-steel-guitar.txt','Salamander.txt','Muldjord.txt','YR-bass.txt','FSBS-electric.txt','Bleymehl-bandoneon.txt','D-Smolken-double-bass.txt','Tonejs-harmonium.txt','VCSL.txt','GPL-3.txt','CC0.txt'].map(name=>`${name}\n\n${readFileSync(`${output}/notices/${name}`,'utf8')}`).join('\n\n')+'\n\nSpessaSynth core 4.3.22, Apache-2.0\n'+readFileSync('node_modules/spessasynth_core/LICENSE','utf8')+'\n\nstb-vorbis 0.0.6\n'+readFileSync('node_modules/stb-vorbis/LICENSE','utf8'));
+writeFileSync(`${output}/notices/BISA.txt`, `Berklee Intersectional Soundbox Archive (2025)\n${regionalSources.archive}\nCreative Commons Attribution 4.0: ${regionalSources.license}\n\n`
+  +Object.entries(regionalSources.credits).map(([instrument,credit])=>`${instrument}: ${credit}`).join('\n')
+  +'\n\nSources:\n'+regionalSources.sources.map(source=>`${source.file}: ${source.url}`).join('\n')
+  +'\n\nModified for the app: mono 44.1 kHz, pinned single-note crops, source-group gain, small edge fades, pitch-center corrections, crossfaded sustain loops for quena and bowed erhu, SF3/Ogg Vorbis q6. The full source files and individual hashes are listed in scripts/lib/regional-sources.json.\n');
+writeFileSync('public/soundfont-notices.txt', 'MixGenres distilled SoundFont banks\n\n'+['BISA.txt','GeneralUser-GS.txt','MuseScore-General.txt','Jaw-Harp.txt','Vinyl-Scratch.txt','Ichiyanagi.txt','FSS-steel-guitar.txt','Salamander.txt','Muldjord.txt','YR-bass.txt','FSBS-electric.txt','Bleymehl-bandoneon.txt','D-Smolken-double-bass.txt','Tonejs-harmonium.txt','VCSL.txt','GPL-3.txt','CC0.txt'].map(name=>`${name}\n\n${readFileSync(`${output}/notices/${name}`,'utf8')}`).join('\n\n')+'\n\nSpessaSynth core 4.3.22, Apache-2.0\n'+readFileSync('node_modules/spessasynth_core/LICENSE','utf8')+'\n\nstb-vorbis 0.0.6\n'+readFileSync('node_modules/stb-vorbis/LICENSE','utf8'));

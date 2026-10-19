@@ -20,6 +20,23 @@ const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80
 const samplePerformance = (instrumentId: string, notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [],
   duration: 1, tail: .5, blends: {}, trackInfo: { keys: { instrumentId, role: 'harmony' } }, worldId: 'folk' });
 
+test('guide-tone and shell policies retain different harmonic jobs without reducing literal score voicings', () => {
+  const theory=getGenreTheory('jazz');
+  const play=(voicing:'guide-tone'|'shell',chord:string,authoredPitch?:PhraseContext['authoredPitch'])=>realizeMidi({
+    profile:getInstrumentPerformanceProfile('piano'),pattern:{roles:['harmony']},role:'harmony',chord,phrasePosition:.2,
+    hybridTheory:{...theory,harmony:{...theory.harmony,voicing}},authoredPitch,
+  } as PhraseContext,0,1,createPhraseState());
+  const pcs=(notes:number[])=>[...new Set(notes.map(midi=>midi%12))].sort((a,b)=>a-b);
+  assert.deepEqual(pcs(play('shell','Cmaj13')),[0,4,11],'shell: root, third, seventh');
+  assert.deepEqual(pcs(play('guide-tone','Cmaj13')),[2,4,9,11],'guide-tone: third, seventh and written extensions');
+  assert.deepEqual(pcs(play('guide-tone','C')),[4,7],'triads keep an audible rootless third and fifth');
+  assert.deepEqual(pcs(play('shell','Cm7')),[0,3,10]);
+  for(const policy of ['shell','guide-tone'] as const) {
+    assert.deepEqual(pcs(play(policy,'C5')),[0,7],'a power chord cannot lose its fifth');
+    assert.deepEqual(play(policy,'Cmaj13',{midi:[48,52,55,59,62,69]}),[48,52,55,59,62,69]);
+  }
+});
+
 test('phrase behavior metadata varies with authored style cells instead of a shared placeholder', () => {
   const styles = GENRE_WORLDS.flatMap(world => world.styleDefinitions);
   const phraseProfiles = new Set(styles.map(style => JSON.stringify(style.calibration?.patterns.phraseBehaviors ?? [])));
