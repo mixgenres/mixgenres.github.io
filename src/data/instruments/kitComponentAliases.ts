@@ -1,10 +1,10 @@
 export const KIT_COMPONENT_MIDI_ALIASES: Array<[RegExp, string[]]> = [
   [/\bclap\b|\bhand.?clap\b/, ['hand-clap']],
   [/kick|bass.?drum|\bbd\b|bombo|grave/, ['kick']],
-  [/snare|\bsd\b|backbeat/, ['snare-center', 'snare']],
   [/rimshot/, ['snare-rimshot']],
   [/cross.?stick|side.?stick|rim.?click/, ['snare-cross-stick']],
   [/ghost/, ['snare-ghost', 'snare-center']],
+  [/snare|\bsd\b|backbeat/, ['snare-center', 'snare']],
   [/open.?hat|hi.?hat.*open|hihat.*open/, ['hihat-open']],
   [/pedal.?hat|hat.?pedal|foot.?chick/, ['hihat-pedal']],
   [/closed.?hat|hi.?hat.*closed|hihat.*closed/, ['hihat-closed']],

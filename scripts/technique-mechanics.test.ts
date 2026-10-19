@@ -221,8 +221,9 @@ test('authored flamenco fingers and simultaneous body strokes reach score and Mu
   assert.ok(exportMusicXml(pipeline.interpretation).includes('golpe simultaneously'));
   const soleaSheet = makeSheet('flamenco', 'flamenco-solea');
   for (const patternId of Object.values(soleaSheet.arrangement).flatMap(parts => Object.values(parts))) {
+    if (patternId === 'silent') continue;
     assert.equal(PATTERNS_BY_ID[patternId]?.sourceLevel, 'style-authored',
-      'the default song arrangement uses authored song cells, not selectable two-bar practice studies');
+      'each sounding part uses a written song cell');
   }
   const solea = compileSongPipeline(soleaSheet);
   const tremolo = solea.interpretation.notes.filter(n => n.technique === 'tremolo' && n.playback.authoredTechnique);

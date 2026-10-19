@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { GENRE_WORLDS, ALL_PATTERNS, PATTERNS_BY_ID } from '../src/data/genres';
+import { GENRE_WORLDS, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../src/data/genres';
 import { ALL_STYLES, getStyle } from '../src/engine/style/registry';
 import { songCatalog } from '../src/data/songs/catalog';
 import { STYLE_REFERENCES } from '../src/data/styles/styleReferences';
@@ -19,6 +19,11 @@ import { compileMusicianScore } from '../src/engine/score/musicianScore';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { INSTRUMENT_CATALOG, capitalizeInstrumentName } from '../src/data/instruments';
+
+const styleOwnsInstrumentPattern = (genreId: string, styleId: string, instrumentId: string) =>
+  (PATTERNS_BY_WORLD[genreId] ?? []).some(pattern => pattern.sourceLevel === 'style-authored'
+    && pattern.styleIds?.includes(styleId)
+    && pattern.instruments?.includes(instrumentId));
 
 test('instrument labels consistently capitalize the initial letter without changing IDs', () => {
   for (const instrument of INSTRUMENT_CATALOG) {
@@ -66,13 +71,82 @@ test('every catalog style uses its full teaching ensemble across the form', () =
   for (const entry of songCatalog) {
     const song = createCatalogSong(entry.id);
     const active = new Set(song.regions.flatMap(region => region.activeInstrumentIds ?? []));
-    if (RECORDING_ARRANGEMENTS[entry.referenceKey].activateTeachingSupport === false) {
-      const written = new Set(RECORDING_ARRANGEMENTS[entry.referenceKey].instruments ?? []);
+    const recording = RECORDING_ARRANGEMENTS[entry.referenceKey];
+    const supports = new Set(auditCatalogSongInstruments(entry.id).supportInstruments);
+    if (recording.activateTeachingSupport === false) {
+      const written = new Set(recording.instruments ?? []);
       assert.ok(written.size > 0, `${entry.styleId} declares its exposed source ensemble`);
       assert.deepEqual(active, written, `${entry.styleId} keeps its written personnel while extra teaching players remain available`);
       continue;
     }
-    assert.ok(active.size >= 8, `${entry.styleId} only activates ${active.size} instruments across its form`);
+    for (const track of song.tracks) {
+      const instrumentId = track.instrumentId ?? '';
+      if (!instrumentId || !supports.has(instrumentId)) {
+        assert.ok(active.has(instrumentId), `${entry.styleId}/${instrumentId} drops a named source player`);
+        continue;
+      }
+      const shouldActivate = instrumentId !== 'drums' || styleOwnsInstrumentPattern(entry.genreId, entry.styleId, instrumentId);
+      assert.equal(active.has(instrumentId), shouldActivate,
+        `${entry.styleId}/${instrumentId} should ${shouldActivate ? '' : 'not '}enter without a style-authored part`);
+    }
+  }
+});
+
+test('catalog samples never auto-play a sibling style drum groove', () => {
+  let kitlessStyles = 0;
+  for (const entry of songCatalog) {
+    const song = createCatalogSong(entry.id);
+    const recording = RECORDING_ARRANGEMENTS[entry.referenceKey];
+    const explicitDrums = recording.instruments?.includes('drums')
+      || Object.values(recording.sectionInstruments ?? {}).some(instruments => instruments.includes('drums'));
+    const localKit = styleOwnsInstrumentPattern(entry.genreId, entry.styleId, 'drums');
+    const activeDrums = song.regions.filter(region => region.activeInstrumentIds?.includes('drums'));
+    if (!explicitDrums && !localKit) {
+      kitlessStyles++;
+      assert.equal(activeDrums.length, 0, `${entry.styleId} must not inherit another style's kit phrase`);
+    }
+    if (activeDrums.length && !explicitDrums) {
+      for (const region of activeDrums) {
+        const track = song.tracks.find(candidate => candidate.instrumentId === 'drums')!;
+        const pattern = PATTERNS_BY_ID[song.arrangement[region.id]?.[track.id] ?? ''];
+        assert.ok(pattern?.styleIds?.includes(entry.styleId), `${entry.styleId} uses its own kit phrase`);
+      }
+    }
+  }
+  assert.ok(kitlessStyles >= 180, `expected broad catalog coverage, checked ${kitlessStyles} kitless styles`);
+
+  const noWave = createCatalogSong('weird-no-wave_song');
+  const zeuhl = createCatalogSong('weird-zeuhl_song');
+  const drumPatternIds = (song: ReturnType<typeof createCatalogSong>) => new Set(song.regions
+    .filter(region => region.activeInstrumentIds?.includes('drums'))
+    .map(region => {
+      const track = song.tracks.find(candidate => candidate.instrumentId === 'drums')!;
+      return song.arrangement[region.id]?.[track.id];
+    }));
+  const noWavePatterns = drumPatternIds(noWave);
+  const zeuhlPatterns = drumPatternIds(zeuhl);
+  assert.ok(noWavePatterns.size > 0 && zeuhlPatterns.size > 0, 'both authored kit styles retain their kit parts');
+  assert.ok([...noWavePatterns].every(id => id?.includes('no-wave')));
+  assert.ok([...zeuhlPatterns].every(id => id?.includes('zeuhl')));
+  assert.ok([...noWavePatterns].every(id => !zeuhlPatterns.has(id)), 'No Wave and Zeuhl keep distinct kit phrases');
+});
+
+test('added sample players adapt local role phrases before borrowing a sibling style', () => {
+  for (const [styleId, instrumentId, role] of [
+    ['weird-deconstructed', 'guitar', 'harmony'],
+    ['ambient-dark-ambient', 'guitar', 'lead'],
+    ['amapiano-classic', 'sampler', 'percussion'],
+    ['bachata-traditional-bolero-bachata', 'maracas', 'percussion'],
+  ]) {
+    const song = createCatalogSong(`${styleId}_song`);
+    const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId)!;
+    const regions = song.regions.filter(region => region.activeInstrumentIds?.includes(instrumentId));
+    assert.ok(regions.length > 0, `${styleId}/${instrumentId} remains audible`);
+    for (const region of regions) {
+      const pattern = PATTERNS_BY_ID[song.arrangement[region.id]?.[track.id] ?? ''];
+      assert.ok(pattern?.styleIds?.includes(styleId), `${styleId}/${instrumentId} keeps the selected style's phrase`);
+      assert.ok(pattern?.roles.includes(role), `${styleId}/${instrumentId} preserves its ${role} job`);
+    }
   }
 });
 
@@ -176,7 +250,8 @@ test('Disco Bollywood gives its added Sitar a plucked answer instead of a vocal 
   const outro = sheet.regions.find(region => region.kind === 'outro');
   assert.ok(outro?.activeInstrumentIds?.includes('sitar'), 'Sitar enters the authored closing ensemble');
   const pattern = PATTERNS_BY_ID[sheet.arrangement[outro!.id]?.[sitar!.id] ?? ''];
-  assert.equal(pattern?.shortName, 'Sitar disco answer');
+  assert.ok(pattern?.styleIds?.includes('bollywood-disco-bollywood'), 'Sitar follows a phrase written for the disco style');
+  assert.ok(pattern?.roles.includes('harmony'), 'Sitar retains its answering harmony job');
   assert.deepEqual(pattern?.instruments, ['sitar']);
   assert.ok(!pattern?.instruments?.includes('voice'), 'Sitar does not inherit the synthetic vocal guide');
 });
@@ -425,11 +500,14 @@ test('every catalog sample song builds an audible shared playback plan', () => {
   for (const entry of songCatalog) {
     const song = createCatalogSong(entry.id);
     const roster = new Set(song.tracks.map(track => track.instrumentId).filter((id): id is string => !!id));
+    const supports = new Set(auditCatalogSongInstruments(entry.id).supportInstruments);
     assert.ok(roster.size >= 8,
       `${entry.styleId} catalog sample exposes the complete eight-part teaching roster`);
     for (const instrumentId of roster) {
       if (RECORDING_ARRANGEMENTS[entry.referenceKey].activateTeachingSupport === false
-        && auditCatalogSongInstruments(entry.id).supportInstruments.includes(instrumentId)) continue;
+        && supports.has(instrumentId)) continue;
+      if (instrumentId === 'drums' && supports.has(instrumentId)
+        && !styleOwnsInstrumentPattern(entry.genreId, entry.styleId, instrumentId)) continue;
       assert.ok(song.regions.some(region => region.activeInstrumentIds?.includes(instrumentId)),
         `${entry.styleId}/${instrumentId} enters at least one authored section`);
     }

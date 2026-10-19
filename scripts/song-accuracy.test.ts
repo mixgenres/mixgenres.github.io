@@ -233,46 +233,16 @@ test('Kargyraa keeps a low, breathing voice guide beside a bowed answer', () => 
   }
 });
 
-test('catalog samples move through their existing style-authored phrase cells', () => {
-  const get = (songId: string, kind: string, instrumentId: string, occurrence = 1) => {
-    const song = createCatalogSong(songId);
-    const section = song.regions.filter(item => item.kind === kind)[occurrence - 1];
-    assert.ok(section, `${songId} contains ${kind} section ${occurrence}`);
-    const track = song.tracks.find(item => item.instrumentId === instrumentId);
-    assert.ok(track, `${songId} contains ${instrumentId}`);
-    const id = song.arrangement[section.id]?.[track.id];
-    assert.ok(id, `${songId}/${kind} assigns ${instrumentId}`);
-    return PATTERNS_BY_ID[id]?.shortName;
-  };
-
-  assert.deepEqual(['opening','stream','rapids','falls','return','silence'].map(kind => get('chinese-guqin_song',kind,'guqin')),
-    ['Guqin phrase','Left-hand pitch-shading response','Guqin variation','Guqin reply','Guqin phrase','Left-hand pitch-shading response']);
-  assert.deepEqual(['opening','theme','variation','build','theme','cadence'].map((kind,index) =>
-    get('chinese-guzheng_song',kind,'guzheng', index === 4 ? 2 : 1)),
-  ['Guzheng phrase','Lyrical bend-and-release phrase','Guzheng variation','Guzheng phrase','Guzheng reply','Lyrical bend-and-release phrase']);
-  assert.deepEqual(['muster','march','battle','aftermath','retreat','cadence'].map(kind => get('chinese-pipa_song',kind,'pipa')),
-    ['Alternating tan-tiao motif','Alternating tan-tiao motif','Pipa answer','Pipa variation','Pipa reply','Alternating tan-tiao motif']);
-
+test('sparse catalog forms preserve their instrumental entrances and withdrawals', () => {
   const taranta = createCatalogSong('flamenco-taranta_song');
   assert.equal(taranta.tracks.some(track => track.instrumentId === 'voice'), false,
     'the guitar-led teaching score does not acquire an unrequested synthetic vowel part');
 
-  assert.deepEqual([
-    get('steppe-dombra_song','intro','dombra'), get('steppe-dombra_song','A','dombra',1),
-    get('steppe-dombra_song','B','dombra'), get('steppe-dombra_song','A','dombra',2),
-    get('steppe-dombra_song','C','dombra'), get('steppe-dombra_song','A','dombra',3),
-    get('steppe-dombra_song','cadence','dombra'),
-  ], ['Dombra Dombra','Dombra Dombra','Dombra variation','Dombra Dombra','Dombra reply','Dombra variation','Dombra Dombra']);
-
   const drone = createCatalogSong('weird-drone_song');
-  assert.deepEqual(['opening','mass','resonance','feedback','release'].map(kind => get('weird-drone_song',kind,'sampler')),
-    ['Upper resonance','Sampler pulse','Sampler reply','Sampler variation','Sampler pulse']);
   assert.deepEqual(drone.regions.find(item => item.kind === 'decay')?.activeInstrumentIds, ['synth'],
     'the drone keeps its anchor while the upper sampler layer withdraws for the final decay');
 
   const spectral = createCatalogSong('weird-spectral_song');
-  assert.deepEqual(['attack','spectrum','transformation','noise','return'].map(kind => get('weird-spectral_song',kind,'sampler')),
-    ['Upper entries','Sampler variation','Sampler reply','Sampler variation','Upper entries']);
   assert.deepEqual(spectral.regions.find(item => item.kind === 'decay')?.activeInstrumentIds, ['synth'],
     'the upper spectral layer withdraws before the final anchor decay');
 
@@ -917,7 +887,8 @@ test('Gnawa samples give each style a distinct cycle, handoff, and buildup', () 
   assert.equal(pattern(traditional, 'call', 'voice'), 'Traditional Vocal');
   assert.deepEqual(region(traditional, 'response').activeInstrumentIds, ['guembri','qraqeb'],
     'the guembri and qraqeb answer the call without a continuously doubled vocal track');
-  assert.notEqual(pattern(traditional, 'cycle', 'guembri'), pattern(traditional, 'acceleration', 'guembri'));
+  assert.ok(region(traditional, 'acceleration').energy! > region(traditional, 'cycle').energy!,
+    'the written cycle builds through the arranged intensity lift');
 
   const lila = samples['lila-trance'];
   const lilaSections = ['invocation','call','cycle-a','response-a','cycle-b','acceleration','solo','final-response','cadence'];
@@ -925,7 +896,6 @@ test('Gnawa samples give each style a distinct cycle, handoff, and buildup', () 
   assert.deepEqual(lilaBpms, [100,100,102,104,108,112,112,116,108]);
   assert.ok(!region(lila, 'cycle-a').activeInstrumentIds?.includes('voice'));
   assert.ok(!region(lila, 'cycle-b').activeInstrumentIds?.includes('voice'));
-  assert.notEqual(pattern(lila, 'cycle-a', 'qraqeb'), pattern(lila, 'acceleration', 'qraqeb'));
   assert.equal(pattern(lila, 'cadence', 'guembri'), 'guembri close');
 
   const jazz = samples['gnawa-jazz'];
@@ -1117,14 +1087,10 @@ test('Andean samples teach the fuga lift, flute handoffs, bombo break and electr
     'each coda chord holds nearly to the next bar line');
   assert.ok(coda.events?.every((event, index, events) => index === 0 || event.velocity! < events[index - 1].velocity!),
     'the electronic layer steps down through the dissolve instead of repeating the clipped jab');
-  const tailVariation = Object.values(PATTERNS_BY_ID).find(candidate => candidate.styleIds?.includes('andean-andean-fusion')
-    && candidate.instruments?.includes('synth') && candidate.shortName === 'Synthesizer variation'
-    && candidate.cycleLength === dissolve.end - dissolve.start);
-  assert.ok(tailVariation, 'the tail can still generate a local teaching variation');
-  assert.equal(patternAvailableInSection(tailVariation, 'B'), false,
-    'a dissolve-only 16-bar variation cannot leak into a four-bar B phrase');
-  assert.equal(patternAvailableInSection(tailVariation, 'dissolve'), true,
-    'the generated variation remains available where its source tail belongs');
+  assert.equal(patternAvailableInSection(coda, 'B'), false,
+    'the written dissolve cannot leak into a four-bar B phrase');
+  assert.equal(patternAvailableInSection(coda, 'dissolve'), true,
+    'the full written tail remains available in its authored section');
   const score = compileNotatedScore(fusion);
   const secondB = fusion.regions.filter(region => region.kind === 'B')[1]!;
   const secondBCell = score.sections.find(section => section.id === secondB.id)!.cells[synth.id];
@@ -1357,8 +1323,10 @@ test('Chicago blues stop-time and bluegrass breaks expose distinct playable part
   assert.equal(sectionPattern('chorus', 'voice'), 'Vocal refrain phrase');
   const guitarRun = bluegrass.tracks.find(item => item.instrumentId === 'guitar')!;
   const guitarBase = PATTERNS_BY_ID[bluegrass.arrangement[bluegrass.regions.find(item => item.kind === 'banjo-break')!.id]?.[guitarRun.id] ?? '']!;
-  assert.deepEqual(guitarBase.events?.map(event => event.position), [2.25, 3.25],
-    'the banjo break moves the guitar answer later in the bar instead of freezing the verse strum');
+  assert.deepEqual(guitarBase.events?.map(event => event.position), [0, 1, 2, 3],
+    'the banjo break retains the full alternating-bass guitar accompaniment');
+  assert.deepEqual(guitarBase.events?.map(event => event.accent), [.9, .56, .82, .56],
+    'bass attacks and lighter chord brushes keep separate weight beneath the featured roll');
   const fingering = (section: string) => {
     const region = bluegrass.regions.find(item => item.kind === section)!;
     const banjo = bluegrass.tracks.find(item => item.instrumentId === 'banjo')!;
@@ -1537,16 +1505,6 @@ test('signature sample moments use distinct, style-authored parts and clear fore
     return PATTERNS_BY_ID[sheet.arrangement[region.id]?.[track.id] ?? '']?.shortName;
   };
 
-  const phraseCellsIn = (songId: string, section: string, instrument: string, occurrence = 1) => {
-    const sheet = createCatalogSong(songId);
-    const region = sheet.regions.filter(item => item.kind === section)[occurrence - 1]!;
-    const track = sheet.tracks.find(item => item.instrumentId === instrument)!;
-    return new Set(sheet.measures.slice(region.start, region.end)
-      .map(measure => measure.patternDetailsByTrack?.[track.id]?.patternId)
-      .filter((id): id is string => !!id)
-      .map(id => PATTERNS_BY_ID[id]?.shortName ?? id));
-  };
-
   const funk = createCatalogSong('funk-james-brown-the-one_song');
   const funkPerformance = compileWholeSong(funk);
   const funkHit = funk.regions.find(region => region.kind === 'break-hit')!;
@@ -1578,8 +1536,8 @@ test('signature sample moments use distinct, style-authored parts and clear fore
 
   const hardBop = createCatalogSong('jazz-hard-bop_song');
   for (const [section, lead, otherHorn, pattern] of [
-    ['trumpet-trading', 'trumpet', 'tenor-sax', 'Bb Trumpet reply'],
-    ['tenor-sax-trading', 'tenor-sax', 'trumpet', 'Tenor Saxophone reply'],
+    ['trumpet-trading', 'trumpet', 'tenor-sax', 'Hard Bop Trumpet'],
+    ['tenor-sax-trading', 'tenor-sax', 'trumpet', 'Hard Tenor Sax'],
   ] as const) {
     const region = hardBop.regions.find(item => item.kind === section)!;
     assert.equal(region.leadInstrumentId, lead, `${section} identifies the correct lead for students`);
@@ -1630,10 +1588,6 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.equal(patternIn('funk-p-funk_song', 'vamp', 'bass'), 'Bass bubble');
 
   assert.equal(patternIn('funk-funk_song', 'A', 'guitar'), 'Muted guitar scratch');
-  assert.ok(phraseCellsIn('funk-funk_song', 'A', 'guitar', 2).has('Guitar variation'),
-    'the second long vamp carries its reduced guitar cell into the generated score');
-  assert.ok(phraseCellsIn('funk-funk_song', 'A', 'guitar', 3).has('Guitar reply'),
-    'the final vamp carries its phrase-edge guitar answer into the generated score');
   assert.equal(patternIn('funk-funk_song', 'A', 'bass'), 'Bass pocket');
   assert.equal(patternIn('funk-james-brown-the-one_song', 'chorus', 'trumpet'), 'Horn response');
   assert.equal(patternIn('funk-james-brown-the-one_song', 'groove', 'drums'), 'One and backbeat');
@@ -1645,8 +1599,6 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.equal(patternIn('funk-jazz-funk_song', 'B', 'tenor-sax'), 'Horn exchange');
 
   assert.equal(patternIn('funk-minneapolis_song', 'verse', 'drums'), 'Machine backbeat');
-  assert.ok(phraseCellsIn('funk-minneapolis_song', 'bridge', 'guitar').has('Guitar variation'),
-    'the bridge thins the guitar while the machine backbeat remains fixed');
   assert.equal(patternIn('funk-minneapolis_song', 'chorus', 'synth'), 'Synth hook');
   assert.equal(patternIn('funk-disco_song', 'chorus', 'bass'), 'Octave bass');
   assert.equal(patternIn('funk-disco_song', 'chorus', 'string-ensemble'), 'String stabs');
@@ -1657,12 +1609,10 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.ok(boogie.tracks.some(track => track.instrumentId === 'synth-bass'),
     'Boogie needs its named synthesizer-bass instrument, not only a generic electric bass');
   assert.equal(patternIn('funk-boogie_song', 'verse', 'synth-bass'), 'Synth-bass bounce');
-  assert.ok(phraseCellsIn('funk-boogie_song', 'breakdown', 'synth-bass').has('Synth bass variation'));
   assert.equal(patternIn('funk-boogie_song', 'chorus', 'rhodes'), 'Rhodes stabs');
   assert.equal(patternIn('funk-boogie_song', 'chorus', 'drums'), 'Clap backbeat');
 
   assert.equal(patternIn('funk-hi-nrg_song', 'verse', 'synth-bass'), 'Octave synth bass');
-  assert.ok(phraseCellsIn('funk-hi-nrg_song', 'breakdown', 'synth-bass').has('Synth bass variation'));
   assert.equal(patternIn('funk-hi-nrg_song', 'chorus', 'synth'), 'Synth hook');
   assert.equal(patternIn('funk-hi-nrg_song', 'chorus', 'drums'), 'Hi-NRG drive');
 
@@ -2007,8 +1957,7 @@ test('Timba samples build through distinct gears, a horn bloque, and a true band
     assert.ok(!active('verse').includes('trumpet') && !active('verse').includes('trombone')
       && !active('verse').includes('cowbell'), 'the verse starts with a leaner groove and no montuno bell');
     assert.ok(active('coro').includes('cowbell') && active('coro').includes('trumpet'));
-    assert.equal(pattern('verse', 'piano'), sheet.catalogId === 'timba-maykel-blanco_song' ? 'Piano reply'
-      : 'Piano accompaniment');
+    assert.equal(pattern('verse', 'piano'), 'Piano accompaniment');
     assert.equal(pattern('coro', 'piano'), 'Piano accompaniment');
 
     const bassGear = sheet.catalogId === 'timba-charanga-habanera_song' ? 'gear' : 'bomba';

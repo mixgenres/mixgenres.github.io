@@ -156,8 +156,9 @@ function approachPc(targetPc: number, currentPc: number, chromatic: boolean): nu
 
 function bassMidi(ctx: PhraseContext, index: number, total: number): number {
   const low = ctx.profile.capabilities.lowMidi;
-  const high = Math.min(ctx.profile.capabilities.highMidi, /^(bass|low-anchor)$/.test(ctx.role) ? 60 : 127);
-  const center = Math.min(ctx.profile.capabilities.comfortableLowMidi + 5, 48);
+  const high = Math.min(ctx.profile.capabilities.highMidi,
+    /^(bass|low-anchor)$/.test(ctx.role) ? Math.max(60, low + 11) : 127);
+  const center = Math.max(low, Math.min(ctx.profile.capabilities.comfortableLowMidi + 5, 48));
   const rawMotion = ctx.bassStyle ?? ctx.hybridTheory.bass.style ?? 'riff';
   const b = rawMotion === 'root-fifth' ? 'rootFifth' : rawMotion;
   const root = parseChord(ctx.chord).bassPc;
@@ -233,7 +234,8 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   const guide = parsed.guideTones?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
-  const poly = Math.max(1, ctx.profile.capabilities.polyphony);
+  const poly = INSTRUMENTS_BY_ID[ctx.profile.instrumentId]?.voicing === 'single'
+    ? 1 : Math.max(1, ctx.profile.capabilities.polyphony);
   const authoredRegister = ctx.authoredPitch?.register;
   const base = authoredRegister !== undefined
     ? nearestMidi(parsed.rootPc, authoredRegister, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)

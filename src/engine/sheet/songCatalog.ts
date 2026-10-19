@@ -10,6 +10,12 @@ import type { FormStepTemplate, SongStyle } from '../../data/styles/schema';
 type EnsembleParts = NonNullable<NonNullable<SongStyle['arrangement']>['ensemble']>;
 const MIN_CATALOG_INSTRUMENTS = 8;
 
+function styleOwnsInstrumentPattern(genreId: string, styleId: string, instrumentId: string): boolean {
+  return (PATTERNS_BY_WORLD[genreId] ?? []).some(pattern => pattern.sourceLevel === 'style-authored'
+    && pattern.styleIds?.includes(styleId)
+    && pattern.instruments?.includes(instrumentId));
+}
+
 const RECORDING_SECTION_LABELS: Record<string, string> = {
   pulse: 'exposed violin cell',
   'additive-entry': 'cello and marimba enter',
@@ -353,7 +359,12 @@ export function createCatalogSong(id: string): Sheet {
   // sparse phrase.
   const activeRoster = new Set(form.flatMap(step => step.instrumentIds ?? []));
   const missingRoster = instruments.filter(instrumentId => !activeRoster.has(instrumentId));
-  if (missingRoster.length && recording.activateTeachingSupport !== false) {
+  // An automatically added kit must not import a sibling style's default
+  // groove. This affects sample personnel only: the interactive fusion path
+  // can still add a kit, any other instrument, or a different role explicitly.
+  const activatableMissingRoster = missingRoster.filter(instrumentId => instrumentId !== 'drums'
+    || styleOwnsInstrumentPattern(entry.genreId, entry.styleId, instrumentId));
+  if (activatableMissingRoster.length && recording.activateTeachingSupport !== false) {
     const anchors = form
       .map((step, index) => ({ step, index }))
       .filter(({ step }) => (step.instrumentIds?.length ?? 0) > 0 && !step.soloInstrumentId)
@@ -372,7 +383,7 @@ export function createCatalogSong(id: string): Sheet {
     const anchor = (preferredAnchors[0] ?? anchors[0]) ?? form.map((step, index) => ({ step, index }))
       .find(({ step }) => (step.instrumentIds?.length ?? 0) > 0);
     if (anchor) {
-      const added = [...new Set([...(anchor.step.instrumentIds ?? []), ...missingRoster])];
+      const added = [...new Set([...(anchor.step.instrumentIds ?? []), ...activatableMissingRoster])];
       form = form.map((step, index) => index === anchor.index ? { ...step, instrumentIds: added } : step);
       // Bass-focused styles teach the added rhythm-section colors through a
       // return passage as well as the first full entrance, so those parts get
@@ -380,7 +391,7 @@ export function createCatalogSong(id: string): Sheet {
       if (entry.genreId === 'bass' && anchors[1]) {
         const second = anchors[1];
         form = form.map((step, index) => index === second.index
-          ? { ...step, instrumentIds: [...new Set([...(step.instrumentIds ?? []), ...missingRoster])] }
+          ? { ...step, instrumentIds: [...new Set([...(step.instrumentIds ?? []), ...activatableMissingRoster])] }
           : step);
       }
     }
@@ -421,8 +432,7 @@ export function createCatalogSong(id: string): Sheet {
       if (cells[track.id] && cells[track.id] !== 'silent' && !supportTrack) continue;
       const instrumentId = track.instrumentId ?? '';
       // Keep the selected style's cells first. A same-genre cell is only used
-      // for an added support color that has no local authored cell, and still
-      // has to match the receiving instrument and natural role.
+      // when an explicitly added support color has no local style phrase.
       const patternPool = [...eligibleStylePatterns,
         ...(supportTrack
           ? eligibleGenreSupportPatterns.filter(pattern =>
@@ -437,7 +447,8 @@ export function createCatalogSong(id: string): Sheet {
         : 0;
       const roleCandidates = patternPool.filter(pattern => {
         if (pattern.sourceLevel !== 'style-authored') return false;
-        if (!pattern.roles.includes(track.role) && !pattern.roles.includes(patternRole)) return false;
+        if (!pattern.roles.includes(track.role) && !pattern.roles.includes(patternRole)
+          && !pattern.compatibleRoles?.includes(track.role)) return false;
         return patternAvailableInSection(pattern, region.kind);
       });
       // Support roster colors may not have a dedicated cell in a very small
@@ -459,14 +470,29 @@ export function createCatalogSong(id: string): Sheet {
         ? candidates.filter(pattern => pattern.sectionUsage?.some(value => canonicalPatternSection(value) === section))
         : [];
       const preferredCandidates = sectionCandidates.length ? sectionCandidates : candidates;
+      const localCandidates = patternPool.filter(pattern => pattern.sourceLevel === 'style-authored'
+        && pattern.styleIds?.includes(style.id)
+        && (pattern.roles.includes(track.role) || pattern.roles.includes(patternRole))
+        && (!['voice', 'choir'].includes(instrumentId)
+          || pattern.instruments?.some(source => ['voice', 'choir'].includes(source))));
+      const localSectionCandidates = section
+        ? localCandidates.filter(pattern => pattern.sectionUsage?.some(value => canonicalPatternSection(value) === section))
+        : [];
+      const localPreferredCandidates = localSectionCandidates.length ? localSectionCandidates : localCandidates;
       const instrumentKinds = new Set(instrumentPatternKinds(instrumentId));
-      const roleMatch = (pattern: typeof candidates[number]) => pattern.roles.includes(track.role) || pattern.roles.includes(patternRole);
+      const roleMatch = (pattern: typeof candidates[number]) => pattern.roles.includes(track.role)
+        || pattern.roles.includes(patternRole)
+        || !!pattern.compatibleRoles?.includes(track.role);
       const instrumentMatch = (pattern: typeof candidates[number]) => {
         const targets = [...(pattern.instruments ?? []), ...(pattern.compatibleInstruments ?? [])].map(String);
         return targets.some(target => target === instrumentId || instrumentKinds.has(target));
       };
       const exact = preferredCandidates.find(pattern => pattern.instruments?.includes(instrumentId));
       const compatible = preferredCandidates.find(pattern => instrumentMatch(pattern));
+      const localExact = localPreferredCandidates.find(pattern => pattern.instruments?.includes(instrumentId));
+      const localAuthoredExact = localCandidates.find(pattern => pattern.instruments?.includes(instrumentId));
+      const localCompatible = localPreferredCandidates.find(pattern => instrumentMatch(pattern));
+      const localRole = localPreferredCandidates.find(pattern => roleMatch(pattern));
       // A section may have no local cell for a support color, but another
       // section can still carry a dedicated phrase for that exact player.
       // Prefer that authored cell over borrowing a vocal, keyboard, or kit
@@ -495,6 +521,19 @@ export function createCatalogSong(id: string): Sheet {
             && roleMatch(pattern)
             && pattern.instruments?.includes(instrumentId))
         : undefined;
+      const localVariation = supportTrack && supportOccurrence > 0
+        ? ([...localPreferredCandidates].find(pattern => pattern.arrangementVariation === true
+            && pattern.id !== supportPatternIds.get(track.id)
+            && roleMatch(pattern))
+            ?? localCandidates.find(pattern => !pattern.sectionUsage?.length
+              && pattern.id !== supportPatternIds.get(track.id)
+              && roleMatch(pattern)))
+        : undefined;
+      const localExactVariation = supportTrack && supportOccurrence > 0
+        ? [...localPreferredCandidates, ...localCandidates].find(pattern => pattern.arrangementVariation === true
+          && pattern.id !== supportPatternIds.get(track.id)
+          && pattern.instruments?.includes(instrumentId))
+        : undefined;
       const variation = supportTrack && supportOccurrence > 0
         ? ([...preferredCandidates].filter(pattern => pattern.arrangementVariation === true
             && pattern.id !== supportPatternIds.get(track.id)
@@ -509,7 +548,10 @@ export function createCatalogSong(id: string): Sheet {
               && roleMatch(pattern)))
         : undefined;
       const roleCompatible = preferredCandidates.find(pattern => roleMatch(pattern));
-      const chosen = exactVariation ?? authoredExact ?? variation ?? exact ?? compatible ?? authoredCompatible ?? roleCompatible ?? authoredRole ?? preferredCandidates[0];
+      const localSupport = supportTrack
+        ? localExactVariation ?? localExact ?? localAuthoredExact ?? localVariation ?? localCompatible ?? localRole
+        : undefined;
+      const chosen = localSupport ?? exactVariation ?? authoredExact ?? variation ?? exact ?? compatible ?? authoredCompatible ?? roleCompatible ?? authoredRole ?? preferredCandidates[0];
       if (!chosen) throw new Error(`Recording ${id} has an active ${track.instrumentId}/${track.role} without an authored phrase in ${region.kind}`);
       cells[track.id] = chosen.id;
       if (supportTrack) {

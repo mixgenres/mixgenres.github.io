@@ -10,12 +10,18 @@ import { PATTERNS_BY_ID } from '../src/data/genres';
 import { ALL_STYLES, getStyle } from '../src/engine/style/registry';
 import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
+import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { velocityForEnergy } from '../src/engine/band/velocity';
 import { applyFeel, grooveVelocityMultiplier, grooveForStyle } from '../src/engine/band/groove';
 import { roleInteractionMultiplier } from '../src/engine/band/interpretBand';
 import { getPerformanceGrammar } from '../src/engine/band/performanceGrammar';
 import { resolveStyle } from '../src/engine/style/resolve';
-import type { MusicalPattern } from '../src/types';
+import type { MusicalPattern, Role } from '../src/types';
+import type { PatternEvent } from '../src/data/schema';
+import { compileNotatedScore } from '../src/engine/score/notatedScore';
+import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG } from '../src/engine/lookup/instruments';
+import { resolveNotatedDrum } from '../src/engine/score/percussionNotation';
+import { kitHitIntent } from '../src/data/performance/kitHitRules';
 
 function fixture(): MusicianScore {
   return { version: 1, title: 'Precision & expression', worldId: 'tango', meter: '4/4', pitchConvention: 'concert',
@@ -29,6 +35,26 @@ function note(overrides: Partial<ScoreNote> = {}): ScoreNote {
     midi: 69, frequencyHz: 440 * 2 ** (23 / 1200), velocity: 86, technique: 'legato',
     expression: { offsetSeconds: -.013, gateRatio: .85 }, source: { pitch: 'written', rhythm: 'written', technique: 'written', derived: false },
     playback: { gestureCode: codeForGesture('legato'), hitFunctionCode: 0, accent: .75 }, ...overrides };
+}
+
+function withFusionPhrase(instrumentId: string, role: Role, sourceInstrument: string, sourceRole: Role,
+  events: PatternEvent[], check: (song: ReturnType<typeof makeSheet>) => void) {
+  const base = makeSheet('tango', 'tango-golden-age');
+  const piano = base.tracks.find(track => track.instrumentId === 'piano')!;
+  const source = Object.values(PATTERNS_BY_ID).find(pattern => pattern.instruments?.includes(sourceInstrument))!;
+  const pattern: MusicalPattern = { ...source, id: `fusion-phrase-${instrumentId}-${role}`, instruments: [sourceInstrument],
+    roles: [sourceRole], canCrossRole: true, sectionUsage: undefined, variants: [], cycleLength: 1,
+    anticipationOffset: 0, events };
+  PATTERNS_BY_ID[pattern.id] = pattern;
+  try {
+    const track = { ...piano, instrumentId, instrument: INSTRUMENTS_BY_ID[instrumentId].name,
+      name: INSTRUMENTS_BY_ID[instrumentId].name, kind: instrumentId, role };
+    const region = { ...base.regions[0], bars: 1, start: 0, end: 1, activeInstrumentIds: [instrumentId],
+      solo: undefined, soloInstrumentId: undefined, leadInstrumentId: undefined };
+    check(rebuild({ ...base, tracks: [track], regions: [region], partRoles: {},
+      arrangement: { [region.id]: { [track.id]: pattern.id } },
+      lockedPatternAssignments: { [region.id]: { [track.id]: pattern.id } } }));
+  } finally { delete PATTERNS_BY_ID[pattern.id]; }
 }
 
 test('section dynamics preserve soft attacks, accent contrast, and a non-saturated forte ceiling', () => {
@@ -291,6 +317,128 @@ test('absolute pitches and fractional rests/ties survive pattern projection and 
     assert.deepEqual(notes.find(n => beatValue(n.position) > 3.99)!.duration, beatFraction(.0007));
     assert.ok(scoreRests(score).some(rest => beatValue(rest.position) === .35));
   } finally { delete PATTERNS_BY_ID[pattern.id]; }
+});
+
+test('fusion moves an absolute phrase into the receiving register without cutting its attacks or gates', () => {
+  const events: PatternEvent[] = [
+    { position: .25, duration: 1.25, pitch: { midi: [78, 82], cents: 17 }, articulation: 'legato' },
+    { position: 2, duration: .75, pitch: { midi: [81, 85] }, articulation: 'legato' },
+  ];
+  const source = structuredClone(events);
+  withFusionPhrase('guitar', 'harmony', 'piano', 'harmony', events, song => {
+    const attacks = compileNotatedScore(song).sections[0].cells[song.tracks[0].id].bars[0].attacks;
+    assert.deepEqual(attacks.map(attack => attack.pitch.kind === 'notes' ? attack.pitch.value.midi : undefined),
+      [[66, 70], [69, 73]], 'the whole phrase moves one octave, retaining both voices and its intervals');
+    assert.deepEqual(attacks.map(attack => beatValue(attack.position)), [.25, 2]);
+    assert.deepEqual(attacks.map(attack => beatValue(attack.duration)), [1.25, .75]);
+    const performance = compileWholeSong(song);
+    const written = performance.notes.filter(note => note.originCode === 0);
+    assert.deepEqual(written.map(note => note.midi).sort((a, b) => a - b), [66, 69, 70, 73]);
+    assert.ok(compileSamplePlan(performance, songMixOptions(song)).events.some(event => event.type === 'on'));
+  });
+  withFusionPhrase('piano', 'harmony', 'piano', 'harmony', events, song => {
+    const attacks = compileNotatedScore(song).sections[0].cells[song.tracks[0].id].bars[0].attacks;
+    assert.deepEqual(attacks.map(attack => attack.pitch.kind === 'notes' ? attack.pitch.value.midi : undefined),
+      [[78, 82], [81, 85]], 'the original player keeps its literal written register');
+  });
+  withFusionPhrase('violin', 'lead', 'guitar', 'lead', [{ position: 1 / 3, duration: .75,
+    pitch: { midi: 66 }, notation: { string: 1, fret: 2, tuplet: { actual: 3, normal: 2 } } }], song => {
+    const attack = compileNotatedScore(song).sections[0].cells[song.tracks[0].id].bars[0].attacks[0];
+    assert.equal(attack.pitch.kind === 'notes' && attack.pitch.value.midi, 66);
+    assert.equal(attack.notation?.string, undefined, 'a guitar string number cannot retune the violin phrase');
+    assert.equal(attack.notation?.fret, undefined);
+    assert.deepEqual(attack.notation?.tuplet, { actual: 3, normal: 2 }, 'the musical notation survives the instrument change');
+    assert.ok(compileWholeSong(song).notes.some(note => note.originCode === 0 && note.midi === 66));
+  });
+  assert.deepEqual(events, source, 'arranging the receiving part does not mutate the source pattern');
+});
+
+test('fusion turns chordal material into a playable wind line or a requested bass voice', () => {
+  const events: PatternEvent[] = [
+    { position: 0, duration: .8, pitch: { midi: [72, 76, 79] } },
+    { position: 2, duration: .8, pitch: { midi: [74, 77, 81] } },
+  ];
+  for (const [instrumentId, role, expected] of [
+    ['flute', 'harmony', [[79], [81]]],
+    ['piano', 'bass', [[48], [50]]],
+    ['flute', 'bass', [[60], [62]]],
+  ] as const) {
+    withFusionPhrase(instrumentId, role, 'piano', 'harmony', events, song => {
+      const cell = compileNotatedScore(song).sections[0].cells[song.tracks[0].id];
+      assert.equal(cell.role, role, 'the receiving role remains the requested role');
+      assert.deepEqual(cell.bars[0].attacks.map(attack => attack.pitch.kind === 'notes' ? attack.pitch.value.midi : undefined), expected);
+      const written = compileWholeSong(song).notes.filter(note => note.originCode === 0);
+      assert.equal(written.length, 2, 'each source attack becomes one playable line attack');
+      assert.deepEqual(written.map(note => note.midi), expected.flat());
+    });
+  }
+  const chords: PatternEvent[] = [{ position: 0, duration: .8, pitch: { voicing: 'chord' } },
+    { position: 2, duration: .8, pitch: { voicing: 'chord' } }];
+  for (const role of ['harmony', 'bass'] as const) {
+    withFusionPhrase('flute', role, 'piano', 'harmony', chords, song => {
+      const written = compileWholeSong(song).notes.filter(note => note.originCode === 0);
+      assert.equal(written.length, 2, `${role} produces one flute line through both chord gestures`);
+      assert.ok(written.every(note => note.midi >= 60 && note.midi <= 96), 'a high instrument can keep a bass contour in its own register');
+    });
+  }
+});
+
+test('fusion transfers percussion rhythm and contact meaning instead of leaking raw MIDI key numbers', () => {
+  const events: PatternEvent[] = [
+    { position: 0, duration: .2, pitch: { midi: 36 }, kind: 'accent' },
+    { position: .75, duration: .3, pitch: { midi: 40 }, kind: 'attack' },
+  ];
+  withFusionPhrase('piano', 'harmony', 'drums', 'percussion', events, song => {
+    const attacks = compileNotatedScore(song).sections[0].cells[song.tracks[0].id].bars[0].attacks;
+    assert.deepEqual(attacks.map(attack => beatValue(attack.position)), [0, .75]);
+    assert.ok(attacks.every(attack => attack.pitch.kind === 'instruction' && attack.pitch.instruction === 'voice-chord'),
+      'kit contact numbers become a pitched role instruction in the current harmony');
+    const performance = compileWholeSong(song);
+    assert.ok(performance.notes.length > 0 && performance.notes.every(note => !note.percussion));
+    assert.ok(compileSamplePlan(performance, songMixOptions(song)).events.some(event => event.type === 'on'));
+  });
+  withFusionPhrase('bongos', 'percussion', 'drums', 'percussion', events, song => {
+    const attacks = compileNotatedScore(song).sections[0].cells[song.tracks[0].id].bars[0].attacks;
+    const keys = attacks.map(attack => attack.pitch.kind === 'drum' ? attack.pitch.drum.midi : undefined);
+    const contacts = new Set(INSTRUMENTS_BY_ID.bongos.kitComponents!.map(component => component.midi));
+    assert.ok(keys.every(key => contacts.has(key!)), `the destination uses its own playable contacts: ${keys.join(', ')}`);
+    assert.ok(new Set(keys).size > 1, 'low and accented source contacts retain their contrast');
+    assert.ok(compileSamplePlan(compileWholeSong(song), songMixOptions(song)).events.some(event => event.type === 'on'));
+  });
+  withFusionPhrase('drums', 'percussion', 'piano', 'harmony', [
+    { position: 0, duration: .4, pitch: { midi: [64, 67, 71] } },
+    { position: 1.5, duration: .4, pitch: { midi: [65, 69, 72] } },
+  ], song => {
+    const attacks = compileNotatedScore(song).sections[0].cells[song.tracks[0].id].bars[0].attacks;
+    assert.equal(attacks.length, 2, 'each chord gesture becomes a rhythmic contact');
+    const keys = new Set(INSTRUMENTS_BY_ID.drums.kitComponents!.map(component => component.midi));
+    assert.ok(attacks.every(attack => attack.pitch.kind === 'drum' && keys.has(attack.pitch.drum.midi)),
+      'melodic MIDI numbers cannot choose unrelated kit voices');
+    assert.ok(compileSamplePlan(compileWholeSong(song), songMixOptions(song)).events.some(event => event.type === 'on'));
+  });
+});
+
+test('specific kit contacts retain rimshot, ghost, cross-stick and pedal identities through interpretation', () => {
+  for (const [source, component, intent] of [
+    ['snare-rimshot', 'snare-rimshot', 'slap'],
+    ['snare-ghost', 'snare-ghost', 'ghost'],
+    ['snare-cross-stick', 'snare-cross-stick', 'rim'],
+    ['hihat-pedal', 'hihat-pedal', 'mute'],
+    ['ride-bell', 'ride-bell', 'bell'],
+  ] as const) {
+    assert.equal(resolveNotatedDrum('drums', source, 'tone', 0).componentId, component);
+    assert.equal(kitHitIntent(source, 'tone'), intent);
+  }
+  for (const instrument of INSTRUMENT_CATALOG) for (const contact of instrument.kitComponents ?? []) {
+    const native = resolveNotatedDrum(instrument.id, contact.id, 'tone', 0);
+    assert.equal(native.componentId, contact.id, `${instrument.id}/${contact.id} retains its exact contact identity`);
+    assert.equal(native.midi, contact.midi);
+    for (const receiver of ['drums', 'bongos', 'tabla', 'cajon']) {
+      const transferred = resolveNotatedDrum(receiver, contact.id, 'tone', 0);
+      assert.ok(INSTRUMENTS_BY_ID[receiver].kitComponents?.some(component => component.id === transferred.componentId),
+        `${instrument.id}/${contact.id} transfers to a playable ${receiver} contact`);
+    }
+  }
 });
 
 test('MusicXML retains triplets, microtonal pitches, overlapping voices and ties', () => {

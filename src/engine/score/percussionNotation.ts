@@ -6,8 +6,14 @@ import type { HitFunction } from '../../data/performance/hitFunctions';
 import { DRUM_STAFF } from '../../data/notation/rules';
 
 export interface NotatedDrum { midi: number; componentId: string; name: string; step: string; octave: number; notehead: 'normal' | 'x' | 'diamond' | 'circle-x' }
-export function notatedDrum(instrumentId: string, midi: number): NotatedDrum {
-  const def = INSTRUMENTS_BY_ID[instrumentId], component = def?.kitComponents?.find(c => c.midi === midi);
+export function notatedDrum(instrumentId: string, midi: number, sourceContact?: string): NotatedDrum {
+  const def = INSTRUMENTS_BY_ID[instrumentId];
+  const candidates = def?.kitComponents?.filter(component => component.midi === midi) ?? [];
+  const raw = sourceContact?.toLowerCase();
+  const aliasIds = raw ? KIT_COMPONENT_MIDI_ALIASES.filter(([pattern]) => pattern.test(raw)).flatMap(([, ids]) => ids) : [];
+  const component = candidates.find(candidate => candidate.id.toLowerCase() === raw)
+    ?? aliasIds.map(id => candidates.find(candidate => candidate.id === id)).find(Boolean)
+    ?? candidates[0];
   const id = component?.id ?? instrumentId;
   const staffKey = Object.keys(DRUM_STAFF).filter(key => id.includes(key)).sort((a, b) => b.length - a.length)[0];
   if (!def) throw new Error(`No instrument definition for percussion part ${instrumentId}`);
@@ -40,8 +46,10 @@ export function notatedDrum(instrumentId: string, midi: number): NotatedDrum {
 export function resolveNotatedDrum(instrumentId: string, sourceHit: string | undefined, hit: HitFunction, index: number): NotatedDrum {
   const def = INSTRUMENTS_BY_ID[instrumentId], components = def?.kitComponents ?? [], raw = String(sourceHit ?? '').toLowerCase();
   if (!def) throw new Error(`No instrument definition for percussion part ${instrumentId}`);
+  const exact = components.find(component => component.id.toLowerCase() === raw);
+  if (exact) return notatedDrum(instrumentId, exact.midi, exact.id);
   for (const [pattern, ids] of KIT_COMPONENT_MIDI_ALIASES) if (pattern.test(raw)) {
-    for (const id of ids) { const component = components.find(c => c.id === id); if (component) return notatedDrum(instrumentId, component.midi); }
+    for (const id of ids) { const component = components.find(c => c.id === id); if (component) return notatedDrum(instrumentId, component.midi, component.id); }
   }
   if (instrumentId === 'hand-percussion' && /\bclap\b|\bhand.?clap\b/.test(raw)) {
     return notatedDrum(instrumentId, 39);
@@ -58,5 +66,5 @@ export function resolveNotatedDrum(instrumentId: string, sourceHit: string | und
   }
   const preferred = findKitComponent(instrumentId, intent, undefined, index);
   if (!preferred) throw new Error(`No ${intent} component is authored for ${instrumentId}${sourceHit ? ` (${sourceHit})` : ''}`);
-  return notatedDrum(instrumentId, preferred.midi);
+  return notatedDrum(instrumentId, preferred.midi, preferred.id);
 }

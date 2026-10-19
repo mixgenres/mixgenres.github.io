@@ -725,6 +725,15 @@ export function suggestPattern(
     .filter((p): p is MusicalPattern => !!p && automaticPatternCandidate(p)
       && (guestWeight > 0 || p.worldId === worldId)
       && patternSupportsVoice(p, voice, allowInstrumentAdaptation));
+  // Explicitly enabling an extra player can request a role absent from this
+  // style's written ensemble (for example palmas beside unaccompanied cante).
+  // Adapt a written part of that role from the genre, keeping the source
+  // phrase intact. Automatic arrangements keep their style-local candidates.
+  if (allowInstrumentAdaptation && !candidatePatterns.length) {
+    candidatePatterns.push(...(PATTERNS_BY_WORLD[worldId] ?? []).filter(pattern =>
+      automaticPatternCandidate(pattern) && pattern.sourceLevel === 'style-authored'
+      && patternSupportsVoice(pattern, voice, true)));
+  }
   // An authored verse answer, solo phrase, or cadence belongs at the section
   // it was written for. Previously it only received a score bonus, so a highly
   // weighted statement cell could drown out the form-specific material and

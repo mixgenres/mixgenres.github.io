@@ -12,6 +12,7 @@ import { resolveNotatedDrum, notatedDrum, type NotatedDrum } from './percussionN
 import { LRUMap, registerCache } from '../cache/lru';
 import { contentKey } from '../cache/contentKey';
 import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
+import { phrasePitchAdapter } from './phraseAdaptation';
 
 export type WrittenPitch = { kind: 'notes'; value: NonNullable<PatternEvent['pitch']> }
   | { kind: 'drum'; drum: NotatedDrum }
@@ -51,9 +52,22 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
           staffLines: percussion && !def?.kit ? 1 : 5, views: percussion ? ['staff', 'drum-lanes', 'technique'] : def?.tuningAndMechanics?.openStrings?.length ? ['staff','tablature','technique'] : ['staff','technique'], vocabulary: [],
           ...GENRE_NOTATION_RULES[genre], ...INSTRUMENT_NOTATION_RULES[def?.id], ...(percussion ? { views: ['staff','drum-lanes','technique'] as NotationRules['views'] } : {}), ...def?.notationRules };
         const measures = sheet.measures.slice(region.start, region.end).map(m => ({ pattern: m.patternByTrack?.[track.id], detail: m.patternDetailsByTrack?.[track.id] }));
-        const key = contentKey(['notation-v1', track.id, region.id, def?.id, role, beats, rules, measures]);
+        const sourceParts = [...new Set(measures.map(({ pattern, detail }) => pattern ?? detail?.patternId ?? 'silent'))]
+          .map(id => { const source = PATTERNS_BY_ID[id];
+            return [id, source?.instruments, source?.roles, source?.events?.map(event => event.pitch)]; });
+        const key = contentKey(['notation-v2', track.id, region.id, def?.id, role, beats, rules, measures, sourceParts]);
         let cell = cells.get(key);
         if (!cell) {
+          const projectedPitches = new Map<string, Array<PatternEvent['pitch']>>();
+          for (const { pattern: selected, detail } of measures) {
+            const patternId = selected ?? detail?.patternId ?? 'silent';
+            const pitches = (detail?.perf as NativeSlice | undefined)?.pitches ?? [];
+            const collected = projectedPitches.get(patternId) ?? [];
+            for (const pitch of pitches) collected.push(pitch);
+            projectedPitches.set(patternId, collected);
+          }
+          const adapters = new Map([...projectedPitches].map(([patternId, pitches]) =>
+            [patternId, phrasePitchAdapter(PATTERNS_BY_ID[patternId], def.id, role, pitches)]));
           const bars = measures.map(({ pattern: selected, detail }, bar): WrittenBar => {
             const patternId = selected ?? detail?.patternId ?? 'silent', pattern = PATTERNS_BY_ID[patternId];
             if (patternId !== 'silent' && !pattern) throw new Error(`Unknown written pattern ${patternId} for ${region.id}/${track.id}`);
@@ -77,17 +91,25 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
               const projectedHit = native
                 ? (native.hitTypes?.[index] ?? '')
                 : detail?.hitTypes?.[index];
-              const sourceHit = native
+              const adapter = adapters.get(patternId);
+              const sourcePitch = native?.pitches?.[index];
+              const sourceHit = (native
                 ? projectedHit || undefined
-                : projectedHit || pattern?.hitGrid?.[index];
+                : projectedHit || pattern?.hitGrid?.[index]) ?? adapter?.percussionHit?.(sourcePitch);
               const hit = notatedHit(pattern, index, projectedHit, native ? {
                 accent: native.accents[index], onset: native.onsets[index], subdivisions: native.stepsPerBar,
               } : undefined);
-              let value = native?.pitches?.[index];
+              let value = adapter ? adapter.pitch(sourcePitch) : sourcePitch;
               let directions = native?.notations?.[index];
               if (directions?.tuplet && (!Number.isInteger(directions.tuplet.actual) || directions.tuplet.actual < 1 || !Number.isInteger(directions.tuplet.normal) || directions.tuplet.normal < 1)) throw new Error('Invalid written tuplet');
               if (directions?.string !== undefined && (!Number.isInteger(directions.string) || directions.string < 1)) throw new Error('Invalid written string number');
               if (directions?.fret !== undefined && (!Number.isInteger(directions.fret) || directions.fret < 0)) throw new Error('Invalid written fret');
+              if (directions && adapter?.adapted && (!pattern?.instruments?.includes(def.id)
+                || JSON.stringify(value?.midi) !== JSON.stringify(sourcePitch?.midi))) {
+                const { string: _sourceString, fret: _sourceFret, fingering: _sourceFingering,
+                  bowing: _sourceBowing, ...phraseDirections } = directions;
+                directions = phraseDirections;
+              }
               // A pattern can move between instruments in the free-form
               // editor. Keep its playable attack and omit notation mechanics
               // that the selected instrument cannot perform.
@@ -107,7 +129,7 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
                 value = { ...value, midi };
               }
               const pitch: WrittenPitch = percussion ? { kind: 'drum', drum: value?.midi !== undefined
-                ? notatedDrum(def.id, Array.isArray(value.midi) ? value.midi[0] : value.midi) : resolveNotatedDrum(def.id, sourceHit, hit, index) }
+                ? notatedDrum(def.id, Array.isArray(value.midi) ? value.midi[0] : value.midi, sourceHit) : resolveNotatedDrum(def.id, sourceHit, hit, index) }
                 : value ? { kind: 'notes', value } : { kind: 'instruction', instruction: /bass|low-anchor/.test(role) ? 'bass-motion' : /lead|melody|counterline|voice/.test(role) ? 'improvise' : 'voice-chord', role };
               const technique = native?.articulations?.[index] || detail?.articulations?.[index] || detail?.articulation;
               const duration = native?.durations?.[index]
@@ -121,7 +143,7 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
                   ?? (Math.abs(native?.microtiming?.[index] ?? 0) > .5 ? 'milliseconds' : 'grid') },
                 durationAuthored: native?.durationAuthoredByOnset?.[index] ?? native?.durationsAuthored ?? detailDurationAligned, notation: directions };
               if (percussion && Array.isArray(value?.midi)) {
-                return value.midi.map(midi => ({ ...attack, pitch: { kind: 'drum', drum: notatedDrum(def.id, midi) } }));
+                return value.midi.map(midi => ({ ...attack, pitch: { kind: 'drum', drum: notatedDrum(def.id, midi, sourceHit) } }));
               }
               return attack;
             });
