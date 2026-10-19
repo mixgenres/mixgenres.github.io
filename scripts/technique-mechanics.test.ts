@@ -44,7 +44,7 @@ test('descriptive ring metadata does not cap generated note gates', () => {
     'explicit short articulation remains effective after removing the ring ceiling');
   assert.ok(Math.abs(noteLengthBeats(1, 'legato') - 1.3) < 1e-9,
     'legato keeps its authored overlap length');
-  for (const nonLengthGesture of ['bachi', 'alternate-pluck', 'accent', 'marcato', 'heavy', 'mute', 'muted', 'cup-mute', 'palm-mute']) {
+  for (const nonLengthGesture of ['bachi', 'alternate-pluck', 'picado', 'accent', 'marcato', 'heavy', 'mute', 'muted', 'cup-mute', 'palm-mute']) {
     assert.equal(noteLengthBeats(0.75, nonLengthGesture), 0.75,
       `${nonLengthGesture} changes attack, color, or energy without silently shortening the note`);
   }
@@ -262,6 +262,17 @@ function writtenFixture(instrument: 'guitar' | 'piano', events: PatternEvent[]) 
       arrangement: { [region.id]: { [track.id]: pattern.id } }, energies: { [region.id]: { [track.id]: 1 } } }));
   } finally { delete PATTERNS_BY_ID[pattern.id]; }
 }
+
+test('picado changes the attack without imposing a short gate on an implicit held note', () => {
+  const pipeline=writtenFixture('guitar',[{position:0,pitch:{midi:60},articulation:'picado'}]);
+  const note=pipeline.performance.notes.find(note=>note.originCode===0)!;
+  assert.equal(GESTURE_NAMES[note.gestureCode],'picado');
+  const bar=pipeline.performance.bars[0];
+  assert(note.dur>=bar.end-bar.start,'the remaining written bar is available to ring');
+  const plan=compileSamplePlan(pipeline.performance,{trackInstruments:new Map([[note.trackId,'guitar']]),worldId:'flamenco'});
+  const off=plan.events.find(event=>event.type==='off');
+  assert.equal(off?.time,note.time+note.dur,'the full performed gate reaches the sample renderer');
+});
 
 test('a written body contact stays unpitched from the initial score through sample planning and MusicXML', () => {
   const pipeline = writtenFixture('guitar', [{ kind: 'attack', position: 0, duration: 1,

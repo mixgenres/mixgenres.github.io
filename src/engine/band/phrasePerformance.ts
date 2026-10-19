@@ -242,18 +242,62 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
     ? nearestMidi(parsed.rootPc, authoredRegister, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)
     : Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi,
       voiceProfile(ctx.profile.instrumentId).centre + (voicing === 'power' ? -12 : 0)));
+  if (voicing === 'power') {
+    // The upper root is an octave doubling, not a duplicate pitch class to
+    // discard. Move the shape together so range fitting cannot lose its fifth
+    // or fold the octave back onto the lower root.
+    const intervals = [0, 7, 12].slice(0, poly);
+    const target = authoredRegister !== undefined ? base : state.previousVoicing?.[0] ?? base;
+    const root = nearestMidi(parsed.rootPc, target,
+      ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi - intervals.at(-1)!);
+    const fits = root % 12 === parsed.rootPc && root >= ctx.profile.capabilities.lowMidi
+      && root + intervals.at(-1)! <= ctx.profile.capabilities.highMidi;
+    const anchor = fits ? root : nearestMidi(parsed.rootPc, target, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
+    const notes = fits ? intervals.map(interval => root + interval)
+      : [...new Set(intervals.map(interval => nearestMidi((parsed.rootPc + interval) % 12, anchor + interval,
+        ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)))].sort((a, b) => a - b);
+    state.previousVoicing = notes;
+    return notes;
+  }
+  if (voicing === 'drop-two') {
+    // Build the written close stack first, then lower its second-highest voice
+    // one octave. A generic wide target for each pitch erased this voicing's
+    // identity and could independently invert its voices at every change.
+    const intervals = parsed.intervals.slice(0, poly);
+    if (intervals.length >= 3) intervals[intervals.length - 2] -= 12;
+    intervals.sort((a, b) => a - b);
+    const targets = authoredRegister === undefined && state.previousVoicing?.length === intervals.length
+      ? state.previousVoicing : intervals.map(interval => base + interval);
+    let best: number[] | undefined, distance = Infinity;
+    for (let root = parsed.rootPc; root <= 127; root += 12) {
+      const candidate = intervals.map(interval => root + interval);
+      if (candidate[0] < ctx.profile.capabilities.lowMidi || candidate.at(-1)! > ctx.profile.capabilities.highMidi) continue;
+      const movement = candidate.reduce((sum, note, i) => sum + Math.abs(note - targets[i]), 0);
+      if (movement < distance) { best = candidate; distance = movement; }
+    }
+    // A narrow instrument may not fit the whole shape in any octave. Revoice
+    // its written tones individually, retaining every available pitch class.
+    // An unplayable octave doubling may become a unison; it never changes the
+    // chord into the range endpoint's unrelated pitch class.
+    best ??= [...new Set(intervals.map((interval, i) => nearestMidi(((parsed.rootPc + interval) % 12 + 12) % 12,
+      targets[i], ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)))].sort((a, b) => a - b);
+    state.previousVoicing = best;
+    return best;
+  }
   let pcs: number[];
-  if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
-  else if (voicing === 'guide-tone' || voicing === 'shell') pcs = [...guide, ...tension, ...tones];
+  // Guide tones carry the third/seventh and optional written extensions;
+  // shells add the root but leave the fifth and color tones to other players.
+  // Appending every chord tone made both policies the same full chord.
+  if (voicing === 'guide-tone') pcs = guide.length ? [...guide, ...tension] : tones.filter(pc => pc !== parsed.rootPc);
+  else if (voicing === 'shell') pcs = [parsed.rootPc, ...(guide.length ? guide : tones.filter(pc => pc !== (parsed.rootPc + 7) % 12))];
   else if (voicing === 'montuno' || voicing === 'yumba') pcs = [...tones.filter(pc => pc !== parsed.rootPc), ...guide, ...tension];
-  else if (voicing === 'drop-two') pcs = [...tones, ...guide];
   else pcs = [...tones, ...tension, ...guide];
   pcs = Array.from(new Set(pcs));
   // inversion on every attack, creating rapid register churn and excessive
   // low-note collisions. Voice leading is handled by nearestMidi/nextChord.
   pcs = pcs.slice();
   const out: number[] = [];
-  const spacing = voicing === 'open' || voicing === 'drop-two' ? 7 : 4;
+  const spacing = voicing === 'open' ? 7 : 4;
   for (let i = 0; i < Math.min(poly, pcs.length); i++) {
     const writtenTarget = base + i * spacing + (voicing === 'montuno' || voicing === 'yumba' ? 7 : 0);
     const target = authoredRegister !== undefined ? writtenTarget : state.previousVoicing?.[i] ?? writtenTarget;

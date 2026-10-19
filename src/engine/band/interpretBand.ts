@@ -758,7 +758,10 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight, lane.lens.sourceStyleId);
         const phraseId = `${track.id}:${region.id}:${phraseIndex}`;
         const timingLockedCue = lane.rhythm.pattern.timingLock === 'ensemble';
-        const soundContext = { worldId: region.genre ?? sheet.worldId, styleId: regionStyle.id, role: track.role };
+        const guestLeadsPart = lane.lens.weight > .55;
+        const performingStyle = guestLeadsPart ? sourceFeelStyle : regionStyle;
+        const soundContext = { worldId: guestLeadsPart ? lane.lens.sourceGenre : region.genre ?? sheet.worldId,
+          styleId: performingStyle.id, role: track.role };
         const phrase: PerformancePhrase = {
           id: phraseId, trackId: track.id, regionId: region.id, startBar: phraseStart, endBar: phraseEnd,
           start: bars[phraseStart]?.start ?? 0, end: bars[phraseEnd - 1]?.end ?? 0, soundContext,
@@ -942,8 +945,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             // second time changes the written phrase and can break cadences.
             const dur = Math.max(onset.durationAuthored ? 0.000001 : 0.028,
               scoreDurationSeconds({ bars }, bar, onset.position * bt.beatsPerBar, writtenDuration));
-            const tuningSystem = regionStyle.harmony.tuningSystem;
-            if (!tuningSystem) throw new Error(`No authored tuning system for ${regionStyle.primaryGenre}/${regionStyle.id}`);
+            const tuningSystem = performingStyle.harmony.tuningSystem;
+            if (!tuningSystem) throw new Error(`No authored tuning system for ${performingStyle.primaryGenre}/${performingStyle.id}`);
             const tuning = resolveTuningSystem(tuningSystem);
             const genericGesture = Boolean(authoredGesture && ['accent','staccato','legato','tenuto'].includes(authoredGesture.toLowerCase()));
             const roleClass = techniqueRoleClass(track.role);
@@ -1060,7 +1063,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         if (carriesChordVoicing && state.previousVoicing?.length) carriedVoicing = state.previousVoicing.slice();
         if (/^(lead|melody|counterline|voice)$/i.test(String(track.role ?? '')) && !timingLockedCue) {
           phraseNotes.push(...developLeadPhrase(phraseNotes, phraseDevelopment, grammarBundle.hybrid,
-            regionStyle, track.instrumentId, track.id, phraseId, soundContext, bars));
+            performingStyle, track.instrumentId, track.id, phraseId, soundContext, bars));
         }
         notes.push(...phraseNotes);
       }
@@ -1186,9 +1189,12 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
     const track = sheet.tracks.find(t => t.id === note.trackId);
     const region = sheet.regions.find(r => r.id === bars[note.bar]?.regionId);
     if (!track?.instrumentId || !region) continue;
-    const genre = region.genre ?? sheet.worldId;
+    const genre = note.soundContext?.worldId ?? region.genre ?? sheet.worldId;
     if (!note.exactPitch) note.midi = foldToRange(note.midi, voiceProfile(track.instrumentId, genre));
-    const style = getResolvedSectionStyle(sheet, region);
+    const regionStyle = getResolvedSectionStyle(sheet, region);
+    const style = note.soundContext && (note.soundContext.worldId !== (region.genre ?? sheet.worldId)
+      || note.soundContext.styleId !== regionStyle.id)
+      ? resolveStyle({ genreId: note.soundContext.worldId, styleId: note.soundContext.styleId }) : regionStyle;
     const harmonicChord = note.harmonicChord;
     if (!harmonicChord) throw new Error(`Pitched note ${note.attackId ?? note.trackId} has no resolved harmony`);
     const tuningSystem = style.harmony.tuningSystem;

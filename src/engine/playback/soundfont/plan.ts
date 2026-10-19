@@ -64,7 +64,17 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const occupied: Array<Map<number,KeyReservation[]>> = [];
     const expressiveLanes = new Set<number>();
     const track: SampleTrack = { id, instrumentId, gain: params.roleGain ?? .7, channels: [], pan: params.pan };
-    const pedal=performance.ccs.filter(cc=>cc.trackId===id&&cc.cc===64).sort((a,b)=>a.time-b.time);
+    const controls=performance.ccs.filter(cc=>cc.trackId===id).sort((a,b)=>a.time-b.time);
+    const pedal=controls.filter(cc=>cc.cc===64);
+    // SpessaSynth does not implement CC66. Compile its selective latch into
+    // note-offs in the shared plan so live audio, seeking and export agree.
+    const sostenuto=controls.filter(cc=>cc.cc===66);
+    const captures=sostenuto.filter((cc,i)=>cc.value>=64 && (sostenuto[i-1]?.value ?? 0)<64);
+    const physicalEnd=(note:PerfNote)=> {
+      const end=note.time+note.dur;
+      return captures.filter(cc=>cc.time>note.time && cc.time<end)
+        .reduce((held,cc)=>Math.max(held,sostenuto.find(next=>next.time>cc.time&&next.value<64)?.time ?? performance.duration),end);
+    };
     const notes = performance.notes.filter(note => note.trackId === id).flatMap(note => {
       if (!note.bodyAttack || note.pitchIdentity === 'unpitched') return [note];
       const technique = note.musicianNotation?.bodyTechnique;
@@ -223,14 +233,22 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       // with pitch motion retain independent same-key ownership.
       const channel = index + lane * Math.max(1, trackIds.length);
       occupied[lane] ??= new Map();
-      const end=note.time+note.dur;
+      const end=physicalEnd(note);
       const down=pedal.filter(cc=>cc.time<=end).at(-1)?.value ?? 0;
       const pedalEnd=down>=64 ? pedal.find(cc=>cc.time>end&&cc.value<64)?.time ?? performance.duration : end;
       const releaseStart=Math.max(end,pedalEnd);
       const profile=SAMPLE_RELEASE_PROFILES[`${patch.pack}:${patch.bank}:${patch.program}:${patch.drum}:${key}`];
-      const loopTail=profile&&profile[2]>.0011?Math.max(.015625,profile[2]):0;
+      // CC72 adds up to 3600 bipolar timecents to the volume release. Retain
+      // the largest setting observed while this voice is held: using only
+      // the packaged default clipped controller-extended releases in export
+      // and freed their channel/voice reservations too early.
+      const releaseAtOnset=controls.filter(cc=>cc.cc===72&&cc.time<=note.time).at(-1)?.value ?? 64;
+      const maxRelease=controls.filter(cc=>cc.cc===72&&cc.time>note.time&&cc.time<=releaseStart)
+        .reduce((value,cc)=>Math.max(value,cc.value),Math.max(64,releaseAtOnset));
+      const releaseScale=2**(3*(maxRelease-64)/64);
+      const loopTail=profile&&profile[2]>.0011?Math.max(.015625,profile[2]*releaseScale):0;
       const estimatedTail=profile
-        ?Math.max(loopTail,Math.min(Math.max(.015625,profile[0]),Math.max(0,profile[1]-(releaseStart-note.time))))
+        ?Math.max(loopTail,Math.min(Math.max(.015625,profile[0]*releaseScale),Math.max(0,profile[1]-(releaseStart-note.time))))
         // Patch-wide release is the maximum across every key and velocity.
         // It is not a safe estimate for a missing key profile: drum presets in
         // particular contain very long release values on unrelated zones.
@@ -257,7 +275,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       voiceDemand.push({start:note.time,end:releaseEnd,patch,key,velocity:timbreVelocity});
       events.push({ time: note.time, type: 'on', channel, key, velocity: timbreVelocity,
         patch, gain: sound.roleGain, cents:cents+initialBend });
-      events.push({ time: note.time + hold, type: 'off', channel, key });
+      events.push({ time: end, type: 'off', channel, key });
       // Filter sweep is a real synth gesture, not a note-length hint. CC 74 is
       // bipolar in the shipped SoundFont engine: 64 leaves the authored patch
       // cutoff unchanged, while lower and higher values move it down/up.
@@ -310,7 +328,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       }
       // Physical custom CCs must not accidentally become unrelated GM controls.
       const mapped = cc.cc === 18 ? 74 : cc.cc === 24 ? 11 : cc.cc;
-      if (![1,7,10,11,64,66,67,71,72,73,74].includes(mapped)) continue;
+      if (![1,7,10,11,64,67,71,72,73,74].includes(mapped)) continue;
       events.push({ time:cc.time,type:'cc',channels:track.channels,cc:mapped,value:Math.max(0,Math.min(127,cc.cc===18?127-cc.value:cc.value)) });
     }
     tracks.push(track);

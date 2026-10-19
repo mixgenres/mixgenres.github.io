@@ -66,8 +66,8 @@ const contrastingSamples = [
     id: 'folk-celtic_song', leadInstrument: 'violin',
     maxGeneratedPhraseEntryLeap: 7,
     chords: ['Em', 'D', 'Bm'], regions: ['intro', 'A', 'B', 'variation', 'tag'],
-    instruments: ['violin', 'tin-whistle', 'guitar', 'bouzouki', 'bodhran'],
-    soundPacks: ['strings', 'winds', 'guitars', 'percussion'],
+    instruments: ['violin', 'tin-whistle', 'guitar', 'bouzouki', 'bodhran', 'upright-bass'],
+    soundPacks: ['strings', 'winds', 'guitars', 'percussion', 'upright'],
   },
   {
     id: 'persian-modern-persian_song', leadInstrument: 'kamancheh',
@@ -149,6 +149,12 @@ test('contrasting catalog songs retain distinct tone, phrase, form, timbre and p
       const partPatterns = localPatterns.filter(pattern => pattern.instruments?.includes(instrumentId));
       assert.ok(new Set(partPatterns.map(pattern => pattern.shortName).filter(Boolean)).size >= 1,
         `${entry.styleId} gives ${instrumentId} a clearly named authored part`);
+      if (entry.styleId === 'folk-celtic' && instrumentId === 'upright-bass') {
+        assert.ok(partPatterns.length >= 2, 'the optional bass has a pulse and a strain-closing teaching cell');
+        assert.ok(partPatterns.every(pattern => pattern.meter === '6/8'
+          && pattern.events?.[0].position === 0 && pattern.events?.[1].position === 1.5),
+        'Celtic bass follows the two jig pulses instead of borrowing a four-beat pop accompaniment');
+      }
 
     }
 

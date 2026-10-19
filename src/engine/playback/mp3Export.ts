@@ -151,7 +151,7 @@ async function renderPerformance(
       }
       const trackStartSample = Math.max(0, Math.floor(minNoteTime * sampleRate));
       const plan = trackPlans.get(trackId)!;
-      const noteEndSample = Math.ceil(Math.max(0, ...plan.noteLifetimes.map(lifetime => lifetime.end)) * sampleRate);
+      const noteEndSample = Math.ceil(plan.noteLifetimes.reduce((end, lifetime) => Math.max(end, lifetime.end), 0) * sampleRate);
       const trackEndSample = Math.min(totalSamples, noteEndSample);
       const trackSamples = trackEndSample - trackStartSample;
       if (trackSamples <= 0 || trackEndSample <= outputStartSample) continue;

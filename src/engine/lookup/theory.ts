@@ -26,7 +26,12 @@ export function getGenreTheory(genreId: string): GenreTheoryProfile {
 
 export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryProfile, weight: number): GenreTheoryProfile {
   const w = Math.max(0, Math.min(1, weight));
-  if (w <= 0.001 || host.genreId === guest.genreId) return host;
+  if (w <= 0.001 || host === guest) return host;
+  // A fully assigned guest part uses that style's complete performing
+  // vocabulary, including another style of the same genre. The song still
+  // owns its form and written harmonic progression.
+  if (w === 1) return { ...guest, genreId: host.genreId, meter: host.meter, cycleBars: host.cycleBars,
+    progressions: host.progressions, cadences: host.cadences, harmonicRhythm: host.harmonicRhythm };
   const choose = <T>(a:T,b:T) => w > 0.55 ? b : a;
   return {
     ...host,
@@ -44,14 +49,14 @@ export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryPro
       anticipationBeats: Array.from(new Set([...host.bass.anticipationBeats, ...(w > .45 ? guest.bass.anticipationBeats : [])])),
       silenceProbability: host.bass.silenceProbability * (1-w) + guest.bass.silenceProbability*w,
     },
-    harmony: host.harmony,
+    harmony: choose(host.harmony, guest.harmony),
     melody: {
       ...host.melody,
       scale: Array.from(new Set([...host.melody.scale, ...(w > .4 ? guest.melody.scale : [])])),
       targetDegrees: Array.from(new Set([...host.melody.targetDegrees, ...(w > .4 ? guest.melody.targetDegrees : [])])),
       callResponse: host.melody.callResponse || (w > .6 && guest.melody.callResponse),
     },
-    rhythm: host.rhythm,
+    rhythm: choose(host.rhythm, guest.rhythm),
     techniques: {
       bass:Array.from(new Set([...host.techniques.bass,...(w>.35?guest.techniques.bass:[])])),
       harmony:Array.from(new Set([...host.techniques.harmony,...(w>.35?guest.techniques.harmony:[])])),

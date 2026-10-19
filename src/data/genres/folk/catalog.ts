@@ -308,14 +308,17 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Celtic jig ornaments and fiddle flute unison bouzouki open-string drone", "shortName": "Bouzouki drone", "role": "harmony", "onsets": [0], "instruments": ["bouzouki"], "cycleLength": 1, "durations": [2.65], "accents": [0.5], "articulation": "legato", "difficulty": 2, "description": "Let a quiet open-string drone color the chord for a full bar. Keep its attack under the melody and avoid doubling every guitar stroke."},
         {"name": "Celtic jig ornaments and fiddle flute unison bouzouki strain answer", "shortName": "Bouzouki answer", "role": "harmony", "onsets": [1.5, 2.5], "instruments": ["bouzouki"], "cycleLength": 1, "durations": [0.55, 0.35], "accents": [0.6, 0.72], "articulations": ["legato", "staccato"], "phraseEnd": true, "sectionUsage": ["ending", "transition"], "difficulty": 3, "description": "Answer the last melody group with two restrained chord tones; leave the cadence open when another player is carrying the tune."},
         {"name": "Celtic jig ornaments and fiddle flute unison bodhran beats one and four", "shortName": "Bodhrán pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["bodhran"], "cycleLength": 1, "accents": [1, 0.3, 0.42, 0.82, 0.3, 0.45], "articulations": ["open", "ghost", "ghost", "accent", "ghost", "ghost"], "difficulty": 2, "description": "Mark the first and fourth eighth notes as the two main pulses. Keep the four connecting strokes quiet so the bodhrán lifts the dance instead of masking the fiddle and whistle."},
-        {"name": "Celtic jig ornaments and fiddle flute unison bodhran cadence roll", "shortName": "Bodhrán roll", "role": "percussion", "onsets": [2, 2.25, 2.5], "instruments": ["bodhran"], "cycleLength": 1, "accents": [0.4, 0.58, 0.86], "articulation": "roll", "phraseEnd": true, "sectionUsage": ["ending"], "difficulty": 3, "description": "Practice one compact roll into the cadence, then stop with the melody. Do not keep the roll running through the next strain."}
+        {"name": "Celtic jig ornaments and fiddle flute unison bodhran cadence roll", "shortName": "Bodhrán roll", "role": "percussion", "onsets": [2, 2.25, 2.5], "instruments": ["bodhran"], "cycleLength": 1, "accents": [0.4, 0.58, 0.86], "articulation": "roll", "phraseEnd": true, "sectionUsage": ["ending"], "difficulty": 3, "description": "Practice one compact roll into the cadence, then stop with the melody. Do not keep the roll running through the next strain."},
+        {"name": "Celtic jig upright bass two-pulse foundation", "shortName": "Jig bass pulse", "role": "bass", "instruments": ["upright-bass"], "onsets": [0, 1.5], "cycleLength": 1, "durations": [0.8, 0.65], "accents": [0.68, 0.5], "pitches": [{"degree": 1, "register": 40}, {"degree": 5, "register": 40}], "articulation": "pizzicato", "difficulty": 1, "description": "Optional modern bass accompaniment: follow the guitar's first and fourth eighth-note pulses with root and fifth. Keep the two groups of three clear and leave the tune's smaller notes to fiddle and whistle."},
+        {"name": "Celtic jig upright bass strain close", "shortName": "Jig bass close", "role": "bass", "instruments": ["upright-bass"], "onsets": [0, 1.5, 2.5], "cycleLength": 1, "durations": [0.8, 0.5, 0.35], "accents": [0.65, 0.45, 0.55], "pitches": [{"degree": 1, "register": 40}, {"degree": 5, "register": 40}, {"degree": 1, "register": 40}], "articulation": "pizzicato", "phraseEnd": true, "sectionUsage": ["ending", "transition"], "difficulty": 2, "description": "Keep the same two jig pulses, then place one quiet tonic on the final eighth note to close the strain. Release with the melody before the next entrance."}
       ],
       "instrumentTechniques": {
         "violin": ["shuffle-bow", "drone-double-stop", "ornamented-slide", "double-stop", "celtic-ornament", "accent", "staccato", "legato", "vibrato"],
         "tin-whistle": ["accent", "staccato", "legato"],
         "guitar": ["hammer-on", "pull-off", "strum", "fingerstyle", "double-stop", "muted-strum", "accent", "staccato", "legato", "vibrato"],
         "bouzouki": ["accent", "staccato", "legato", "tenuto"],
-        "bodhran": ["accent", "roll", "ghost", "open"]
+        "bodhran": ["accent", "roll", "ghost", "open"],
+        "upright-bass": ["pizzicato", "accent", "tenuto"]
       },
       "instrumentDialects": {
         "violin:lead": {
@@ -338,6 +341,10 @@ export const GENRE_PACK: GenrePackInput = {
         "bodhran:percussion": {
           "allowedTechniques": ["accent", "roll", "ghost", "open"],
           "defaultTechnique": "accent"
+        },
+        "upright-bass:bass": {
+          "allowedTechniques": ["pizzicato", "accent", "tenuto"],
+          "defaultTechnique": "pizzicato"
         }
       },
       "mix": {

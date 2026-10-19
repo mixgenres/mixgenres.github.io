@@ -22,6 +22,8 @@ import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG } from '../src/engine/lookup/instruments';
 import { resolveNotatedDrum } from '../src/engine/score/percussionNotation';
 import { kitHitIntent } from '../src/data/performance/kitHitRules';
+import { resolveTuningSystem } from '../src/engine/sheet/tuning';
+import { parseChord } from '../src/engine/sheet/musicTheory';
 
 function fixture(): MusicianScore {
   return { version: 1, title: 'Precision & expression', worldId: 'tango', meter: '4/4', pitchConvention: 'concert',
@@ -317,6 +319,48 @@ test('absolute pitches and fractional rests/ties survive pattern projection and 
     assert.deepEqual(notes.find(n => beatValue(n.position) > 3.99)!.duration, beatFraction(.0007));
     assert.ok(scoreRests(score).some(rest => beatValue(rest.position) === .35));
   } finally { delete PATTERNS_BY_ID[pattern.id]; }
+});
+
+test('a guest metal part retains its power voicing and recorded electric sound inside a tango song', () => {
+  withFusionPhrase('guitar','harmony','guitar','harmony',[
+    {position:0,duration:1,pitch:{voicing:'chord',register:48},articulation:'legato'},
+    {position:2,duration:1,pitch:{voicing:'chord',register:48},articulation:'legato'},
+  ],song=>{
+    const region=song.regions[0],track=song.tracks[0];
+    const fused=rebuild({...song,partLens:{[region.id]:{[track.id]:{genreId:'metal',styleId:'metal-heavy-metal',weight:1}}}});
+    const performance=compileWholeSong(fused),written=performance.notes.filter(note=>note.originCode===0);
+    const attacks=new Map<string,typeof written>();
+    for(const note of written){const group=attacks.get(note.attackId!)??[];group.push(note);attacks.set(note.attackId!,group);}
+    assert.equal(attacks.size,2,'both written attacks survive the assignment');
+    for(const group of attacks.values()){
+      const midis=group.map(note=>note.midi).sort((a,b)=>a-b);
+      assert.deepEqual(midis.map(midi=>midi-midis[0]),[0,7,12]);
+      assert(group.every(note=>note.soundContext?.worldId==='metal'&&note.soundContext.styleId==='metal-heavy-metal'));
+    }
+    const plan=compileSamplePlan(performance,songMixOptions(fused));
+    assert(plan.events.filter(event=>event.type==='on').every(event=>event.type==='on'&&event.patch.pack==='electricDrive'),
+      'the guest metal part reaches its recorded electric source instead of inheriting tango nylon');
+    assert.deepEqual(fused.measures.map(measure=>measure.chord),song.measures.map(measure=>measure.chord));
+  });
+});
+
+test('guest tuning survives the musician score and sample boundary without changing written pitches', () => {
+  withFusionPhrase('guitar','lead','guitar','lead',[
+    {position:0,duration:1,pitch:{midi:59,cents:12},articulation:'legato'},
+  ],song=>{
+    const region=song.regions[0],track=song.tracks[0];
+    const fused=rebuild({...song,partLens:{[region.id]:{[track.id]:{genreId:'arabic',styleId:'arabic-tarab',weight:1}}}});
+    const performance=compileWholeSong(fused),note=performance.notes.find(note=>note.originCode===0)!;
+    assert.equal(note.midi,59);
+    const tuning=resolveTuningSystem(resolveStyle({genreId:'arabic',styleId:'arabic-tarab'}).harmony.tuningSystem!);
+    const expected=tuning.getFrequencyHz(note.midi,parseChord(note.harmonicChord!).rootPc)*2**(12/1200);
+    assert(Math.abs(note.frequencyHz!-expected)<1e-9,'the guest tuning and written cents both reach the final frequency');
+    const attack=compileSamplePlan(performance,songMixOptions(fused)).events.find(event=>event.type==='on');
+    assert(attack&&attack.type==='on');
+    const expectedCents=1200*Math.log2(expected/(440*2**((note.midi-69)/12)));
+    assert(Math.abs(attack.cents-expectedCents)<1e-8,'the sample plan preserves the full guest pitch offset');
+    assert(Math.abs(expectedCents)>20,'the fixture has a measurable non-equal-tempered offset');
+  });
 });
 
 test('fusion moves an absolute phrase into the receiving register without cutting its attacks or gates', () => {

@@ -57,7 +57,7 @@ export function noteLengthBeats(authoredBeats: number, articulation?: string): n
   // marcato, heavy) do not imply a shorter note; mute often selects a timbre,
   // and the sample's muted envelope already expresses its decay. Those gestures
   // must not silently replace the written duration with a global gate ratio.
-  if (/staccato|seco|picado|damp|choke|chapa/i.test(art)) mult = 0.42;
+  if (/staccato|seco|damp|choke|chapa/i.test(art)) mult = 0.42;
   else if (/legato|ligado|tenuto|sostenuto/i.test(art)) mult = 1.3;
 
   // Do not infer a note-off from the next onset. That global gap ceiling

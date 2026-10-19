@@ -7,12 +7,13 @@ import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engin
 import { arrangeBand } from '../src/engine/band/arrangeBand';
 import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
-import { getGenreTheory, styleTheoryFor } from '../src/engine/lookup/theory';
+import { blendGenreTheory, getGenreTheory, styleTheoryFor } from '../src/engine/lookup/theory';
 import { GENRE_WORLDS, GENRE_WORLDS_BY_ID } from '../src/data/genres';
 import { CATALOG_INFERRED_THEORY_GENRES } from '../src/data/musicTheory/genreTheory';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import { parseChord, scalePcsForMode } from '../src/engine/sheet/musicTheory';
+import { INSTRUMENT_CATALOG } from '../src/engine/lookup/instruments';
 
 const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80, trackId: 'keys', bar: 0,
   gestureCode: 0, hitFunctionCode: 0, accent: 0.8 });
@@ -124,6 +125,85 @@ test('authored chord registers survive voicing and a preceding lower chord', () 
   assert.ok(Math.min(...high) >= 72, 'a written upper chord cannot inherit the preceding lower voicing');
   assert.deepEqual(new Set(high.map(midi => midi % 12)), new Set(low.map(midi => midi % 12)),
     'the register change preserves the written chord quality');
+});
+
+test('power voicings retain their root-fifth-octave shape through range fitting and voice leading', () => {
+  const theory = styleTheoryFor('metal-heavy-metal', 'metal');
+  for (const instrument of ['guitar', 'piano', 'marimba', 'flute']) {
+    const profile = getInstrumentPerformanceProfile(instrument), state = createPhraseState();
+    const context = { profile, role: 'harmony', pattern: { roles: ['harmony'] },
+      hybridTheory: theory, authoredPitch: { voicing: 'chord' }, chord: 'C5' } as PhraseContext;
+    const count = instrument === 'flute' ? 1 : 3;
+    for (const chord of ['C5', 'D5', 'F#5', 'Bb5', 'C5']) {
+      const voiced = realizeMidi({ ...context, chord }, 0, 1, state);
+      assert.equal(voiced.length, count, `${instrument}/${chord}: retain the complete playable power shape`);
+      assert.deepEqual(voiced.map(note => note - voiced[0]), [0, 7, 12].slice(0, count));
+      assert.equal(voiced[0] % 12, parseChord(chord).rootPc);
+      assert(voiced.every(note => note >= profile.capabilities.lowMidi && note <= profile.capabilities.highMidi));
+      assert.deepEqual(realizeMidi({ ...context, chord }, 0, 1, state), voiced, 'a repeated chord retains its register');
+    }
+  }
+});
+
+test('drop-two lowers the second-highest close voice and keeps all chord material', () => {
+  const theory = styleTheoryFor('r-and-b-neo-soul', 'r-and-b');
+  const context = { profile: getInstrumentPerformanceProfile('piano'), role: 'harmony', pattern: { roles: ['harmony'] },
+    chord: 'Cmaj7', hybridTheory: theory, authoredPitch: { voicing: 'chord', register: 60 } } as PhraseContext;
+  const state = createPhraseState();
+  assert.deepEqual(realizeMidi(context, 0, 1, state), [55, 60, 64, 71]);
+  const next = { ...context, chord: 'Dm7', authoredPitch: { voicing: 'chord' as const } };
+  assert.deepEqual(realizeMidi(next, 0, 1, state), [57, 62, 65, 72],
+    'a chord change follows the whole shape rather than re-spacing each pitch independently');
+  assert.deepEqual(realizeMidi(next, 0, 1, state), [57, 62, 65, 72]);
+  assert.deepEqual(realizeMidi({ ...context, authoredPitch: { voicing: 'chord', register: 72 } }, 0, 1, state), [67, 72, 76, 83],
+    'a written register change takes precedence over the preceding voicing');
+  const extended = realizeMidi({ ...context, chord: 'Cmaj13' }, 0, 1, createPhraseState());
+  assert.equal(extended.length, parseChord('Cmaj13').intervals.length);
+  assert.deepEqual(new Set(extended.map(note => note % 12)), new Set(parseChord('Cmaj13').intervals.map(iv => iv % 12)),
+    'extensions are not discarded to force every chord into four voices');
+  const literal = [60, 64, 67, 71];
+  assert.deepEqual(realizeMidi({ ...context, authoredPitch: { midi: literal } }, 0, 1, state), literal,
+    'literal written notes retain their authored voicing');
+});
+
+test('fusion retains the selected style vocabulary across genres and within one genre', () => {
+  const host = styleTheoryFor('afrobeat-classic-afrobeat', 'afrobeat');
+  for (const guest of [styleTheoryFor('metal-heavy-metal', 'metal'), styleTheoryFor('afrobeat-jazz-heavy-afrobeat', 'afrobeat')]) {
+    assert.notDeepEqual(guest.harmony,host.harmony,'the fixture assigns a distinct voicing policy');
+    const before = structuredClone({host,guest});
+    const full = blendGenreTheory(host,guest,1);
+    for (const field of ['harmony','bass','melody','rhythm','techniques','mixFocus'] as const) {
+      assert.deepEqual(full[field],guest[field],`${guest.genreId}: a full assignment retains its complete ${field} vocabulary`);
+    }
+    assert.deepEqual(full.progressions,host.progressions,'the part assignment preserves the written song progression');
+    assert.deepEqual(blendGenreTheory(host,guest,0),host);
+    assert.deepEqual(blendGenreTheory(host,guest,.8).harmony,guest.harmony,
+      'a guest-led blend uses the guest voicing policy rather than always inheriting the host');
+    assert.deepEqual({host,guest},before,'resolving a part must not change either source definition');
+  }
+});
+
+test('power and drop-two harmony adapt to every pitched instrument without range errors or changed chord tones', () => {
+  const roots=['C','Db','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
+  for(const def of INSTRUMENT_CATALOG){
+    if(def.voicing==='unpitched'||def.kit||def.drum)continue;
+    const profile=getInstrumentPerformanceProfile(def.id);
+    const voices=def.voicing==='single'&&['wind','brass','voice'].includes(profile.family)?1:profile.capabilities.polyphony;
+    for(const [genre,style,suffix] of [['metal','metal-heavy-metal','5'],['r-and-b','r-and-b-neo-soul','maj13']]){
+      const theory=styleTheoryFor(style,genre);
+      for(const root of roots){
+        const chord=root+suffix,parsed=parseChord(chord);
+        const context={profile,role:'harmony',pattern:{roles:['harmony']},hybridTheory:theory,chord,
+          authoredPitch:{voicing:'chord'}} as PhraseContext;
+        const written=(suffix==='5'?[0,7,12]:parsed.intervals).slice(0,voices);
+        const played=realizeMidi(context,0,1,createPhraseState());
+        assert(played.every(note=>Number.isInteger(note)&&note>=profile.capabilities.lowMidi&&note<=profile.capabilities.highMidi),
+          `${def.id}/${chord}: all voices fit the receiving instrument`);
+        assert.deepEqual(new Set(played.map(note=>note%12)),new Set(written.map(iv=>(parsed.rootPc+iv)%12)),
+          `${def.id}/${chord}: octave revoicing retains the authored harmonic material`);
+      }
+    }
+  }
 });
 
 test('sustained musicians retain each authored attack and whole-bar durations follow meter', () => {
