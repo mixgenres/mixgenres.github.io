@@ -8,7 +8,7 @@ import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { compileSamplePlan, SAMPLE_RELEASE_RESERVE } from '../src/engine/playback/soundfont/plan';
 import { SampleRuntime } from '../src/engine/playback/soundfont/runtime';
 import { setSoundfontBankReader, loadSoundfontBank, soundfontBankStats } from '../src/engine/playback/soundfont/banks';
-import { patchForInstrument, SAMPLED_KIT_KEYS, type BankId } from '../src/engine/playback/soundfont/presets';
+import { BANK_PROGRAMS, patchForInstrument, SAMPLED_KIT_KEYS, type BankId } from '../src/engine/playback/soundfont/presets';
 import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_KEYS, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey } from '../src/engine/playback/soundfont/percussion';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { performanceFixture, noteFixture } from './lib/playbackFixtures';
@@ -75,6 +75,42 @@ test('live runtime rejects a planned attack with no playable sample zone', async
     plan.voiceDemand[0].key = 0;
     assert.throws(() => runtime.setPlan(plan), /No playable SoundFont zone/);
   } finally { runtime.destroy(); }
+});
+test('recorded patch identity survives other packs with the same MIDI bank and program', async () => {
+  const fixtures = [
+    {instrument:'piano',technique:'tone',pack:'piano',other:'upright'},
+    {instrument:'upright-bass',technique:'tone',pack:'upright',other:'piano'},
+    {instrument:'guitar',technique:'harmonic',pack:'nylon',other:'electronic'},
+    {instrument:'turntable',technique:'tone',pack:'electronic',other:'nylon'},
+  ] as const;
+  for (const fixture of fixtures) {
+    const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:60,gestureCode:codeForGesture(fixture.technique)})]}),
+      {...options,trackInstruments:new Map([['keys',fixture.instrument]]),worldId:'flamenco'});
+    assert.deepEqual(plan.banks,[fixture.pack]);
+    const render=async(banks:BankId[])=>{
+      const runtime=await runtimeFor({...plan,banks}),left=new Float32Array(8820),right=new Float32Array(left.length);
+      try {runtime.render(left,right);return {left,right};} finally {runtime.destroy();}
+    };
+    const isolated=await render([fixture.pack]);
+    assert(isolated.left.some(value=>Math.abs(value)>.001),`${fixture.instrument}: the reference patch produces audio`);
+    for (const banks of [[fixture.other,fixture.pack],[fixture.pack,fixture.other]]) {
+      const combined=await render(banks);
+      assert.deepEqual(combined,isolated,`${fixture.instrument}: another pack must not substitute its colliding preset`);
+    }
+  }
+});
+test('loading the complete sample palette retains every recorded preset', () => {
+  const runtime=new SampleRuntime(44100);
+  let expected=0;
+  try {
+    for (const id of Object.keys(BANK_PROGRAMS) as BankId[]) {
+      const packed=gunzipSync(readFileSync(`src/assets/soundfonts/${id}.sfpack`));
+      runtime.addBank(id,packed.buffer.slice(packed.byteOffset,packed.byteOffset+packed.byteLength));
+      expected+=runtime.synth.soundBankManager.soundBankList.find(entry=>entry.id===id)!.soundBank.presets.length;
+    }
+    assert.equal(runtime.synth.soundBankManager.presetList.length,expected,
+      'no pack may lose a recorded patch when another pack uses the same preset address');
+  } finally {runtime.destroy();}
 });
 test('every catalog instrument maps to a shipped playable sample preset',()=>{
   const banks=new Map<BankId,ReturnType<typeof load>>();
@@ -222,6 +258,45 @@ test('sampled synth filter-sweep cues produce one shared cutoff gesture per chan
   const ordinary=makePlan('synth','tone');assert.equal(ordinary.events.filter(event=>event.type==='cc'&&event.cc===74).length,0);
   const piano=makePlan('piano','filter-sweep');assert.equal(piano.events.filter(event=>event.type==='cc'&&event.cc===74).length,0,
     'filter sweep stays a synth control rather than affecting sampled acoustic instruments');
+});
+test('per-attack volume and filter envelopes leave other ringing notes on independent channels',()=>{
+  for (const [instrument, technique, cc] of [['pedal-steel', 'volume-swell', 11], ['synth', 'filter-sweep', 74]] as const) {
+    for (const expressiveFirst of [false, true]) {
+      const notes = [
+        noteFixture({midi:48,time:0,dur:.25,gestureCode:codeForGesture(expressiveFirst ? technique : 'tone')}),
+        noteFixture({midi:55,time:.3,dur:.8,gestureCode:codeForGesture(expressiveFirst ? 'tone' : technique),
+          pitchBend:[{offset:0,value:9100}]}),
+        noteFixture({midi:60,time:.3,dur:.8,gestureCode:codeForGesture(expressiveFirst ? 'tone' : technique)}),
+      ];
+      const plan=compileSamplePlan(performanceFixture({notes}),{...options,trackInstruments:new Map([['keys',instrument]]),
+        worldId:instrument==='synth'?'electronic':'country'});
+      const ons=plan.events.filter(event=>event.type==='on');
+      assert.notEqual(ons[0].channel,ons[1].channel,`${instrument}: even a released tail keeps independent expression`);
+      assert.equal(ons[1].channel,ons[2].channel,'a chord sharing one envelope stays together');
+      const expressive=ons[expressiveFirst?0:1];
+      const controls=plan.events.filter(event=>event.type==='cc'&&event.cc===cc);
+      assert(controls.length>0);
+      assert(controls.every(event=>event.type==='cc'&&event.channels.every(channel=>channel===expressive.channel)));
+      assert(plan.events.some(event=>event.type==='bend'&&event.key===55),
+        'an authored pitch curve coexists with the independent volume/filter envelope');
+      if(cc===11)assert.equal(controls.length,12,'chord tones share one volume-pedal envelope');
+    }
+  }
+});
+test('simultaneous string and body strokes reach the shared sample renderer as audible contacts',async()=>{
+  const notes=[48,55,64].map((midi,index)=>noteFixture({midi,attackId:'stroke',bodyAttack:index===0,
+    musicianNotation:{bodyTechnique:'golpe'},pitchIdentity:'pitched',gestureCode:codeForGesture('rasgueado')}));
+  const settings={...options,trackInstruments:new Map([['keys','guitar']]),worldId:'flamenco'};
+  const render=async(body:boolean)=>{
+    const plan=compileSamplePlan(performanceFixture({notes:notes.map(note=>({...note,bodyAttack:body&&note.bodyAttack}))}),settings);
+    const runtime=await runtimeFor(plan),left=new Float32Array(17640),right=new Float32Array(left.length);
+    try {runtime.render(left,right);return left;} finally {runtime.destroy();}
+  };
+  const combined=await render(true),strings=await render(false);
+  let contactEnergy=0;
+  for(let i=0;i<combined.length;i++)contactEnergy+=(combined[i]-strings[i])**2;
+  assert(combined.every(Number.isFinite));
+  assert(contactEnergy>1e-6,'the extra body stroke contributes recorded audio, beyond its notation flag');
 });
 test('khomus has its own recorded jaw harp patch, with its narrow sample range safely playable',()=>{
   const patch=patchForInstrument('khomus');

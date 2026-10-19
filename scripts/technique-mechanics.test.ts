@@ -81,6 +81,12 @@ test('up/down chord sweeps preserve pitches and written rhythm with exactly one 
     assert.deepEqual(timed.map(n => n.midi), stroke === 'up' ? [64, 55, 48] : [48, 55, 64]);
     assert.equal(perf.notes.filter(n => n.bodyAttack).length, 1);
     assert.equal(timed[0].bodyAttack, true, 'body tap belongs to stroke onset');
+    const plan = compileSamplePlan(perf, { trackInstruments: new Map([['p', 'guitar']]), worldId: 'flamenco' });
+    const contacts = plan.events.filter(event => event.type === 'on' && event.patch.pack === 'percussion');
+    assert.equal(contacts.length, 1, 'the notated simultaneous golpe becomes one recorded contact');
+    assert.equal(contacts[0].time, timed[0].time);
+    assert.equal(plan.events.filter(event => event.type === 'on' && event.patch.pack !== 'percussion').length, 3,
+      'the simultaneous body contact preserves all three played strings');
     assert.ok(perf.notes.every(n => n.notation?.beat === 0 && n.notation.durationBeats === .6));
   }
 });
@@ -219,6 +225,11 @@ test('authored flamenco fingers and simultaneous body strokes reach score and Mu
   assert.ok(body.every(n => !('physical' in n)), 'body technique stays in the score instead of a cached physical-voice object');
   for (const n of body) assert.equal(pipeline.performance.notes.filter(other => other.attackId === n.attackId && other.bodyAttack).length, 1);
   assert.ok(exportMusicXml(pipeline.interpretation).includes('golpe simultaneously'));
+  const plan = compileSamplePlan(pipeline.performance, { trackInstruments: new Map(song.tracks.map(t => [t.id, t.instrumentId ?? t.instrument])),
+    worldId: song.worldId, styleId: song.styleId });
+  assert.equal(plan.events.filter(event => event.type === 'on').length,
+    pipeline.performance.notes.length + body.filter(note => note.pitchIdentity !== 'unpitched').length,
+    'the complete arrangement renders every written note and each simultaneous body contact');
   const soleaSheet = makeSheet('flamenco', 'flamenco-solea');
   for (const patternId of Object.values(soleaSheet.arrangement).flatMap(parts => Object.values(parts))) {
     if (patternId === 'silent') continue;
@@ -226,6 +237,11 @@ test('authored flamenco fingers and simultaneous body strokes reach score and Mu
       'each sounding part uses a written song cell');
   }
   const solea = compileSongPipeline(soleaSheet);
+  const combinedStrokes = solea.performance.notes.filter(note => note.bodyAttack && note.pitchIdentity !== 'unpitched');
+  assert.ok(combinedStrokes.length, 'the soleá arrangement contains simultaneous pitched/body strokes');
+  const soleaPlan = compileSamplePlan(solea.performance, { trackInstruments: new Map(soleaSheet.tracks.map(t => [t.id, t.instrumentId ?? t.instrument])),
+    worldId: soleaSheet.worldId, styleId: soleaSheet.styleId });
+  assert.equal(soleaPlan.events.filter(event => event.type === 'on').length, solea.performance.notes.length + combinedStrokes.length);
   const tremolo = solea.interpretation.notes.filter(n => n.technique === 'tremolo' && n.playback.authoredTechnique);
   assert.ok(tremolo.length >= 5);
   assert.deepEqual(tremolo.slice(0, 5).map(n => n.playback.musicianNotation?.fingering), ['p', 'i', 'a', 'm', 'i'],

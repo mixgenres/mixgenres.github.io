@@ -1,6 +1,9 @@
 import { SpessaSynthProcessor, SoundBankLoader, KeyModifier, SpessaLog, type MIDIController } from 'spessasynth_core';
-import type { BankId } from './presets';
+import { BANK_PROGRAMS, type BankId } from './presets';
 import type { SamplePlan, SampleEvent } from './plan';
+// The synth selects by MIDI bank/program, without the plan's pack ID. Reserve
+// a bank LSB per pack so shared preset numbers retain their recorded identity.
+const bankNamespaces = new Map(Object.keys(BANK_PROGRAMS).map((id, index) => [id, index + 1]));
 /** Shared live/offline event interpreter; no musical randomness or wall timers. */
 export class SampleRuntime {
   readonly synth: SpessaSynthProcessor;
@@ -26,7 +29,9 @@ export class SampleRuntime {
   }
   addBank(id: BankId, buffer: ArrayBuffer) {
     if (this.loadedBanks.has(id)) return;
-    this.synth.soundBankManager.addSoundBank(SoundBankLoader.fromArrayBuffer(buffer), id);
+    const bank = SoundBankLoader.fromArrayBuffer(buffer);
+    for (const preset of bank.presets) if (!preset.isGMGSDrum) preset.bankLSB = bankNamespaces.get(id)!;
+    this.synth.soundBankManager.addSoundBank(bank, id);
     this.loadedBanks.add(id);
   }
   setPlan(plan: SamplePlan) {
@@ -172,7 +177,8 @@ export class SampleRuntime {
     // Key modifiers select the exact patch independently of channel 9 and
     // other sounding notes, including guitar body hits and pizzicato switches.
     const modifier=new KeyModifier();
-    modifier.patch={bankMSB:event.patch.bank,bankLSB:0,program:event.patch.program,isGMGSDrum:event.patch.drum};
+    modifier.patch={bankMSB:event.patch.bank,bankLSB:event.patch.drum?0:bankNamespaces.get(event.patch.pack)!,
+      program:event.patch.program,isGMGSDrum:event.patch.drum};
     modifier.gain=event.gain;
     this.synth.keyModifierManager.addMapping(event.channel,event.key,modifier);
     this.synth.pitchWheel(event.channel,Math.max(0,Math.min(16383,Math.round(8192+event.cents/2400*8192))),event.key);

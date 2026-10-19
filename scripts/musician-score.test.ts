@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { makeSheet, rebuild } from '../src/engine/sheet/sheet';
+import { makeSheet, rebuild, setSectionChords } from '../src/engine/sheet/sheet';
 import { createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { composeMusicianScore, compileWholeSong } from '../src/engine/band/arrangeBand';
 import { beatFraction, beatValue, compileMusicianScore, musicianScoreFromArrangement, scoreNoteSegments, scoreRests, type MusicianScore, type ScoreNote } from '../src/engine/score/musicianScore';
@@ -381,6 +381,31 @@ test('fusion turns chordal material into a playable wind line or a requested bas
       assert.ok(written.every(note => note.midi >= 60 && note.midi <= 96), 'a high instrument can keep a bass contour in its own register');
     });
   }
+  for (const instrumentId of ['marimba', 'mandolin']) {
+    withFusionPhrase(instrumentId, 'harmony', 'piano', 'harmony', events, song => {
+      const written = compileWholeSong(song).notes.filter(note => note.originCode === 0);
+      assert.equal(written.length, 6, `${instrumentId} keeps all three playable chord voices at both attacks`);
+      assert.deepEqual(written.map(note => note.midi).sort((a, b) => a - b), [72, 74, 76, 77, 79, 81]);
+    });
+  }
+});
+
+test('timpani retain tuned pitch and bass-staff notation instead of fixed kit notes', () => {
+  withFusionPhrase('timpani', 'percussion', 'timpani', 'percussion', [
+    { position: 0, duration: .6, articulation: 'open' },
+    { position: 2, duration: .6, articulation: 'open' },
+  ], song => {
+    const notation = compileNotatedScore(song).sections[0].cells[song.tracks[0].id];
+    assert.equal(notation.rules.clef, 'bass');
+    assert.equal(notation.rules.staffLines, 5);
+    assert.ok(notation.bars[0].attacks.every(attack => attack.pitch.kind !== 'drum'));
+    const tones = (chord: string) => compileWholeSong(setSectionChords(song, song.regions[0].id, [chord]))
+      .notes.filter(note => note.originCode === 0);
+    const c = tones('C'), eb = tones('Eb');
+    assert.ok(c.length > 0 && c.every(note => !note.percussion && note.midi >= 38 && note.midi <= 60));
+    assert.deepEqual(eb.map(note => note.midi % 12), c.map(note => (note.midi + 3) % 12),
+      'the tuned part follows the harmony instead of repeating fixed B/D/F drum-key numbers');
+  });
 });
 
 test('fusion transfers percussion rhythm and contact meaning instead of leaking raw MIDI key numbers', () => {

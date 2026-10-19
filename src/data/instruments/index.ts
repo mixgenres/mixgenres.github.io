@@ -371,8 +371,19 @@ if (kamancheh) kamancheh.name = 'Kamancheh';
 const timpani = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'timpani');
 if (timpani) {
   timpani.kit = false;
-  timpani.drum = { low: 47, mid: 50, high: 53 };
-  timpani.voicing = 'unpitched';
+  timpani.drum = undefined;
+  timpani.kitComponents = undefined;
+  timpani.family = 'hand-drums';
+  timpani.voicing = 'single';
+  timpani.excitationType = 'mallet';
+  timpani.polyphony = 2;
+  timpani.acousticProfile = { ...timpani.acousticProfile!, low: 38, high: 60, centre: 46, role: 'bass' };
+  // Yamaha's tonal-range guide describes tuned sets of two to five drums:
+  // https://www.yamaha.com/en/musical_instrument_guide/timpani/structure/structure004.html
+  timpani.tuningAndMechanics = { ...timpani.tuningAndMechanics,
+    keyRange: { lowNote: 'D2', highNote: 'C4', lowMidi: 38, highMidi: 60 } };
+  timpani.notationRules = { clef: 'bass', staffLines: 5, views: ['staff', 'technique'], vocabulary: ['roll', 'damp', 'accent'] };
+  timpani.note = 'Tuned kettle drums played with mallets. Follow the written pitches and distinguish ringing strokes, rolls and damped releases.';
 }
 
 // These regional names share a starting point with a nearby instrument, but

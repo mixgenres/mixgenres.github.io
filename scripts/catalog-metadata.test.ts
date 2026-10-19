@@ -514,6 +514,11 @@ test('every catalog sample song builds an audible shared playback plan', () => {
     const performance = arrangeBand(song);
     const plan = compileSamplePlan(performance, songMixOptions(song));
     assert.ok(plan.events.some(event => event.type === 'on'), `${entry.id} must compile to audible sample events`);
+    const bodyContacts = performance.notes.filter(note => note.bodyAttack && note.pitchIdentity !== 'unpitched').length;
+    assert.equal(plan.events.filter(event => event.type === 'on').length, performance.notes.length + bodyContacts,
+      `${entry.id}: every performed note and simultaneous body contact must reach the SoundFont plan`);
+    const renderedNotes = new Set(plan.noteLifetimes.map(lifetime => lifetime.note));
+    assert.ok(performance.notes.every(note => renderedNotes.has(note)), `${entry.id}: no performed note may be omitted`);
     const activeInstruments = new Set(song.regions.flatMap(region => region.activeInstrumentIds ?? []));
     const onChannels = new Set(plan.events.filter(event => event.type === 'on').map(event => event.channel));
     for (const track of song.tracks) {

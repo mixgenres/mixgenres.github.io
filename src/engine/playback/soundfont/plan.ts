@@ -4,6 +4,7 @@ import type { Mp3RenderOptions } from '../mp3Export';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
 import { resolveTrackSound } from '../trackSound';
 import { resolveSampleGesture } from './gestures';
+import { codeForGesture } from '../../band/gestures';
 import { patchForInstrument, electronicKitPatch, SYNTH_SAMPLE_PROGRAMS, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
 import { PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey, recordedPercussionTake } from './percussion';
@@ -27,12 +28,12 @@ export interface SamplePlan {
   /** Expected simultaneous SF2 sample zones; used to size the synth before audio starts. */
   voiceDemand: Array<{ start: number; end: number; patch: SamplePatch; key: number; velocity: number }>;
 }
-interface KeyReservation { holdEnd: number; soundingEnd: number; cents: number; pitchMotion: boolean }
+interface KeyReservation { holdEnd: number; soundingEnd: number; cents: number; pitchMotion: boolean; expression?: string }
 const pitch = (note: PerfNote) => note.frequencyHz !== undefined
   ? 1200 * Math.log2(note.frequencyHz / (440 * 2 ** ((note.midi - 69) / 12))) : note.tuningCents ?? 0;
 
 /** This consumes compiled musician decisions. Strums/rolls/ornaments are already
- * separate score events; adding another burst here would double their rhythm. */
+ * separate score events; a simultaneous body contact adds only its own sample. */
 export function compileSamplePlan(performance: Performance, options: Mp3RenderOptions): SamplePlan {
   const trackIds = options.selectedTrackIds ?? [...options.trackInstruments.keys()];
   const worldId = options.worldId ?? performance.worldId;
@@ -41,6 +42,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
   const noteLifetimes: SamplePlan['noteLifetimes'] = [];
   const voiceDemand: SamplePlan['voiceDemand'] = [];
   const synthFilterSweeps: Array<{ channel: number; start: number; end: number }> = [];
+  const steelVolumeSwells = new Set<string>();
   const tracks: SampleTrack[] = [];
   let channels = 1;
   let soundingEnd=Math.max(.1,performance.duration+(performance.tail??0));
@@ -60,9 +62,21 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       return sound;
     };
     const occupied: Array<Map<number,KeyReservation[]>> = [];
+    const expressiveLanes = new Set<number>();
     const track: SampleTrack = { id, instrumentId, gain: params.roleGain ?? .7, channels: [], pan: params.pan };
     const pedal=performance.ccs.filter(cc=>cc.trackId===id&&cc.cc===64).sort((a,b)=>a.time-b.time);
-    const notes = performance.notes.filter(note => note.trackId === id).sort((a,b) => a.time-b.time || a.midi-b.midi);
+    const notes = performance.notes.filter(note => note.trackId === id).flatMap(note => {
+      if (!note.bodyAttack || note.pitchIdentity === 'unpitched') return [note];
+      const technique = note.musicianNotation?.bodyTechnique;
+      if (!technique) throw new Error(`Missing simultaneous body technique for ${note.attackId ?? note.trackId}`);
+      // A combined string/body stroke owns one extra recorded contact. Keep
+      // the pitched voicing intact and route the contact through the same
+      // articulation, lifetime and voice-allocation path as a standalone tap.
+      const contact: PerfNote = { ...note, bodyAttack: false, pitchIdentity: 'unpitched',
+        gestureCode: codeForGesture(technique), attackId: `${note.attackId ?? note.time}:body`,
+        midi: 60, frequencyHz: undefined, tuningCents: undefined, pitchBend: undefined, percussion: undefined };
+      return [note, contact];
+    }).sort((a,b) => a.time-b.time || a.midi-b.midi);
     // Hi-hat exclusivity is channel-local in SF2. Reserve one hat channel so
     // a closed/pedal hit chokes an open hat even while its release is ringing.
     const hatChannel = instrumentId==='sampler' || !!def.kit && instrumentId !== 'timpani' && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
@@ -181,9 +195,23 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const hasGestureBend=!patch.drum&&(/fall|doit|slide|arrastre|vibrato|shake/.test(action)
         ||instrumentId==='pedal-steel'&&['pedal-bend','knee-lever-bend','chordal-glissando'].includes(action));
       const hasPitchMotion=!patch.drum&&(!!note.pitchBend?.length||hasGestureBend);
+      const volumeSwell = instrumentId === 'pedal-steel' && action === 'volume-swell';
+      const filterSweep = (instrumentId === 'synth' || instrumentId === 'synth-bass') && action === 'filter-sweep';
+      const expression = volumeSwell || filterSweep ? `${action}:${note.time}:${note.dur}` : undefined;
       const hat = hatChannel && [42,44,46].includes(key);
       let lane = hat ? 0 : occupied.findIndex((keys,lane) => {
         if(hatChannel&&lane===0)return false;
+        // CC11/74 affect every key on their channel, including release tails.
+        // Only tones sharing the same envelope may share an expressive lane;
+        // another ringing key must not be ducked or filtered by this attack.
+        if (expression !== undefined || expressiveLanes.has(lane)) {
+          for (const [reservedKey, previous] of keys) {
+            const active = previous.filter(reservation => reservation.soundingEnd > note.time);
+            if (active.length) keys.set(reservedKey, active); else keys.delete(reservedKey);
+            if (active.some(reservation => reservation.expression !== expression
+              && (reservation.expression !== undefined || expression !== undefined))) return false;
+          }
+        }
         const reservations=(keys.get(key)??[]).filter(reservation=>reservation.soundingEnd>note.time);
         keys.set(key,reservations);
         return reservations.every(reservation=>reservation.holdEnd<=note.time
@@ -209,8 +237,9 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         :SOUNDFONT_RELEASE_RESERVE;
       const releaseEnd=releaseStart+estimatedTail;
       const reservations=(occupied[lane].get(key)??[]).filter(reservation=>reservation.soundingEnd>note.time);
-      reservations.push({holdEnd:releaseStart,soundingEnd:releaseEnd,cents:onsetCents,pitchMotion:hasPitchMotion});
+      reservations.push({holdEnd:releaseStart,soundingEnd:releaseEnd,cents:onsetCents,pitchMotion:hasPitchMotion,expression});
       occupied[lane].set(key,reservations);soundingEnd=Math.max(soundingEnd,releaseEnd);
+      if (expression !== undefined) expressiveLanes.add(lane);
       if (!track.channels.includes(channel)) track.channels.push(channel);
       channels = Math.max(channels, channel + 1);
       // PerfNote.dur is the compiled musical gate. Pattern authoring and the
@@ -234,7 +263,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       // cutoff unchanged, while lower and higher values move it down/up.
       // Defer the envelope until channel allocation is complete so a chord
       // shares one sweep instead of sending a controller ramp per chord tone.
-      if ((instrumentId === 'synth' || instrumentId === 'synth-bass') && action === 'filter-sweep') {
+      if (filterSweep) {
         synthFilterSweeps.push({ channel, start: note.time, end: note.time + hold });
       }
       for (const bend of note.pitchBend ?? []) if (bend.offset >= 0 && bend.offset < hold) {
@@ -260,13 +289,15 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
             events.push({time:note.time+hold*(.72+.25*t),type:'bend',channel,key,cents:cents+gestureBend.to*(1-t)});
           }
         }
-        if (action==='volume-swell') {
-          for (let point=0;point<=10;point++) {
-            const t=point/10;
-            events.push({time:note.time+hold*.62*t,type:'cc',channels:[channel],cc:11,value:Math.round(16+111*t)});
-          }
-          events.push({time:note.time+hold,type:'cc',channels:[channel],cc:11,value:127});
+      }
+      const swellKey = `${channel}:${note.time}:${hold}`;
+      if (volumeSwell && !steelVolumeSwells.has(swellKey)) {
+        steelVolumeSwells.add(swellKey);
+        for (let point=0;point<=10;point++) {
+          const t=point/10;
+          events.push({time:note.time+hold*.62*t,type:'cc',channels:[channel],cc:11,value:Math.round(16+111*t)});
         }
+        events.push({time:note.time+hold,type:'cc',channels:[channel],cc:11,value:127});
       }
       if (/vibrato|shake/.test(action) && !note.pitchBend?.length && !patch.drum) {
         for (let t=.12;t<hold;t+=.025) events.push({ time:note.time+t,type:'bend',channel,key,cents:cents+Math.sin(t*Math.PI*10)*(/shake/.test(action)?65:18) });

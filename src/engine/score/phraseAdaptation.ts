@@ -66,14 +66,15 @@ export function phrasePitchAdapter(pattern: MusicalPattern | undefined, instrume
   if (sourcePercussion) return { adapted, pitch: (_value: Pitch): Pitch => undefined };
 
   const instrument = INSTRUMENTS_BY_ID[instrumentId];
-  const { capabilities } = getInstrumentPerformanceProfile(instrumentId);
+  const { capabilities, family } = getInstrumentPerformanceProfile(instrumentId);
   const low = capabilities.lowMidi;
   // A flute or piccolo can outline a bass role in its own lowest register.
   // Keep a complete chromatic octave available instead of imposing a MIDI-60
   // ceiling that makes the role impossible on a high instrument.
   const high = /^(bass|low-anchor)$/.test(role)
     ? Math.min(capabilities.highMidi, Math.max(60, low + 11)) : capabilities.highMidi;
-  const voices = instrument?.voicing === 'single' || changedRole && /^(bass|low-anchor)$/.test(role)
+  const singleLinePlayer = instrument?.voicing === 'single' && ['wind', 'brass', 'voice'].includes(family);
+  const voices = singleLinePlayer || changedRole && /^(bass|low-anchor)$/.test(role)
     ? 1 : capabilities.polyphony;
   const voicing = (midi: number | number[]) => {
     const notes = (Array.isArray(midi) ? midi : [midi]).slice().sort((a, b) => a - b);

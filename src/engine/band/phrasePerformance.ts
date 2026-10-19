@@ -235,6 +235,7 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
   const poly = INSTRUMENTS_BY_ID[ctx.profile.instrumentId]?.voicing === 'single'
+    && ['wind', 'brass', 'voice'].includes(ctx.profile.family)
     ? 1 : Math.max(1, ctx.profile.capabilities.polyphony);
   const authoredRegister = ctx.authoredPitch?.register;
   const base = authoredRegister !== undefined
