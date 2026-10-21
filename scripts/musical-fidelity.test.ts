@@ -14,11 +14,123 @@ import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import { parseChord, scalePcsForMode } from '../src/engine/sheet/musicTheory';
 import { INSTRUMENT_CATALOG } from '../src/engine/lookup/instruments';
+import { createCatalogSong } from '../src/engine/sheet/songCatalog';
 
 const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80, trackId: 'keys', bar: 0,
   gestureCode: 0, hitFunctionCode: 0, accent: 0.8 });
 const samplePerformance = (instrumentId: string, notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [],
   duration: 1, tail: .5, blends: {}, trackInfo: { keys: { instrumentId, role: 'harmony' } }, worldId: 'folk' });
+
+test('tonic-relative phrases keep their melody through chord changes while chord-relative parts follow harmony', () => {
+  const context = { profile: getInstrumentPerformanceProfile('piano'), pattern: { roles: ['lead'] }, role: 'lead',
+    hybridTheory: styleTheoryFor('tango-golden-age', 'tango'), tonicPc: 9,
+    authoredPitch: { degree: 3, register: 60, reference: 'tonic' } } as PhraseContext;
+  const pitches = ['Am', 'Dm', 'E7', 'F'].map(chord => realizeMidi({ ...context, chord }, 0, 1, createPhraseState())[0]);
+  assert.ok(pitches.every(midi => midi === pitches[0]), 'the same written melody note is not transposed with every root');
+  assert.equal(pitches[0] % 12, 0, 'A harmonic-minor third remains C even over E7');
+  const relative = ['Am', 'Dm', 'E7'].map(chord => realizeMidi({ ...context, chord,
+    authoredPitch: { ...context.authoredPitch, reference: 'chord' } }, 0, 1, createPhraseState())[0] % 12);
+  assert.deepEqual(relative, [0, 5, 8], 'chord-relative accompaniment still honors written chord quality');
+});
+
+test('relative melody range fitting moves the whole contour instead of folding its last note down', () => {
+  const events = [0, 4, 7, 12].map((semitoneOffset, position) => ({ position,
+    pitch: { semitoneOffset, reference: 'tonic' as const, register: 80 } }));
+  const context = { profile: getInstrumentPerformanceProfile('voice'), pattern: { roles: ['lead'], events }, role: 'lead',
+    hybridTheory: styleTheoryFor('pop-contemporary', 'pop'), chord: 'C', tonicPc: 0 } as PhraseContext;
+  const notes = events.map((event, index) => realizeMidi({ ...context, authoredPitch: event.pitch }, index, 4, createPhraseState())[0]);
+  assert.deepEqual(notes.map(midi => midi - notes[0]), [0, 4, 7, 12]);
+  assert.ok(notes.every(midi => midi >= context.profile.capabilities.lowMidi && midi <= context.profile.capabilities.highMidi));
+});
+
+test('bass settings cannot prescribe a melody cadence or replace a fused bass motion', () => {
+  const theory = styleTheoryFor('jazz-hard-bop', 'jazz');
+  const context = { profile: getInstrumentPerformanceProfile('violin'), pattern: { roles: ['lead'] }, role: 'lead',
+    chord: 'C', nextChord: 'Dm', phrasePosition: .95, phraseIndex: 0, onsetIndex: 0, hit: 'tone',
+    hybridTheory: { ...theory, melody: { ...theory.melody, targetDegrees: [3], pitchSequence: undefined } },
+    hostProfile: { register: { highBias: .5 } }, hostGenre: 'jazz' } as PhraseContext;
+  const state = { ...createPhraseState(), previousMidi: 60 };
+  assert.equal(realizeMidi(context, 0, 1, state)[0] % 12, 4, 'walking bass approaches cannot force a lead onto the next D root');
+  const bass = { ...context, profile: getInstrumentPerformanceProfile('bass'), role: 'bass', hostGenre: 'salsa',
+    pattern: { roles: ['bass'], meter: '4/4' }, bassStyle: 'rootFifth', onsetPosition: .875,
+    hybridTheory: { ...theory, bass: { ...theory.bass, anticipationBeats: [3.5] } } } as PhraseContext;
+  assert.equal(realizeMidi(bass, 0, 2, createPhraseState())[0] % 12, 0,
+    'a selected root-fifth part is not converted to tumbao merely because the host is salsa');
+});
+
+test('rhythm-to-melody fusion uses the selected style phrase with repeated notes intact', () => {
+  const theory = styleTheoryFor('metal-thrash', 'metal');
+  const context = { profile: getInstrumentPerformanceProfile('piano'), pattern: { roles: ['lead'] }, role: 'lead',
+    hybridTheory: theory, chord: 'C5', tonicPc: 0, hostGenre: 'tango', phraseIndex: 0 } as PhraseContext;
+  const played = Array.from({ length: 8 }, (_, index) => realizeMidi({ ...context, phraseAttackIndex: index }, index, 8, createPhraseState())[0] % 12);
+  assert.deepEqual(played, [0, 0, 0, 1, 0, 7, 0, 0],
+    'the thrash pedal and semitone attack are not converted into a shared triadic climb');
+});
+
+test('rhythm-to-bass fusion retains written interval contours and chord anticipations', () => {
+  const theory = styleTheoryFor('gnawa-gnawa-rock', 'gnawa');
+  const context = { profile: getInstrumentPerformanceProfile('bass'), pattern: { roles: ['percussion'] }, role: 'bass',
+    hybridTheory: theory, chord: 'C5', tonicPc: 0, hostGenre: 'tango', bassStyle: theory.bass.style } as PhraseContext;
+  const sequence = theory.bass.pitchSequence!;
+  assert.ok(sequence.length > 4);
+  const played = sequence.map((_, index) => realizeMidi({ ...context, phraseAttackIndex: index }, index, sequence.length, createPhraseState())[0] % 12);
+  assert.deepEqual(played, [0,7,0,3,0,7,0,7,3,0,0],
+    'the repeated guembri phrase is not replaced by a root/fifth generator');
+  const anticipated = { ...context, chord: 'C', nextChord: 'F', hybridTheory: { ...theory,
+    bass: { ...theory.bass, pitchSequence: [{ degree: 1, reference: 'next-chord' as const }] } } };
+  assert.equal(realizeMidi(anticipated,0,1,createPhraseState())[0] % 12,5);
+});
+
+test('a bass instrument assigned to lead follows the lead phrase rather than its default bass job', () => {
+  const theory = styleTheoryFor('pop-contemporary', 'pop');
+  const context = { profile: getInstrumentPerformanceProfile('bass'), pattern: { roles: ['percussion'] }, role: 'lead',
+    chord: 'C', tonicPc: 0, hybridTheory: { ...theory, melody: { ...theory.melody,
+      pitchSequence: [0,4,7].map(semitoneOffset => ({ semitoneOffset, reference: 'tonic' as const })) } } } as PhraseContext;
+  assert.deepEqual([0,1,2].map(index => realizeMidi({ ...context, phraseAttackIndex: index },index,3,createPhraseState())[0] % 12),[0,4,7]);
+});
+
+test('partial fusion preserves repeated, ordered pitch anchors', () => {
+  const base = getGenreTheory('jazz');
+  const host = { ...base, melody: { ...base.melody, targetDegrees: [1, 3, 1, 5] }, bass: { ...base.bass, targetDegrees: [1, 1, 5, 1] } };
+  const guest = { ...base, melody: { ...base.melody, targetDegrees: [5, 2, 5, 1] }, bass: { ...base.bass, targetDegrees: [1, 5, 1, 3] } };
+  for (const [weight, expected] of [[.4, host], [.72, guest]] as const) {
+    const blended = blendGenreTheory(host, guest, weight);
+    assert.deepEqual(blended.melody.targetDegrees, expected.melody.targetDegrees);
+    assert.deepEqual(blended.bass.targetDegrees, expected.bass.targetDegrees);
+  }
+});
+
+test('written bass anticipations follow the next chord without changing other attacks', () => {
+  const context = { profile: getInstrumentPerformanceProfile('bass'), pattern: { roles: ['bass'] }, role: 'bass',
+    hybridTheory: styleTheoryFor('timba-songo', 'timba'), chord: 'Am7', nextChord: 'D7',
+    authoredPitch: { degree: 1, register: 36, reference: 'next-chord' } } as PhraseContext;
+  assert.equal(realizeMidi(context, 0, 1, createPhraseState())[0] % 12, 2);
+  assert.equal(realizeMidi({ ...context, authoredPitch: { ...context.authoredPitch, reference: 'chord' } }, 0, 1, createPhraseState())[0] % 12, 9);
+});
+
+test('pedal bass does not acquire a shared leading tone at the end of a bar', () => {
+  const context = { profile: getInstrumentPerformanceProfile('bass'), pattern: { roles: ['bass'], meter: '4/4' }, role: 'bass',
+    hybridTheory: styleTheoryFor('ambient-drone', 'ambient'), chord: 'D5', nextChord: 'D5', bassStyle: 'pedal', hostGenre: 'ambient' } as PhraseContext;
+  assert.deepEqual([0,1,2,3].map(index => realizeMidi(context,index,4,createPhraseState())[0] % 12), [2,2,2,2]);
+});
+
+test('riff bass retains ninths and its own late-phrase tones', () => {
+  const base = styleTheoryFor('funk-funk', 'funk');
+  const context = { profile: getInstrumentPerformanceProfile('bass'), pattern: { roles: ['bass'], meter: '4/4' }, role: 'bass',
+    hybridTheory: { ...base, bass: { ...base.bass, targetDegrees: [1,9], chromaticApproach: false } },
+    chord: 'C7', nextChord: 'D7', bassStyle: 'riff', hostGenre: 'funk', phrasePosition: .95, barIndex: 0, phraseEnd: 1 } as PhraseContext;
+  assert.deepEqual([0,1].map(index => realizeMidi(context,index,2,createPhraseState())[0] % 12), [0,2],
+    'a ninth is not clamped to the seventh, and late notes do not all turn into the next root approach');
+});
+
+test('modal funk and blues-form big-band phrases retain the written center instead of an inferred dominant resolution', () => {
+  for (const style of ['funk-funk', 'jazz-big-band']) {
+    const song = createCatalogSong(`${style}_song`), performance = arrangeBand(song);
+    const openingRoot = parseChord(song.regions[0].chords![0]).rootPc;
+    const melodyRoots = new Set(performance.notes.map(note => note.tuningRootPc).filter(root => root !== undefined));
+    assert.deepEqual(melodyRoots, new Set([openingRoot]), `${style} keeps its authored modal/blues center`);
+  }
+});
 
 test('guide-tone and shell policies retain different harmonic jobs without reducing literal score voicings', () => {
   const theory=getGenreTheory('jazz');
@@ -72,8 +184,8 @@ test('inferred melody and bass targets follow authored pitch cells and the style
     'power-chord styles anchor to the written root and fifth rather than an invented third/seventh arpeggio');
   assert.deepEqual(punkTheory.bass.targetDegrees, [1, 5],
     'power-chord bass motion does not inject a third or seventh absent from the riff');
-  assert.deepEqual(styleTheoryFor(homeStyle('amapiano').id, 'amapiano').bass.targetDegrees, [1, 5, 3, 7],
-    'Amapiano bass targets retain the tones in its authored seventh-chord vocabulary');
+  assert.deepEqual(styleTheoryFor(homeStyle('amapiano').id, 'amapiano').bass.targetDegrees, [1, 5, 8, 3],
+    'Amapiano bass targets retain its written root, fifth, octave and third instead of importing an unplayed seventh');
   assert.deepEqual(styleTheoryFor(homeStyle('mexican').id, 'mexican').melody.targetDegrees, [1, 3, 5, 7],
     'dominant-seventh targets stay when the style actually authors a seventh chord');
   assert.deepEqual(styleTheoryFor(homeStyle('chinese').id, 'chinese').melody.targetDegrees, [1, 2, 3, 5, 4, 6],

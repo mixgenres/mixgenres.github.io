@@ -4,15 +4,19 @@ function clamp(value: number, min = 0, max = 1): number {
 
 /** Convert normalized energy (0.2..1) and pattern velocity to MIDI velocity. */
 export function velocityForEnergy(energy: number, onsetVelocity: number, accentContrast: number): number {
-  const level = clamp(energy) * 5;
-  // Keep quiet sections playable, but leave a broad, nonlinear-feeling range
-  // for authored accents and SoundFont velocity layers. The previous curve
-  // allowed ordinary high-energy notes to reach 120 before activity and
-  // brightness were applied, so a large share of a song flattened at MIDI
-  // 127. Clamp the accent input before shaping it; don't squash every strong
-  // attack against a global full-scale ceiling.
-  const floor = 0.24 + (level - 1) * 0.11;
-  const ceiling = 0.46 + (level - 1) * 0.095;
-  const accent = clamp(onsetVelocity * accentContrast);
-  return Math.round(clamp(floor + (ceiling - floor) * accent, 0.18, 0.84) * 127);
+  const written = clamp(onsetVelocity);
+  const section = clamp(energy), contrast = Math.max(.1, accentContrast);
+  // Retain the nominal velocity response used to balance the recorded banks.
+  // Replacing it with a zero-to-one level curve moved quiet bass and guitar
+  // into much weaker sample layers while drums kept their stronger attacks.
+  const floor = .13 + .55 * section;
+  const span = .235 - .075 * section;
+  const nominal = floor + span * Math.min(1, written * contrast) + .025 * (written - .72);
+  const smooth = (value: number) => { const x = clamp(value); return x * x * (3 - 2 * x); };
+  // Extend genuine pianissimo and fortissimo without moving ordinary playing
+  // out of its calibrated sample layers or reinstating a global MIDI ceiling.
+  const soft = smooth(written / .35);
+  const forte = smooth((written - .9) / .1);
+  const peak = Math.max(nominal, .325 + .675 * section);
+  return Math.max(1, Math.min(127, Math.round((nominal * soft + (peak - nominal) * forte) * 127)));
 }

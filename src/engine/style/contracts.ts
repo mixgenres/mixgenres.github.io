@@ -2,6 +2,7 @@ import type { SongStyle } from '../../data/styles/schema';
 import { GENRE_CONTRACTS } from '../../data/styles/contracts';
 import type { WorldContract, BassDialect } from '../../data/styles/contracts';
 import { GENRE_WORLDS_BY_ID } from '../../data/genres';
+import { BASS_MOTION_ALIASES } from '../../data/performance/bassMotionAliases';
 export type { InteractionModel, PulseModel, PocketSpec, PercussionDialect, BassDialect, ApproachSpec, EnergyMapping, EnergyDelta, TransitionType, TransitionGrammar, DragProfile, PerformanceIdioms, MixCharacter, WorldContract, InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
 
 function cloneDeep<T>(v: T): T {
@@ -108,13 +109,7 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
       // level than the shared performance dialect. Keep those authored labels
       // in the catalog, then resolve their broad playback mechanic here; the
       // actual style-specific cells still determine the notes and phrasing.
-      const explicitAliases: Record<string, BassDialect['style']> = {
-        'root-fifth': 'rootFifth', pedal: 'root',
-        'syncopated-sub': 'sub', 'fragmented-sub': 'sub', 'synth-bass-bounce': 'sub',
-        countermelody: 'rootFifth', counterline: 'rootFifth', 'gospel-answer': 'rootFifth',
-        'riff-root': 'riff', 'orchestral-lift': 'root', 'sustained-root': 'root',
-      };
-      const resolvedBassStyle = explicitAliases[style.harmony.bassMotion] ?? style.harmony.bassMotion;
+      const resolvedBassStyle = BASS_MOTION_ALIASES[style.harmony.bassMotion] ?? style.harmony.bassMotion;
       if (!bassStyles.has(resolvedBassStyle as BassDialect['style'])) {
         throw new Error(`Unsupported bass motion "${style.harmony.bassMotion}" for ${style.id}`);
       }

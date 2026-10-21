@@ -131,7 +131,7 @@ export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
         {"name": "pansori solo voice and buk cues voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "pansori solo voice and buk cues buk pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["buk"], "cycleLength": 1, "articulation": "accent"}
+        {"name": "pansori solo voice and buk cues buk pulse", "role": "percussion", "onsets": [0, 1.5, 2.5, 3, 4.5, 5.5], "instruments": ["buk"], "cycleLength": 2, "articulation": "accent", "hits": ["dum", "edge", "ghost", "open", "edge", "dum"], "accents": [0.9, 0.55, 0.3, 0.75, 0.5, 0.95], "description": "Use a six-pulse drum conversation with strong low arrivals and lighter rim answers. Give the singer room between cues rather than stamping four equal beats. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "vibrato", "staccato", "legato"],

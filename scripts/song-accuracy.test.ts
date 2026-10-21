@@ -524,10 +524,10 @@ test('authored descending motifs resolve downward instead of wrapping upward', (
   assert.ok(line.every((midi, i) => !i || midi < line[i - 1]), String(line));
 });
 
-test('generated weak melody attacks approach their target instead of inheriting an upward contour', () => {
+test('improvised weak melody attacks approach their target instead of inheriting an upward contour', () => {
   const theory = styleTheoryFor('latin-cumbia', 'latin');
   const ctx = { profile: getInstrumentPerformanceProfile('flute'), role: 'lead', chord: 'C',
-    phrasePosition: .25, phraseIndex: 0, onsetIndex: 1, hit: 'tone', pattern: { roles: ['lead'] },
+    phrasePosition: .25, phraseIndex: 0, onsetIndex: 1, hit: 'tone', pattern: { roles: ['lead'] }, soloist: true,
     hybridTheory: { ...theory, melody: { ...theory.melody, targetDegrees: [1], contour: ['pickup'] } } } as PhraseContext;
   const state = createPhraseState();
   state.previousMidi = 76; // E5; the authored C target lies below it.
@@ -537,7 +537,7 @@ test('generated weak melody attacks approach their target instead of inheriting 
 test('generated melody target degrees continue through the full phrase across bar boundaries', () => {
   const theory = styleTheoryFor('latin-cumbia', 'latin');
   const ctx = { profile: getInstrumentPerformanceProfile('flute'), role: 'lead', chord: 'C', phraseIndex: 0,
-    phrasePosition: .4, onsetIndex: 0, phraseAttackIndex: 2, hit: 'tone', pattern: { roles: ['lead'] },
+    phrasePosition: .4, onsetIndex: 0, phraseAttackIndex: 2, hit: 'tone', pattern: { roles: ['lead'] }, soloist: true,
     hybridTheory: { ...theory, melody: { ...theory.melody, targetDegrees: [1, 3, 5, 1] } } } as PhraseContext;
   const state = createPhraseState();
   state.previousMidi = 60;
@@ -928,8 +928,10 @@ test('Troilo coda gives the bandoneon phrase a real breath before it repeats', (
   assert.deepEqual(singing?.events?.map(event => event.microtiming ?? 0), [0, 24, -12, 32, -18, 22, -8, 10],
     'the cantando line has authored phrase push and pull');
   const themeBar = performance.bars.find(bar => bar.index === theme.start)!;
+  const delayedEvent = singing.events![1];
   const delayedPhraseNote = performance.notes.find(note => note.trackId === bandoneon.id
-    && note.bar === theme.start && Math.abs(note.time - (themeBar.start + 1.5 * 60 / themeBar.bpm + .024)) < .01);
+    && note.bar === theme.start && Math.abs(note.time - (themeBar.start
+      + delayedEvent.position * 60 / themeBar.bpm + delayedEvent.microtiming! / 1000)) < .01);
   assert.ok(delayedPhraseNote, 'the bandoneon timing offsets reach the shared playback event plan');
 
   const coda = sheet.regions.find(region => region.kind === 'coda')!;
@@ -1676,7 +1678,7 @@ test('salsa and Mexican samples use their signature instrument handoffs and ense
   assert.ok(!activeIn('salsa-cha-cha-cha_song', 'flute').includes('voice'),
     'the cha-cha-chá flute feature has its own space');
 
-  assert.equal(createCatalogSong('salsa-charanga_song').tracks.find(track => track.instrumentId === 'voice')?.volume, 0.54,
+  assert.equal(createCatalogSong('salsa-charanga_song').tracks.find(track => track.instrumentId === 'voice')?.volume, 0.38,
     'the sustained vocal guide remains audible but sits behind the instrumental groove');
   assert.ok(!activeIn('salsa-charanga_song', 'flute').includes('voice'),
     'the charanga flute solo is a genuine instrumental feature');

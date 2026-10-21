@@ -22,6 +22,7 @@ export function compileSongPipeline(sheet: Sheet): CompiledSong {
   const notation = compileNotatedScore(sheet);
   const notationKeys = notation.sections.flatMap(section => Object.values(section.cells).map(cell => cell.key));
   const interpretationKey = contentKey(['interpretation-v1', notationKeys, notation.sections.map(s => s.chords),
+    sheet.measures.map(measure => measure.harmonyEvents),
     sheet.regions.map(({ name: _name, ...region }) => region), sheet.arrangementContext, sheet.partLens, sheet.partRoles,
     sheet.bpm, sheet.timeSignature, sheet.tempoShift, sheet.relationships, sheet.styleId, sheet.styleInfluences, sheet.styleOverrides]);
   let interpreted = interpretations.get(interpretationKey);

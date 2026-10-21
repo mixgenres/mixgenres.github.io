@@ -82,6 +82,13 @@ export const KIT_INSTRUMENT_ID_MATCHERS = [
   { idFragment: 'bongo', key: 'bongo' },
   { idFragment: 'timbale', key: 'timbale' },
   { idFragment: 'tabla', key: 'tabla' },
+  // These current modeled instruments explicitly use the tabla bank's five
+  // contacts (see instruments/index.ts). Resolve every rhythmic intention
+  // through that declared contact set, including muted/slap and roll. Do not
+  // reject the part because the receiving instrument has a different name.
+  { idFragment: 'pakhawaj', key: 'tabla' },
+  { idFragment: 'mridangam', key: 'tabla' },
+  { idFragment: 'dholak', key: 'tabla' },
   { idFragment: 'bata', key: 'bata' },
   { idFragment: 'cajon', key: 'cajon' },
   { idFragment: 'palmas', key: 'palmas' },

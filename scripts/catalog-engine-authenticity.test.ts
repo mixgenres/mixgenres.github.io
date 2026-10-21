@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { readFileSync } from 'node:fs';
 import { songCatalog } from '../src/data/songs/catalog';
-import { PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../src/data/genres';
+import { GENRE_WORLDS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../src/data/genres';
+import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { createCatalogSong } from '../src/engine/sheet/songCatalog';
@@ -16,10 +17,156 @@ import { PersianGenre } from '../src/data/genres/persian';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import type { Performance } from '../src/engine/band/performanceData';
 import type { Sheet } from '../src/engine/sheet/sheet';
+import { kitHitIntent } from '../src/data/performance/kitHitRules';
 
 setSoundfontBankReader(async id => {
   const bytes = readFileSync(`src/assets/soundfonts/${id}.sfpack`);
   return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+});
+
+test('every catalog cell declares the complete span and valid percussion contacts of its written events', () => {
+  for (const world of GENRE_WORLDS) for (const pattern of world.patterns) {
+    const [n, d] = pattern.meter.split('/').map(Number);
+    const beats = n * 4 / d * pattern.cycleLength;
+    for (const event of pattern.events ?? []) {
+      assert.ok(Number.isFinite(event.position) && event.position >= 0 && event.position < beats,
+        `${pattern.id} declares the complete cycle instead of relying on an inferred continuation`);
+      if (!event.hitType || !pattern.instruments?.some(id => {
+        const def = INSTRUMENTS_BY_ID[id];
+        return !!def?.kit || !!def?.drum || def?.voicing === 'unpitched';
+      })) continue;
+      assert.doesNotThrow(() => kitHitIntent(event.hitType, 'tone'),
+        `${pattern.id} carries a usable authored percussion contact: ${event.hitType}`);
+    }
+  }
+});
+
+test('repeated accompaniment scaffolds are replaced by written instrument jobs', () => {
+  const former = new Set(['[0.25,1.5,2.75,3.5]', '[0,1.5,2.5,3.5]', '[0,1.5,3]']);
+  for (const world of GENRE_WORLDS) for (const pattern of world.patterns) {
+    if (!pattern.roles.some(role => role === 'harmony' || role === 'texture')) continue;
+    const events = pattern.events ?? [];
+    const copied = pattern.cycleLength === 1 && pattern.meter === '4/4'
+      && former.has(JSON.stringify(events.map(event => event.position)))
+      && events.every(event => !event.pitch && event.duration === .4
+        && event.accent === undefined && event.articulation === 'staccato');
+    assert.ok(!copied, `${pattern.id} must teach a local accompaniment instead of the stock chord cell`);
+  }
+  for (const [genre, style, first, second] of [
+    ['afrobeat','afrobeat-classic-afrobeat','guitar','organ'],
+    ['funk','funk-funk','guitar','clavinet'],
+    ['reggae','reggae-rockers','guitar','organ'],
+    ['gospel','gospel-contemporary','piano','organ'],
+  ]) {
+    const parts = [first, second].map(instrument => PATTERNS_BY_WORLD[genre].find(pattern =>
+      pattern.styleIds?.includes(style) && pattern.instruments?.includes(instrument)
+      && pattern.roles.includes('harmony') && !pattern.arrangementVariation));
+    assert.ok(parts.every(Boolean), `${style} has both written support players`);
+    assert.notDeepEqual(parts[0]!.events?.map(event => event.position), parts[1]!.events?.map(event => event.position),
+      `${style} support players interlock instead of doubling one attack grid`);
+  }
+});
+
+test('melodic returns keep their written phrase spans and explicit drone spaces', () => {
+  for (const [genre, style, cycle] of [
+    ['ethiopian','ethiopian-ethio-jazz',2],
+    ['brazilian','brazilian-samba',2],
+    ['folk','folk-old-time',2],
+    ['ambient','ambient-drone',4],
+  ] as const) {
+    const patterns = PATTERNS_BY_WORLD[genre].filter(pattern => pattern.styleIds?.includes(style)
+      && pattern.roles.includes('lead') && pattern.id.endsWith('-melodic-return'));
+    assert.ok(patterns.length, `${style} supplies a written melodic return`);
+    for (const pattern of patterns) assert.equal(pattern.cycleLength, cycle,
+      `${style} follows its actual phrase span`);
+  }
+});
+
+test('written fifths in pentatonic accompaniment are intervals rather than fifth scale slots', () => {
+  for (const [genre, style, instrument, role, tones] of [
+    ['desert-blues','sahel-guitar','guitar','harmony',[0,7,10,7,3,0,3,7,10,7,3,2,0]],
+    ['gnawa','gnawa-rock','guembri','bass',[0,7,0,3,0,7,0,7,3,0,0]],
+    ['steppe','folk-rock-fusion','bass','bass',[0,7,0,9,0,7,4,0]],
+  ] as const) {
+    const pattern = PATTERNS_BY_WORLD[genre].find(pattern => pattern.styleIds?.includes(`${genre}-${style}`)
+      && pattern.instruments?.includes(instrument) && pattern.roles.includes(role)
+      && pattern.events?.every(event => event.pitch?.reference === 'tonic'));
+    assert.ok(pattern, `${style} has the written modal accompaniment`);
+    assert.deepEqual(pattern.events!.map(event => event.pitch?.semitoneOffset), tones,
+      `${style} keeps the actual root/fifth and its own upper answer`);
+  }
+});
+
+test('free cante, tala contacts and Carnatic personnel survive sample construction', () => {
+  for (const style of ['taranta','granaina','malaguena']) {
+    const cante = PATTERNS_BY_WORLD.flamenco.filter(pattern => pattern.styleIds?.includes(`flamenco-${style}`)
+      && pattern.instruments?.includes('voice') && pattern.roles.includes('lead'));
+    assert.ok(cante.length && cante.every(pattern => pattern.events?.every(event => event.kind === 'rest' || event.pitch)),
+      `${style} retains its complete written cante material`);
+    // The Taranta sample deliberately teaches exposed solo guitar. Its vocal
+    // cells remain available to the editor without forcing a singer into it.
+    if (style === 'taranta') continue;
+    const sheet = createCatalogSong(`flamenco-${style}_song`);
+    const voice = sheet.tracks.find(track => track.instrumentId === 'voice');
+    assert.ok(voice, `${style} retains its cante player`);
+    const sung = sheet.regions.find(region => /cante/.test(region.kind));
+    assert.ok(sung?.activeInstrumentIds?.includes('voice'), `${style} exposes the sung phrase`);
+    const pattern = PATTERNS_BY_ID[sheet.arrangement[sung!.id]?.[voice!.id] ?? ''];
+    assert.ok(pattern?.events?.length && pattern.events.every(event => event.kind === 'rest' || event.pitch),
+      `${style} cante has written tones instead of a missing or shared generated line`);
+  }
+  for (const style of ['carnatic-kriti','ragam-tanam-pallavi','varnam','tillana']) {
+    const definition = GENRE_WORLDS.find(world => world.id === 'indian-classical')!.styleDefinitions
+      .find(candidate => candidate.id === `indian-classical-${style}`)!;
+    assert.deepEqual(definition.calibration?.roles.percussion.preferredInstruments, ['mridangam']);
+    assert.ok(definition.calibration?.roles.lead.preferredInstruments.includes('violin'));
+  }
+  const tabla = PATTERNS_BY_WORLD['indian-classical'].find(pattern =>
+    pattern.styleIds?.includes('indian-classical-hindustani-khayal') && pattern.instruments?.includes('tabla'))!;
+  assert.equal(tabla.cycleLength, 4, 'the 16-beat cycle is not collapsed to one four-beat bar');
+  assert.ok(tabla.events?.some((event, index, events) => event.hitType === 'bayan-ghe'
+    && events.some((other, otherIndex) => otherIndex !== index && other.position === event.position
+      && other.hitType === 'dayan-na')), 'composite tabla strokes keep both drums');
+});
+
+test('catalog pitched leads have written melodic content without a shared cross-genre phrase', () => {
+  const signatures = new Map<string, Set<string>>();
+  let pitchedStyles = 0;
+  for (const world of GENRE_WORLDS) for (const style of world.styleDefinitions) {
+    const leads = world.patterns.filter(pattern => pattern.styleIds?.includes(style.id)
+      && pattern.roles.some(role => /^(lead|melody|voice|counterline)$/.test(role))
+      && pattern.instruments?.some(id => {
+        const def = INSTRUMENTS_BY_ID[id];
+        return def && def.voicing !== 'unpitched' && !def.kit && !def.drum;
+      }));
+    if (!leads.length) continue; // Taiko has intentionally unpitched foreground parts.
+    pitchedStyles++;
+    for (const pattern of leads) {
+      assert.ok(pattern.events?.every(event => event.kind === 'rest' || event.pitch),
+        `${pattern.id} must not hand an unspecified tune to the shared generator`);
+    }
+    const main = leads.find(pattern => !pattern.arrangementVariation && pattern.category !== 'cadence' && pattern.category !== 'fill')!;
+    const signature = JSON.stringify([main.meter, main.cycleLength,
+      main.events?.map(event => [event.position, event.duration, event.pitch?.degree,
+        event.pitch?.semitoneOffset, event.pitch?.midi, event.pitch?.voicing])]);
+    const owners = signatures.get(signature) ?? new Set<string>();
+    owners.add(world.id); signatures.set(signature, owners);
+  }
+  assert.equal(pitchedStyles, 420);
+  for (const owners of signatures.values()) assert.equal(owners.size, 1,
+    `unrelated genres must not share one complete main phrase: ${[...owners].join(', ')}`);
+});
+
+test('unrelated bass idioms no longer inherit the shared syncopated root-fifth cell', () => {
+  const former = '[[0,0.6],[0.75,0.6],[1.5,0.6],[2.5,0.6],[3.75,0.25]]';
+  const affected = GENRE_WORLDS.flatMap(world => world.patterns.filter(pattern => pattern.roles.includes('bass')
+    && JSON.stringify(pattern.events?.map(event => [event.position, event.duration])) === former));
+  assert.equal(affected.length, 0, 'the 43 copied bass cells need their own written groove');
+  for (const [genre, style, motion] of [['funk','funk-funk','riff'], ['house','house-deep-house','house'],
+    ['reggaeton','reggaeton-classic','sub'], ['metal','metal-thrash','riff'], ['country','country-honky-tonk','root-fifth']]) {
+    const authored = GENRE_WORLDS.find(world => world.id === genre)!.styleDefinitions.find(candidate => candidate.id === style)!;
+    assert.equal(authored.bassMotion, motion, `${style} keeps an appropriate bass motion`);
+  }
 });
 
 /** A deliberately wide-spaced sample set: chamber minimalism, thrash, bluegrass,

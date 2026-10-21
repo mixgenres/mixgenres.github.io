@@ -1,5 +1,5 @@
 import { GENRE_WORLDS } from '../genres';
-import type { GenreStyleDefinition, GenreWorld } from '../schema';
+import type { GenreStyleDefinition, GenreWorld, PatternEvent } from '../schema';
 import { SCALE_MODE_INTERVALS } from './scales';
 
 export type ScaleName =
@@ -21,6 +21,8 @@ export interface GenreTheoryProfile {
   harmonicRhythm: 'beat' | 'half-bar' | 'bar' | 'two-bar' | 'static' | 'phrase';
   bass: {
     style: string;
+    /** Ordered written bass notes for rhythm-only role transfers. */
+    pitchSequence?: Array<NonNullable<PatternEvent['pitch']>>;
     targetDegrees: number[];
     chromaticApproach: boolean;
     passingProbability: number;
@@ -40,6 +42,8 @@ export interface GenreTheoryProfile {
   };
   melody: {
     scale: ScaleName[];
+    /** Ordered notes from a local teaching phrase, including repeated tones. */
+    pitchSequence?: Array<NonNullable<PatternEvent['pitch']>>;
     targetDegrees: number[];
     approachDegrees: number[];
     phraseBars: number[];

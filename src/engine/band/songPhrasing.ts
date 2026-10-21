@@ -46,11 +46,6 @@ function preferredGestureSet(profile: InstrumentPerformanceProfile, genre: strin
   return Array.from(new Set(ids.filter(id => Boolean(profile.gestures[id]))));
 }
 
-function chordTonePcs(chord: string): number[] {
-  const c = parseChord(chord);
-  return Array.from(new Set(c.intervals.map((n: number) => (c.rootPc + n + 120) % 12)));
-}
-
 function phrasePosition(n: PerfNote, phraseStart: number, phraseEnd: number): number {
   return clamp(((n.bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart));
 }
@@ -63,13 +58,6 @@ function rootRatio(notes: PerfNote[]): number {
     if ((n.midi % 12 + 12) % 12 === parseChord(n.harmonicChord).rootPc) roots++;
   }
   return tonal ? roots / tonal : 0;
-}
-
-function nearestNonRootChordTone(midi: number, pcs: number[], rootPc: number): number {
-  const candidates: number[] = [];
-  for (let d = -12; d <= 12; d++) { const x = midi + d; const pc = (x % 12 + 12) % 12; if (pcs.includes(pc) && pc !== rootPc) candidates.push(x); }
-  candidates.sort((a, b) => Math.abs(a - midi) - Math.abs(b - midi));
-  return candidates[0] ?? midi;
 }
 
 function phraseTechniqueBudget(role: string, family: string, genre: string, notes: PerfNote[]): number {
@@ -109,20 +97,14 @@ function optimizePhrase(notes: PerfNote[], track: Voice, profile: InstrumentPerf
   // the style-aware performer; applying this same sine swell to every track
   // again at the song-level pass used to make unrelated genres breathe alike.
   for (let i = 0; i < notes.length; i++) {
-    const n = notes[i], pos = phrasePosition(n, phraseStart, phraseEnd);
+    const n = notes[i];
     const roleGain = /bass/.test(role) ? 0.96 : /comp|harmony/.test(role) ? 0.98 : /lead|melody|voice/.test(role) ? 1.01 : 1;
     n.vel = Math.max(1, Math.min(127, Math.round(n.vel * roleGain)));
     if (/bass/.test(role) && n.midi < profile.capabilities.comfortableLowMidi && n.hitFunctionCode !== 0) n.vel = Math.max(1, Math.round(n.vel * 0.88));
 
-    // Harmony is voiced as a unit upstream. Replacing individual roots here
-    // would duplicate inner voices and destroy an intentional chord/inversion.
-    // Bass: structural roots remain roots; inner attacks can outline the harmony.
-    if (!n.authoredPitch && /bass/.test(role) && rootShare > 0.78 && pos > 0.16 && pos < 0.82 && i % 4 === 2) {
-      if (!n.harmonicChord) throw new Error(`Note ${n.attackId ?? n.trackId} has no resolved harmony`);
-      const parsed = parseChord(n.harmonicChord);
-      const candidate = nearestNonRootChordTone(n.midi, chordTonePcs(n.harmonicChord), parsed.rootPc);
-      if (candidate !== n.midi && Math.abs(candidate - n.midi) <= 7) n.midi = candidate;
-    }
+    // Pitch belongs to the written cell and its role-aware realization.
+    // Root-heavy pedals, riffs and one-drop lines must not acquire the same
+    // extra chord tone every fourth note during a dynamics/technique pass.
   }
 
   const styleTechnique = styleTechniqueExpectation(style, profile, role, partStyle, partStyleWeight);

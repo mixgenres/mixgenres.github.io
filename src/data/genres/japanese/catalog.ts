@@ -198,7 +198,7 @@ export const GENRE_PACK: GenrePackInput = {
       "cells": [
         {"name": "shamisen minyo strum and vocal answer voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "shamisen minyo strum and vocal answer shamisen statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["shamisen"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "shamisen minyo strum and vocal answer taiko pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["taiko"], "cycleLength": 1, "articulation": "accent"}
+        {"name": "shamisen minyo strum and vocal answer taiko pulse", "role": "percussion", "onsets": [0, 1, 1.5, 3, 4.5, 5.5, 6, 7.5], "instruments": ["taiko"], "cycleLength": 2, "articulation": "accent", "hits": ["dum", "edge", "ghost", "open", "edge", "ghost", "dum", "edge"], "accents": [0.85, 0.5, 0.3, 0.7, 0.55, 0.3, 0.9, 0.65], "description": "Support the sung dance phrase with grounded drum arrivals and lighter rim answers across two bars; keep the shamisen phrase clear. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],

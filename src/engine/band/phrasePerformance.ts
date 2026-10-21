@@ -1,6 +1,6 @@
-import { ANTICIPATED_BASS_GENRES, IDIOMATIC_DEGREE_RULES } from '../../data/performance/genreInstrumentBehaviors';
 import { GENRE_GESTURE_HINT_RULES } from '../../data/performance/genreGestureRules';
 import { GESTURE_HINT_ALIASES } from '../../data/performance/gestureHintAliases';
+import { BASS_MOTION_ALIASES } from '../../data/performance/bassMotionAliases';
 import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
 import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
 import type { MusicalPattern, Measure } from '../../types';
@@ -59,6 +59,8 @@ export interface PhraseContext {
   hit: HitFunction;
   gesture?: string;
   chord: string;
+  /** The section's written key center, independent of the current chord root. */
+  tonicPc?: number;
   nextChord?: string;
   energy: number;
   bassStyle?: string;
@@ -160,7 +162,7 @@ function bassMidi(ctx: PhraseContext, index: number, total: number): number {
     /^(bass|low-anchor)$/.test(ctx.role) ? Math.max(60, low + 11) : 127);
   const center = Math.max(low, Math.min(ctx.profile.capabilities.comfortableLowMidi + 5, 48));
   const rawMotion = ctx.bassStyle ?? ctx.hybridTheory.bass.style ?? 'riff';
-  const b = rawMotion === 'root-fifth' ? 'rootFifth' : rawMotion;
+  const b = BASS_MOTION_ALIASES[rawMotion] ?? rawMotion;
   const root = parseChord(ctx.chord).bassPc;
   const nextRoot = ctx.nextChord ? rootPc(ctx.nextChord) : root;
   const nextTarget = ctx.nextChord ? degreePc(ctx.nextChord, index % 2 === 0 ? 3 : 1, ctx.hybridTheory) : nextRoot;
@@ -192,7 +194,7 @@ function bassMidi(ctx: PhraseContext, index: number, total: number): number {
     if (ctx.statePreviousMidi !== undefined && Math.abs(step - ctx.statePreviousMidi) <= 5) return step;
     return prior;
   }
-  if (b === 'tumbao' || ANTICIPATED_BASS_GENRES.includes(ctx.hostGenre)) {
+  if (b === 'tumbao') {
     const anti = ctx.hybridTheory.bass.anticipationBeats;
     const [numerator, denominator] = ctx.pattern.meter.split('/').map(Number);
     // Rhythm onsets are fractions of a bar; theory anticipations are quarter
@@ -204,7 +206,7 @@ function bassMidi(ctx: PhraseContext, index: number, total: number): number {
   }
   if (b === 'rootFifth' || b === 'samba' || b === 'cumbia' || b === 'reggae') return index % 2 === 0 ? r : f;
   if (b === 'octave') return r + (index % 2 === 0 ? 0 : (12 <= high - r ? 12 : 0));
-  if (b === 'sub') return r;
+  if (b === 'sub' || b === 'root') return r;
   if (b === 'dembow') return index % 2 ? f : r;
   if (b === 'house') {
     const target = index % 4 === 3 && ctx.nextChord ? nextTarget : root;
@@ -213,15 +215,14 @@ function bassMidi(ctx: PhraseContext, index: number, total: number): number {
   if (b === 'riff') {
     const scale = chordScalePcs(ctx.chord, ctx.hybridTheory);
     const degree = ctx.hybridTheory.bass.targetDegrees[index % ctx.hybridTheory.bass.targetDegrees.length] ?? 1;
-    const pc = scale[Math.max(0, Math.min(scale.length - 1, degree - 1))] ?? root;
-    if (ctx.phrasePosition > 0.72 && ctx.nextChord) {
+    const pc = degreePc(ctx.chord, degree, ctx.hybridTheory);
+    if (ctx.barIndex === ctx.phraseEnd - 1 && index === total - 1 && ctx.nextChord
+      && nextRoot !== root && ctx.hybridTheory.bass.chromaticApproach) {
       return nearestMidi(approachPc(nextTarget, r % 12, ctx.hybridTheory.bass.chromaticApproach), r, low, high);
     }
-    return nearestMidi(pc, center + (index % 2 ? 4 : 0), low, high);
+    return nearestMidi(pc, center + 12 * Math.floor((degree - 1) / scale.length), low, high);
   }
-  return ctx.nextChord && index === total - 1
-    ? nearestMidi(approachPc(nextTarget, r % 12, ctx.hybridTheory.bass.chromaticApproach), r, low, high)
-    : r;
+  throw new Error(`No bass realization for authored motion "${rawMotion}" in ${ctx.regionStyleId ?? ctx.hostGenre}`);
 }
 
 function stateTarget(ctx: PhraseContext, target: number, center: number, low: number, high: number): number {
@@ -323,27 +324,71 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
   if (ctx.authoredPitch) {
     const pitch = ctx.authoredPitch;
     if (pitch.voicing === 'chord') return chordVoicing(ctx, state);
-    const pc = ((pitch.semitoneOffset !== undefined ? rootPc(ctx.chord) + pitch.semitoneOffset
-      : degreePc(ctx.chord, pitch.degree ?? 1, ctx.hybridTheory)) + 120) % 12;
-    const root = rootPc(ctx.chord);
-    const rootMidi = nearestMidi(root, pitch.register ?? voiceProfile(ctx.profile.instrumentId).centre,
-      ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
-    const scaleLength = chordScalePcs(ctx.chord, ctx.hybridTheory).length;
-    const offset = pitch.semitoneOffset ?? (pc - root + 12) % 12 + 12 * Math.floor(((pitch.degree ?? 1) - 1) / scaleLength);
+    const tonicRelative = pitch.reference === 'tonic';
+    const pitchChord = pitch.reference === 'next-chord' ? ctx.nextChord ?? ctx.chord : ctx.chord;
+    const root = tonicRelative ? ctx.tonicPc ?? rootPc(pitchChord) : rootPc(pitchChord);
+    const scale = tonicRelative ? scalePcsForMode(ctx.hybridTheory.defaultScale, root) : chordScalePcs(pitchChord, ctx.hybridTheory);
+    const degreeIndex = (pitch.degree ?? 1) - 1;
+    const degreePitch = scale[((degreeIndex % scale.length) + scale.length) % scale.length];
+    const pc = ((pitch.semitoneOffset !== undefined ? root + pitch.semitoneOffset : degreePitch) + 120) % 12;
+    const offset = pitch.semitoneOffset ?? (pc - root + 12) % 12 + 12 * Math.floor(degreeIndex / scale.length);
+    const low = ctx.profile.capabilities.lowMidi, high = ctx.profile.capabilities.highMidi;
+    const register = pitch.register ?? voiceProfile(ctx.profile.instrumentId).centre;
+    let rootMidi = nearestMidi(root, register, low, high);
+    const matching = (ctx.pattern?.events ?? []).flatMap(event => event.pitch
+      && event.pitch.midi === undefined && event.pitch.voicing !== 'chord'
+      && event.pitch.register === pitch.register && (event.pitch.reference ?? 'chord') === (pitch.reference ?? 'chord')
+      ? [event.pitch] : []);
+    const roleSequence = /^(bass|low-anchor)$/.test(ctx.role)
+      ? ctx.hybridTheory.bass.pitchSequence : ctx.hybridTheory.melody.pitchSequence;
+    const written = matching.length ? matching : (roleSequence ?? [])
+      .filter(value => (value.reference ?? 'chord') === (pitch.reference ?? 'chord'));
+    const offsets = written.map(value => {
+      if (value.semitoneOffset !== undefined) return value.semitoneOffset;
+      const at = (value.degree ?? 1) - 1;
+      return (scale[((at % scale.length) + scale.length) % scale.length] - root + 12) % 12
+        + 12 * Math.floor(at / scale.length);
+    });
+    if (offsets.length) {
+      const lowerRoot = low - Math.min(...offsets), upperRoot = high - Math.max(...offsets);
+      // Fit a complete written contour in one octave before considering any
+      // per-note range adaptation. Otherwise a high-register 1–3–5–8 rises
+      // for three notes and suddenly drops an octave at the last tonic.
+      if (Math.ceil((lowerRoot - root) / 12) <= Math.floor((upperRoot - root) / 12))
+        rootMidi = nearestMidi(root, register, lowerRoot, upperRoot);
+    }
     // Degree contours are relative to one root register. Picking every pitch
     // nearest the same centre makes a descending 5–3–2–1 jump up at its tonic.
     return [nearestMidi(pc, rootMidi + offset,
-      ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)];
+      low, high)];
   }
   if (voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
-  if (!ctx.soloist && (/^(bass|low-anchor)$/.test(ctx.role) || voiceProfile(ctx.profile.instrumentId).role === 'bass')) return [bassMidi(ctx, index, total)];
+  const bassRole = /^(bass|low-anchor)$/.test(ctx.role)
+    || !ctx.role && voiceProfile(ctx.profile.instrumentId).role === 'bass';
+  if (!ctx.soloist && bassRole) {
+    const sequence = ctx.hybridTheory.bass.pitchSequence;
+    const rhythmOnlyTransfer = !ctx.pattern.roles.some(role => /^(bass|low-anchor)$/.test(role));
+    if (rhythmOnlyTransfer && sequence?.length) {
+      const written = sequence[(ctx.phraseAttackIndex ?? index) % sequence.length];
+      return realizeMidi({ ...ctx, authoredPitch: { ...written, register: undefined } }, index, total, state);
+    }
+    return [bassMidi(ctx, index, total)];
+  }
   const melodicRole = /^(lead|melody|counterline|voice)$/.test(ctx.role);
   if (!ctx.soloist && !melodicRole && (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d))) return chordVoicing(ctx, state);
+
+  // A percussion-to-melody fusion supplies rhythm rather than written pitch.
+  // Give it the selected style's actual phrase vocabulary, preserving its
+  // repeated tones and contour instead of cycling an unordered 1/3/5 set.
+  const sequence = ctx.hybridTheory.melody.pitchSequence;
+  if (!ctx.soloist && melodicRole && sequence?.length) {
+    const written = sequence[(ctx.phraseAttackIndex ?? index) % sequence.length];
+    return realizeMidi({ ...ctx, authoredPitch: { ...written, register: undefined } }, index, total, state);
+  }
 
   const scale = ctx.soloist && ctx.soloGrammar?.scaleMode
     ? scalePcsForMode(ctx.soloGrammar.scaleMode, rootPc(ctx.chord))
     : chordScalePcs(ctx.chord, ctx.hybridTheory);
-  const idiomaticDegrees = IDIOMATIC_DEGREE_RULES.find(rule => rule.genrePattern.test(ctx.hostGenre) && rule.instrumentPattern.test(d))?.degrees;
   const stage = ctx.soloist && ctx.soloGrammar?.phraseStages?.length
     ? ctx.soloGrammar.phraseStages[ctx.phraseIndex % ctx.soloGrammar.phraseStages.length]
     : undefined;
@@ -352,9 +397,8 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
     ? ((ctx.barIndex + index) % 2 ? 5 : 1)
     : targetStrategy.includes('root') ? 1 : undefined;
   const phraseAttackIndex = ctx.phraseAttackIndex ?? index;
-  const targetDegree = grammarDegree ?? (idiomaticDegrees
-    ? idiomaticDegrees[phraseAttackIndex % idiomaticDegrees.length]
-    : (ctx.hybridTheory.melody.targetDegrees[phraseAttackIndex % ctx.hybridTheory.melody.targetDegrees.length] ?? 1));
+  const targetDegree = grammarDegree
+    ?? (ctx.hybridTheory.melody.targetDegrees[phraseAttackIndex % ctx.hybridTheory.melody.targetDegrees.length] ?? 1);
   const targetPc = ctx.soloist && scale.length
     ? scale[(targetDegree - 1 + scale.length * 2) % scale.length]
     : degreePc(ctx.chord, targetDegree, ctx.hybridTheory);
@@ -380,10 +424,9 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
         ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
     }
   }
-  if (ctx.nextChord && ctx.phrasePosition > 0.8 && ctx.hybridTheory.bass.chromaticApproach) {
-    const nextParsed = parseChord(ctx.nextChord);
-    pc = nextParsed.rootPc;
-  }
+  // Bass approaches do not prescribe the melody's cadence. In particular a
+  // chromatic walking-bass setting must not turn every late lead note into
+  // the next chord root.
   const target = state.previousMidi ?? (ctx.profile.capabilities.comfortableLowMidi + ctx.hostProfile.register.highBias * 18);
   // Do not add four semitones to the register on every late-phrase attack:
   // repeated answers otherwise climb to the instrument's ceiling.

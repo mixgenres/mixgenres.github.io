@@ -656,8 +656,9 @@ export function createCatalogSong(id: string): Sheet {
   }
   // Give returning form sections a written development cell when the style
   // already teaches one for that exact instrument and role. Preserve all
-  // explicitly assigned/locked recording cells; this only changes repeats
-  // that would otherwise copy the same opening cell verbatim.
+  // occurrence-specific, section-scoped and locked recording cells. A broad
+  // kind-level assignment of the unscoped theme is still allowed to develop
+  // on its return; repeating that default must not hide written alternatives.
   const firstCellBySection = new Map<string, string>();
   const sectionOccurrence = new Map<string, number>();
   for (const region of sheet.regions) {
@@ -670,12 +671,14 @@ export function createCatalogSong(id: string): Sheet {
       const occurrence = sectionOccurrence.get(sectionTrackKey) ?? 0;
       const explicitTarget = [instrumentId, `${instrumentId}:${track.role}`];
       const regionAssignments = patternAssignmentsForRegion(region);
-      const explicitlyAssigned = explicitTarget.some(target => Object.hasOwn(regionAssignments, target));
+      const occurrenceAssignments = playableRecording.patternAssignments?.[sectionOccurrenceKeys.get(region.id) ?? ''] ?? {};
+      const basePattern = PATTERNS_BY_ID[basePatternId];
+      const explicitlyAssigned = explicitTarget.some(target => Object.hasOwn(occurrenceAssignments, target)
+        || !!basePattern?.sectionUsage?.length && Object.hasOwn(regionAssignments, target));
       const explicitlyLocked = lockTargetsForRegion(region).some(target => explicitTarget.includes(target));
       const originalPatternId = firstCellBySection.get(sectionTrackKey);
       if (occurrence > 0 && basePatternId === originalPatternId && !explicitlyAssigned && !explicitlyLocked) {
-        const variations = (style.patterns?.allowed ?? [])
-          .map(candidateId => PATTERNS_BY_ID[candidateId])
+        const variations = eligibleStylePatterns
           .filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern
             && pattern.id !== basePatternId
             && pattern.enabled !== false

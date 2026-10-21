@@ -195,25 +195,7 @@ export const GENRE_PACK: GenrePackInput = {
             "ghost"
           ]
         },
-        {
-          "name": "timba piano tumbao and bass gear changes timbales pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
+        {"name": "timba piano tumbao and bass gear changes timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.5, 3.5, 4, 4.75, 5.5, 6, 6.5, 7.5], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent", "hits": ["edge", "edge", "edge", "bell", "edge", "bell", "edge", "bell", "edge", "bell", "edge", "bell"], "accents": [0.65, 0.4, 0.6, 0.85, 0.45, 0.8, 0.7, 0.85, 0.45, 0.8, 0.5, 0.95], "description": "Keep the shell timeline through the first bar, then answer on the bell as the piano tumbao returns. Original ensemble lesson; not a recording transcription."},
         {"name":"timba piano tumbao and bass gear changes kit","role":"percussion","onsets":[0,0,0.5,1.5,1.5,1.75,2.5,2.75,3,3.5,4,4,5,5.5,5.5,5.75,6.5,7,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare","kick","cowbell","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78,0.92,0.48,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78],"articulation":"accent","shortName":"Timba kit interlock","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {"name":"timba piano tumbao and bass gear changes drums cadence fill","role":"percussion","onsets":[2.5,3,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","cowbell","snare"],"accents":[0.48,0.92,0.48,0.78],"shortName":"Timba kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
@@ -348,7 +330,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "songo drum conga interlock and bass displacement voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "songo drum conga interlock and bass displacement trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "songo drum conga interlock and bass displacement trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "songo drum conga interlock and bass displacement piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "songo drum conga interlock and bass displacement piano accompaniment", "role": "harmony", "onsets": [0.5, 1, 1.5, 2.5, 3, 3.5, 4, 4.5, 5.5, 6, 6.5, 7.5], "instruments": ["piano"], "cycleLength": 2, "durations": [0.25, 0.22, 0.4, 0.22, 0.22, 0.4, 0.25, 0.35, 0.25, 0.22, 0.4, 0.35], "articulation": "staccato", "accents": [0.55, 0.5, 0.9, 0.55, 0.5, 0.85, 0.65, 0.8, 0.55, 0.5, 0.9, 0.75], "pitches": [{"degree": 1, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 1, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}], "description": "Learn the two-bar broken-chord tumbao in groups, keeping its syncopated high notes distinct from the bass anticipation. Original ensemble study, not a recording transcription."},
         {"name": "songo drum conga interlock and bass displacement low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "songo drum conga interlock and bass displacement congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "songo drum conga interlock and bass displacement timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
@@ -459,7 +441,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Irakere jazz funk horns and piano montuno voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Irakere jazz funk horns and piano montuno trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Irakere jazz funk horns and piano montuno trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Irakere jazz funk horns and piano montuno piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Irakere jazz funk horns and piano montuno piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.25, 3.5, 4.5, 5.25, 6, 6.75, 7.5], "instruments": ["piano"], "cycleLength": 2, "durations": [0.3, 0.25, 0.4, 0.3, 0.35, 0.3, 0.25, 0.4, 0.3, 0.35], "articulation": "staccato", "accents": [0.95, 0.5, 0.8, 0.6, 0.85, 0.6, 0.8, 0.55, 0.75, 0.9], "pitches": [{"degree": 1, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 7, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 9, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 7, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 58, "voicing": "single", "reference": "chord"}, {"degree": 1, "register": 58, "voicing": "single", "reference": "chord"}], "description": "Cross a funk opening accent with a syncopated two-bar piano line; articulate upper extensions and leave the horn punches clear. Original ensemble study, not a recording transcription."},
         {"name": "Irakere jazz funk horns and piano montuno low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "Irakere jazz funk horns and piano montuno congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "Irakere jazz funk horns and piano montuno timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
@@ -674,44 +656,8 @@ export const GENRE_PACK: GenrePackInput = {
             0.5
           ]
         },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao congas pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
-        {
-          "name": "NG La Banda dense horn bloques and bass tumbao timbales pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
+        {"name": "NG La Banda dense horn bloques and bass tumbao congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.75, 3, 3.5, 4, 4.5, 5, 5.75, 6.5, 7, 7.5], "instruments": ["congas"], "cycleLength": 2, "articulation": "accent", "hits": ["ghost", "ghost", "slap", "ghost", "ghost", "slap", "open", "open", "ghost", "ghost", "slap", "ghost", "open", "slap", "open"], "accents": [0.35, 0.3, 0.85, 0.3, 0.4, 0.6, 0.9, 0.7, 0.35, 0.3, 0.8, 0.35, 0.75, 0.65, 0.95], "description": "Retain light hand motion around the slap and paired open tones; the second-bar reply changes while the piano holds its own tumbao. Original ensemble lesson; not a recording transcription."},
+        {"name": "NG La Banda dense horn bloques and bass tumbao timbales pulse", "role": "percussion", "onsets": [0, 0.75, 1, 1.5, 2.5, 3.25, 3.5, 4, 4.5, 5.5, 6.25, 7, 7.5], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent", "hits": ["edge", "bell", "edge", "edge", "bell", "edge", "bell", "edge", "edge", "bell", "edge", "bell", "bell"], "accents": [0.7, 0.85, 0.4, 0.6, 0.8, 0.4, 0.9, 0.7, 0.4, 0.85, 0.5, 0.8, 0.95], "description": "Use shell contacts as the quiet frame and sharp bell answers around the horn punches; change the second-bar grouping. Original ensemble lesson; not a recording transcription."},
         {"name":"NG La Banda dense horn bloques and bass tumbao kit","role":"percussion","onsets":[0,0,0.75,1,1.5,1.5,2.5,2.5,3,3.5,4,4,4.5,5.5,5.5,5.5,6,6.75,7,7],"instruments":["drums"],"hits":["kick","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","cowbell","kick","snare","cowbell","cowbell","kick","snare","cowbell"],"cycleLength":2,"accents":[0.92,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.48,0.92,0.78,0.48,0.48,0.92,0.78,0.48],"articulation":"accent","shortName":"Bloque kit pocket","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {"name":"NG La Banda dense horn bloques and bass tumbao drums cadence fill","role":"percussion","onsets":[2,2.75,3,3],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","snare","cowbell"],"accents":[0.48,0.92,0.78,0.48],"shortName":"Bloque kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {
@@ -839,7 +785,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Charanga Habanera synth piano and explosive breaks voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Charanga Habanera synth piano and explosive breaks trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Charanga Habanera synth piano and explosive breaks trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Charanga Habanera synth piano and explosive breaks piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Charanga Habanera synth piano and explosive breaks piano accompaniment", "role": "harmony", "onsets": [0.25, 0.75, 1.5, 2, 2.75, 3.5, 4.25, 5, 5.75, 6.5, 7.25, 7.75], "instruments": ["piano"], "cycleLength": 2, "durations": [0.2, 0.25, 0.3, 0.2, 0.3, 0.35, 0.2, 0.3, 0.25, 0.3, 0.2, 0.14], "articulation": "staccato", "accents": [0.5, 0.85, 0.65, 0.5, 0.8, 0.6, 0.55, 0.9, 0.6, 0.8, 0.55, 0.45], "pitches": [{"degree": 1, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 1, "register": 60, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 60, "voicing": "single", "reference": "chord"}], "description": "Practice a displaced two-bar tumbao with uneven groupings; hold the accented top note slightly longer and keep the short notes light. Original ensemble study, not a recording transcription."},
         {"name": "Charanga Habanera synth piano and explosive breaks synth countertumbao", "shortName": "Synth countertumbao", "role": "harmony", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "durations": [0.18, 0.18, 0.18, 0.18], "articulation": "staccato", "sectionUsage": ["coro", "mambo"]},
         {"name": "Charanga Habanera synth piano and explosive breaks low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "Charanga Habanera synth piano and explosive breaks congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
@@ -957,7 +903,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Bamboleo funk bass and female vocal response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Bamboleo funk bass and female vocal response trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Bamboleo funk bass and female vocal response trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Bamboleo funk bass and female vocal response piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Bamboleo funk bass and female vocal response piano accompaniment", "role": "harmony", "onsets": [0, 0.5, 1.25, 2, 2.75, 3.25, 4.5, 5.25, 5.75, 6.5, 7, 7.5], "instruments": ["piano"], "cycleLength": 2, "durations": [0.25, 0.3, 0.25, 0.4, 0.2, 0.3, 0.3, 0.25, 0.3, 0.25, 0.2, 0.35], "articulation": "staccato", "accents": [0.9, 0.5, 0.75, 0.6, 0.5, 0.8, 0.55, 0.85, 0.5, 0.7, 0.5, 0.95], "pitches": [{"degree": 1, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 1, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 59, "voicing": "single", "reference": "chord"}, {"degree": 1, "register": 59, "voicing": "single", "reference": "chord"}], "description": "Answer the vocal line with a two-bar piano pattern that changes its final grouping; keep the bass pickup separate. Original ensemble study, not a recording transcription."},
         {"name": "Bamboleo funk bass and female vocal response low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "Bamboleo funk bass and female vocal response congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "Bamboleo funk bass and female vocal response timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
@@ -1170,65 +1116,11 @@ export const GENRE_PACK: GenrePackInput = {
             0.38
           ]
         },
-        {
-          "name": "Paulito FG coro development and gear shifts congas pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
-        {
-          "name": "Paulito FG coro development and gear shifts timbales pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
+        {"name": "Paulito FG coro development and gear shifts congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.5, 3, 3.5, 4, 4.75, 5, 5.5, 6.25, 7, 7.5], "instruments": ["congas"], "cycleLength": 2, "articulation": "accent", "hits": ["ghost", "ghost", "slap", "ghost", "ghost", "ghost", "open", "open", "ghost", "slap", "ghost", "open", "ghost", "open", "slap"], "accents": [0.35, 0.3, 0.8, 0.3, 0.4, 0.3, 0.9, 0.7, 0.35, 0.7, 0.3, 0.8, 0.35, 0.9, 0.65], "description": "Keep a clear marcha foundation, then answer with changed slap and open-tone placement in the second bar. Original ensemble lesson; not a recording transcription."},
+        {"name": "Paulito FG coro development and gear shifts timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1.25, 2, 2.75, 3.5, 4, 4.5, 5.25, 6, 6.75, 7.25, 7.5], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent", "hits": ["edge", "edge", "bell", "edge", "bell", "edge", "edge", "bell", "edge", "bell", "edge", "ghost", "bell"], "accents": [0.65, 0.4, 0.85, 0.5, 0.8, 0.45, 0.7, 0.85, 0.4, 0.8, 0.5, 0.3, 0.95], "description": "Move between shell and bell through the gear phrase; the closing ghost contact stays light before the final bell. Original ensemble lesson; not a recording transcription."},
         {"name":"Paulito FG coro development and gear shifts kit","role":"percussion","onsets":[0,0,0.5,1,1.5,1.75,2,2.5,3,3.5,3.5,4,4,4.75,5,5,5.5,6.5,6.5,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","snare","cowbell","kick","cowbell","cowbell","kick","snare","cowbell","kick","cowbell","kick","snare","cowbell","cowbell","kick","cowbell","cowbell","snare"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.78,0.48,0.92,0.48,0.48,0.92,0.78,0.48,0.92,0.48,0.92,0.78,0.48,0.48,0.92,0.48,0.48,0.78],"articulation":"accent","shortName":"Gear-change kit pocket","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {"name":"Paulito FG coro development and gear shifts drums cadence fill","role":"percussion","onsets":[2.5,2.5,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["kick","cowbell","cowbell","snare"],"accents":[0.92,0.48,0.48,0.78],"shortName":"Gear-change kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
-        {
-          "name": "Paulito FG coro development and gear shifts cowbell pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        }
+        {"name": "Paulito FG coro development and gear shifts cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3.5, 4, 5, 5.5, 6.5, 7, 7.5], "instruments": ["cowbell"], "cycleLength": 2, "articulation": "accent", "hits": ["bell", "edge", "edge", "bell", "edge", "bell", "bell", "edge", "bell", "edge", "bell", "edge"], "accents": [0.9, 0.45, 0.6, 0.85, 0.5, 0.8, 0.95, 0.5, 0.8, 0.5, 0.9, 0.6], "description": "Keep low bell anchors and lighter edge answers; use the second-bar response as the gear cue. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1456,25 +1348,7 @@ export const GENRE_PACK: GenrePackInput = {
             "slap"
           ]
         },
-        {
-          "name": "Manolin chant coro and percussion breaks timbales pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
+        {"name": "Manolin chant coro and percussion breaks timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2.25, 2.75, 3.5, 4, 4.75, 5.5, 6.25, 7, 7.5], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent", "hits": ["edge", "edge", "bell", "edge", "bell", "edge", "edge", "bell", "edge", "bell", "edge", "bell"], "accents": [0.65, 0.4, 0.85, 0.5, 0.8, 0.45, 0.7, 0.85, 0.4, 0.8, 0.5, 0.95], "description": "Keep the shell-and-bell conversation independent of the displaced piano figure; let the end of bar two cue the return. Original ensemble lesson; not a recording transcription."},
         {
           "name": "Manolin chant coro and percussion breaks timbales cadence fill",
           "role": "percussion",
@@ -1722,65 +1596,11 @@ export const GENRE_PACK: GenrePackInput = {
             0.32
           ]
         },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro congas pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro timbales pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
+        {"name": "Havana D Primera melodic trumpet and vocal coro congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.75, 7, 7.5], "instruments": ["congas"], "cycleLength": 2, "articulation": "accent", "hits": ["ghost", "ghost", "slap", "ghost", "ghost", "ghost", "open", "open", "ghost", "slap", "ghost", "ghost", "open", "ghost", "open", "open"], "accents": [0.35, 0.3, 0.8, 0.3, 0.4, 0.3, 0.9, 0.7, 0.35, 0.7, 0.3, 0.35, 0.75, 0.3, 0.9, 0.75], "description": "Keep a flowing hand exchange with distinct slaps and open tones; shape the second-bar open-tone answer without filling every gap. Original ensemble lesson; not a recording transcription."},
+        {"name": "Havana D Primera melodic trumpet and vocal coro timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2.5, 3.5, 4, 4.5, 5.25, 6, 6.75, 7.5], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent", "hits": ["edge", "edge", "bell", "edge", "bell", "edge", "edge", "bell", "edge", "bell", "edge", "bell"], "accents": [0.65, 0.4, 0.85, 0.5, 0.8, 0.45, 0.7, 0.85, 0.4, 0.8, 0.5, 0.95], "description": "Play the broad shell frame under the verse and stronger bell answers through the response; keep the pickup contacts small. Original ensemble lesson; not a recording transcription."},
         {"name":"Havana D Primera melodic trumpet and vocal coro kit","role":"percussion","onsets":[0,0,0.5,0.75,1.5,1.5,2,2.75,3,3.5,3.5,4,4,5,5,5.5,5.5,6.5,7,7,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","kick","snare","cowbell","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","snare","cowbell","kick","cowbell","cowbell","kick","cowbell","snare"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.92,0.78,0.48,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.78,0.48,0.92,0.48,0.48,0.92,0.48,0.78],"articulation":"accent","shortName":"Trumpet-response kit pocket","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {"name":"Havana D Primera melodic trumpet and vocal coro drums cadence fill","role":"percussion","onsets":[2.5,3,3,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","cowbell","snare"],"accents":[0.48,0.92,0.48,0.78],"shortName":"Trumpet-response kit close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
-        {
-          "name": "Havana D Primera melodic trumpet and vocal coro cowbell pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        }
+        {"name": "Havana D Primera melodic trumpet and vocal coro cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2.25, 3, 3.5, 4, 4.75, 5.5, 6.5, 7, 7.5], "instruments": ["cowbell"], "cycleLength": 2, "articulation": "accent", "hits": ["bell", "edge", "edge", "bell", "edge", "bell", "bell", "edge", "bell", "edge", "bell", "edge"], "accents": [0.9, 0.45, 0.6, 0.85, 0.5, 0.8, 0.95, 0.5, 0.8, 0.5, 0.9, 0.6], "description": "Maintain a low-bell anchor and a changing high-edge answer across the two-bar coro phrase. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1983,44 +1803,8 @@ export const GENRE_PACK: GenrePackInput = {
             0.5
           ]
         },
-        {
-          "name": "Maykel Blanco percussive piano and sharp bloques congas pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "congas"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
-        {
-          "name": "Maykel Blanco percussive piano and sharp bloques timbales pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "timbales"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        },
+        {"name": "Maykel Blanco percussive piano and sharp bloques congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2.25, 2.75, 3, 3.5, 4, 4.5, 5, 5.75, 6, 6.5, 7, 7.5], "instruments": ["congas"], "cycleLength": 2, "articulation": "accent", "hits": ["ghost", "ghost", "slap", "ghost", "ghost", "slap", "open", "open", "ghost", "ghost", "slap", "ghost", "open", "ghost", "open", "slap"], "accents": [0.35, 0.3, 0.8, 0.3, 0.4, 0.6, 0.9, 0.7, 0.35, 0.3, 0.8, 0.35, 0.75, 0.3, 0.9, 0.7], "description": "Keep the quieter hand motion continuous around the accents; let the changed second-bar slap lead into the next horn response. Original ensemble lesson; not a recording transcription."},
+        {"name": "Maykel Blanco percussive piano and sharp bloques timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1.25, 1.75, 2.5, 3.25, 4, 4.5, 5.5, 6.25, 6.75, 7.5], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent", "hits": ["edge", "edge", "bell", "edge", "bell", "edge", "edge", "bell", "edge", "bell", "edge", "bell"], "accents": [0.65, 0.4, 0.85, 0.5, 0.8, 0.45, 0.7, 0.85, 0.4, 0.8, 0.5, 0.95], "description": "Use a compact shell figure with bright bell replies, leaving the brass bloque accents room to land. Original ensemble lesson; not a recording transcription."},
         {
           "name": "Maykel Blanco percussive piano and sharp bloques timbales cadence fill",
           "role": "percussion",
@@ -2089,25 +1873,7 @@ export const GENRE_PACK: GenrePackInput = {
             0.38
           ]
         },
-        {
-          "name": "Maykel Blanco percussive piano and sharp bloques cowbell pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        }
+        {"name": "Maykel Blanco percussive piano and sharp bloques cowbell pulse", "role": "percussion", "onsets": [0, 0.75, 1.5, 2, 2.5, 3.5, 4, 4.5, 5.5, 6.25, 7, 7.5], "instruments": ["cowbell"], "cycleLength": 2, "articulation": "accent", "hits": ["bell", "edge", "edge", "bell", "edge", "bell", "bell", "edge", "bell", "edge", "bell", "edge"], "accents": [0.9, 0.45, 0.6, 0.85, 0.5, 0.8, 0.95, 0.5, 0.8, 0.5, 0.9, 0.6], "description": "Play grounded bell strikes and light edge replies, with a second-bar displacement that stays separate from the piano tumbao. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -2212,7 +1978,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "timba funk slap bass and syncopated horn hits voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "timba funk slap bass and syncopated horn hits trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "timba funk slap bass and syncopated horn hits trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba funk slap bass and syncopated horn hits piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "timba funk slap bass and syncopated horn hits piano accompaniment", "role": "harmony", "onsets": [0.5, 1.25, 1.75, 2.5, 3.25, 4, 4.75, 5.5, 6.25, 7, 7.5], "instruments": ["piano"], "cycleLength": 2, "durations": [0.2, 0.25, 0.18, 0.3, 0.25, 0.35, 0.2, 0.3, 0.25, 0.2, 0.35], "articulation": "staccato", "accents": [0.55, 0.85, 0.45, 0.75, 0.6, 0.95, 0.5, 0.8, 0.6, 0.5, 0.85], "pitches": [{"degree": 1, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 7, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 1, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 8, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 5, "register": 61, "voicing": "single", "reference": "chord"}, {"degree": 3, "register": 61, "voicing": "single", "reference": "chord"}], "description": "Combine a clipped funk attack with a moving tumbao answer; use the changed second-bar high note to lead back into the cycle. Original ensemble study, not a recording transcription."},
         {"name": "timba funk slap bass and syncopated horn hits low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "timba funk slap bass and syncopated horn hits congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "timba funk slap bass and syncopated horn hits timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
@@ -2478,25 +2244,7 @@ export const GENRE_PACK: GenrePackInput = {
         },
         {"name":"modern timba layered coro and band breaks kit","role":"percussion","onsets":[0,0,0.5,1,1.25,1.5,1.5,2.5,2.75,3.5,3.5,4,4,4.5,5,5.5,5.75,6,6.5,6.5,7.25,7.5],"instruments":["drums"],"hits":["kick","cowbell","cowbell","cowbell","snare","kick","cowbell","cowbell","kick","snare","cowbell","kick","cowbell","cowbell","snare","cowbell","kick","cowbell","kick","cowbell","snare","cowbell"],"cycleLength":2,"accents":[0.92,0.48,0.48,0.48,0.78,0.92,0.48,0.48,0.92,0.78,0.48,0.92,0.48,0.48,0.78,0.48,0.92,0.48,0.92,0.48,0.78,0.48],"articulation":"accent","shortName":"Modern timba kit","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
         {"name":"modern timba layered coro and band breaks drums cadence fill","role":"percussion","onsets":[2,2.5,2.5,3.25,3.5],"instruments":["drums"],"cycleLength":1,"phraseEnd":true,"articulation":"accent","hits":["cowbell","kick","cowbell","snare","cowbell"],"accents":[0.48,0.92,0.48,0.78,0.48],"shortName":"Modern timba close","description":"Coordinate the syncopated kick and snare against the bell across two bars. Leave the conga spaces open and follow the band gear cues. Original teaching adaptation, not a recording transcription."},
-        {
-          "name": "modern timba layered coro and band breaks cowbell pulse",
-          "role": "percussion",
-          "onsets": [
-            0,
-            0.5,
-            1,
-            1.5,
-            2,
-            2.5,
-            3,
-            3.5
-          ],
-          "instruments": [
-            "cowbell"
-          ],
-          "cycleLength": 1,
-          "articulation": "accent"
-        }
+        {"name": "modern timba layered coro and band breaks cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3.25, 4, 4.75, 5.5, 6, 6.75, 7.5], "instruments": ["cowbell"], "cycleLength": 2, "articulation": "accent", "hits": ["bell", "edge", "edge", "bell", "edge", "bell", "bell", "edge", "bell", "edge", "bell", "edge"], "accents": [0.9, 0.45, 0.6, 0.85, 0.5, 0.8, 0.95, 0.5, 0.8, 0.5, 0.9, 0.6], "description": "Keep the low and high bell contacts distinct through a two-bar response, holding the dance timeline beneath the modern band accents. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],

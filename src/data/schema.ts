@@ -152,9 +152,10 @@ export interface PatternVariant {
 export interface PatternEvent {
   /** Player-facing directions are retained separately from DSP controls. */
   notation?: { string?: number; fret?: number; fingering?: string; stroke?: 'up' | 'down'; bowing?: 'up' | 'down'; bodyTechnique?: 'golpe' | 'golpe-caja'; grace?: boolean; ornament?: string; tuplet?: { actual: number; normal: number }; tieToNext?: boolean };
-  /** Absolute MIDI pitches take precedence. Chord-relative register anchors
-   * the root; degree retains octaves. Cents offsets are relative to the tuning. */
-  pitch?: { midi?: number | number[]; cents?: number; degree?: number; semitoneOffset?: number; register?: number; voicing?: 'single' | 'chord' };
+  /** Absolute MIDI pitches take precedence. Relative pitches default to the
+   * current chord; tonic-relative melodies keep their key through chord changes.
+   * Register anchors the reference root; degree retains octaves. */
+  pitch?: { midi?: number | number[]; cents?: number; degree?: number; semitoneOffset?: number; register?: number; voicing?: 'single' | 'chord'; reference?: 'chord' | 'tonic' | 'next-chord' };
   position: number;
   duration?: number;
   kind?: 'attack' | 'rest' | 'tie' | 'sustain' | 'ghost' | 'accent' | 'ornament' | 'pickup' | 'fill';

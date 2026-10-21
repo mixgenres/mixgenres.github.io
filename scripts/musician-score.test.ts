@@ -59,7 +59,7 @@ function withFusionPhrase(instrumentId: string, role: Role, sourceInstrument: st
   } finally { delete PATTERNS_BY_ID[pattern.id]; }
 }
 
-test('section dynamics preserve soft attacks, accent contrast, and a non-saturated forte ceiling', () => {
+test('section dynamics preserve soft attacks and reach distinct strong sample layers', () => {
   const quiet = velocityForEnergy(0.2, 0.8, 1);
   const mid = velocityForEnergy(0.6, 0.8, 1);
   const peak = velocityForEnergy(1, 1, 1.6);
@@ -67,7 +67,15 @@ test('section dynamics preserve soft attacks, accent contrast, and a non-saturat
   const strongAccent = velocityForEnergy(0.8, 0.9, 1);
   assert.ok(quiet < mid && mid < peak, `${quiet} < ${mid} < ${peak}`);
   assert.ok(softAccent < strongAccent, `${softAccent} < ${strongAccent}`);
-  assert.ok(peak <= 107, `forte ceiling should leave headroom below MIDI 127, got ${peak}`);
+  assert.equal(peak, 127, 'written fortissimo reaches the top sample layer; mix gain owns headroom');
+  assert.ok(velocityForEnergy(1, .85, 1.6) < velocityForEnergy(1, .95, 1.6),
+    'strong accents remain distinct instead of clipping their input to the same value');
+  assert.ok(velocityForEnergy(.8, .05, 1) < 12, 'quiet attacks do not acquire a shared mezzo-forte floor');
+  for (const energy of [.2,.6,.8,1]) for (const written of [.4,.6,.72,.85]) {
+    const reference = Math.round((.13 + .55 * energy + (.235 - .075 * energy) * Math.min(1, written * 1.2)) * 127);
+    assert.ok(Math.abs(velocityForEnergy(energy,written,1.2)-reference) <= 1,
+      'ordinary playing retains the recorded banks’ calibrated velocity response');
+  }
 });
 
 test('style groove carries written accents into a stable, bounded velocity contour', () => {

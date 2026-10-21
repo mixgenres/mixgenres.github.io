@@ -64,8 +64,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "tarab vocal melisma and oud answer ney statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "tarab vocal melisma and oud answer oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "tarab vocal melisma and oud answer qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "tarab vocal melisma and oud answer riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tarab vocal melisma and oud answer darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"}
+        {"name": "tarab vocal melisma and oud answer riq pulse", "role": "percussion", "onsets": [0.5, 1, 1.5, 2.5, 3, 3.5], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent", "hits": ["edge", "ghost", "edge", "ghost", "edge", "ghost"], "accents": [0.7, 0.3, 0.65, 0.3, 0.8, 0.35], "description": "Keep light jingle and edge answers in the dum-tak gaps; the darbuka owns the low strokes. Original ensemble lesson; not a recording transcription."},
+        {"name": "tarab vocal melisma and oud answer darbuka pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent", "hits": ["dum", "edge", "edge", "dum", "edge"], "accents": [0.95, 0.65, 0.7, 0.85, 0.75], "description": "Learn the bare maqsum dum-tak frame, keeping its spaces open for the singer and riq. Rhythm reference: https://www.maqamworld.com/en/iqaa.php. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -152,7 +152,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "takht heterophonic oud qanun and ney violin statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "takht heterophonic oud qanun and ney oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "takht heterophonic oud qanun and ney qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "takht heterophonic oud qanun and ney riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"}
+        {"name": "takht heterophonic oud qanun and ney riq pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3, 3.5], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent", "hits": ["dum", "edge", "edge", "dum", "ghost", "edge", "ghost"], "accents": [0.85, 0.55, 0.7, 0.8, 0.3, 0.75, 0.35], "description": "Use a restrained dum-tak frame with quiet jingle pickups, leaving the oud and qanun phrases exposed. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "ney": ["breath-phrase", "microtonal-inflection", "ornament", "glissando"],
@@ -385,8 +385,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "orchestral unison maqam theme oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "orchestral unison maqam theme qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "orchestral unison maqam theme string-ensemble accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "orchestral unison maqam theme riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "orchestral unison maqam theme darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"}
+        {"name": "orchestral unison maqam theme riq pulse", "role": "percussion", "onsets": [0.5, 1, 1.5, 2.5, 3, 3.25, 3.5], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent", "hits": ["edge", "ghost", "edge", "ghost", "edge", "ghost", "edge"], "accents": [0.65, 0.3, 0.6, 0.3, 0.75, 0.3, 0.8], "description": "Let bright riq contacts answer the low drum, keeping the last pickup small before the ensemble arrival. Original ensemble lesson; not a recording transcription."},
+        {"name": "orchestral unison maqam theme darbuka pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.75, 3, 3.5], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent", "hits": ["dum", "edge", "edge", "dum", "ghost", "edge", "ghost"], "accents": [0.95, 0.65, 0.75, 0.85, 0.3, 0.8, 0.35], "description": "Keep the low maqsum frame clear and add only light connecting strokes under the orchestral response. Original ensemble lesson; not a recording transcription."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

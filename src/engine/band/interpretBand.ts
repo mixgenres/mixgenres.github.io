@@ -15,7 +15,7 @@ import { styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
 import { getResolvedSectionStyle, partLensForPattern, phraseBarsForStyle } from '../sheet/sheet.ts';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 import { calibratedTechniqueGestures } from '../../engine/style/performance-expectations';
-import { parseChord, scalePcsForMode } from '../sheet/musicTheory.ts';
+import { inferKey, parseChord, scalePcsForMode } from '../sheet/musicTheory.ts';
 import { foldToRange, noteLengthBeats, voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveTuningSystem } from '../sheet/tuning.ts';
 import { buildBarTimes, type BarTime, type Performance, type PerformancePhrase, type PerfNote, type PerfCC } from '../band/performanceData.ts';
@@ -410,7 +410,7 @@ function developLeadPhrase(
     if (restBeats < Math.max(0.2, stepBeats * 1.7) || restBeats > 1.6) continue;
 
     const chord = to.harmonicChord;
-    const root = parseChord(chord).rootPc;
+    const root = to.tuningRootPc ?? parseChord(chord).rootPc;
     const scale = scalePcsForMode(style.melody.scaleMode, root);
     const midi = nextScaleTone(from.midi, to.midi, scale, minMidi, maxMidi);
     if (midi === undefined || midi === from.midi || midi === to.midi) continue;
@@ -440,6 +440,7 @@ function developLeadPhrase(
       dur: duration,
       midi,
       harmonicChord: chord,
+      tuningRootPc: to.tuningRootPc,
       frequencyHz: tuning.getFrequencyHz(midi, root),
       vel: Math.max(20, Math.round(Math.min(from.vel, to.vel) * (development === 'fill' ? 0.72 : 0.62))),
       trackId,
@@ -696,6 +697,15 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
   for (const region of sheet.regions) {
     const regionStyle = getResolvedSectionStyle(sheet, styleRegion(region));
     const styleGroove = grooveForStyle(regionStyle);
+    const tonalRegions = sheet.regions.filter(candidate => (candidate.genre ?? sheet.worldId) === (region.genre ?? sheet.worldId)
+      && getResolvedSectionStyle(sheet, styleRegion(candidate)).id === regionStyle.id);
+    const tonalChords = tonalRegions.flatMap(candidate => candidate.chords ?? []);
+    const firstChord = tonalChords[0] ?? sheet.measures[region.start]?.chord;
+    if (!firstChord) throw new Error(`Missing tonal center for ${region.id}`);
+    const tonicPc = regionStyle.harmony.requiresChords === false || /modal|drone|power|riff|blues/i.test(regionStyle.harmony.model)
+      ? parseChord(firstChord).rootPc
+      : /phrygian/i.test(regionStyle.melody.scaleMode)
+        ? parseChord(tonalChords.at(-1) ?? firstChord).rootPc : inferKey(tonalChords.length ? tonalChords : [firstChord]).tonicPc;
     const context = sheet.arrangementContext?.[region.id];
     const sectionDecisions = new Map<string, ReturnType<typeof decide>>();
     for (const baseVoice of sheet.tracks as Voice[]) {
@@ -715,8 +725,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
       if (!cell) throw new Error(`Missing written part ${region.id}/${track.id}`);
       const lastWrittenBar = Math.max(region.end + 1, ...cell.bars.flatMap(bar => bar.attacks.map(attack => region.start + bar.bar
         + Math.ceil((beatValue(attack.position) + beatValue(attack.duration)) / bars[region.start].beatsPerBar))));
-      const partKey = contentKey(['band-v1', cell.key, region.start, region.kind, regionStyle, decision, context?.solo,
-        lane.lens, sheet.measures.slice(region.start, region.end + 1).map(m => m.chord),
+      const partKey = contentKey(['band-v1', cell.key, region.start, region.kind, regionStyle, tonicPc, decision, context?.solo,
+        lane.lens, sheet.measures.slice(region.start, region.end + 1).map(m => [m.chord, m.harmonyEvents]),
         bars.slice(region.start, lastWrittenBar).map(b => b.bpm)]);
       const cachedPart = partInterpretations.get(partKey);
       const sectionTime = bars[region.start].start;
@@ -861,6 +871,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               authoredPitch: onset.pitch,
               hit: onset.hit,
               chord,
+              tonicPc,
               nextChord,
               energy,
               bassStyle: hybridTheory.bass.style,
@@ -948,6 +959,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const tuningSystem = performingStyle.harmony.tuningSystem;
             if (!tuningSystem) throw new Error(`No authored tuning system for ${performingStyle.primaryGenre}/${performingStyle.id}`);
             const tuning = resolveTuningSystem(tuningSystem);
+            const pitchTuningRoot = onset.pitch?.reference === 'tonic' ? tonicPc
+              : onset.pitch?.reference === 'next-chord' ? parseChord(nextChord ?? chord).rootPc : undefined;
             const genericGesture = Boolean(authoredGesture && ['accent','staccato','legato','tenuto'].includes(authoredGesture.toLowerCase()));
             const roleClass = techniqueRoleClass(track.role);
             const hostRoles = sharedHostProfile.roles.map(techniqueRoleClass);
@@ -980,9 +993,10 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                 notation: { bar, beat: onset.position * bt.beatsPerBar, durationBeats: writtenDuration },
                 exactPitch,
                 tuningCents: onset.pitch?.cents,
+                tuningRootPc: pitchTuningRoot,
                 harmonicChord: chord,
                 midi,
-                frequencyHz: tuning.getFrequencyHz(midi, parseChord(chord).rootPc),
+                frequencyHz: tuning.getFrequencyHz(midi, pitchTuningRoot ?? parseChord(chord).rootPc),
                 vel: Math.max(1, Math.min(127, vel - (stagger ? mi * 4 : 0))),
                 trackId: track.id,
                 bar,
@@ -1200,7 +1214,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
     const tuningSystem = style.harmony.tuningSystem;
     if (!tuningSystem) throw new Error(`No authored tuning system for ${style.primaryGenre}/${style.id}`);
     note.frequencyHz = resolveTuningSystem(tuningSystem)
-      .getFrequencyHz(note.midi, parseChord(harmonicChord).rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
+      .getFrequencyHz(note.midi, note.tuningRootPc ?? parseChord(harmonicChord).rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
   }
   realizeTechniquePerformance(performance);
   return performance;

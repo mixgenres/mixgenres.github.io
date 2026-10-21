@@ -12,7 +12,7 @@ export const ELECTRONIC_BASS_TRACK_VOLUME_STEPS: Array<{ upperBound: number; lev
 export const FIXED_INSTRUMENT_TRACK_VOLUME: Record<string, number> = {
   // GM Voice Oohs is a sustained guide patch, not a recorded singer. Keep the
   // melodic guide audible for learning while leaving the actual band groove in front.
-  voice: 0.54,
+  voice: 0.38,
   piano: 0.76,
   bandoneon: 0.82,
   cello: 0.78,

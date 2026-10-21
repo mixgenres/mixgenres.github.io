@@ -61,6 +61,23 @@ test('harmonic boundary edits invalidate their incoming/outgoing transitions and
   assert.ok(after.trace.transitions.filter(t => t.toSectionId===edited.regions[1].id).every(t => t.toChord==='D7'));
 });
 
+test('within-bar chord edits invalidate song and part interpretation caches', () => {
+  const song = makeSheet('tango', 'tango-golden-age'), before = compileSongPipeline(song);
+  const edited = structuredClone(song), piano = edited.tracks.find(track => track.instrumentId === 'piano')!;
+  const measure = edited.measures.find(measure => before.performance.notes.some(note => note.trackId === piano.id
+    && note.bar === measure.index && (note.notation?.beat ?? 0) >= 2))!;
+  const original = measure.chord;
+  measure.harmonyEvents = [{ beat: 0, chord: original }, { beat: 2, chord: 'F#7' }];
+  const after = compileSongPipeline(edited);
+  assert.notEqual(after.trace.interpretation, before.trace.interpretation);
+  assert.equal(measure.chord, original, 'the bar label and notation cells need not change for a mid-bar edit');
+  const changed = after.performance.notes.filter(note => note.trackId === piano.id && note.bar === measure.index
+    && (note.notation?.beat ?? 0) >= 2);
+  assert.ok(changed.length > 0);
+  assert.ok(changed.every(note => note.harmonicChord === 'F#7'), 'warm part caches must read the edited harmony events');
+  assert.ok(changed.some(note => [6, 10, 1, 4].includes(note.midi % 12)));
+});
+
 test('flamenco notation retains variations, playing vocabulary and explicit fingering', () => {
   const song = makeSheet('flamenco'), track = song.tracks.find(t => /guitar/.test(t.instrumentId ?? ''))!;
   assert.ok(track);

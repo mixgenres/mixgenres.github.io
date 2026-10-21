@@ -28,6 +28,8 @@ export interface PerfNote {
   /** Absolute score pitches must never acquire automatic register changes. */
   exactPitch?: boolean;
   tuningCents?: number;
+  /** A tonic-relative phrase keeps this tuning root through chord changes. */
+  tuningRootPc?: number;
   /** Musical attack and phrase ownership, shared by all tones of a voicing/roll. */
   attackId?: string;
   phraseId?: string;

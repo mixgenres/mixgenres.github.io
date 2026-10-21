@@ -14,8 +14,31 @@ function cell(name: string, role: string, instrument: string, onsets: number[], 
 }
 function line(instrument: string, name: string, onsets: number[], degrees: number[], durations: number[], articulation = 'legato', cycleLength = 2) {
   return cell(name, 'lead', instrument, onsets, durations, articulation,
-    degrees.map(degree => pitch(degree, instrument === 'violin' ? 74 : instrument === 'cello' ? 58 : instrument === 'voice' ? 64 : 65)), undefined, cycleLength);
+    degrees.map(degree => ({ ...pitch(degree, instrument === 'violin' ? 74 : instrument === 'cello' ? 58 : instrument === 'voice' ? 64 : 65), reference: 'tonic' })), undefined, cycleLength);
 }
+
+/** Distinct teaching sentences for orchestras previously given one shared
+ * tune. Rhythms demonstrate their stated roles; these are original studies. */
+const SENTENCES: Record<string, { onsets: number[]; degrees: number[]; durations: number[]; accents: number[] }> = {
+  canaro: { onsets: [.5,1,2,2.5,3.5,4,5,6,7], degrees: [5,3,2,1,3,5,4,2,1],
+    durations: [.3,.7,.3,.7,.3,.8,.7,.7,.7], accents: [.65,.85,.55,.8,.55,.9,.72,.65,.85] },
+  darienzo: { onsets: [0,.5,1.5,2,3,3.5,4,5,6,7], degrees: [1,1,5,3,2,1,3,5,2,1],
+    durations: [.25,.25,.3,.25,.3,.25,.35,.35,.3,.4], accents: [1,.55,.82,.95,.75,.5,.95,.8,.68,.92] },
+  'di-sarli': { onsets: [0,1.5,2.5,3.5,4,5.5,6,6.5,7.25], degrees: [5,6,5,3,4,6,5,2,1],
+    durations: [1.3,.8,.8,.3,1.3,.3,.3,.55,.65], accents: [.72,.8,.65,.58,.88,.7,.6,.55,.75] },
+  troilo: { onsets: [0,1.25,2,3.25,4,5.5,6.25,7.25], degrees: [1,2,3,5,4,3,2,1],
+    durations: [1,.5,.9,.5,1.25,.5,.6,.6], accents: [.75,.58,.72,.88,.8,.65,.55,.72] },
+  pugliese: { onsets: [0,1.5,2,3.25,4,5,5.5,6.5,7.25], degrees: [1,3,2,1,5,6,5,2,1],
+    durations: [1.25,.35,.9,.45,.85,.3,.75,.4,.55], accents: [.9,.55,.65,.5,1,.65,.82,.58,.8] },
+  salgan: { onsets: [.5,1.25,1.5,2.5,3.25,4.25,5,5.5,6.25,7,7.5], degrees: [3,5,6,5,3,4,2,3,5,2,1],
+    durations: [.5,.15,.6,.5,.5,.5,.3,.5,.5,.3,.35], accents: [.7,.5,.85,.65,.55,.78,.5,.65,.8,.6,.85] },
+  'electrotango-gotan': { onsets: [0,1.5,3,4,5.5,6.5,7], degrees: [1,5,7,5,3,2,1],
+    durations: [.5,.5,.65,.7,.5,.3,.8], accents: [.85,.65,.7,.82,.6,.55,.8] },
+  'electro-rock-bajofondo': { onsets: [.5,1,2.5,3.5,4,5.25,6,6.75,7.5], degrees: [1,1,5,7,6,5,3,2,1],
+    durations: [.3,.8,.6,.3,.9,.5,.5,.5,.35], accents: [.8,.95,.7,.8,.9,.6,.75,.55,.85] },
+  'modern-orquesta': { onsets: [0,.75,1.5,3,4,5.25,6,6.5,7,7.5], degrees: [1,5,8,7,6,4,5,3,2,1],
+    durations: [.5,.5,1,.6,.9,.5,.3,.3,.3,.35], accents: [1,.65,.85,.55,.75,.5,.7,.6,.5,.82] },
+};
 const four = [0, 1, 2, 3];
 const marcato = (instrument: string, accents = [1, .68, .92, .68]) => cell('Marcato en cuatro', 'harmony', instrument,
   four, [.42, .28, .42, .28], 'marcato', four.map(() => chord), accents);
@@ -144,6 +167,17 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
         line('violin', lyrical ? 'Long bowed countermelody' : 'Bowed answering phrase',
           lyrical ? [0, 2, 4, 6] : [1.5, 3, 4.5, 5, 6, 7], lyrical ? [5, 3, 4, 2] : [5, 3, 4, 3, 2, 1],
         lyrical ? [1.8, 1.8, 1.8, 1.8] : [1.25, .75, .4, .75, .75, .75])];
+    }
+    const sentence = SENTENCES[id];
+    if (sentence) {
+      const primary = lines.findIndex(item => item.instruments?.includes('bandoneon'));
+      if (primary >= 0) {
+        const original = lines[primary];
+        lines[primary] = { ...original, onsets: [...sentence.onsets], durations: [...sentence.durations],
+          pitches: sentence.degrees.map(degree => ({ ...pitch(degree, 65), reference: 'tonic' })),
+          accents: [...sentence.accents], velocities: [...sentence.accents],
+        };
+      }
     }
     if (id === 'troilo') {
       const breath = line('bandoneon', 'Troilo line-ending breath', [0, 1.5, 2, 3, 4, 5.5, 6.5],

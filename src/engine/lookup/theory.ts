@@ -7,6 +7,10 @@ import { bassTargetsForAuthoredStyle, CATALOG_INFERRED_THEORY_GENRES, GENRE_THEO
 import { CHORD_PALETTE, CHORD_MOOD_ORDER_RAW } from '../../data/chordPalette';
 import type { ChordMood, ChordOption } from '../../data/chordPalette';
 import { GENRE_WORLDS_BY_ID } from '../../data/genres';
+import type { GenreStyleDefinition, PatternEvent } from '../../data/schema';
+
+const melodySequences = new WeakMap<GenreStyleDefinition, Array<NonNullable<PatternEvent['pitch']>>>();
+const bassSequences = new WeakMap<GenreStyleDefinition, Array<NonNullable<PatternEvent['pitch']>>>();
 
 function rhythmRate(value: string): GenreTheoryProfile['harmonicRhythm'] {
   const rhythm = value.trim().toLowerCase().replace(/\s+/g, '-');
@@ -42,7 +46,8 @@ export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryPro
     bass: {
       ...host.bass,
       style: w > .7 ? guest.bass.style : host.bass.style,
-      targetDegrees: Array.from(new Set([...host.bass.targetDegrees, ...(w > .45 ? guest.bass.targetDegrees : [])])),
+      pitchSequence: choose(host.bass.pitchSequence, guest.bass.pitchSequence),
+      targetDegrees: [...choose(host.bass.targetDegrees, guest.bass.targetDegrees)],
       chromaticApproach: host.bass.chromaticApproach || (w > .55 && guest.bass.chromaticApproach),
       passingProbability: host.bass.passingProbability * (1-w) + guest.bass.passingProbability*w,
       phraseFillProbability: host.bass.phraseFillProbability * (1-w) + guest.bass.phraseFillProbability*w,
@@ -52,8 +57,11 @@ export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryPro
     harmony: choose(host.harmony, guest.harmony),
     melody: {
       ...host.melody,
+      pitchSequence: choose(host.melody.pitchSequence, guest.melody.pitchSequence),
       scale: Array.from(new Set([...host.melody.scale, ...(w > .4 ? guest.melody.scale : [])])),
-      targetDegrees: Array.from(new Set([...host.melody.targetDegrees, ...(w > .4 ? guest.melody.targetDegrees : [])])),
+      // These are ordered phrase anchors, not a set of allowed pitches.
+      // Union/deduplication erased repeated roots and the guest's contour.
+      targetDegrees: [...choose(host.melody.targetDegrees, guest.melody.targetDegrees)],
       callResponse: host.melody.callResponse || (w > .6 && guest.melody.callResponse),
     },
     rhythm: choose(host.rhythm, guest.rhythm),
@@ -139,6 +147,30 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
     out.rhythm.subdivision = /32nd|rapid.?roll|micro.?edit/i.test(calibration.patterns.families.join(' ')) ? 32
       : /12\/8|12.?beat|compound/i.test(`${out.meter} ${calibration.patterns.families.join(' ')}`) ? 12 : out.rhythm.subdivision;
     out.melody.scale = harmony.scales.length ? harmony.scales.map(scaleFromWords) : out.melody.scale;
+    let sequence = melodySequences.get(style);
+    if (!sequence) {
+      const local = world.patterns.find(pattern => pattern.styleIds?.includes(style.id)
+        && pattern.roles.some(role => /^(lead|melody|voice|counterline)$/.test(role))
+        && !pattern.arrangementVariation && pattern.category !== 'cadence' && pattern.category !== 'fill'
+        && pattern.events?.some(event => event.pitch && event.pitch.midi === undefined
+          && event.pitch.voicing !== 'chord'));
+      sequence = (local?.events ?? []).flatMap(event => event.pitch && event.pitch.midi === undefined
+        && event.pitch.voicing !== 'chord' ? [{ ...event.pitch }] : []);
+      melodySequences.set(style, sequence);
+    }
+    out.melody.pitchSequence = sequence;
+    let bassSequence = bassSequences.get(style);
+    if (!bassSequence) {
+      const localBass = world.patterns.find(pattern => pattern.styleIds?.includes(style.id)
+        && pattern.roles.some(role => /^(bass|low-anchor)$/.test(role))
+        && !pattern.arrangementVariation && pattern.category !== 'cadence' && pattern.category !== 'fill'
+        && pattern.events?.some(event => event.pitch && event.pitch.midi === undefined
+          && event.pitch.voicing !== 'chord'));
+      bassSequence = (localBass?.events ?? []).flatMap(event => event.pitch && event.pitch.midi === undefined
+        && event.pitch.voicing !== 'chord' ? [{ ...event.pitch }] : []);
+      bassSequences.set(style, bassSequence);
+    }
+    out.bass.pitchSequence = bassSequence;
     if (CATALOG_INFERRED_THEORY_GENRES.has(genreId)) {
       out.melody.targetDegrees = melodyTargetsForAuthoredStyle(world, style);
       out.bass.targetDegrees = bassTargetsForAuthoredStyle(world, style);
