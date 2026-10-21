@@ -370,7 +370,9 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
     const rhythmOnlyTransfer = !ctx.pattern.roles.some(role => /^(bass|low-anchor)$/.test(role));
     if (rhythmOnlyTransfer && sequence?.length) {
       const written = sequence[(ctx.phraseAttackIndex ?? index) % sequence.length];
-      return realizeMidi({ ...ctx, authoredPitch: { ...written, register: undefined } }, index, total, state);
+      // The low register is part of the bass job. The relative-pitch branch
+      // already fits its whole contour into the receiving instrument's range.
+      return realizeMidi({ ...ctx, authoredPitch: { ...written } }, index, total, state);
     }
     return [bassMidi(ctx, index, total)];
   }

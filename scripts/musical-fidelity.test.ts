@@ -76,6 +76,8 @@ test('rhythm-to-bass fusion retains written interval contours and chord anticipa
   const played = sequence.map((_, index) => realizeMidi({ ...context, phraseAttackIndex: index }, index, sequence.length, createPhraseState())[0] % 12);
   assert.deepEqual(played, [0,7,0,3,0,7,0,7,3,0,0],
     'the repeated guembri phrase is not replaced by a root/fifth generator');
+  assert.equal(realizeMidi({ ...context, profile: getInstrumentPerformanceProfile('piano'), phraseAttackIndex: 0 },0,sequence.length,createPhraseState())[0],36,
+    'a piano assigned the bass job keeps the written low register instead of moving the line to middle C');
   const anticipated = { ...context, chord: 'C', nextChord: 'F', hybridTheory: { ...theory,
     bass: { ...theory.bass, pitchSequence: [{ degree: 1, reference: 'next-chord' as const }] } } };
   assert.equal(realizeMidi(anticipated,0,1,createPhraseState())[0] % 12,5);
