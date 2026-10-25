@@ -1,5 +1,20 @@
 import { PAN_MAP } from '../../data/sound/mix/panMap';
 
+/** StereoPannerNode's stereo-input matrix. Crossfeed preserves both recorded
+ * channels at the sides; independent L/R attenuation discarded half a stereo
+ * instrument at a hard pan and disagreed with live playback.
+ */
+export function stereoPanMatrix(normalizedPan: number, gain = 1) {
+  const pan = Math.max(-1, Math.min(1, normalizedPan * 2 - 1));
+  if (pan === 0) return { ll: gain, lr: 0, rl: 0, rr: gain };
+  if (pan < 0) {
+    const angle = (pan + 1) * Math.PI / 2;
+    return { ll: gain, lr: 0, rl: Math.cos(angle) * gain, rr: Math.sin(angle) * gain };
+  }
+  const angle = pan * Math.PI / 2;
+  return { ll: Math.cos(angle) * gain, lr: Math.sin(angle) * gain, rl: 0, rr: gain };
+}
+
 export class StereoFieldManager {
   /** Returns a conventional Web Audio StereoPanner value (-1..1). */
   public resolveInstrumentPan(instrument: string): number {

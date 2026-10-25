@@ -2451,8 +2451,17 @@ export function makeStarterSheet(
     ...(CATALOG_ROSTER_EXCLUSIONS[genreId] ?? []),
     ...(CATALOG_ROSTER_EXCLUSIONS[styleId] ?? []),
   ]);
+  const stylePatterns = (PATTERNS_BY_WORLD[genreId] ?? [])
+    .filter(pattern => automaticPatternCandidate(pattern)
+      && pattern.sourceLevel === 'style-authored'
+      && pattern.styleIds?.includes(styleId)
+      && allowed.has(pattern.id));
   const roleForStarterInstrument = (instrumentId: string): string => {
     const natural = roleForInstrument(instrumentId);
+    const writtenRoles = [...new Set(stylePatterns.filter(pattern => pattern.instruments?.includes(instrumentId))
+      .flatMap(pattern => pattern.roles))];
+    if (writtenRoles.includes(natural)) return natural;
+    if (writtenRoles.length) return writtenRoles[0];
     if (authoredRoles.has(natural)) return natural;
     if (natural === 'voice' && authoredRoles.has('lead')) return 'lead';
     if ((natural === 'lead' || natural === 'harmony') && authoredRoles.has('texture')) return 'texture';
@@ -2465,11 +2474,6 @@ export function makeStarterSheet(
           : ['lead', 'texture', 'harmony', 'bass', 'percussion'];
     return fallbackOrder.find(role => authoredRoles.has(role)) ?? natural;
   };
-  const stylePatterns = (PATTERNS_BY_WORLD[genreId] ?? [])
-    .filter(pattern => automaticPatternCandidate(pattern)
-      && pattern.sourceLevel === 'style-authored'
-      && pattern.styleIds?.includes(styleId)
-      && allowed.has(pattern.id));
   const candidates = stylePatterns
     .flatMap(pattern => (pattern.instruments ?? []).map(instrumentId => ({ pattern, instrumentId })))
     .filter(({ pattern, instrumentId }) => {
@@ -2532,7 +2536,14 @@ export function makeStarterSheet(
       // section whose source cell was written for another role. The adapted
       // phrase remains style material; leaving the new part silent would make
       // the promised teaching roster decorative only.
-      const playable = inSection.length ? inSection : partPatterns;
+      const sectionChoices = inSection.length ? inSection : partPatterns;
+      // Own-instrument material is the first choice even when another part
+      // has already used its ID. Randomly mixing it with every role-compatible
+      // phrase made guitar/cello rows show clarinet answers and caused several
+      // added colors to double the same borrowed melodic job unnecessarily.
+      const native = sectionChoices.filter(pattern => pattern.instruments?.includes(instrumentId)
+        && (pattern.roles.includes(role) || role === 'voice' && pattern.roles.includes('lead')));
+      const playable = native.length ? native : sectionChoices;
       if (!playable.length) {
         assigned[region.id] = 'silent';
         continue;

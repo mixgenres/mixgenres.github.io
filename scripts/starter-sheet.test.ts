@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { makeSheet, makeStarterSheet, switchSongWorld } from '../src/engine/sheet/sheet';
+import { makeSheet, makeStarterSheet, switchSongWorld, patternAvailableInSection } from '../src/engine/sheet/sheet';
 import { GENRE_WORLDS } from '../src/data/genres';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { ALL_STYLES, resolveStyle } from '../src/engine/style';
@@ -73,6 +73,23 @@ test('traditional starter additions stay inside the style-native acoustic palett
     assert.ok(additions.length > 0, `${styleId} should expose authored support colors`);
     assert.ok(additions.every(id => !['synth', 'sampler', 'drums'].includes(id)),
       `${styleId} should not reach eight by adding generic electronic or drum-kit parts`);
+  }
+});
+
+test('added starter players prefer their own section material before borrowing another instrument phrase', () => {
+  for (const [genreId, styleId] of [['tango','tango-golden-age'],['flamenco','flamenco-solea'],['country','country-bluegrass']]) {
+    const base = makeSheet({ genreId, styleId }), starter = makeStarterSheet({ genreId, styleId });
+    const existing = new Set(base.tracks.map(track => track.id));
+    const patterns = (resolveStyle({ genreId, styleId }).patterns?.allowed ?? []).map(id => PATTERNS_BY_ID[id]);
+    for (const track of starter.tracks.filter(track => !existing.has(track.id))) for (const region of starter.regions) {
+      const instrumentId = track.instrumentId;
+      if (!instrumentId) continue;
+      const own = patterns.filter(pattern => pattern?.instruments?.includes(instrumentId)
+        && pattern.roles.includes(track.role) && patternAvailableInSection(pattern, String(region.kind)));
+      if (!own.length) continue;
+      const selected = PATTERNS_BY_ID[starter.arrangement[region.id]?.[track.id] ?? ''];
+      assert.ok(selected?.instruments?.includes(instrumentId), `${styleId}/${region.kind}/${instrumentId} keeps its own written job`);
+    }
   }
 });
 

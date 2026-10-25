@@ -8,7 +8,10 @@ export function resolveSampleGesture(instrumentId: string, gestureCode: number, 
   pitchIdentity?: PerfNote['pitchIdentity']) {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (!def) throw new Error(`No instrument mechanics for ${instrumentId}`);
-  const name = GESTURE_NAMES[gestureCode] ?? 'tone';
+  // Zero is the explicit neutral instruction in imported/legacy event plans.
+  // A missing nonzero identity is a broken boundary, not a plain-tone choice.
+  const name = GESTURE_NAMES[gestureCode] ?? (gestureCode === 0 ? 'tone' : undefined);
+  if (!name) throw new Error(`Missing compiled gesture name: ${gestureCode}`);
   const normalized = normalizeTechnique(name);
   const bowed = def.family === 'bowed';
   const explicitPizz = normalized === 'pizzicato' || normalized.includes('pizz');

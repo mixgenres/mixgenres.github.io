@@ -15,6 +15,18 @@ export function codeForGesture(id: string): number {
   return code;
 }
 
+/** Each worker has its own module registry. Restore only names carried by the
+ * compiled score, verifying the stable code before playback or score export. */
+export function registerGestureNames(names?: Record<number, string>): void {
+  for (const [rawCode, name] of Object.entries(names ?? {})) {
+    const code = Number(rawCode);
+    if (!Number.isInteger(code) || typeof name !== 'string' || !name.trim()
+      || GESTURE_NAMES[code] !== undefined && GESTURE_NAMES[code] !== name
+      || codeForGesture(name) !== code) throw new Error(`Invalid compiled gesture identity: ${rawCode}`);
+    GESTURE_NAMES[code] = name;
+  }
+}
+
 for (const id of [
   'tone','accent','staccato','legato','ghost','open','mute','slap','pizzicato','arco',
   'marcato','arrastre','strappata','lija','tambor','chicharra','heel','toe','quinto-slap',

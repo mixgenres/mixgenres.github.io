@@ -174,3 +174,38 @@ test('only written parts are registered and authored cadence chances survive unc
   assert.deepEqual(world.patterns[0].events?.map(event => event.velocity), body.velocities);
   assert.deepEqual(world.patterns[1].events?.map(event => event.probability), [1, .6]);
 });
+
+test('compiled technique identities survive an independent worker registry',async()=>{
+  const {compilePerformance}=await import('../src/engine/playback/compilePerformance');
+  const {GESTURE_NAMES,registerGestureNames}=await import('../src/engine/band/gestures');
+  const {compileSamplePlan}=await import('../src/engine/playback/soundfont/plan');
+  const gesture='knee-lever-bend',code=codeForGesture(gesture),previousName=GESTURE_NAMES[code];
+  const originalWorker=globalThis.Worker;
+  const performance: import('../src/engine/band/performanceData').Performance={duration:1,tail:.5,bars:[],ccs:[],blends:{},
+    worldId:'country',gestureNames:{[code]:gesture},notes:[{trackId:'steel',midi:60,time:0,dur:.7,vel:90,bar:0,
+      gestureCode:code,hitFunctionCode:0,accent:.8}]};
+  class WorkerStub {
+    onmessage: ((event: MessageEvent)=>void)|null=null;
+    postMessage(){queueMicrotask(()=>this.onmessage?.({data:{performance:structuredClone(performance)}} as MessageEvent));}
+    terminate(){}
+  }
+  try {
+    // This registry did not execute the worker's technique-selection code.
+    delete GESTURE_NAMES[code];
+    globalThis.Worker=WorkerStub as unknown as typeof Worker;
+    const received=await compilePerformance({} as import('../src/engine/sheet/sheet').Sheet,new AbortController().signal);
+    assert.equal(GESTURE_NAMES[code],gesture,'main-thread notation and export regain the real technique name');
+    const plan=compileSamplePlan(received,{worldId:'country',trackInstruments:new Map([['steel','pedal-steel']])});
+    assert.ok(plan.events.some(event=>event.type==='bend'&&event.cents<0),'the knee-lever motion reaches playback');
+    delete GESTURE_NAMES[code];
+    assert.ok(compileSamplePlan(structuredClone(received),{worldId:'country',trackInstruments:new Map([['steel','pedal-steel']])})
+      .events.some(event=>event.type==='bend'),'serialized performances restore their own vocabulary too');
+    assert.throws(()=>registerGestureNames({[code+1]:gesture}),/Invalid compiled gesture/);
+  } finally {globalThis.Worker=originalWorker;GESTURE_NAMES[code]=previousName;}
+});
+
+test('musician-score output names every emitted technique instead of depending on the compiler registry',()=>{
+  const {performance}=compileSongPipeline(makeSheet('flamenco','flamenco-bulerias'));
+  assert.ok(performance.notes.length);
+  for(const note of performance.notes)assert.equal(typeof performance.gestureNames?.[note.gestureCode],'string');
+});

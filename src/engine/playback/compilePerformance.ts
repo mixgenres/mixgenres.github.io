@@ -1,5 +1,6 @@
 import type { Performance } from '../band/performanceData';
 import type { Sheet } from '../sheet/sheet';
+import { registerGestureNames } from '../band/gestures';
 
 /** Compute the score on demand; this does not render or cache audio. */
 export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Promise<Performance> {
@@ -23,7 +24,10 @@ export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Pro
     worker.onmessage = ({ data }: MessageEvent<{ performance?: Performance; error?: string }>) => {
       cleanup();
       if (signal.aborted) reject(cancelled());
-      else if (data.performance) resolve(data.performance);
+      else if (data.performance) {
+        try { registerGestureNames(data.performance.gestureNames); resolve(data.performance); }
+        catch (error) { reject(error); }
+      }
       else reject(new Error(data.error ?? 'Compilation failed'));
     };
     worker.onerror = event => {

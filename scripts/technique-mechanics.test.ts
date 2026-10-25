@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { codeForGesture } from '../src/engine/band/gestures';
-import { realizeTechniquePerformance } from '../src/engine/band/techniquePerformance';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveSampleGesture } from '../src/engine/playback/soundfont/gestures';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
@@ -19,6 +18,7 @@ import { noteLengthBeats, voiceProfile } from '../src/engine/sheet/instrumentRol
 import { resolveStyle } from '../src/engine/style/resolve';
 import { calibratedTechniqueGestures, styleTechniqueExpectation } from '../src/engine/style/performance-expectations';
 import { optimizePerformanceByPhraseAndSong } from '../src/engine/band/songPhrasing';
+import { realizeTechniquePerformance } from '../src/engine/band/techniquePerformance';
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import type { MusicalPattern } from '../src/types';
 
@@ -29,6 +29,27 @@ const note = (technique: string, midi = 60, directions?: PatternEvent['notation'
 });
 const performance = (instrument: string, notes: PerfNote[]): Performance => ({
   trackInfo: { p: { instrumentId: instrument, role: 'lead' } }, notes, ccs: [], bars: [], duration: 1, tail: .5, blends: {},
+});
+
+test('slides follow connected phrase targets in both directions and retain authored bends', () => {
+  for (const target of [55, 60, 67]) {
+    const slide = { ...note('slide', 60), phraseId: 'line' };
+    const next = { ...note('pluck', target), time: .3, attackId: 'b', phraseId: 'line' };
+    const perf = performance('guitar', [slide, next]);
+    realizeTechniquePerformance(perf);
+    const end = slide.pitchBend!.at(-1)!;
+    const semitones = (end.value - 8192) / 8192 * (slide.pitchBendRangeSemitones ?? 2);
+    assert.ok(Math.abs(semitones - (target - 60)) < .002, `slide lands on ${target}`);
+    const plan = compileSamplePlan({ ...perf, worldId: 'blues' }, { trackInstruments: new Map([['p', 'guitar']]) });
+    const bends = plan.events.filter(event => event.type === 'bend').filter(event => event.time < .3);
+    assert.ok(Math.abs(bends.at(-1)!.cents - (target - 60) * 100) < .2);
+  }
+  const isolated = note('slide');
+  realizeTechniquePerformance(performance('guitar', [isolated]));
+  assert.deepEqual(isolated.pitchBend, [{ offset: 0, value: 8192 }]);
+  const authored = { ...note('slide'), pitchBend: [{ offset: .1, value: 9000 }] };
+  realizeTechniquePerformance(performance('guitar', [authored]));
+  assert.deepEqual(authored.pitchBend, [{ offset: .1, value: 9000 }]);
 });
 
 test('descriptive ring metadata does not cap generated note gates', () => {

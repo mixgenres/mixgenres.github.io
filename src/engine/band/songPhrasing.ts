@@ -2,7 +2,6 @@ import type { Sheet, Voice } from '../sheet/sheet.ts';
 import type { ResolvedStyle } from '../../data/styles/schema';
 import type { Performance, PerfNote } from '../band/performanceData.ts';
 import { getResolvedSectionStyle, getTrackRole, phraseBarsForStyle } from '../sheet/sheet.ts';
-import { contractForGenre } from '../../engine/style/contracts';
 import { getInstrumentPerformanceProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { GESTURE_CODES, GESTURE_NAMES } from './gestures.ts';
 import { parseChord } from '../sheet/musicTheory.ts';
@@ -27,13 +26,11 @@ export interface PhraseOptimizationReport {
     rootHeavyPhrases: number;
     gestureDiversityBefore: number;
     gestureDiversityAfter: number;
-    bassTrimDb?: number;
   }>;
   warnings: string[];
 }
 
 function clamp(v: number, lo = 0, hi = 1) { return Math.max(lo, Math.min(hi, v)); }
-function dbToLinear(db: number) { return Math.pow(10, db / 20); }
 
 function phraseLengthFor(style: ResolvedStyle): number {
   return phraseBarsForStyle(style, 1);
@@ -44,10 +41,6 @@ function preferredGestureSet(profile: InstrumentPerformanceProfile, genre: strin
   if (!gp) throw new Error(`No ${genre} gesture profile for ${profile.instrumentId}`);
   const ids = gp.preferredGestures;
   return Array.from(new Set(ids.filter(id => Boolean(profile.gestures[id]))));
-}
-
-function phrasePosition(n: PerfNote, phraseStart: number, phraseEnd: number): number {
-  return clamp(((n.bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart));
 }
 
 function rootRatio(notes: PerfNote[]): number {
@@ -87,25 +80,14 @@ function optimizePhrase(notes: PerfNote[], track: Voice, profile: InstrumentPerf
     group.push(note); attacks.set(key, group);
   }
   const attackGroups = [...attacks.values()];
-  const density = Math.max(0.45, Math.min(1.0, attackGroups.length / Math.max(4, (phraseEnd - phraseStart) * 2)));
   const desiredTechniqueCount = Math.max(0, Math.floor(attackGroups.length * Math.max(
     target.techniqueLandmarkRatio ?? 0,
     phraseTechniqueBudget(role, family, genre, attackGroups.map(group => group[0])),
   )));
 
-  // Keep authored note accents intact here. Phrase dynamics are shaped once by
-  // the style-aware performer; applying this same sine swell to every track
-  // again at the song-level pass used to make unrelated genres breathe alike.
-  for (let i = 0; i < notes.length; i++) {
-    const n = notes[i];
-    const roleGain = /bass/.test(role) ? 0.96 : /comp|harmony/.test(role) ? 0.98 : /lead|melody|voice/.test(role) ? 1.01 : 1;
-    n.vel = Math.max(1, Math.min(127, Math.round(n.vel * roleGain)));
-    if (/bass/.test(role) && n.midi < profile.capabilities.comfortableLowMidi && n.hitFunctionCode !== 0) n.vel = Math.max(1, Math.round(n.vel * 0.88));
-
-    // Pitch belongs to the written cell and its role-aware realization.
-    // Root-heavy pedals, riffs and one-drop lines must not acquire the same
-    // extra chord tone every fourth note during a dynamics/technique pass.
-  }
+  // Dynamics belong to the compiled player. Sample-layer velocity cannot be
+  // used as a fader: doing so changes the attack/timbre and makes this player's
+  // touch depend on which other tracks happen to be present.
 
   const styleTechnique = styleTechniqueExpectation(style, profile, role, partStyle, partStyleWeight);
   const percussiveRole = /percussion|drum|pulse/i.test(role);
@@ -122,9 +104,6 @@ function optimizePhrase(notes: PerfNote[], track: Voice, profile: InstrumentPerf
     }
   }
 
-  if (density > 0.82 && /comp|harmony/.test(role)) {
-    for (const n of notes) { const pos = phrasePosition(n, phraseStart, phraseEnd); if (pos > 0.38 && pos < 0.62 && n.hitFunctionCode !== 0) n.vel = Math.max(1, Math.round(n.vel * 0.94)); }
-  }
   const afterGestures = new Set(notes.map(n => GESTURE_NAMES[n.gestureCode] ?? String(n.gestureCode)));
   return { rootHeavy, beforeGestures, afterGestures };
 }
@@ -206,21 +185,6 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
       if (outOfRange) scopeWarnings.push(`${outOfRange} notes outside authored instrument range`);
       if (profile.capabilities.polyphony < 2 && trackNotes.some(n => n.dur > 0.15)) scopeWarnings.push('monophonic physical model is receiving sustained overlap candidates');
       if (scopeWarnings.length) warnings.push(`${target.styleId}:${track.instrumentId}: ${scopeWarnings.join('; ')}`);
-      let bassTrimDb: number | undefined;
-      if (/bass/.test(normalizedRole)) {
-        const mc = contractForGenre(genre, style).timbreSpace.mixCharacter;
-        const forward = mc?.bassForward ?? 0.5;
-        const density = trackNotes.length / Math.max(1, (region.end - region.start) * 4);
-        const densityTrim = density > 0.42 ? Math.min(2.5, (density - 0.42) * 8) : 0;
-        bassTrimDb = target.bassTrimDb === undefined
-          ? undefined
-          : target.bassTrimDb - densityTrim + (forward > 0.80 ? 0.75 : 0);
-      }
-      if (bassTrimDb) {
-        const g = dbToLinear(bassTrimDb);
-        for (const n of trackNotes) n.vel = Math.max(1, Math.min(127, Math.round(n.vel * g)));
-      }
-
       trackReports.push({
         trackId: track.id,
         instrumentId: track.instrumentId,
@@ -230,23 +194,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
         rootHeavyPhrases,
         gestureDiversityBefore: before.size,
         gestureDiversityAfter: after.size,
-        bassTrimDb,
       });
-    }
-  }
-
-  // Song-level role balance: correct persistent lane imbalance after phrase shaping.
-  const laneStats = new Map<string, { sum: number; count: number; role: string }>();
-  for (const n of notes) { const info = perf.trackInfo?.[n.trackId]; const x = laneStats.get(n.trackId) ?? { sum: 0, count: 0, role: String(info?.role ?? '') }; x.sum += n.vel * n.vel; x.count++; laneStats.set(n.trackId, x); }
-  const laneRms = Array.from(laneStats.entries()).map(([id, x]) => ({ id, value: Math.sqrt(x.sum / Math.max(1, x.count)), role: x.role }));
-  const ensembleMedian = laneRms.length ? [...laneRms].sort((a,b)=>a.value-b.value)[Math.floor(laneRms.length/2)].value : 0;
-  if (ensembleMedian > 0) {
-    for (const lane of laneRms) {
-      let target = 1;
-      if (/bass/.test(lane.role) && lane.value > ensembleMedian * 1.05) target = 0.86;
-      else if (/lead|melody|voice/.test(lane.role) && lane.value < ensembleMedian * 0.86) target = 1.06;
-      else if (/comp|harmony/.test(lane.role) && lane.value > ensembleMedian * 1.20) target = 0.93;
-      if (target !== 1) for (const n of notes) if (n.trackId === lane.id) n.vel = Math.max(1, Math.min(127, Math.round(n.vel * target)));
     }
   }
 

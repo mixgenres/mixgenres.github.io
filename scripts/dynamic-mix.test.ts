@@ -7,7 +7,7 @@ import { resolveMixLayers, resolveMixContract } from '../src/engine/studio/dynam
 import { analyzeMixWindow, resolveForegroundOwnership, analyzeMasking, resolveMixFunctions } from '../src/engine/studio/dynamicMix/MixAnalysis';
 import { planMixScene } from '../src/engine/studio/dynamicMix/DynamicMixPlanner';
 import { compileMixSceneTimeline, formatMixTrace } from '../src/engine/studio/dynamicMix/compileMixSceneTimeline';
-import { compileAutomation, automationValueAt, scheduleAutomation, excerptMixTimeline } from '../src/engine/studio/dynamicMix/MixAutomation';
+import { compileAutomation, compileTransientAutomation, automationValueAt, scheduleAutomation, excerptMixTimeline } from '../src/engine/studio/dynamicMix/MixAutomation';
 import { createSongMixGraph } from '../src/engine/studio/dynamicMix/MixGraph';
 import { accumulatePortableMix } from '../src/engine/studio/dynamicMix/PortableMixRuntime';
 import { createMasterChain } from '../src/engine/studio/mixer';
@@ -206,7 +206,8 @@ class Node {
   gain = new Param(); frequency = new Param(); Q = new Param(); threshold = new Param(); knee = new Param();
   ratio = new Param(); attack = new Param(); release = new Param(); pan = new Param(); delayTime = new Param();
   type = ''; curve?: Float32Array; oversample = ''; disconnected = false;
-  connect(_node: unknown, _output?: number, _input?: number) {}
+  connections: unknown[] = [];
+  connect(node: unknown, _output?: number, _input?: number) { this.connections.push(node); }
   disconnect() { this.disconnected = true; }
 }
 function context() {
@@ -244,6 +245,42 @@ test('live/offline scheduling uses identical lanes and never rebuilds strips or 
   assert.equal(a.nodes.length, count);
   live.graph.dispose(); live.master.dispose(); offline.graph.dispose(); offline.master.dispose();
   assert.ok(a.nodes.every(node => node.disconnected));
+});
+
+test('transient emphasis shapes attacks without lifting sustains, stacking chords or changing excerpt timing', () => {
+  const scenes = timeline();
+  scenes.scenes[0].tracks.lead.transientAmount = 1;
+  scenes.scenes[0].analysis.tracks.find(track => track.trackId === 'lead')!.attacks = [0, 0, .003, .5, 1];
+  scenes.scenes[1].tracks.lead.transientAmount = 0;
+  const points = compileTransientAutomation(scenes, 'lead');
+  assert.equal(points.filter(point => point.value > 1).length, 3, 'a rolled chord receives one transient');
+  assert.ok(Math.abs(automationValueAt(points, .5) - 10 ** (3 / 20)) < 1e-9);
+  assert.equal(automationValueAt(points, .6), 1, 'the sustained body returns to its original level');
+  assert.equal(automationValueAt(points, 4), 1, 'zero emphasis stays neutral');
+  const excerpt = compileTransientAutomation(excerptMixTimeline(scenes, .51, 1), 'lead');
+  for (const time of [0, .01, .05, .49, .55])
+    assert.ok(Math.abs(automationValueAt(excerpt, time) - automationValueAt(points, time + .51)) < 1e-9);
+  scenes.scenes.forEach(scene => { scene.enabled = false; });
+  assert.ok(compileTransientAutomation(scenes, 'lead').every(point => point.value === 1));
+});
+
+test('mixed sections automate saturation character, spring return and compressor knee through the shared graph', () => {
+  const scenes = timeline();
+  scenes.scenes[0].resolvedMix = structuredClone(scenes.scenes[0].resolvedMix);
+  scenes.scenes[1].resolvedMix = structuredClone(scenes.scenes[1].resolvedMix);
+  Object.assign(scenes.scenes[0].resolvedMix.contract.character, { saturationType: 'tape', reverbType: 'room', compressionRatio: 1.5 });
+  Object.assign(scenes.scenes[1].resolvedMix.contract.character, { saturationType: 'tube', reverbType: 'spring', compressionRatio: 4 });
+  const { ctx, nodes } = context(), master = createMasterChain(ctx);
+  const graph = createSongMixGraph(ctx, master, scenes, ['lead', 'bass']);
+  graph.schedule();
+  const events = (param: AudioParam) => (param as unknown as Param).events;
+  assert.equal(events(master.dynamicParameters.saturationTape).at(-1)![1], 0);
+  assert.equal(events(master.dynamicParameters.saturationTube).at(-1)![1], 1);
+  assert.ok(events(master.dynamicParameters.springReturn).at(-1)![1] > 0);
+  assert.equal(events(master.dynamicParameters.glueKnee).at(-1)![1], 8);
+  assert.ok(nodes.some(node => node.connections.includes(master.subBus)), 'low-anchor bus reaches the dedicated ducking path');
+  graph.dispose(); master.dispose();
+  assert.ok(nodes.every(node => node.disconnected));
 });
 
 test('portable runtime executes the timeline deterministically without mutating part audio', () => {

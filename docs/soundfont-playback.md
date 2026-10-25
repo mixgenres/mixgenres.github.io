@@ -16,4 +16,6 @@ AudioWorklet frames schedule live events. Pause preserves sample state; seek pri
 
 The shared plan implements sostenuto by latching only notes already held at pedal-down. Decay reservations include release-controller extensions and per-key release modulation, including velocity-dependent envelope changes. Ties retain continuation bends and require matching tuned pitches.
 
+Connected guitar/bass slides resolve their next phrase tone before playback, including descending motion and the target's tuning. Isolated slides retain their written pitch; explicitly authored bend curves take precedence. Per-note bend ranges survive the musician-score boundary. Hi-hat gates close before the next hat attack on their shared choke lane, preventing overlapping same-key gates from releasing the wrong voice.
+
 See [bank sources and rebuild instructions](../src/assets/soundfonts/README.md) and [the shared mixing model](dynamic-mixing.md).

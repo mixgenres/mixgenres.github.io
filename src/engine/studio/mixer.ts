@@ -69,8 +69,9 @@ export interface MasterChain {
   dynamicParameters: {
     low: AudioParam; presence: AudioParam; air: AudioParam; width: AudioParam; roomReturn: AudioParam;
     delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
-    glueThreshold: AudioParam; glueRatio: AudioParam; glueAttack: AudioParam; glueRelease: AudioParam; drumParallel: AudioParam; subEnhancement: AudioParam; duckDepth: AudioParam;
+    glueThreshold: AudioParam; glueKnee: AudioParam; glueRatio: AudioParam; glueAttack: AudioParam; glueRelease: AudioParam; drumParallel: AudioParam; subEnhancement: AudioParam; duckDepth: AudioParam;
     drumDry: AudioParam; drumWet: AudioParam;
+    saturationTape: AudioParam; saturationTube: AudioParam; saturationClip: AudioParam; springReturn: AudioParam;
   };
   tap: GainNode;
   setVolume(v: number): void;
@@ -123,11 +124,18 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
 
 
   // 2. Drum Bus Saturation ("Knock") with Saturation Type
-  const drumShaper = ctx.createWaveShaper();
   const initialKnock = settings.drumKnock;
-  const initialSatType = settings.saturationType;
-  drumShaper.curve = saturationCurve(1, initialSatType);
-  drumShaper.oversample = '2x';
+  // Fixed parallel curves let a mixed-genre song crossfade its production
+  // character through automation. Replacing WaveShaper.curve during playback
+  // clicks and used to leave every later section on the first style's curve.
+  const saturationTypes = ['tape', 'tube', 'hard-clip'] as const;
+  const drumSaturators = saturationTypes.map(type => {
+    const shaper = ctx.createWaveShaper(), level = ctx.createGain();
+    shaper.curve = saturationCurve(1, type); shaper.oversample = '2x';
+    level.gain.value = settings.saturationType === type ? 1 : 0;
+    drumBus.connect(shaper); shaper.connect(level);
+    return { type, shaper, level };
+  });
   // A real dry path preserves transients above +/-1 when saturation is zero.
   // WaveShaper identity curves still clamp inputs outside their table range.
   const drumDry = ctx.createGain(), drumWet = ctx.createGain();
@@ -293,8 +301,8 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   const masterSum = ctx.createGain();
   masterSum.gain.value = 1.0;
 
-  drumBus.connect(drumShaper);
-  drumShaper.connect(drumWet); drumWet.connect(masterSum);
+  for (const saturator of drumSaturators) saturator.level.connect(drumWet);
+  drumWet.connect(masterSum);
   drumBus.connect(drumDry); drumDry.connect(masterSum);
   drumParallelWet.connect(masterSum);
 
@@ -450,9 +458,11 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     roomDelayTimes: roomDelays.map(room => room.delay.delayTime),
     dynamicParameters: { low: low.gain, presence: pres.gain, air: air.gain, width: sideGain.gain, roomReturn: revMix.gain,
       delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
-      delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueRatio: glue.ratio,
+      delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueKnee: glue.knee, glueRatio: glue.ratio,
       glueAttack: glue.attack, glueRelease: glue.release, drumParallel: drumParallelWet.gain, subEnhancement: subEnhanceGain.gain, duckDepth: kickDuckDepth.gain,
-      drumDry: drumDry.gain, drumWet: drumWet.gain },
+      drumDry: drumDry.gain, drumWet: drumWet.gain,
+      saturationTape: drumSaturators[0].level.gain, saturationTube: drumSaturators[1].level.gain,
+      saturationClip: drumSaturators[2].level.gain, springReturn: springWet.gain },
     tap,
     setVolume(v: number) {
       output.gain.setTargetAtTime(Math.max(0, Math.min(1.5, v * MASTER_MIX_DEFAULTS.outputGain)), ctx.currentTime, 0.02);
@@ -508,7 +518,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       delay.delayTime.setTargetAtTime(next.delayTimeSeconds, now, 0.05);
       delayFeedback.gain.setTargetAtTime(next.delayFeedback, now, 0.05);
       delayTone.frequency.setTargetAtTime(next.delayToneHz, now, 0.05);
-      drumShaper.curve = saturationCurve(1, next.saturationType);
+      for (const saturator of drumSaturators) saturator.level.gain.setTargetAtTime(next.saturationType === saturator.type ? 1 : 0, now, .05);
       drumDry.gain.setTargetAtTime(1-next.drumKnock,now,.05);
       drumWet.gain.setTargetAtTime(next.drumKnock,now,.05);
       sideGain.gain.setTargetAtTime(next.widthGain, now, 0.05);
@@ -519,7 +529,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         drumBus.disconnect();
         instBus.disconnect();
         subBus.disconnect();
-        drumShaper.disconnect();
+        for (const saturator of drumSaturators) { saturator.shaper.disconnect(); saturator.level.disconnect(); }
         drumDry.disconnect(); drumWet.disconnect();
         subFilter.disconnect();
         subEnhanceGain.disconnect();

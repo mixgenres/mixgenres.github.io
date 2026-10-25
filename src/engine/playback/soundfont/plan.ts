@@ -4,7 +4,7 @@ import type { Mp3RenderOptions } from '../mp3Export';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
 import { resolveTrackSound } from '../trackSound';
 import { resolveSampleGesture } from './gestures';
-import { codeForGesture } from '../../band/gestures';
+import { codeForGesture, registerGestureNames } from '../../band/gestures';
 import { patchForInstrument, electronicKitPatch, SYNTH_SAMPLE_PROGRAMS, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
 import { PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey, recordedPercussionTake } from './percussion';
@@ -36,6 +36,7 @@ const pitch = (note: PerfNote) => note.frequencyHz !== undefined
 /** This consumes compiled musician decisions. Strums/rolls/ornaments are already
  * separate score events; a simultaneous body contact adds only its own sample. */
 export function compileSamplePlan(performance: Performance, options: Mp3RenderOptions): SamplePlan {
+  registerGestureNames(performance.gestureNames);
   const trackIds = options.selectedTrackIds ?? [...options.trackInstruments.keys()];
   const worldId = options.worldId ?? performance.worldId;
   if (trackIds.length && !worldId) throw new Error('Sample playback requires an authored genre context.');
@@ -64,6 +65,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     };
     const occupied: Array<Map<number,KeyReservation[]>> = [];
     const expressiveLanes = new Set<number>();
+    const hats: Array<{ time: number; off: Extract<SampleEvent, { type: 'off' }> }> = [];
     const track: SampleTrack = { id, instrumentId, gain: params.roleGain ?? .7, channels: [], pan: params.pan };
     const controls=performance.ccs.filter(cc=>cc.trackId===id).sort((a,b)=>a.time-b.time);
     const pedal=controls.filter(cc=>cc.cc===64);
@@ -109,6 +111,10 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
           throw new Error(`Invalid pitch bend for ${note.trackId}: offset or value is out of range.`);
         }
       }
+      if (note.pitchBendRangeSemitones !== undefined && (!Number.isFinite(note.pitchBendRangeSemitones)
+        || note.pitchBendRangeSemitones <= 0 || note.pitchBendRangeSemitones > 24)) {
+        throw new Error(`Invalid pitch bend range for ${note.trackId}`);
+      }
       const gesture = resolveSampleGesture(instrumentId, note.gestureCode, note.vel, note.pitchIdentity);
       const action = gesture.action;
       const context = note.soundContext;
@@ -146,16 +152,18 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       if (instrumentId === 'trumpet' && /mute/.test(action)) patch = patchForProgram(59, 'brass');
       if (instrumentId === 'bass' && /slap|pop/.test(action)) patch = patchForProgram(36, 'guitars');
       else if(instrumentId==='bass'&&/fretless/.test(sound.variantId??''))patch=patchForProgram(35,'guitars');
-      else if(instrumentId==='bass'&&/pick/.test(sound.excitationType??''))patch={bank:64,program:34,drum:false,pack:'bass'};
+      else if(instrumentId==='bass'&&/pick|plectrum/.test(`${gesture.name} ${sound.excitationType ?? ''}`))patch={bank:64,program:34,drum:false,pack:'bass'};
       if(instrumentId==='organ'&&/pipe|church/.test(sound.variantId??''))patch=patchForProgram(19,'keys');
       if (instrumentId==='sampler') {
         // Sampler notes select from the packaged one-shot palette. Fold any
         // authored MIDI pitch onto a real sample key so it stays playable in
         // every role and genre, including scores authored outside drum range.
         patch=electronicKitPatch(sound.variantId) ?? {bank:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
-        const palette=sound.samplePalette ?? SAMPLED_KIT_KEYS;
+        const palette: readonly number[] = sound.samplePalette ?? SAMPLED_KIT_KEYS;
         if (!palette.length || palette.some(key=>!Number.isInteger(key)||key<0||key>127)) throw new Error('Invalid sampler palette.');
-        key=palette[((Math.round(note.midi)-36)%palette.length+palette.length)%palette.length];
+        // Authored pad keys already identify real contacts. Only adapt pitches
+        // outside this palette (for example a transferred melodic phrase).
+        key = palette.includes(key) ? key : palette[((key - 36) % palette.length + palette.length) % palette.length];
       } else if (instrumentId==='synth'||instrumentId==='synth-bass') {
         const name=sound.synthPatchId??sound.synthPatch?.id??'';
         if(SYNTH_SAMPLE_PROGRAMS[name]!==undefined)patch={bank:75,program:SYNTH_SAMPLE_PROGRAMS[name],drum:false,pack:'electronic'};
@@ -181,7 +189,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         const canonical=RECORDED_PERCUSSION_ALIASES[instrumentId]??instrumentId;
         const recorded=RECORDED_PERCUSSION_PATCHES[canonical];
         if(recorded) {
-          key=recordedPercussionKey(instrumentId,note.midi,def.drum,action);
+          key=recordedPercussionKey(instrumentId,note.midi,def.drum,action,note.sourceHit);
           patch={bank:66,program:recorded.program+recordedPercussionTake(instrumentId,key,stableTake(note)),drum:false,pack:'percussion'};
         } else key=percussionKey(instrumentId, note.midi, def.drum, action);
       }
@@ -278,7 +286,9 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       voiceDemand.push({start:note.time,end:releaseEnd,patch,key,velocity:timbreVelocity});
       events.push({ time: note.time, type: 'on', channel, key, velocity: timbreVelocity,
         patch, gain: sound.roleGain * (patch.pack === 'regional' ? 10**((REGIONAL_SAMPLE_GAIN_DB[instrumentId]??0)/20) : 1), cents:cents+initialBend });
-      events.push({ time: end, type: 'off', channel, key });
+      const off: Extract<SampleEvent, { type: 'off' }> = { time: end, type: 'off', channel, key };
+      events.push(off);
+      if (hat) hats.push({ time: note.time, off });
       // Filter sweep is a real synth gesture, not a note-length hint. CC 74 is
       // bipolar in the shipped SoundFont engine: 64 leaves the authored patch
       // cutoff unchanged, while lower and higher values move it down/up.
@@ -288,7 +298,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         synthFilterSweeps.push({ channel, start: note.time, end: note.time + hold });
       }
       for (const bend of note.pitchBend ?? []) if (bend.offset >= 0 && bend.offset < hold) {
-        events.push({ time: note.time + bend.offset, type: 'bend', channel, key, cents: cents + (bend.value-8192)/8192*200 });
+        events.push({ time: note.time + bend.offset, type: 'bend', channel, key,
+          cents: cents + (bend.value-8192)/8192*(note.pitchBendRangeSemitones ?? 2)*100 });
       }
       if (/fall|doit|slide|arrastre/.test(action) && !note.pitchBend?.length && !patch.drum) {
         const direction = /fall/.test(action) ? -1 : 1;
@@ -323,6 +334,14 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       if (/vibrato|shake/.test(action) && !note.pitchBend?.length && !patch.drum) {
         for (let t=.12;t<hold;t+=.025) events.push({ time:note.time+t,type:'bend',channel,key,cents:cents+Math.sin(t*Math.PI*10)*(/shake/.test(action)?65:18) });
       }
+    }
+    // The shared hi-hat lane preserves SF2 choking. Close the prior gate
+    // before the next hat attack too: the synth pairs same-key note-offs in
+    // attack order, so nested gates otherwise release the wrong hat voice.
+    let nextHatTime = Infinity;
+    for (let i = hats.length - 1; i >= 0; i--) {
+      if (i + 1 < hats.length && hats[i + 1].time > hats[i].time) nextHatTime = hats[i + 1].time;
+      hats[i].off.time = Math.min(hats[i].off.time, nextHatTime);
     }
     for (const cc of performance.ccs.filter(cc => cc.trackId === id)) {
       if (!Number.isFinite(cc.time) || !Number.isInteger(cc.cc) || cc.cc < 0 || cc.cc > 127

@@ -4,6 +4,7 @@ import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEnc
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import type { Performance, PerfNote } from '../band/performanceData.ts';
 import { resolveTrackSound } from './trackSound';
+import { stereoPanMatrix } from '../studio/panning';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
 import { resolvePlaybackMix, ensembleHeadroom } from '../studio/masterSettings';
 import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
@@ -161,13 +162,15 @@ async function renderPerformance(
       let chunks = [stem];
       const applyBalance = !options.rawStem || !!options.mixState;
       const pan = Math.max(0, Math.min(1, trackMixPan));
-      const gainL = applyBalance ? Math.cos(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume : 1;
-      const gainR = applyBalance ? Math.sin(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume : 1;
+      const balance = stereoPanMatrix(applyBalance ? pan : .5, applyBalance ? trackMixVolume : 1);
       if (!masterContext && applyBalance) {
         // Apply fader and pan directly to this part's rendered sample buffer.
         chunks = chunks.map(chunk => {
           const left = new Float32Array(chunk.left.length), right = new Float32Array(chunk.right.length);
-          for (let i = 0; i < left.length; i++) { left[i] = chunk.left[i]*gainL; right[i] = chunk.right[i]*gainR; }
+          for (let i = 0; i < left.length; i++) {
+            left[i] = chunk.left[i] * balance.ll + chunk.right[i] * balance.rl;
+            right[i] = chunk.left[i] * balance.lr + chunk.right[i] * balance.rr;
+          }
           return {left,right,startSample:chunk.startSample};
         });
       }
@@ -181,8 +184,8 @@ async function renderPerformance(
         for (const chunk of chunks) for (let i=0;i<chunk.left.length;i++) {
           const offset=chunk.startSample+i-outputStartSample;
           if(offset>=0 && offset<diagnosticSamples) {
-            left[offset]+=chunk.left[i]*(masterContext ? gainL : 1);
-            right[offset]+=chunk.right[i]*(masterContext ? gainR : 1);
+            left[offset] += masterContext ? chunk.left[i] * balance.ll + chunk.right[i] * balance.rl : chunk.left[i];
+            right[offset] += masterContext ? chunk.left[i] * balance.lr + chunk.right[i] * balance.rr : chunk.right[i];
           }
         }
         options.onDiagnostics({ stage: 'stem', id: trackId, instrumentId,
@@ -212,16 +215,13 @@ async function renderPerformance(
       }
       if (dynamicGraph && masterContext) {
         // Native sources sum complete part tails into one continuous master.
-        const split=masterContext.createChannelSplitter(2), merge=masterContext.createChannelMerger(2);
-        const balanceL=masterContext.createGain(), balanceR=masterContext.createGain();
-        balanceL.gain.value=gainL; balanceR.gain.value=gainR;
-        split.connect(balanceL,0); split.connect(balanceR,1);
-        balanceL.connect(merge,0,0); balanceR.connect(merge,0,1);
-        merge.connect(dynamicGraph.tracks.get(trackId)!.input);
+        const level = masterContext.createGain(), panner = masterContext.createStereoPanner();
+        level.gain.value = trackMixVolume; panner.pan.value = pan * 2 - 1;
+        level.connect(panner); panner.connect(dynamicGraph.tracks.get(trackId)!.input);
         for(const chunk of chunks) {
           const buffer=masterContext.createBuffer(2,chunk.left.length,sampleRate);
           buffer.getChannelData(0).set(chunk.left); buffer.getChannelData(1).set(chunk.right);
-          const source=masterContext.createBufferSource(); source.buffer=buffer; source.connect(split);
+          const source=masterContext.createBufferSource(); source.buffer=buffer; source.connect(level);
           source.start(chunk.startSample/sampleRate);
         }
         onProgress?.(0.05 + ((tIdx + 1) / totalTracks) * .68);
@@ -252,8 +252,8 @@ async function renderPerformance(
       for(const chunk of chunks) {
         const offset=chunk.startSample, copyLen=Math.min(chunk.left.length,Math.max(0,totalSamples-offset));
         for(let i=0;i<copyLen;i++) {
-          targetL[offset+i]+=chunk.left[i]*(masterContext ? gainL : 1);
-          targetR[offset+i]+=chunk.right[i]*(masterContext ? gainR : 1);
+          targetL[offset+i] += masterContext ? chunk.left[i] * balance.ll + chunk.right[i] * balance.rl : chunk.left[i];
+          targetR[offset+i] += masterContext ? chunk.left[i] * balance.lr + chunk.right[i] * balance.rr : chunk.right[i];
         }
       }
 

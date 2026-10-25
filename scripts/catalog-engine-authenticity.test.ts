@@ -1187,3 +1187,42 @@ test('the catalog no longer shares the inherited rock-kit placeholder across unr
     assert.ok(!inherited, `${pattern.id} must teach its own style's drum part`);
   }
 });
+
+test('percussion players retain distinct written contacts instead of the shared syncopated pulse', () => {
+  const former = JSON.stringify([0,.5,1,1.75,2,2.75,3,3.5]);
+  for (const genre of ['afrobeat','andean','desert-blues','ethiopian','gospel','latin','mbalax','soukous','timba']) {
+    for (const pattern of PATTERNS_BY_WORLD[genre]) {
+      if (!pattern.roles.includes('percussion') || pattern.arrangementVariation) continue;
+      const events = pattern.events ?? [];
+      const copied = pattern.cycleLength === 1 && pattern.meter === '4/4'
+        && JSON.stringify(events.map(event => event.position)) === former
+        && events.every(event => !event.hitType && event.accent === undefined && event.articulation === 'accent');
+      assert.ok(!copied, `${pattern.id} needs a written hand/contact part`);
+    }
+  }
+  for (const style of ['songo','irakere-jazz-funk-precursor','charanga-habanera','bamboleo','timba-funk']) {
+    const parts = ['congas','timbales','cowbell'].map(instrument => PATTERNS_BY_WORLD.timba.find(pattern =>
+      pattern.styleIds?.includes(`timba-${style}`) && pattern.instruments?.includes(instrument)
+      && pattern.roles.includes('percussion') && !pattern.arrangementVariation && pattern.category !== 'fill'));
+    assert.ok(parts.every(Boolean), `${style} has all three percussion players`);
+    const signatures = parts.map(pattern => JSON.stringify(pattern!.events?.map(event=>[event.position,event.hitType,event.accent])));
+    assert.equal(new Set(signatures).size, 3, `${style} shell, bell and conga parts interlock`);
+    for (const part of parts) {
+      assert.equal(part!.cycleLength,2,'the complete two-bar answer remains written');
+      assert.ok(part!.events?.every(event=>event.hitType && event.accent !== undefined && event.duration === undefined),
+        'contacts carry dynamics and retain their natural decay');
+    }
+  }
+});
+
+test('written hand contacts cross the musician-score boundary into playback unchanged',()=>{
+  const sheet=createCatalogSong('afrobeat-classic-afrobeat_song');
+  const performance=compileWholeSong(sheet), options=songMixOptions(sheet);
+  const track=sheet.tracks.find(track=>track.instrumentId==='congas')!;
+  const notes=performance.notes.filter(note=>note.trackId===track.id);
+  assert.ok(notes.some(note=>note.sourceHit==='heel') && notes.some(note=>note.sourceHit==='open'));
+  const plan=compileSamplePlan(performance,{...options,selectedTrackIds:[track.id]});
+  const keys=new Set(plan.events.filter(event=>event.type==='on').map(event=>event.key));
+  assert.ok([...keys].some(key=>key>=38&&key<=40),'muted hand contacts use their recorded takes');
+  assert.ok([...keys].some(key=>key>=35&&key<=37),'open contacts keep the ringing recorded takes');
+});

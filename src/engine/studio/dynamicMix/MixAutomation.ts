@@ -25,11 +25,45 @@ export function compileAutomation(timeline: MixSceneTimeline, value: (scene: Mix
     }
     previous = scene;
   }
+  return excerptAutomation(points, timeline);
+}
+
+function excerptAutomation(points: AutomationPoint[], timeline: MixSceneTimeline): AutomationPoint[] {
   const offset = timeline.sourceStartTime ?? 0;
   if (offset === 0 || !points.length) return points;
   return [{ time: 0, value: automationValueAt(points, offset) },
     ...points.filter(point => point.time > offset && point.time <= offset + timeline.duration).map(point => ({ ...point, time: point.time - offset })),
     { time: timeline.duration, value: automationValueAt(points, offset + timeline.duration) }];
+}
+
+/** The compiled attacks already identify the player's transients. Shape only
+ * their first 60 ms, without changing sample velocity/layers, sustained level,
+ * stereo balance or the written rhythm. A chord owns one envelope. */
+export function compileTransientAutomation(timeline: MixSceneTimeline, trackId: string): AutomationPoint[] {
+  const attacks = timeline.scenes.flatMap(scene => {
+    const amount = scene.enabled ? scene.tracks[trackId]?.transientAmount ?? 0 : 0;
+    return (scene.analysis.tracks.find(track => track.trackId === trackId)?.attacks ?? [])
+      .map(time => ({ time, amount }));
+  }).sort((a, b) => a.time - b.time);
+  const grouped: typeof attacks = [];
+  for (const attack of attacks) {
+    const previous = grouped.at(-1);
+    // A rolled chord/body companion remains one musical transient.
+    if (previous && attack.time - previous.time < .008) previous.amount = Math.max(previous.amount, attack.amount);
+    else grouped.push({ ...attack });
+  }
+  const points: AutomationPoint[] = [{ time: 0, value: 1 }];
+  for (let index = 0; index < grouped.length; index++) {
+    const { time, amount } = grouped[index];
+    if (time < 0 || amount <= 0) continue;
+    const peak = dbToGain(Math.max(0, Math.min(1, amount)) * 3);
+    const start = Math.max(points.at(-1)!.time, time - .001);
+    if (start > points.at(-1)!.time) points.push({ time: start, value: 1 });
+    if (time === points.at(-1)!.time) points[points.length - 1] = { time, value: peak };
+    else points.push({ time, value: peak });
+    points.push({ time: Math.min(time + .06, (grouped[index + 1]?.time ?? Infinity) - .002), value: 1 });
+  }
+  return excerptAutomation(points, timeline);
 }
 export function automationValueAt(points: AutomationPoint[], time: number): number {
   if (!points.length) return 0;

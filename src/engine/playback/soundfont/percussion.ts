@@ -42,18 +42,23 @@ export function recordedPercussionTake(id:string,key:number,take:number):number 
 export const RECORDED_PERCUSSION_KEYS = new Set([
   'congas','bongos','darbuka','frame-drum','guiro','claves','agogo','cowbell','shaker','tambourine','gongs','log-drum',
 ]);
-export function recordedPercussionKey(id:string,midi:number,source:{low:number;mid:number;high:number},action:string) {
+export function recordedPercussionKey(id:string,midi:number,source:{low:number;mid:number;high:number},action:string,sourceHit?:string) {
   const instrument=RECORDED_PERCUSSION_ALIASES[id]??id;
   const low=midi===source.low,high=midi===source.high;
-  if(instrument==='congas')return /slap|mute|heel/.test(action)?(low?38:high?40:39):/tumba/.test(action)?35:low?35:high?37:36;
-  if(instrument==='bongos')return (low?35:36)+(/mute|slap/.test(action)?2:0);
-  if(instrument==='darbuka')return /rim|tap|slap|ghost/.test(action)?(low?36:high?38:37):low?35:high?39:37;
-  if(instrument==='frame-drum')return /mute|choke|closed/.test(action)?37:/brush|hand/.test(action)?35:36;
-  if(instrument==='guiro')return /fast|short/.test(action)?35:/hit|tap/.test(action)?36:/slow|drag|long/.test(action)?38:37;
+  // A generic articulation such as "accent" must not erase a written contact.
+  // Both are relevant: a muted head can itself be accented. These keys refer
+  // to the named recordings in percussion-sources.json, not fabricated tones.
+  const contact = `${action} ${sourceHit ?? ''}`.toLowerCase();
+  if(instrument==='congas')return /slap|mute|heel|toe|tip|ghost/.test(contact)?(low?38:high?40:39):/tumba/.test(contact)?35:low?35:high?37:36;
+  if(instrument==='bongos')return (low?35:36)+(/mute|slap|ghost|heel|tip/.test(contact)?2:0);
+  if(instrument==='darbuka')return /rim|tap|slap|ghost/.test(contact)?(low?36:high?38:37):low?35:high?39:37;
+  if(instrument==='frame-drum')return /mute|choke|closed/.test(contact)?37:/brush|hand|ghost|heel|toe|tip/.test(contact)?35:36;
+  if(instrument==='guiro')return /fast|short|ghost/.test(contact)?35:/hit|tap|edge/.test(contact)?36:/slow|drag|long/.test(contact)?38:37;
   if(instrument==='agogo')return low?35:36;
-  if(instrument==='cowbell')return /double/.test(action)?37:/mute|choke/.test(action)?36:35;
-  if(instrument==='shaker')return /up|reverse|pickup/.test(action)?36:35;
-  if(instrument==='tambourine')return /up|reverse|pickup/.test(action)?36:35;
+  // The dry/muted bell recording approximates an edge contact; the full hit
+  // carries the mouth stroke. The package has no dedicated bell-edge take.
+  if(instrument==='cowbell')return /double/.test(contact)?37:/mute|choke|edge|rim/.test(contact)?36:35;
+  if(instrument==='shaker'||instrument==='tambourine')return /up|reverse|pickup|ghost|heel|toe|tip/.test(contact)?36:35;
   if(instrument==='log-drum')return high||midi>source.mid?50:47;
   return 35;
 }

@@ -421,3 +421,25 @@ test('sample-key selection preserves fractional MIDI pitches and tuning offsets'
       'the sampled key retains the written half-semitone and additional tuning');
   }
 });
+
+test('late phrase interpretation preserves playing intensity independently of ensemble velocity', async () => {
+  const { optimizePerformanceByPhraseAndSong } = await import('../src/engine/band/songPhrasing');
+  const sheet = makeSheet('tango', 'tango-golden-age');
+  const region = sheet.regions[0];
+  const bass = sheet.tracks.find(track => track.role === 'bass')!;
+  const piano = sheet.tracks.find(track => track.instrumentId === 'piano')!;
+  const bassNotes = Array.from({length:16}, (_,i) => ({...note(i*.15,36), trackId:bass.id,
+    bar:region.start+Math.floor(i/4), vel:[54,81,106,127][i%4], harmonicChord:'C', authoredTechnique:true,
+    attackId:`bass-${i}`}));
+  const make = (accompanimentVelocity: number): Performance => ({
+    ...samplePerformance('piano', []), notes:[...bassNotes, ...bassNotes.map((n,i)=>({...n,
+      trackId:piano.id, midi:60, vel:accompanimentVelocity, attackId:`piano-${i}`}))],
+    trackInfo:Object.fromEntries(sheet.tracks.map(track=>[track.id,{instrumentId:track.instrumentId ?? track.instrument,role:track.role}])) });
+  for (const velocity of [30,70,120]) {
+    const result=optimizePerformanceByPhraseAndSong(sheet,make(velocity)).performance;
+    assert.deepEqual(result.notes.filter(n=>n.trackId===bass.id).map(n=>n.vel),bassNotes.map(n=>n.vel),
+      'a mixer correction cannot change the bass sample layers, ghost notes or fortissimo');
+    assert.ok(result.notes.filter(n=>n.trackId===piano.id).every(n=>n.vel===velocity),
+      'dense accompaniment keeps its written touch');
+  }
+});

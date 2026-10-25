@@ -184,7 +184,9 @@ export function compileMusicianScore(score: MusicianScore): Performance {
     dur: scoreDurationSeconds(score, note.bar, beatValue(note.position), beatValue(note.duration)) * note.expression.gateRatio,
     notation: { bar: note.bar, beat: beatValue(note.position), durationBeats: beatValue(note.duration) },
   })).sort((a, b) => a.time - b.time || a.trackId.localeCompare(b.trackId) || a.midi - b.midi);
-  return { scoreVersion: 1, notes, bars: score.bars.map(({ chord: _chord, section: _section, ...bar }) => bar),
+  return { scoreVersion: 1, notes,
+    gestureNames: Object.fromEntries(notes.map(note => [note.gestureCode, GESTURE_NAMES[note.gestureCode]])),
+    bars: score.bars.map(({ chord: _chord, section: _section, ...bar }) => bar),
     ccs: score.controllers.map(cc => ({ ...cc })), phrases: score.phrases, duration: score.duration, tail: score.tail,
     blends: score.blends, worldId: score.worldId, mixTimeline: score.mixTimeline,
     trackInfo: Object.fromEntries(score.parts.map(part => [part.id, { instrumentId: part.instrumentId, role: part.role }])) };

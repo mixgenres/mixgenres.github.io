@@ -14,7 +14,7 @@ export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
 export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>> = {
   // The rendered bachata bongo and güira anchors sat 18–27 dB below the
   // requinto/bass in active passages. Restore a readable dance pulse.
-  bachata: { bass: 8, guira: 20, bongos: 11, guitar: 1.5 },
+  bachata: { bass: 8, bongos: -1, guitar: 1.5 },
   // Keep the bass and fiddle clear in the ensemble. Section/lead automation
   // carries fiddle breaks, while a shared static lift used to bury the chops.
   country: { 'upright-bass': 1.5, violin: 1.5 },
@@ -23,16 +23,18 @@ export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>
   // Four-second ensemble renders put the recorded scrape/shake sources
   // 40–50 dB below the guitar and the bass 8–14 dB below it. Restore a readable
   // Angolan rhythm section without lifting drum-kit transients with them.
-  kizomba: { bass: 5, guitar: -1.5, dikanza: 20, shaker: 14 },
-  // The VCSL one-shot conga, clave and bell recordings sit well below the
-  // melodic bank at the same MIDI velocity. These salsa-only trims put the
-  // timekeeping and hand-drum attacks back in the pocket without affecting
-  // the separate, already balanced bachata calibration above.
-  salsa: { trumpet: 3, trombone: 3, congas: 18, bongos: 10, timbales: 10, claves: 12, cowbell: 10, guiro: 8, guira: 8 },
+  kizomba: { bass: 5, guitar: -1.5, shaker: 4 },
+  // Residual stage balance after shared source compensation. Keep the
+  // established salsa levels while making the same recorded contacts readable
+  // in worlds that previously received no source makeup.
+  salsa: { trumpet: 3, trombone: 3, congas: 8, bongos: -2, timbales: 10, claves: -4, cowbell: -6, guiro: -12, guira: -12 },
 };
 
 /** Track trims backed by source-level audits of the named sample arrangements. */
 export const STYLE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>> = {
+  // With distinct muted/open contacts restored, the boogaloo conga stem sat
+  // 4 dB above its horn foreground in the measured ensemble window.
+  'salsa-boogaloo': { congas: -4 },
   // The exposed martinete guide has no band to balance against. Its existing
   // ensemble vocal trim rendered the entire study around -35 dBFS RMS. Restore
   // the solo line here without lifting sustained vowel guides in other songs.

@@ -2,7 +2,7 @@ import { resolveMasterSettings } from '../masterSettings';
 import type { MasterChain } from '../mixer';
 import type { MixBusId } from '../../../data/sound/schema/dynamicMix';
 import { MIX_BUSES, type MixSceneTimeline, neutralTrackMixState } from './MixScene';
-import { compileAutomation, dbToGain, scheduleAutomation } from './MixAutomation';
+import { compileAutomation, compileTransientAutomation, dbToGain, scheduleAutomation } from './MixAutomation';
 
 export interface SongMixGraph {
   tracks: Map<string, { input: GainNode }>;
@@ -31,16 +31,19 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
     const compressor = ctx.createDynamicsCompressor(); nodes.push(compressor);
     compressor.threshold.value = -18; compressor.knee.value = 12; compressor.attack.value = .03; compressor.release.value = .25;
     input.connect(compressor); compressor.connect(level);
+    const separateMasterBus = id === 'percussion' || id === 'lowAnchor';
     if (id === 'percussion') level.connect(master.drumBus);
+    else if (id === 'lowAnchor') level.connect(master.subBus);
     else level.connect(ensemble);
-    automate(level.gain, scene => dbToGain(scene.buses[id].gainOffsetDb) * (id === 'percussion' ? baselineHeadroom * dbToGain(scene.master.gainOffsetDb) : 1));
+    automate(level.gain, scene => dbToGain(scene.buses[id].gainOffsetDb) * (separateMasterBus ? baselineHeadroom * dbToGain(scene.master.gainOffsetDb) : 1));
     automate(compressor.ratio, scene => 1 + scene.buses[id].compressionAmount * (scene.buses[id].compressionRatio - 1));
     buses.set(id, input);
   }
   const tracks = new Map<string, { input: GainNode }>();
   for (const id of trackIds) {
-    const input = gain(), body = filter('lowshelf', 280), presence = filter('peaking', 2600), level = gain();
-    input.connect(body); body.connect(presence);
+    const input = gain(), transient = gain(), body = filter('lowshelf', 280), presence = filter('peaking', 2600), level = gain();
+    input.connect(transient); transient.connect(body); body.connect(presence);
+    automation.push({ param: transient.gain, points: compileTransientAutomation(timeline, id) });
     const splitter = ctx.createChannelSplitter(2), merger = ctx.createChannelMerger(2);
     nodes.push(splitter, merger);
     const ll = gain(), lr = gain(0), rl = gain(0), rr = gain();
@@ -79,6 +82,7 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
   automate(masterParams.delayFeedback, scene => settings(scene).delayFeedback);
   automate(masterParams.delayTone, scene => settings(scene).delayToneHz, 'spectral');
   automate(masterParams.glueThreshold, scene => settings(scene).glue.threshold);
+  automate(masterParams.glueKnee, scene => settings(scene).glue.knee);
   automate(masterParams.glueRatio, scene => settings(scene).glue.ratio);
   automate(masterParams.glueAttack, scene => settings(scene).glue.attack);
   automate(masterParams.glueRelease, scene => settings(scene).glue.release);
@@ -87,6 +91,10 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
   automate(masterParams.duckDepth, scene => settings(scene).duckDepth);
   automate(masterParams.drumDry, scene => 1-settings(scene).drumKnock);
   automate(masterParams.drumWet, scene => settings(scene).drumKnock);
+  automate(masterParams.saturationTape, scene => settings(scene).saturationType === 'tape' ? 1 : 0);
+  automate(masterParams.saturationTube, scene => settings(scene).saturationType === 'tube' ? 1 : 0);
+  automate(masterParams.saturationClip, scene => settings(scene).saturationType === 'hard-clip' ? 1 : 0);
+  automate(masterParams.springReturn, scene => settings(scene).springReverbMix, 'spatial');
   const roomTimes = [.013, .019, .029, .037, .053, .071];
   master.roomDelayTimes.forEach((param, index) => automate(param,
     scene => roomTimes[index] * (scene.enabled ? .6 + scene.resolvedMix.contract.ambience.roomSize * 1.2 : 1), 'spatial'));

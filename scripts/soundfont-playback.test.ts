@@ -25,6 +25,7 @@ import { prepareBankForLive } from '../src/engine/playback/soundfont/prepareBank
 import { StbVorbis } from 'stb-vorbis';
 import { ALL_STYLES } from '../src/engine/style';
 import { makeSheet } from '../src/engine/sheet/sheet';
+import { createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import { resolveDialect } from '../src/engine/band/genreDialect';
 import { ELECTRONIC_KIT_PROGRAMS } from '../src/data/sound/playback/electronicKits';
@@ -464,12 +465,12 @@ test('reggaeton arrangements use authored electronic kits and bounded sampler pa
     }
   }
 });
-test('every style example reaches playable sample zones and retains its authored kit and synth choices',()=>{
+test('every generated style and full catalog song reaches playable sample zones and retains its authored kit and synth choices',()=>{
   const banks=new Map<BankId,ReturnType<typeof load>>();
   const checked=new Set<string>();
   const missing=new Set<string>();
-  for(const style of ALL_STYLES) {
-    const sheet=makeSheet(style.primaryGenre,style.id),performance=arrangeBand(sheet);
+  for(const style of ALL_STYLES) for(const catalog of [false,true]) {
+    const sheet=catalog?createCatalogSong(`${style.id}_song`):makeSheet(style.primaryGenre,style.id),performance=arrangeBand(sheet);
     const plan=compileSamplePlan(performance,songMixOptions(sheet));
     assert(plan.events.some(event=>event.type==='on'),`${style.id} is audible`);
     for(const event of plan.events)if(event.type==='on') {
@@ -608,6 +609,16 @@ test('recorded kit layout preserves drum pitch, stereo layers, takes and hat exc
   const ons=plan.events.filter(e=>e.type==='on');
   assert.equal(new Set(ons.filter(e=>[42,44,46].includes(e.key)).map(e=>e.channel)).size,1);
   assert.notEqual(ons.find(e=>e.key===38)!.channel,ons[0].channel);
+});
+test('a new hi-hat closes the previous gate before nested same-key note-offs can release the wrong attack',()=>{
+  const plan=compileSamplePlan(performanceFixture({notes:[
+    noteFixture({midi:46,time:0,dur:1}),noteFixture({midi:46,time:.1,dur:.02}),noteFixture({midi:42,time:.2,dur:.05}),
+  ]}),{...options,trackInstruments:new Map([['keys','drums']])});
+  const hats=plan.events.filter(event=>event.type==='on').filter(event=>[42,44,46].includes(event.key));
+  assert.equal(new Set(hats.map(event=>event.channel)).size,1,'open and closed hats retain their shared choke group');
+  const offs=plan.events.filter(event=>event.type==='off'&&event.key===46);
+  assert.deepEqual(offs.map(event=>event.time),[.1,.12000000000000001]);
+  assert.ok(plan.events.indexOf(offs[0])<plan.events.indexOf(hats[1]),'old gate closes before the new attack at the same time');
 });
 test('Salamander covers the full keyboard with distinct recorded dynamics and stereo microphones',()=>{
   const bank=load('piano'),preset=bank.presets[0];
@@ -879,4 +890,59 @@ test('stem diagnostics measure the returned excerpt without discarded-history si
   assert.ok(stem.metrics.rmsDbfs !== null && output.metrics.rmsDbfs !== null);
   assert.ok(Math.abs(stem.metrics.rmsDbfs! - output.metrics.rmsDbfs!) < 1e-6,
     'an isolated raw stem has the same RMS as its returned PCM, not an earlier silent prefix');
+});
+
+test('written bass picking selects the picked sample without requiring a style-wide patch change',()=>{
+  const plan=compileSamplePlan(performanceFixture({notes:[
+    noteFixture({time:0,midi:40,gestureCode:codeForGesture('fingerstyle')}),
+    noteFixture({time:.5,midi:40,gestureCode:codeForGesture('pick')}),
+  ]}),{...options,trackInstruments:new Map([['keys','bass']]),worldId:'country',styleId:'country-bluegrass'});
+  const events=plan.events.filter(event=>event.type==='on');
+  assert.equal(events.length,2);
+  assert.equal(events[1].patch.pack,'bass');assert.equal(events[1].patch.program,34);
+  assert.notDeepEqual(events[0].patch,events[1].patch,'finger and pick have different recorded attacks');
+});
+
+test('sampler pad keys retain authored contacts rather than being folded into other pads',()=>{
+  const keys=[36,38,42,46,49,51];
+  const plan=compileSamplePlan(performanceFixture({notes:keys.map((midi,i)=>noteFixture({midi,time:i*.25}))}),
+    {...options,trackInstruments:new Map([['keys','sampler']])});
+  assert.deepEqual(plan.events.filter(event=>event.type==='on').map(event=>event.key),keys);
+});
+
+test('authored percussion contacts survive a generic accent into the recorded sample plan',()=>{
+  const cases: Array<[string,string[],number[]]> = [
+    ['congas',['open','heel','toe','slap'],[36,39,39,39]],
+    ['cowbell',['bell','edge','mute'],[35,36,36]],
+    ['shaker',['open','ghost'],[35,36]],
+    ['tambourine',['open','ghost'],[35,36]],
+    ['frame-drum',['open','ghost','mute'],[36,35,37]],
+    ['guiro',['open','ghost'],[37,35]],
+  ];
+  for(const [instrumentId,contacts,keys] of cases) {
+    const def=INSTRUMENTS_BY_ID[instrumentId];
+    const plan=compileSamplePlan(performanceFixture({notes:contacts.map((sourceHit,i)=>noteFixture({
+      midi:def.drum!.mid,time:i*.5,sourceHit,gestureCode:codeForGesture('accent')}))}),
+      {...options,trackInstruments:new Map([['keys',instrumentId]])});
+    assert.deepEqual(plan.events.filter(event=>event.type==='on').map(event=>event.key),keys,instrumentId);
+    for(const event of plan.events)if(event.type==='on') {
+      const preset=load('percussion').presets.find(p=>p.bankMSB===event.patch.bank&&p.program===event.patch.program);
+      assert.ok(preset?.getVoiceParameters(event.key,event.velocity).length,`${instrumentId}/${event.key} exists`);
+    }
+  }
+});
+
+test('shared percussion source compensation keeps repeated recorded contacts audible',async()=>{
+  for(const instrumentId of ['congas','bongos','cowbell','claves','guiro','shaker','tambourine']) {
+    const def=INSTRUMENTS_BY_ID[instrumentId];
+    const performance=performanceFixture({duration:2,tail:.5,notes:Array.from({length:4},(_,i)=>noteFixture({
+      time:i*.5,midi:def.drum!.mid,vel:96,dur:.22,gestureCode:codeForGesture('open')}))});
+    const audio=await renderPerformanceToAudio(performance,{...options,worldId:'folk',styleId:undefined,
+      trackInstruments:new Map([['keys',instrumentId]]),trackRoles:new Map([['keys','percussion']]),
+      rawStem:true,maxDurationSeconds:2.5,yieldForUI:false});
+    const metrics=measureAudio(audio.left,audio.right,audio.sampleRate);
+    assert.equal(metrics.nonFiniteSamples,0,instrumentId);assert.equal(metrics.clippedSampleFraction,0,instrumentId);
+    assert.ok(metrics.samplePeakDbfs! > -31 && metrics.samplePeakDbfs! < -18,
+      `${instrumentId}: source peak ${metrics.samplePeakDbfs} dBFS retains clean, readable attacks`);
+  }
 });

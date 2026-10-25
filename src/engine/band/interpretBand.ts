@@ -985,6 +985,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                 soundContext,
                 musicianNotation: onset.musicianNotation,
                 percussion: onset.percussion,
+                sourceHit: onset.sourceHit,
                 notationEventId: `${track.id}:${region.id}:${bar - region.start}:${i}`,
                 attackId: `${track.id}:${region.id}:${bar}:${i}`,
                 phraseId,

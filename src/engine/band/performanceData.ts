@@ -22,6 +22,8 @@ export interface PerfNote {
   bodyAttack?: boolean;
   musicianNotation?: import('../../data/schema').PatternEvent['notation'];
   percussion?: import('../score/percussionNotation').NotatedDrum;
+  /** Written contact survives generic articulation (e.g. accent + muted head). */
+  sourceHit?: string;
   notationEventId?: string;
   /** Written quarter-note beats, before groove/roll displacement. */
   notation?: { bar?: number; beat: number; durationBeats: number };
@@ -46,6 +48,8 @@ export interface PerfNote {
   frequencyHz?: number;
   /** Optional MIDI 0xE0 pitch-bend trajectory, scheduled relative to note-on. */
   pitchBend?: PitchBendPoint[];
+  /** Symmetric trajectory range; existing/imported MIDI bends default to two semitones. */
+  pitchBendRangeSemitones?: number;
   /** 1..127 */
   vel: number;
   trackId: string;
@@ -102,6 +106,8 @@ export interface PerformancePhrase {
 }
 
 export interface Performance {
+  /** Self-contained technique names for worker/serialization boundaries. */
+  gestureNames?: Record<number, string>;
   pipeline?: import('../pipeline/compileSong').PipelineTrace;
   /** Playback events have passed through the explicit musician-score boundary. */
   scoreVersion?: 1;

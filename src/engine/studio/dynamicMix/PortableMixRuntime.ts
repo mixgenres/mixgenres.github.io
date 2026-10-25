@@ -1,6 +1,6 @@
 import type { MixSceneTimeline } from './MixScene';
 import { neutralTrackMixState } from './MixScene';
-import { automationValueAt, compileAutomation, dbToGain } from './MixAutomation';
+import { automationValueAt, compileAutomation, compileTransientAutomation, dbToGain } from './MixAutomation';
 
 /** Stateful biquad for environments without Web Audio, using RBJ shelf/peak coefficients. */
 class StereoEQ {
@@ -31,6 +31,7 @@ export function accumulatePortableMix(timeline: MixSceneTimeline, trackId: strin
   const state = (scene: MixSceneTimeline['scenes'][number]) => scene.tracks[trackId] ?? neutralTrackMixState();
   const lanes = {
     gain: compileAutomation(timeline, scene => dbToGain(state(scene).gainOffsetDb)),
+    transient: compileTransientAutomation(timeline, trackId),
     bus: compileAutomation(timeline, scene => dbToGain(scene.buses[state(scene).bus].gainOffsetDb)),
     master: compileAutomation(timeline, scene => dbToGain(scene.master.gainOffsetDb)),
     presence: compileAutomation(timeline, scene => state(scene).presenceOffsetDb, 'spectral'),
@@ -56,7 +57,8 @@ export function accumulatePortableMix(timeline: MixSceneTimeline, trackId: strin
   for (let i = 0; i < count; i++) {
     time = (startSample + i) / sampleRate;
     if (i % 64 === 0) { body.set(at('body'), 280, sampleRate, true); presence.set(at('presence'), 2600, sampleRate, false); }
-    const l = presence.sample(body.sample(left[i], 0), 0), r = presence.sample(body.sample(right[i], 1), 1);
+    const transient = at('transient');
+    const l = presence.sample(body.sample(left[i] * transient, 0), 0), r = presence.sample(body.sample(right[i] * transient, 1), 1);
     const mid = (l + r) / 2, side = (l - r) / 2 * at('width'), pan = at('pan');
     // Same equal-power stereo panning branches as StereoPannerNode.
     let pl: number, pr: number;

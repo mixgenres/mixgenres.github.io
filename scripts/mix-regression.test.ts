@@ -182,3 +182,35 @@ test('later excerpts preserve controllers and notes already sounding', () => {
   assert.equal(excerpt.notes[0].time, 0); assert.equal(excerpt.notes[0].dur, 2);
   assert.deepEqual(excerpt.ccs.map(c => [c.time, c.cc, c.value]), [[0, 7, 40], [1, 11, 64]]);
 });
+
+test('stereo pan preserves both recorded channels and matches the live panner matrix', async () => {
+  const { stereoPanMatrix } = await import('../src/engine/studio/panning');
+  const apply = (pan: number, l: number, r: number) => {
+    const m = stereoPanMatrix(pan);
+    return [l * m.ll + r * m.rl, l * m.lr + r * m.rr];
+  };
+  assert.deepEqual(apply(.5, .3, .8), [.3, .8], 'center is a transparent stereo path');
+  assert.deepEqual(apply(0, 0, .8), [.8, 0], 'right-only recording is retained at hard left');
+  const right = apply(1, .3, 0);
+  assert.ok(Math.abs(right[0]) < 1e-12 && Math.abs(right[1] - .3) < 1e-12,
+    'left-only recording is retained at hard right');
+  for (const pan of [.1,.25,.75,.9]) {
+    const [l,r] = apply(pan, pan < .5 ? 0 : 1, pan < .5 ? 1 : 0);
+    assert.ok(Math.abs(l*l + r*r - 1) < 1e-12, 'the moved channel retains equal-power energy');
+  }
+});
+
+test('percussion source makeup applies across genres without doubling established ensemble boosts',()=>{
+  const db=(gain:number)=>20*Math.log10(gain);
+  const role=-2.5;
+  for(const [id,makeup] of [['congas',10],['bongos',12],['cowbell',16],['claves',16],['guiro',20],['shaker',10]] as const) {
+    assert.ok(Math.abs(db(getRoleGainLinear('percussion','folk',id))-role-makeup)<1e-9,
+      `${id} source compensation is independent of a genre-specific exception`);
+  }
+  for(const [genre,id,oldExtra] of [['salsa','congas',16],['salsa','bongos',8],['salsa','cowbell',8],
+    ['salsa','claves',10],['salsa','guiro',6],['bachata','guira',20],['bachata','bongos',11],
+    ['kizomba','dikanza',20],['kizomba','shaker',14]] as const) {
+    assert.ok(Math.abs(db(getRoleGainLinear('percussion',genre,id))-role-oldExtra)<1e-9,
+      `${genre}/${id} retains its established summed gain`);
+  }
+});
