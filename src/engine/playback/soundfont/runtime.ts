@@ -144,8 +144,13 @@ export class SampleRuntime {
   renderSplit(outputs: Float32Array[][], _scratchL: Float32Array, _scratchR: Float32Array, length: number, start=0) {
     this.read(length,(offset,count)=>{
       for(let track=0;track<outputs.length;track++) {
-        outputs[track][0].set(this.quantum[track][0].subarray(this.readOffset,this.readOffset+count),start+offset);
-        outputs[track][1].set(this.quantum[track][1].subarray(this.readOffset,this.readOffset+count),start+offset);
+        const left=outputs[track][0],right=outputs[track][1],source=this.quantum[track];
+        // No short-lived typed-array views on every track/quantum. Thousands
+        // of subarray objects per second added GC work to realtime playback.
+        for(let i=0;i<count;i++) {
+          left[start+offset+i]=source[0][this.readOffset+i];
+          right[start+offset+i]=source[1][this.readOffset+i];
+        }
       }
     });
   }

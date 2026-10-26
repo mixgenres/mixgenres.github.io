@@ -39,7 +39,7 @@ jazz::post-bop|_=Cm7,Cm7,Cm7,Cm7,Fm7,Fm7,Cm7,Cm7,F#7,F7,Cm7,Cm7
 salsa::salsa-dura|_=Bb,Eb,F7,Bb;montuno=Bb,F7,Bb,F7;coro=Bb,F7,Bb,F7
 salsa::salsa-jazz|_=Cm7,Fm7,G7,Cm7;solo=Cm9,F13,Bbmaj7,Ebmaj7,Am7b5,D7b9,Gm7,G7
 reggaeton::classic|_=Fm,Db,Eb,Fm
-reggaeton::melodic|_=Dmaj7,Bm7,Em7,A7
+reggaeton::melodic|_=Am,F,C,G;bridge=F,G,Am,Am;outro=F,G,Am,Am
 bachata::moderna|_=E,B,A,B
 reggae::dub|_=Dm,Gm,Dm,A7
 afrobeat::classic-afrobeat|_=Fm7,Fm7,Eb7,Fm7

@@ -1,4 +1,11 @@
 import { PAN_MAP } from '../../data/sound/mix/panMap';
+import type { TrackMixState } from './dynamicMix/MixScene';
+
+/** Automatic mono bass placement is a starting point. An explicit user pan
+ * remains effective after the style's width and stage processing. */
+export function resolveMixPan(defaultPan: number, userPan?: number, state?: Pick<TrackMixState, 'bus' | 'width'>): number {
+  return Math.max(0, Math.min(1, userPan ?? (state?.bus === 'lowAnchor' && state.width === 0 ? .5 : defaultPan)));
+}
 
 /** StereoPannerNode's stereo-input matrix. Crossfeed preserves both recorded
  * channels at the sides; independent L/R attenuation discarded half a stereo

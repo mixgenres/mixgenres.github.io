@@ -14,6 +14,8 @@ The 0.44 MiB regional bank uses CC BY recordings from the Berklee Intersectional
 
 AudioWorklet frames schedule live events. Pause preserves sample state; seek primes voices and controller history. MP3 export encodes bounded PCM blocks. Live and offline output share musical events and mix decisions, while their browser and Node mastering backends may sound slightly different.
 
+Browser rendering yields through message tasks instead of chained zero-delay timers, which can be heavily throttled in background tabs ([Chrome timer scheduling](https://developer.chrome.com/blog/timer-throttling-in-chrome-88)). Seek preparation and sample rendering check a 16 ms work budget and report progress within each part. Invalid/unreadable encoder replies fail and release their worker instead of leaving the export pending. Realtime split-output copies avoid allocating typed-array views on every channel and audio quantum. The export dialog exposes progress to assistive technology, keeps keyboard focus on cancellation, and supports Escape.
+
 The shared plan implements sostenuto by latching only notes already held at pedal-down. Decay reservations include release-controller extensions and per-key release modulation, including velocity-dependent envelope changes. Ties retain continuation bends and require matching tuned pitches.
 
 Connected guitar/bass slides resolve their next phrase tone before playback, including descending motion and the target's tuning. Isolated slides retain their written pitch; explicitly authored bend curves take precedence. Per-note bend ranges survive the musician-score boundary. Hi-hat gates close before the next hat attack on their shared choke lane, preventing overlapping same-key gates from releasing the wrong voice.

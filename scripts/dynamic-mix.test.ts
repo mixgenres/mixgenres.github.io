@@ -17,6 +17,7 @@ import type { MixSceneTimeline } from '../src/engine/studio/dynamicMix/MixScene'
 import type { Sheet } from '../src/engine/sheet/sheet';
 import { makeSheet, setSectionSolo } from '../src/engine/sheet/sheet';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
+import { resolveMixPan } from '../src/engine/studio/panning';
 
 const tango = () => resolveStyle({ genreId: 'tango', styleId: 'tango-golden-age' });
 const note = (trackId: string, midi = 65, time = 0, dur = 3): PerfNote => ({ trackId, midi, time, dur, bar: 0,
@@ -193,6 +194,17 @@ test('catalog styles have calibrated mixes and explicitly disabled mix contracts
   }
 });
 
+test('dry role and section ambience policies control delay as well as reverb', () => {
+  const wet = resolveMixContract(tango(), { enabled: true, ambience: { reverbSend: .1, delaySend: .2 },
+    roles: { bass: { ambienceSend: 0 }, harmony: { ambienceSend: .1 } },
+    sections: { dry: { ambience: 0 } } });
+  const audible = planMixScene(scene().analysis, wet, 'wet');
+  assert.equal(audible.tracks.bass.reverbSend, 0); assert.equal(audible.tracks.bass.delaySend, 0);
+  assert.ok(audible.tracks.comp.reverbSend > 0 && audible.tracks.comp.delaySend > 0);
+  const dry = planMixScene(scene().analysis, wet, 'wet', 'dry');
+  for (const state of Object.values(dry.tracks)) { assert.equal(state.reverbSend, 0); assert.equal(state.delaySend, 0); }
+});
+
 class Param {
   value = 0;
   events: Array<[string, number, number]> = [];
@@ -294,6 +306,30 @@ test('portable runtime executes the timeline deterministically without mutating 
   };
   assert.deepEqual(render(), render()); assert.deepEqual(l, before);
   assert.ok(render().flatMap(buffer => [...buffer]).every(Number.isFinite));
+});
+
+test('manual pan follows style width so a mono bass policy cannot undo the user balance', () => {
+  const scenes = timeline();
+  for (const scene of scenes.scenes) {
+    Object.assign(scene.tracks.bass, { width: 0, gainOffsetDb: 0, presenceOffsetDb: 0,
+      bodyOffsetDb: 0, panOffset: 0, transientAmount: 0, reverbSend: 0, delaySend: 0 });
+    scene.buses.lowAnchor.gainOffsetDb = 0; scene.master.gainOffsetDb = 0;
+  }
+  assert.equal(resolveMixPan(.15, undefined, scenes.scenes[0].tracks.bass), .5, 'automatic bass seating is centered');
+  assert.equal(resolveMixPan(.15, 0, scenes.scenes[0].tracks.bass), 0, 'explicit pan wins');
+  const inputL = new Float32Array(80).fill(.1), inputR = new Float32Array(80).fill(.3);
+  for (const pan of [0, .5, 1]) {
+    const outputL = new Float32Array(80), outputR = new Float32Array(80), roomL = new Float32Array(80), roomR = new Float32Array(80);
+    accumulatePortableMix(scenes, 'bass', inputL, inputR, 0, 8000, outputL, outputR, roomL, roomR,
+      new Float32Array(80), new Float32Array(80), pan, .5);
+    assert.ok(Math.abs(outputL[40] - (pan === 0 ? .2 : pan === .5 ? .1 : 0)) < 1e-6);
+    assert.ok(Math.abs(outputR[40] - (pan === 1 ? .2 : pan === .5 ? .1 : 0)) < 1e-6);
+  }
+  const { ctx } = context(), master = createMasterChain(ctx), graph = createSongMixGraph(ctx, master, scenes, ['bass']);
+  const manual = graph.tracks.get('bass')!.pan.pan;
+  manual.value = -.8; graph.schedule(); graph.schedule(10, 3);
+  assert.equal(manual.value, -.8, 'seek scheduling leaves the user balance control intact');
+  graph.dispose(); master.dispose();
 });
 
 // Compatibility fixtures lacking a timeline must remain valid Performance objects.

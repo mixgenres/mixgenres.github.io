@@ -1,7 +1,8 @@
 import type { GenrePackInput } from '../_shared/genrePack';
 import { addCatalogSupportCells } from '../_shared/catalogSupport';
+import { authorReggaetonParts } from './arrangements';
 
-export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
+export const GENRE_PACK: GenrePackInput = authorReggaetonParts(addCatalogSupportCells({
   "id": "reggaeton",
   "name": "Reggaeton",
   "family": "Reggaeton",
@@ -759,4 +760,4 @@ export const GENRE_PACK: GenrePackInput = addCatalogSupportCells({
   { instrumentId: 'bass', role: 'bass' },
   { instrumentId: 'congas', role: 'percussion' },
   { instrumentId: 'piano', role: 'harmony' },
-]);
+]));

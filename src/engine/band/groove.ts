@@ -86,8 +86,9 @@ export function swingOffsetBeats(beatInBar: number, g: GrooveProfile): number {
 
   if (g.swingUnit === 8) {
     if (Math.abs(frac - 0.5) < 0.02) return g.swing - 0.5;
-    // 16ths inside a swung 8th ride along with it, proportionally
-    if (Math.abs(frac - 0.75) < 0.02) return (g.swing - 0.5) * 0.5;
+    // Both interior sixteenths follow their enclosing eighth. Moving only
+    // the last one made the first half of the pair lurch unevenly.
+    if (Math.abs(frac - 0.25) < 0.02 || Math.abs(frac - 0.75) < 0.02) return (g.swing - 0.5) * 0.5;
     return 0;
   }
 

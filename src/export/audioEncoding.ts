@@ -2,7 +2,21 @@ export type Mp3WorkerReply = { ready: true } | { ack: true } | { error: string }
 export type Mp3WorkerRequest = {type:'start';sampleRate:number;frames:number;peak:number} | {type:'block';left:Float32Array;right:Float32Array} | {type:'finish'};
 const MP3_BLOCK=1152*16;
 export function checkAbort(signal?: AbortSignal) { if (signal?.aborted) throw new DOMException('Export cancelled', 'AbortError'); }
-export const yieldToUI = () => new Promise<void>(resolve => setTimeout(resolve, 0));
+let uiTasks: MessageChannel | undefined;
+const uiContinuations: Array<() => void> = [];
+/** Yield a real task without chaining timers. Background-tab timer clamping
+ * otherwise adds seconds/minutes between small chunks of a long export. */
+export function yieldToUI(): Promise<void> {
+  if (typeof document === 'undefined' || typeof MessageChannel === 'undefined') {
+    return new Promise(resolve => setTimeout(resolve, 0));
+  }
+  uiTasks ??= (() => {
+    const channel = new MessageChannel();
+    channel.port1.onmessage = () => uiContinuations.shift()?.();
+    return channel;
+  })();
+  return new Promise(resolve => { uiContinuations.push(resolve); uiTasks!.port2.postMessage(0); });
+}
 /** The same bounded streaming encoder is used by Node and the browser worker. */
 export async function createMp3StreamEncoder(sampleRate:number,frames:number,peak:number) {
   if(!Number.isInteger(frames)||frames<=0||!Number.isFinite(peak))throw new Error('Invalid or empty MP3 PCM');
@@ -68,21 +82,29 @@ export async function encodeMp3(left: Float32Array, right: Float32Array, sampleR
   } catch(error){worker.terminate();throw error;}
   return new Promise((resolve, reject) => {
     let offset=0;
+    let phase: 'start' | 'block' | 'finish' = 'start';
     const clean = () => { worker.terminate(); signal?.removeEventListener('abort', abort); };
     const abort = () => { clean(); reject(new DOMException('Export cancelled', 'AbortError')); };
     signal?.addEventListener('abort', abort, { once: true });
     worker.onerror = event => { clean(); reject(new Error(event.message || 'MP3 worker failed')); };
+    worker.onmessageerror = () => { clean(); reject(new Error('MP3 worker returned an unreadable result.')); };
     worker.onmessage = ({ data }: MessageEvent<Mp3WorkerReply>) => {
-      if ('error' in data) { clean(); reject(new Error(data.error)); }
-      else if ('blob' in data) { clean(); resolve(data.blob); }
-      else {
-        try {
+      try {
+        if (!data || typeof data !== 'object') throw new Error('Invalid MP3 worker response.');
+        if ('error' in data) { clean(); reject(new Error(data.error)); }
+        else if ('blob' in data) {
+          if (phase !== 'finish' || !(data.blob instanceof Blob) || !data.blob.size) throw new Error('MP3 worker returned incomplete audio.');
+          clean(); resolve(data.blob);
+        } else {
+          if (!(phase === 'start' && 'ready' in data && data.ready === true
+            || phase === 'block' && 'ack' in data && data.ack === true)) throw new Error('Unexpected MP3 worker response.');
           onProgress?.(offset/left.length);
-          if(offset>=left.length){worker.postMessage({type:'finish'} satisfies Mp3WorkerRequest);return;}
+          if(offset>=left.length){phase='finish';worker.postMessage({type:'finish'} satisfies Mp3WorkerRequest);return;}
           const end=Math.min(left.length,offset+MP3_BLOCK),l=left.slice(offset,end),r=right.slice(offset,end);offset=end;
+          phase='block';
           worker.postMessage({type:'block',left:l,right:r} satisfies Mp3WorkerRequest,[l.buffer,r.buffer]);
-        } catch(error){clean();reject(error);}
-      }
+        }
+      } catch(error){clean();reject(error);}
     };
     try { worker.postMessage({type:'start',sampleRate,frames:left.length,peak} satisfies Mp3WorkerRequest); }
     catch (error) { clean(); reject(error); }

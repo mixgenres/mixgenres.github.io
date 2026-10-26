@@ -847,6 +847,23 @@ test('sample PCM renders the requested part on demand and honours cancellation',
   const again=await renderPerformanceToAudio(p,raw);assert.notEqual(again.left,result.left);assert.deepEqual(again.left,result.left);
   const abort=new AbortController();abort.abort();await assert.rejects(renderPerformanceToAudio(p,{...raw,signal:abort.signal}),{name:'AbortError'});
 });
+test('chunked sample rendering reports progress, retains exact PCM and can cancel inside a part',async context=>{
+  const p=performanceFixture({notes:[noteFixture({dur:.25})],duration:.4});
+  const raw={...options,trackInstruments:new Map([['keys','kalimba']]),rawStem:true,maxDurationSeconds:.4,yieldForUI:false};
+  const reference=await renderPerformanceToAudio(p,raw);
+  let now=0;
+  context.mock.method(globalThis.performance,'now',()=>now+=17);
+  const progress:number[]=[];
+  const chunked=await renderPerformanceToAudio(p,{...raw,yieldForUI:true},fraction=>progress.push(fraction));
+  assert.deepEqual(chunked.left,reference.left);assert.deepEqual(chunked.right,reference.right);
+  assert.equal(progress.at(-1),1);
+  assert.ok(progress.some(fraction=>fraction>.1&&fraction<.7),'progress advances before the first part finishes');
+  assert.ok(progress.every((fraction,index)=>index===0||fraction>=progress[index-1]));
+  const controller=new AbortController();
+  await assert.rejects(renderPerformanceToAudio(p,{...raw,yieldForUI:true,signal:controller.signal},fraction=>{
+    if(fraction>.1&&fraction<.7)controller.abort();
+  }),{name:'AbortError'});
+});
 test('sample export windows retain earlier attacks and controller history',()=>{
   const p=performanceFixture({notes:[noteFixture({time:0,dur:.1}),noteFixture({time:1.2,midi:64,dur:.2}),noteFixture({time:1.95,midi:65})],
     ccs:[{trackId:'keys',time:.05,cc:64,value:127},{trackId:'keys',time:1.7,cc:64,value:0},{trackId:'keys',time:1.95,cc:11,value:0}],duration:2});

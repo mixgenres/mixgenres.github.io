@@ -12,6 +12,7 @@ import { createSongMixGraph, type SongMixGraph } from '../../studio/dynamicMix/M
 import { determineBusCategory } from '../mixBus';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
 import { resolvePlaybackMix, ensembleHeadroom } from '../../studio/masterSettings';
+import { resolveMixPan } from '../../studio/panning';
 import type { SampleCommand, SampleReply } from './protocol';
 
 interface LiveGraph {
@@ -20,6 +21,7 @@ interface LiveGraph {
   released?:boolean;
   plan?:SamplePlan;
   strips:Map<string,{gain:GainNode;pan:StereoPannerNode}>; nodes:AudioNode[]; banks:Set<string>;
+  defaultPans:Map<string,number>;
 }
 /** Live-first sample player; it schedules SoundFont events without pre-rendering audio. */
 export class SoundfontSongPlayer {
@@ -137,21 +139,26 @@ export class SoundfontSongPlayer {
         const timeline=this.prepared?.performance.mixTimeline;
         const headroom=ensembleHeadroom(plan.tracks.length,mix.masterProfile.lift);
         const scenes=timeline?.scenes.some(scene=>scene.enabled)?createSongMixGraph(ctx,master,timeline,plan.tracks.map(t=>t.id),timeline.baselineHeadroom??headroom):undefined;
-        const nodes:AudioNode[]=[],strips:LiveGraph['strips']=new Map();
+        const nodes:AudioNode[]=[],strips:LiveGraph['strips']=new Map(),defaultPans=new Map<string,number>();
         const solo=song.tracks.some(t=>t.solo);
         plan.tracks.forEach((track,index)=>{
-          const gain=ctx.createGain(),pan=ctx.createStereoPanner(),trim=ctx.createGain();
+          const stage=scenes?.tracks.get(track.id);
+          const gain=ctx.createGain(),pan=stage?.pan??ctx.createStereoPanner(),trim=ctx.createGain();
           const authored=song.tracks.find(t=>t.id===track.id);
           gain.gain.value=authored?.muted||solo&&!authored?.solo?0:authored?.volume??1;
-          pan.pan.value=((authored?.pan??track.pan)-.5)*2;
-          node.connect(gain,index);gain.connect(pan);pan.connect(trim);
+          const defaultPan=resolveMixPan(track.pan,undefined,timeline?.scenes[0]?.tracks[track.id]);
+          defaultPans.set(track.id,defaultPan);
+          pan.pan.value=(resolveMixPan(defaultPan,authored?.pan)-.5)*2;
+          node.connect(gain,index);
+          if(stage)gain.connect(trim);
+          else {gain.connect(pan);pan.connect(trim);}
           const def=INSTRUMENTS_BY_ID[track.instrumentId];
           const bus=determineBusCategory(def?.acousticProfile?.role,track.instrumentId);
           trim.gain.value=scenes?1:headroom;
           trim.connect(scenes?.tracks.get(track.id)?.input ?? (bus==='drums'?master.drumBus:bus==='sub'?master.subBus:master.instBus));
-          nodes.push(gain,pan,trim);strips.set(track.id,{gain,pan});
+          nodes.push(gain,trim);if(!stage)nodes.push(pan);strips.set(track.id,{gain,pan});
         });
-        const graph:LiveGraph={node,master,scenes,output,guard,position:0,nodes,strips,banks:new Set()};
+        const graph:LiveGraph={node,master,scenes,output,guard,position:0,nodes,strips,banks:new Set(),defaultPans};
         node.port.onmessage=({data}:MessageEvent<SampleReply>)=>this.receive(data,graph);
         try {
           for(const bank of plan.banks) {
@@ -182,8 +189,8 @@ export class SoundfontSongPlayer {
     for(const track of song.tracks) {
       const strip=this.graph.strips.get(track.id);if(!strip)continue;
       strip.gain.gain.setTargetAtTime(track.muted||solo&&!track.solo?0:track.volume??1,now,.005);
-      const defaultPan=this.graph.plan?.tracks.find(t=>t.id===track.id)?.pan??.5;
-      strip.pan.pan.setTargetAtTime(((track.pan??defaultPan)-.5)*2,now,.005);
+      const defaultPan=this.graph.defaultPans.get(track.id)??.5;
+      strip.pan.pan.setTargetAtTime((resolveMixPan(defaultPan,track.pan)-.5)*2,now,.005);
     }
   }
   async play(inputTime?:number):Promise<void> {

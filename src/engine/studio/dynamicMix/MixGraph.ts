@@ -5,7 +5,7 @@ import { MIX_BUSES, type MixSceneTimeline, neutralTrackMixState } from './MixSce
 import { compileAutomation, compileTransientAutomation, dbToGain, scheduleAutomation } from './MixAutomation';
 
 export interface SongMixGraph {
-  tracks: Map<string, { input: GainNode }>;
+  tracks: Map<string, { input: GainNode; pan: StereoPannerNode }>;
   schedule(contextTime?: number, songTime?: number): void;
   cancel(time?: number): void;
   dispose(): void;
@@ -39,7 +39,7 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
     automate(compressor.ratio, scene => 1 + scene.buses[id].compressionAmount * (scene.buses[id].compressionRatio - 1));
     buses.set(id, input);
   }
-  const tracks = new Map<string, { input: GainNode }>();
+  const tracks = new Map<string, { input: GainNode; pan: StereoPannerNode }>();
   for (const id of trackIds) {
     const input = gain(), transient = gain(), body = filter('lowshelf', 280), presence = filter('peaking', 2600), level = gain();
     input.connect(transient); transient.connect(body); body.connect(presence);
@@ -49,8 +49,8 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
     const ll = gain(), lr = gain(0), rl = gain(0), rr = gain();
     presence.connect(splitter); splitter.connect(ll, 0); splitter.connect(lr, 0); splitter.connect(rl, 1); splitter.connect(rr, 1);
     ll.connect(merger, 0, 0); rl.connect(merger, 0, 0); lr.connect(merger, 0, 1); rr.connect(merger, 0, 1);
-    const pan = ctx.createStereoPanner(); nodes.push(pan);
-    merger.connect(pan); pan.connect(level);
+    const pan = ctx.createStereoPanner(), userPan = ctx.createStereoPanner(); nodes.push(pan, userPan);
+    merger.connect(pan); pan.connect(userPan); userPan.connect(level);
     const state = (scene: MixSceneTimeline['scenes'][number]) => scene.tracks[id] ?? neutralTrackMixState();
     automate(level.gain, scene => dbToGain(state(scene).gainOffsetDb));
     automate(body.gain, scene => state(scene).bodyOffsetDb, 'spectral');
@@ -69,7 +69,7 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
     room.connect(master.roomInput); echo.connect(master.delayInput);
     automate(room.gain, scene => baselineHeadroom * state(scene).reverbSend * dbToGain(scene.master.gainOffsetDb));
     automate(echo.gain, scene => baselineHeadroom * state(scene).delaySend * dbToGain(scene.master.gainOffsetDb));
-    tracks.set(id, { input });
+    tracks.set(id, { input, pan: userPan });
   }
   const settings = (scene: MixSceneTimeline['scenes'][number]) => resolveMasterSettings(scene.resolvedMix.contract.character, scene.styleId);
   const masterParams = master.dynamicParameters;

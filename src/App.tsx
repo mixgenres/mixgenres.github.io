@@ -290,7 +290,7 @@ export default function App() {
     if (!scrubbingRef.current) setHoverFrac(null);
   };
 
-  const sheetOpen = tempoOpen || downloadOpen || startOverOpen || randomizeOpen || worldOpen || sectionOpen ||
+  const sheetOpen = isBouncing || tempoOpen || downloadOpen || startOverOpen || randomizeOpen || worldOpen || sectionOpen ||
     chordOpen || energyOpen || sectionGenreOpen || styleOpen || addingVoice || !!roleFor || !!instrFor || !!patternFor || !!note;
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -1095,21 +1095,28 @@ export default function App() {
       {/* ---- sheets ------------------------------------------------------- */}
 
       {isBouncing && (
-        <div className="fixed inset-0 bg-white/85 z-[100] flex flex-col items-center justify-center p-6 backdrop-blur-sm text-center">
+        <div role="dialog" aria-modal="true" aria-labelledby="export-title"
+          onKeyDown={event => {
+            if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); exportAbortRef.current?.abort(); }
+            if (event.key === 'Tab') { event.preventDefault(); event.currentTarget.querySelector('button')?.focus(); }
+          }}
+          className="fixed inset-0 bg-white/85 z-[100] flex flex-col items-center justify-center p-6 backdrop-blur-sm text-center">
           <div className="w-10 h-10 border-3 border-black/15 border-t-black rounded-full animate-spin mb-4" />
-          <div className="text-xl font-bold mb-2">Creating your export…</div>
+          <div id="export-title" className="text-xl font-bold mb-2">Creating your export…</div>
           <p className="text-sm opacity-60 max-w-xs leading-relaxed mb-2">
             Please stand by while your song renders…
           </p>
           {bounceProgress !== null && (
-            <div className="w-48 h-1.5 bg-black/10 rounded-full overflow-hidden mt-2 mb-1">
+            <div role="progressbar" aria-label="Export progress" aria-valuemin={0} aria-valuemax={100}
+              aria-valuenow={Math.round(Math.max(0, Math.min(1, bounceProgress)) * 100)}
+              className="w-48 h-1.5 bg-black/10 rounded-full overflow-hidden mt-2 mb-1">
               <div
                 className="h-full bg-black transition-all duration-150"
                 style={{ width: `${Math.round((bounceProgress ?? 0) * 100)}%` }}
               />
             </div>
           )}
-          <button 
+          <button autoFocus
             onClick={() => {
               exportAbortRef.current?.abort();
             }}

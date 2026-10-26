@@ -113,37 +113,45 @@ function doParse(symbolRaw: string): ParsedChord {
   let rest = body.slice(rootMatch[1].length);
   rest = rest.replace(/^-/, 'm').replace(/Δ/g, 'maj').replace(/ø/g, 'm7b5').replace(/°/g, 'dim');
   rest = rest.replace(/M(?=\d)/g, 'maj');
+  rest = rest.replace(/^major/i, 'maj').replace(/^(?:minor|min)(?![a-z])/i, 'm')
+    .replace(/maj/gi, 'maj').replace(/\s+/g, '').toLowerCase();
   validateChordSuffix(rest, symbol);
-    const has = (re: RegExp) => re.test(rest);
+    // Added tones and alterations do not imply a complete tertian extension:
+    // add13 has no seventh, and 7#11 does not request a natural ninth/eleventh.
+    const additions = [...rest.matchAll(/add([b#]?)(2|4|9|11|13)/g)];
+    const modifiers = rest.replace(/add[b#]?(?:2|4|9|11|13)/g, '');
+    const core = modifiers.replace(/[b#](?:5|9|11|13)/g, '').replace(/[()]/g, '');
+    const sixNine = /6\/9/.test(core);
+    const base = core.replace(/6\/9/g, '6');
+    const has = (re: RegExp) => re.test(base);
 
-    const isPower = /^5(?![0-9])/.test(rest) || /^\(?no3\)?/.test(rest);
+    const powerChord = /^5(?![0-9])/.test(base);
+    const omitThird = /no3/.test(base);
+    const isPower = powerChord || omitThird;
     const sus2 = has(/sus2/);
     const sus4 = has(/sus4?(?!\d)/) && !sus2;
-    const dim = has(/dim|o7|o(?![a-z])/i);
-    const halfDim = has(/m7b5|m7\(b5\)/);
-    const aug = has(/aug|\+(?!\d)/);
-    const maj7 = has(/maj7|maj9|maj11|maj13|M7|M9|ma7/);
+    const dim = has(/^(?:dim|o)(?![a-z])/i);
+    const halfDim = /^m7(?:\(?b5\)?)/.test(modifiers);
+    const aug = has(/aug|\+/);
+    const maj7 = has(/maj7|maj9|maj11|maj13|ma7/);
     const minor = !dim && !halfDim && /^m(?!aj|a7)/.test(rest);
 
     const six = has(/(^|[^b#0-9])6(?![0-9])/);
     const thirteen = has(/13/);
     const eleven = has(/11/);
     const nine = has(/9/);
-    const add9 = has(/add9/);
-    const add11 = has(/add11/);
-    const sixNine = has(/6\s*\/\s*9/);
     const alt = has(/alt(?:ered)?/i);
-    const seven = has(/7/) || thirteen || (nine && !add9 && !sixNine) || (eleven && !add11 && !sixNine);
+    const seven = has(/7/) || thirteen || nine || eleven;
 
-    const b5 = has(/b5/) || halfDim || dim || alt;
-    const s5 = has(/#5/) || aug || alt;
-    const b9 = has(/b9/) || alt;
-    const s9 = has(/#9/) || alt;
-    const s11 = has(/#11/);
-    const b13 = has(/b13/);
+    const b5 = /b5/.test(modifiers) || halfDim || dim || alt;
+    const s5 = /#5/.test(modifiers) || aug || alt;
+    const b9 = /b9/.test(modifiers) || alt;
+    const s9 = /#9/.test(modifiers) || alt;
+    const s11 = /#11/.test(modifiers);
+    const b13 = /b13/.test(modifiers);
 
     let quality: ChordQuality;
-    if (isPower) quality = 'power';
+    if (powerChord || omitThird && !seven && !six) quality = 'power';
     else if (dim) quality = 'diminished';
     else if (halfDim) quality = 'halfDiminished';
     else if (aug) quality = 'augmented';
@@ -161,8 +169,8 @@ function doParse(symbolRaw: string): ParsedChord {
     }
 
     if (b5) set.add(6);
-    else if (s5) set.add(8);
-    else set.add(7);
+    if (s5) set.add(8);
+    if (!b5 && !s5) set.add(7);
 
     if (dim && (seven || six)) set.add(9);
     else if (six) set.add(9);
@@ -174,24 +182,28 @@ function doParse(symbolRaw: string): ParsedChord {
     if (!isPower) {
       const third = sus2 ? 2 : sus4 ? 5 : (minor || dim || halfDim) ? 3 : 4;
       guideTones.push(third);
-      if (maj7) guideTones.push(11);
-      else if (dim && (seven || six)) guideTones.push(9);
-      else if (seven) guideTones.push(10);
-      else if (six) guideTones.push(9);
     }
+    if (maj7) guideTones.push(11);
+    else if (dim && (seven || six)) guideTones.push(9);
+    else if (seven) guideTones.push(10);
+    else if (six) guideTones.push(9);
 
     if (b9) { set.add(13); tensions.push(13); }
     else if (s9) { set.add(15); tensions.push(15); }
-    else if (nine || add9) { set.add(14); tensions.push(14); }
-    if ((thirteen || eleven) && !b9 && !s9 && !add9 && !sixNine && !nine) { set.add(14); tensions.push(14); }
+    else if (nine || thirteen || eleven) { set.add(14); tensions.push(14); }
 
     if (s11) { set.add(18); tensions.push(18); }
-    else if (eleven || add11) { set.add(17); tensions.push(17); }
+    else if (eleven) { set.add(17); tensions.push(17); }
 
     if (b13) { set.add(20); tensions.push(20); }
     else if (thirteen) { set.add(21); tensions.push(21); }
     if (alt) { set.add(6); set.add(8); set.add(13); set.add(15); tensions.push(6,8,13,15); }
     if (sixNine) { set.add(14); tensions.push(14); }
+    const addedIntervals: Record<string, number> = { '2': 2, '4': 5, '9': 14, '11': 17, '13': 21 };
+    for (const [, accidental, degree] of additions) {
+      const interval = addedIntervals[degree] + (accidental === 'b' ? -1 : accidental === '#' ? 1 : 0);
+      set.add(interval); tensions.push(interval);
+    }
 
     const intervals = [...set].sort((a, b) => a - b);
     return {
@@ -219,7 +231,7 @@ function doParse(symbolRaw: string): ParsedChord {
 /** Reject unrecognized quality text instead of quietly voicing it as major. */
 function validateChordSuffix(suffix: string, symbol: string): void {
   let remaining = suffix;
-  const token = /^(?:\s+|minor|major|min|maj|ma|m|dim|o|aug|\+|sus2|sus4|sus|no3|alt(?:ered)?|add(?:b|#)?(?:2|4|9|11|13)|6\/9|[b#](?:5|9|11|13)|(?:5|6|7|9|11|13)|[()])/i;
+  const token = /^(?:\s+|minor|major|min|maj|ma(?=7)|m|dim|o|aug|\+|sus2|sus4|sus|no3|alt(?:ered)?|add(?:b|#)?(?:2|4|9|11|13)|6\/9|[b#](?:5|9|11|13)|(?:5|6|7|9|11|13)|[()])/i;
   while (remaining.length) {
     const match = remaining.match(token);
     if (!match) throw new Error(`Unsupported chord quality "${suffix}" in "${symbol}"`);

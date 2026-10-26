@@ -1,6 +1,7 @@
 import type { MixSceneTimeline } from './MixScene';
 import { neutralTrackMixState } from './MixScene';
 import { automationValueAt, compileAutomation, compileTransientAutomation, dbToGain } from './MixAutomation';
+import { stereoPanMatrix } from '../panning';
 
 /** Stateful biquad for environments without Web Audio, using RBJ shelf/peak coefficients. */
 class StereoEQ {
@@ -27,7 +28,8 @@ class StereoEQ {
 /** The planner supplies all targets; this runtime mixes the rendered part buffers. */
 export function accumulatePortableMix(timeline: MixSceneTimeline, trackId: string, left: Float32Array, right: Float32Array,
   startSample: number, sampleRate: number, outputL: Float32Array, outputR: Float32Array,
-  roomL: Float32Array, roomR: Float32Array, echoL: Float32Array, echoR: Float32Array) {
+  roomL: Float32Array, roomR: Float32Array, echoL: Float32Array, echoR: Float32Array,
+  userPan = .5, userLevel = 1) {
   const state = (scene: MixSceneTimeline['scenes'][number]) => scene.tracks[trackId] ?? neutralTrackMixState();
   const lanes = {
     gain: compileAutomation(timeline, scene => dbToGain(state(scene).gainOffsetDb)),
@@ -53,6 +55,7 @@ export function accumulatePortableMix(timeline: MixSceneTimeline, trackId: strin
     return !b || time <= a.time ? a.value : a.value + (b.value - a.value) * (time - a.time) / (b.time - a.time);
   };
   const body = new StereoEQ(), presence = new StereoEQ();
+  const balance = stereoPanMatrix(userPan, userLevel);
   const count = Math.min(left.length, outputL.length - startSample);
   for (let i = 0; i < count; i++) {
     time = (startSample + i) / sampleRate;
@@ -64,6 +67,9 @@ export function accumulatePortableMix(timeline: MixSceneTimeline, trackId: strin
     let pl: number, pr: number;
     if (pan <= 0) { const angle = (pan + 1) * Math.PI / 2; pl = mid + side + (mid - side) * Math.cos(angle); pr = (mid - side) * Math.sin(angle); }
     else { const angle = pan * Math.PI / 2; pl = (mid + side) * Math.cos(angle); pr = mid - side + (mid + side) * Math.sin(angle); }
+    const stagedL = pl, stagedR = pr;
+    pl = stagedL * balance.ll + stagedR * balance.rl;
+    pr = stagedL * balance.lr + stagedR * balance.rr;
     const gain = at('gain') * at('master'), index = startSample + i;
     outputL[index] += pl * gain * at('bus'); outputR[index] += pr * gain * at('bus');
     roomL[index] += pl * gain * at('room'); roomR[index] += pr * gain * at('room');

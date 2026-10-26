@@ -4,7 +4,7 @@ import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEnc
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import type { Performance, PerfNote } from '../band/performanceData.ts';
 import { resolveTrackSound } from './trackSound';
-import { stereoPanMatrix } from '../studio/panning';
+import { stereoPanMatrix, resolveMixPan } from '../studio/panning';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
 import { resolvePlaybackMix, ensembleHeadroom } from '../studio/masterSettings';
 import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
@@ -143,7 +143,7 @@ async function renderPerformance(
       const instDef = INSTRUMENTS_BY_ID[instrumentId];
       const params = resolveTrackSound(instrumentId, worldId!, options.styleId, options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role);
       const trackMixVolume = options.mixState?.volume?.[trackId] ?? 1;
-      const trackMixPan = options.mixState?.pan?.[trackId] ?? params.pan;
+      const trackMixPan = resolveMixPan(params.pan, options.mixState?.pan?.[trackId], timeline?.scenes[0]?.tracks[trackId]);
       // Keep historical attacks in the excerpt so holds, bends and release tails
       // are reconstructed by the sample player at the requested playhead.
       let minNoteTime = Infinity;
@@ -158,12 +158,13 @@ async function renderPerformance(
       if (trackSamples <= 0 || trackEndSample <= outputStartSample) continue;
       const retainedStart = Math.max(trackStartSample,outputStartSample);
       if (!instDef) throw new Error(`Unknown instrument: ${instrumentId}`);
-      const stem = await (await import('./soundfont/render')).renderSampleTrack(perf, options, trackId, retainedStart, trackEndSample, plan);
+      const stem = await (await import('./soundfont/render')).renderSampleTrack(perf, options, trackId, retainedStart, trackEndSample, plan,
+        fraction => onProgress?.(.05+((tIdx+fraction)/totalTracks)*.68));
       let chunks = [stem];
       const applyBalance = !options.rawStem || !!options.mixState;
       const pan = Math.max(0, Math.min(1, trackMixPan));
       const balance = stereoPanMatrix(applyBalance ? pan : .5, applyBalance ? trackMixVolume : 1);
-      if (!masterContext && applyBalance) {
+      if (!masterContext && !timeline && applyBalance) {
         // Apply fader and pan directly to this part's rendered sample buffer.
         chunks = chunks.map(chunk => {
           const left = new Float32Array(chunk.left.length), right = new Float32Array(chunk.right.length);
@@ -184,8 +185,8 @@ async function renderPerformance(
         for (const chunk of chunks) for (let i=0;i<chunk.left.length;i++) {
           const offset=chunk.startSample+i-outputStartSample;
           if(offset>=0 && offset<diagnosticSamples) {
-            left[offset] += masterContext ? chunk.left[i] * balance.ll + chunk.right[i] * balance.rl : chunk.left[i];
-            right[offset] += masterContext ? chunk.left[i] * balance.lr + chunk.right[i] * balance.rr : chunk.right[i];
+            left[offset] += masterContext || timeline ? chunk.left[i] * balance.ll + chunk.right[i] * balance.rl : chunk.left[i];
+            right[offset] += masterContext || timeline ? chunk.left[i] * balance.lr + chunk.right[i] * balance.rr : chunk.right[i];
           }
         }
         options.onDiagnostics({ stage: 'stem', id: trackId, instrumentId,
@@ -215,9 +216,9 @@ async function renderPerformance(
       }
       if (dynamicGraph && masterContext) {
         // Native sources sum complete part tails into one continuous master.
-        const level = masterContext.createGain(), panner = masterContext.createStereoPanner();
-        level.gain.value = trackMixVolume; panner.pan.value = pan * 2 - 1;
-        level.connect(panner); panner.connect(dynamicGraph.tracks.get(trackId)!.input);
+        const level = masterContext.createGain(), stage = dynamicGraph.tracks.get(trackId)!;
+        level.gain.value = trackMixVolume; stage.pan.pan.value = pan * 2 - 1;
+        level.connect(stage.input);
         for(const chunk of chunks) {
           const buffer=masterContext.createBuffer(2,chunk.left.length,sampleRate);
           buffer.getChannelData(0).set(chunk.left); buffer.getChannelData(1).set(chunk.right);
@@ -229,7 +230,7 @@ async function renderPerformance(
       }
       if (timeline && !masterContext) {
         for(const chunk of chunks) accumulatePortableMix(timeline,trackId,chunk.left,chunk.right,chunk.startSample,sampleRate,
-          instBusL,instBusR,roomL,roomR,echoL,echoR);
+          instBusL,instBusR,roomL,roomR,echoL,echoR,pan,trackMixVolume);
         onProgress?.(0.05 + ((tIdx + 1) / totalTracks) * .68);
         continue;
       }

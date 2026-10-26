@@ -9,6 +9,8 @@ import { authorBassStudies } from './bassStudies';
 
 /** Authored beat positions, in quarter-note units; no style-name hashing. */
 export interface AuthoredCell {
+  /** Stable identity for new lessons, without renumbering existing saved cells. */
+  id?: string;
   name: string;
   /** Concise student-facing label; the full source name and technique stay in description. */
   shortName?: string;
@@ -475,7 +477,7 @@ function studentInstrumentLabel(instrumentId: string): string {
 }
 
 function patternIdForCell(style: GenreStyleDefinition, cell: AuthoredCell, index: number): string {
-  return `${style.id}-pattern-${index}-${slug(cell.name)}`;
+  return cell.id ?? `${style.id}-pattern-${index}-${slug(cell.name)}`;
 }
 
 function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cell: AuthoredCell, index: number): MusicalPattern {
@@ -563,8 +565,9 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
     // appended with their own stable IDs below, rather than shifting every
     // regular source and ending that was already in the catalog.
     const regular = authoredCells.filter(cell => !cell.phraseEnd && style.calibration!.roles[cell.role]);
+    let legacyIndex = 0;
     const patterns = regular.map((cell, index) => {
-      const pattern = patternFromCell(input, style, cell, index);
+      const pattern = patternFromCell(input, style, cell, cell.id ? 0 : legacyIndex++);
       // A second complete written part is an arrangement alternative.
       if (!cell.arrangementVariation && regular.slice(0, index).some(previous =>
         previous.role === cell.role

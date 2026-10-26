@@ -934,12 +934,12 @@ export const STYLE_REFERENCES = {
     ]
   },
   "reggaeton::melodic": {
-    "credit": "Rauw Alejandro",
-    "recording": "“Todo de Ti”",
+    "credit": "Rauw Alejandro & Camilo",
+    "recording": "“Tattoo (Remix with Camilo)”",
     "qualities": [
       "Melodic hooks",
-      "synth-pop harmony",
-      "smoother percussion",
+      "light dembow pocket",
+      "sung call and response",
       "more dynamic section changes"
     ]
   },

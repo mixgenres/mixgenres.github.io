@@ -8,7 +8,8 @@ import { SampleRuntime } from './runtime';
 /** Direct Node/offline part rendering, shared with the live event interpreter. Studio
  * mastering and MP3 encoding remain in the existing export pipeline. */
 export async function renderSampleTrack(performance: Performance, options: Mp3RenderOptions,
-  trackId: string, startSample: number, endSample: number, compiledPlan?: SamplePlan): Promise<{ left: Float32Array; right: Float32Array; startSample: number }> {
+  trackId: string, startSample: number, endSample: number, compiledPlan?: SamplePlan,
+  onProgress?: (fraction: number) => void): Promise<{ left: Float32Array; right: Float32Array; startSample: number }> {
   const sampleRate=44100;
   const plan=compiledPlan??compileSamplePlan(performance,{...options,selectedTrackIds:[trackId]});
   const runtime=new SampleRuntime(sampleRate);
@@ -16,19 +17,32 @@ export async function renderSampleTrack(performance: Performance, options: Mp3Re
   try {
     // Load only the banks used by this part's events.
     for (const bank of plan.banks) { checkAbort(options.signal); runtime.addBank(bank,await loadSoundfontBank(bank,options.signal)); }
+    onProgress?.(.05);
     await runtime.synth.processorInitialized;
     runtime.setPlan(plan); runtime.seek(startSample/sampleRate);
-    let blocks=0;
+    let lastYield=globalThis.performance.now();
     while(runtime.isSeeking) {
-      checkAbort(options.signal); runtime.prime(scratchL,scratchR,128);
-      if(options.yieldForUI!==false && ++blocks%4===0) await yieldToUI();
+      checkAbort(options.signal); runtime.prime(scratchL,scratchR,8);
+      if(options.yieldForUI!==false && globalThis.performance.now()-lastYield>=16) {
+        onProgress?.(.05+.1*Math.max(0,Math.min(1,runtime.position*sampleRate/Math.max(1,startSample))));
+        await yieldToUI(); lastYield=globalThis.performance.now();
+      }
     }
     const left=new Float32Array(Math.max(0,endSample-startSample)), right=new Float32Array(left.length);
     for(let frame=0;frame<left.length;frame+=128) {
-      if(frame%16384===0) {checkAbort(options.signal);if(options.yieldForUI!==false)await yieldToUI();}
+      // A fixed number of audio frames is not a CPU budget: a dense piano or
+      // orchestral part can cost far more than the same span of a single bass.
+      if(frame%1024===0) {
+        checkAbort(options.signal);
+        if(options.yieldForUI!==false && globalThis.performance.now()-lastYield>=16) {
+          onProgress?.(.15+.85*frame/Math.max(1,left.length));
+          await yieldToUI(); lastYield=globalThis.performance.now();
+        }
+      }
       runtime.render(left,right,frame,Math.min(128,left.length-frame));
     }
     checkAbort(options.signal);
+    onProgress?.(1);
     return {left,right,startSample};
   } finally {runtime.destroy();}
 }

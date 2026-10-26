@@ -2,6 +2,18 @@
   "reviewed": "2026-10-08",
   "status": "Catalog identities and streaming links researched; audio comparison and timecodes pending. These are comparison seeds, not evidence of mix matching.",
   "source": "Apple Music track pages and public Apple catalog search metadata. No reference audio downloaded.",
+  "scoreReview": {
+    "date": "2026-10-25",
+    "scope": "Classic, Playero and Melodic drum cells; Classic and Melodic example arrangements. Six existing Melodic track-page identities checked; comparative listening and timecodes remain pending.",
+    "findings": [
+      "Restored the syncopated dembow snare in the three foundation cells and retained it in verse, hook and phrase-end alternatives.",
+      "Melodic now uses Tattoo (Remix with Camilo) as its listening reference. Its original 96 BPM minor-key study is internally consistent; it does not claim the recording's exact tempo, harmony, melody or personnel.",
+      "The guitar arpeggio contains individual picked chord tones. A separate upper answer develops the chorus, with quieter pad support and explicit sampled shaker/clap contacts.",
+      "Classic and Melodic sections have deliberate reduced lineups and instrumental openings. Extra teaching instruments remain available without automatic bass or acoustic-part doubling."
+    ],
+    "rhythmSource": "https://www.native-instruments.com/blogs/blog/reggaeton",
+    "recordingSource": "https://music.apple.com/us/song/1520712876"
+  },
   "references": [
     {
       "styleId": "reggaeton-classic",

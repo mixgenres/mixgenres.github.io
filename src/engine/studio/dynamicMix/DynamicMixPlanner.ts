@@ -48,7 +48,10 @@ export function planMixScene(analysis: MixAnalysisWindow, resolvedMix: ResolvedM
       state.panOffset = centered ? 0 : clamp(mixRecordValue(mix.stage.rolePan, intent.authoredRole) ?? 0, -1, 1) * state.width;
       const room = (policy.ambienceSend ?? mix.ambience.reverbSend) * (section.ambience ?? 1) * (intimate ? 1 - dynamics.silenceContrast * .15 : 1);
       state.reverbSend = clamp(room * (.55 + state.depth) * (1 + expansion * mix.ambience.bloom), 0, .4);
-      state.delaySend = clamp(mix.ambience.delaySend * (.6 + state.depth), 0, .25);
+      // An explicitly dry role must stay dry on every space send. Previously
+      // the bass's ambienceSend:0 stopped reverb but still echoed its low end.
+      state.delaySend = policy.ambienceSend === 0 ? 0
+        : clamp(mix.ambience.delaySend * (.6 + state.depth) * (section.ambience ?? 1), 0, .25);
       state.reverbSendOffsetDb = 20 * Math.log10(Math.max(.001, state.reverbSend) / Math.max(.001, mix.ambience.reverbSend));
       state.delaySendOffsetDb = 20 * Math.log10(Math.max(.001, state.delaySend) / Math.max(.001, mix.ambience.delaySend));
       state.transientAmount = policy.transientEmphasis ?? mix.character.transientSnap ?? 0;
